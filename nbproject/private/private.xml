@@ -3,8 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Java_BackEnd">
-            <file>file:/D:/Java_BackEnd/SWP_Project/web/page-report.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/LoginServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/dal/AccountDAO.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/model/Accounts.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/dal/EmployeeDAO.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/auth-lock-screen.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/VerifyServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/page-list-customers.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/web/ui-alerts.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/verify/RandomCode.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/model/Employees.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/pages-maintenance.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/changePassword.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/forgot-password.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/ResetPasswordServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/page-report.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/form-validation.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/index.html</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/auth-sign-up.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/auth-confirm-mail.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/auth-recoverpw.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/auth-sign-in.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/ChangePasswordServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/resetPassword.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/verify/SendEmail.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/pricing.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/RegisterServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/ForgetPassword.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/EmployeeSettingServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/web/employeeSetting.jsp</file>
         </group>
     </open-files>
 </project-private>
