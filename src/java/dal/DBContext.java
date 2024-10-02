@@ -27,4 +27,12 @@ public class DBContext {
             System.out.println(ex);
         }
     }
+    public static void main(String[] args) {
+        DBContext dBContext = new DBContext();
+        if (dBContext.connection != null) {
+            System.out.println("ok");
+        } else {
+            System.out.println("fail");
+        }
+    }
 }

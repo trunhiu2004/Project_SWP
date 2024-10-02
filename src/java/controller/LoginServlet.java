@@ -6,8 +6,6 @@
 package controller;
 
 import dal.AccountDAO;
-import model.Accounts;
-import model.Employees;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,16 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import java.util.UUID;
-import verify.RandomCode;
-import verify.SendEmail;
+import model.Accounts;
 
 /**
  *
  * @author frien
  */
-public class RegisterServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +36,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");  
+            out.println("<title>Servlet LoginServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+        request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
     } 
 
     /** 
@@ -74,32 +69,22 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //get info from form
-        String email = request.getParameter("emailRegister");
-        if(!checkDuplicate(email)){
-        //create random token
-        String token = UUID.randomUUID().toString();
-        
-        //url link to change pass
-        String link = "http://localhost:9999/SWP_Project/changePassword?token=" + token;
-        
-        request.getSession().setAttribute("emailRegister", email);
-        
-//        //activate 6-digit code
-//        RandomCode rc=new RandomCode();
-//        String verifyCode=rc.activateCode();
-        
-        //verify user email
-        SendEmail se = new SendEmail();
-        se.send(email, link);
-        request.getSession().setAttribute("token", token);
-        request.getSession().setAttribute("status", "register");
-        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
-        }else{
-            request.setAttribute("error", "Account has been already existed!");
-            request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+        String email = request.getParameter("emailLogin");
+        String password = request.getParameter("passwordLogin");
+
+        AccountDAO dao = new AccountDAO();
+        Accounts a = dao.login(email, password);
+        if (a == null) {
+            request.setAttribute("mess", "Wrong username or password");
+            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
+            
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", a);
+            
+            response.sendRedirect("index.html");
+
         }
-       
     }
 
     /** 
@@ -111,16 +96,4 @@ public class RegisterServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-
-
-    private boolean checkDuplicate(String email) {
-        AccountDAO accDAO = new AccountDAO();
-        List<Accounts> listAcc = accDAO.getAllAccount();
-        for (Accounts accounts : listAcc) {
-            if(accounts.getEmail().equalsIgnoreCase(email)){
-                return true;
-            }
-        }
-        return false;
-    }
 }
