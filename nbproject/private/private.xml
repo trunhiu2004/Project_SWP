@@ -35,5 +35,12 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/src/java/controller/EmployeeSettingServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/web/employeeSetting.jsp</file>
         </group>
+        <group>
+            <file>file:/E:/SWP391/Project/Project_SWP/src/java/controller/VerifyServlet.java</file>
+            <file>file:/E:/SWP391/Project/Project_SWP/src/java/controller/LoginServlet.java</file>
+            <file>file:/E:/SWP391/Project/Project_SWP/src/java/controller/ResetPasswordServlet.java</file>
+            <file>file:/E:/SWP391/Project/Project_SWP/src/java/controller/RegisterServlet.java</file>
+            <file>file:/E:/SWP391/Project/Project_SWP/web/index.html</file>
+        </group>
     </open-files>
 </project-private>

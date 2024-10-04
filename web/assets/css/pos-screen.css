@@ -1,0 +1,573 @@
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f7;
+    color: #333;
+}
+
+/* Container chính */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.container .img{
+    width: 10%;
+    /* Đặt chiều rộng là 100% để chiếm toàn bộ thẻ sản phẩm */
+    height: 10px;
+}
+
+/* Sidebar - Thanh điều hướng */
+.sidebar {
+    width: 80px;
+    /* Giảm kích thước của sidebar */
+    background-color: #fff;
+    padding: 20px 10px;
+    /* Thêm padding bên trái và bên phải */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Đặt thành cột */
+    align-items: center;
+    /* Căn giữa nội dung */
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #ff6f00;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar a {
+    text-decoration: none; /* Xóa gạch chân */
+    color: inherit; /* Giữ nguyên màu biểu tượng */
+}
+
+.sidebar a:visited {
+    color: inherit; /* Màu khi đã truy cập */
+}
+
+.sidebar a:hover {
+    color: #007BFF; /* Màu khi rê chuột, bạn có thể tùy chỉnh */
+}
+
+
+.sidebar nav ul li {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    /* Căn giữa nội dung */
+    align-items: center;
+    /* Căn giữa nội dung */
+    border-radius: 50%;
+    /* Làm tròn các góc */
+    width: 50px;
+    /* Chiều rộng của từng mục */
+    height: 50px;
+    /* Chiều cao của từng mục */
+    margin-bottom: 10px;
+    /* Khoảng cách giữa các mục */
+}
+
+.sidebar nav ul li:hover {
+    background-color: #ff6f00;
+    /* Màu nền khi hover */
+    color: #fff;
+    /* Đổi màu icon khi hover */
+    transform: scale(1.1);
+    /* Tăng kích thước nhẹ khi hover */
+}
+
+.sidebar nav ul li i {
+    font-size: 24px;
+    /* Kích thước biểu tượng */
+    transition: color 0.2s;
+    /* Hiệu ứng chuyển màu cho icon */
+    margin: 0 10px;
+    /* Tăng khoảng cách giữa các icon */
+}
+
+
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+}
+
+.header {
+    text-align: center;
+    /* Căn giữa nội dung trong header */
+    margin-bottom: 20px;
+    /* Khoảng cách dưới header */
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0c74db;
+}
+
+.header p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+
+/* Phần tìm kiếm */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 5px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.search-bar .search-btn,
+.search-bar .qr-btn {
+    background-color: #0077ff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar .search-btn:hover,
+.search-bar .qr-btn:hover {
+    background-color: #0080ff;
+}
+
+.search-bar .qr-btn {
+    margin-left: 10px;
+    /* Thêm khoảng cách giữa nút Search và QR */
+}
+
+
+/* qr code */
+.modal {
+    display: none;
+    /* Ẩn modal theo mặc định */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Nền mờ khi modal xuất hiện */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    /* Bo tròn góc */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* Categories */
+.categories {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* Màu nền của phần danh mục */
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-radius: 30px;
+    /* Độ bo tròn của các góc */
+    width: 120px;
+    background-color: #fff;
+    /* Màu nền của category */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid transparent;
+    /* Thêm border mặc định để đẹp hơn */
+}
+
+.category.active {
+    border: 2px solid #007bff;
+    /* Đường viền cho trạng thái active */
+    background-color: #eef7ff;
+    /* Màu nền cho trạng thái active */
+}
+
+.category .icon {
+    background-color: #f1f1f1;
+    /* Màu nền cho icon */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* Hình tròn cho icon */
+    margin-bottom: 10px;
+}
+
+.category .title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.category .items {
+    color: #888;
+    /* Màu chữ cho số lượng items */
+    font-size: 14px;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Products section */
+.products {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa các thẻ sản phẩm */
+    flex-wrap: wrap; /* Cho phép các thẻ sản phẩm xuống dòng */
+    justify-content: space-around; /* Căn giữa các thẻ sản phẩm */
+}
+
+.product-card {
+    background-color: #ffffff; /* Màu nền trắng cho thẻ sản phẩm */
+    border: 1px solid #e0e0e0; /* Viền nhẹ cho thẻ sản phẩm */
+    border-radius: 10px; /* Bo tròn góc cho thẻ sản phẩm */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bóng đổ mềm mại */
+    margin: 10px; /* Khoảng cách giữa các thẻ sản phẩm */
+    width: 240px; /* Chiều rộng cho mỗi thẻ sản phẩm */
+    text-align: center; /* Căn giữa nội dung bên trong thẻ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Nâng lên khi hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Bóng đổ mạnh khi hover */
+}
+
+.product-card img {
+    width: 100%; /* Chiều rộng hình ảnh 100% thẻ */
+    height: auto; /* Chiều cao tự động */
+    border-top-left-radius: 10px; /* Bo tròn góc trên bên trái */
+    border-top-right-radius: 10px; /* Bo tròn góc trên bên phải */
+}
+
+.product-card h3 {
+    font-size: 1.4em; /* Kích thước chữ cho tên sản phẩm */
+    margin: 10px 0; /* Khoảng cách trên và dưới */
+    color: #333; /* Màu chữ cho tên sản phẩm */
+}
+
+.product-card p {
+    font-size: 14px; /* Kích thước chữ cho mô tả */
+    color: #7f8c8d; /* Màu chữ nhạt hơn cho mô tả */
+    margin-bottom: 10px; /* Khoảng cách dưới cùng */
+}
+
+.product-card .price {
+    font-size: 18px; /* Kích thước chữ cho giá */
+    color: #0080ff; /* Màu xanh cho giá */
+    font-weight: bold; /* In đậm cho giá */
+    margin: 5px 0; /* Giảm khoảng cách giữa giá và các phần khác */
+}
+
+/* Thiết kế cho nút Add to Cart */
+.add-cart-btn {
+    display: inline-block;
+    background-color: #3498db; /* Màu xanh chủ đạo */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-cart-btn:hover {
+    background-color: #2980b9; /* Màu tối hơn khi hover */
+    transform: translateY(-2px); /* Hiệu ứng nổi khi hover */
+}
+
+.add-cart-btn:active {
+    background-color: #2471a3; /* Màu khi nút bị nhấn */
+    transform: translateY(0); /* Nút trở về vị trí cũ khi nhấn */
+}
+
+/* Đảm bảo rằng các nút Add to Cart trong thẻ product-card có kích thước phù hợp */
+.product-card .add-cart-btn {
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng thẻ sản phẩm */
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Đảm bảo thẻ sản phẩm được bố trí đẹp mắt */
+.product-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi khi hover */
+}
+
+/* Tùy chỉnh hình ảnh trong thẻ sản phẩm */
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Tùy chỉnh tiêu đề sản phẩm */
+.product-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Thêm hiệu ứng cho liên kết */
+.product-card h3 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.product-card h3 a:hover {
+    color: #3498db; /* Đổi màu khi hover */
+}
+
+
+.order-summary {
+    width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    /* Tăng hiệu ứng đổ bóng */
+    border-radius: 15px;
+    /* Làm bo tròn góc */
+    transition: transform 0.3s ease-in-out;
+}
+
+.order-summary:hover {
+    transform: scale(1.02);
+    /* Hiệu ứng khi hover */
+}
+
+.order-summary h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #0080ff;
+    /* Thêm màu sắc cho tiêu đề */
+    font-weight: bold;
+}
+
+.order-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.order-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    /* Nền màu sáng cho từng sản phẩm */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.order-list li:hover {
+    background-color: #ffeed2;
+    /* Hiệu ứng hover trên sản phẩm */
+}
+
+.order-list img {
+    width: 60px;
+    /* Tăng kích thước hình ảnh */
+    height: 60px;
+    border-radius: 8px;
+    /* Bo tròn hình ảnh */
+    object-fit: cover;
+}
+
+.order-details h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.order-details .price {
+    font-size: 16px;
+    color: #0080ff;
+    /* Màu sắc nổi bật cho giá */
+    font-weight: bold;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.quantity-btn {
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #0080ff;
+    /* Hiệu ứng hover cho nút số lượng */
+}
+
+/* xoa san pham */
+.remove-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: red;
+    /* Màu sắc của biểu tượng */
+    font-size: 16px;
+    /* Kích thước biểu tượng */
+}
+
+.remove-btn:hover {
+    color: darkred;
+    /* Màu khi hover */
+}
+
+.total-summary {
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    padding: 20px;
+    /* Tăng padding để phần tổng rộng hơn */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    /* Tăng kích thước font cho toàn bộ phần tổng */
+}
+
+.total-summary p,
+.total-summary h3 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    /* Tăng kích thước font cho các dòng */
+    color: #555;
+}
+
+.total-summary h3 {
+    font-size: 20px;
+    /* Tăng kích thước font cho tiêu đề tổng */
+    color: #0080ff;
+    /* Giữ màu sắc nổi bật cho tiêu đề */
+}
+
+.payment-btn {
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-btn:hover {
+    background-color: #0080ff;
+    /* Hiệu ứng hover */
+}
+
+/* Đặt font chữ và làm cho giao diện thanh lịch hơn */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f7;
+    color: #333;
+}

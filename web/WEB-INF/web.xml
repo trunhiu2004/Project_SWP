@@ -28,6 +28,26 @@
         <servlet-name>ResetPasswordServlet</servlet-name>
         <servlet-class>controller.ResetPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListProduct</servlet-name>
+        <servlet-class>controller.ListProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProduct</servlet-name>
+        <servlet-class>controller.SearchProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeList</servlet-name>
+        <servlet-class>controller.EmployeeList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditEmployee</servlet-name>
+        <servlet-class>controller.EditEmployee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <servlet-class>controller.DeleteEmployee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,5 +75,25 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProduct</servlet-name>
+        <url-pattern>/productList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProduct</servlet-name>
+        <url-pattern>/SearchProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeList</servlet-name>
+        <url-pattern>/EmployeeList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditEmployee</servlet-name>
+        <url-pattern>/EditEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <url-pattern>/DeleteEmployee</url-pattern>
     </servlet-mapping>
 </web-app>

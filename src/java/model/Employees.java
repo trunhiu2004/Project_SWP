@@ -14,18 +14,18 @@ public class Employees {
     private String employee_name;
     private String employee_phone;
     private String employee_address;
-    private String employee_status;
+    
     private int account_id;
 
     public Employees() {
     }
 
-    public Employees(int employee_id, String employee_name, String employee_phone, String employee_address, String employee_status, int account_id) {
+    public Employees(int employee_id, String employee_name, String employee_phone, String employee_address, int account_id) {
         this.employee_id = employee_id;
         this.employee_name = employee_name;
         this.employee_phone = employee_phone;
         this.employee_address = employee_address;
-        this.employee_status = employee_status;
+        
         this.account_id = account_id;
     }
 
@@ -61,13 +61,7 @@ public class Employees {
         this.employee_address = employee_address;
     }
 
-    public String getEmployee_status() {
-        return employee_status;
-    }
-
-    public void setEmployee_status(String employee_status) {
-        this.employee_status = employee_status;
-    }
+    
 
     public int getAccount_id() {
         return account_id;
