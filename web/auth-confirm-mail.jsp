@@ -33,10 +33,10 @@
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
                                                 <img src="assets/images/login/mail.png" class="img-fluid" width="80" alt="">
-                                                <h2 class="mt-3 mb-0">Success !</h2>
-                                                <p class="cnf-mail mb-1">A email has been send to youremail. Please check for an
-                                                    email from company and click
-                                                    on the included link to reset your password.</p>
+                                                <h2 class="mt-3 mb-0">Thành công !</h2>
+                                                <p class="cnf-mail mb-1">Một đường link đã được gửi 
+                                                đến email.
+                                                </p>
 <!--                                                <div class="d-inline-block w-100">
                                                     <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
                                                 </div>-->

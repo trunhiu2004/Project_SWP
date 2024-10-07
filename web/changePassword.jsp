@@ -30,23 +30,20 @@
                                     <div class="d-flex align-items-center auth-content">
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
-                                                <h2 class="mb-2">Change password</h2>
-                                                <p>Create your POSDash account.</p>
+                                                <h2 class="mb-2">??i m?t kh?u</h2>
                                                 <form action="changePassword" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="floating-label form-group">
                                                                 <input class="floating-input form-control" type="password" placeholder=" " name="passwordRegister">
-                                                                <label>New password</label>
+                                                                <label>M?t kh?u m?i</label>
                                                             </div>
                                                         </div>
 
 
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Confirm</button>
-                                                    <p class="mt-3">
-                                                        Already have an Account <a href="login" class="text-primary">Sign In</a>
-                                                    </p>
+                                                   
                                                 </form>
                                             </div>
                                         </div>

@@ -96,7 +96,7 @@ public class RegisterServlet extends HttpServlet {
         request.getSession().setAttribute("status", "register");
         request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
         }else{
-            request.setAttribute("error", "Account has been already existed!");
+            request.setAttribute("error", "Email đã tồn tại!");
             request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
         }
        
