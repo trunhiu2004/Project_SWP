@@ -5,21 +5,18 @@
 
 package controller;
 
-import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Accounts;
 
 /**
  *
  * @author frien
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +33,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet LogoutServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +53,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
+        request.getSession().removeAttribute("account");
+        response.sendRedirect("login");
     } 
 
     /** 
@@ -69,22 +67,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("emailLogin");
-        String password = request.getParameter("passwordLogin");
-
-        AccountDAO dao = new AccountDAO();
-        Accounts a = dao.login(email, password);
-        if (a == null) {
-            request.setAttribute("mess", "Sai tên đăng nhập hoặc mật khẩu!");
-            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
-            
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", a);
-            
-            response.sendRedirect("home.jsp");
-
-        }
+        processRequest(request, response);
     }
 
     /** 

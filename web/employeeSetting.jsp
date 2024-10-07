@@ -2,6 +2,8 @@
 
 
 <!doctype html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
@@ -30,30 +32,30 @@
                                     <div class="d-flex align-items-center auth-content">
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
-                                                <h2 class="mb-2">Information Details</h2>
-                                                <p>Enter your information</p>
+                                                <h2 class="mb-2">Thông tin nhân viên</h2>
+                                                <p>Hãy nhập thông tin của bạn</p>
                                                 <form action="employeeSetting" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
                                                                 <input class="floating-input form-control" type="text" placeholder=" " name="fullName">
-                                                                <label>Full Name</label>
+                                                                <label>Họ tên</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
                                                                 <input class="floating-input form-control" type="text" placeholder=" " name="phone">
-                                                                <label>Phone</label>
+                                                                <label>Số điện thoại</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
                                                                 <input class="floating-input form-control" type="text" placeholder=" " name="address">
-                                                                <label>address</label>
+                                                                <label>Địa chỉ</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
                                                    
                                                 </form>
                                             </div>
