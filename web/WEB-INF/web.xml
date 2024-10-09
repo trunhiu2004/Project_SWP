@@ -32,6 +32,30 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListUnitServlet</servlet-name>
+        <servlet-class>controller.ListUnitServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListSupplierServlet</servlet-name>
+        <servlet-class>controller.ListSupplierServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <servlet-class>controller.ListCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductServlet</servlet-name>
+        <servlet-class>controller.ListProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <servlet-class>controller.AddCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>controller.DeleteCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -63,5 +87,29 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUnitServlet</servlet-name>
+        <url-pattern>/listUnit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSupplierServlet</servlet-name>
+        <url-pattern>/listSupplier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <url-pattern>/listCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductServlet</servlet-name>
+        <url-pattern>/listProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <url-pattern>/addCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/deleteCategory</url-pattern>
     </servlet-mapping>
 </web-app>

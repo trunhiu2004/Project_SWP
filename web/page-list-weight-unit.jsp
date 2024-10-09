@@ -3,14 +3,14 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
         <!-- Favicon -->
-        <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
+        <jsp:include page="components/favicon.jsp"></jsp:include> </head>
         <body class="  ">
             <!-- loader Start -->
             <div id="loading">
@@ -49,51 +49,30 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Product List</h4>
-                                        <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
+                                        <h4 class="mb-3">Category List</h4>
+                                        <p class="mb-0">Use category list as to describe your overall core business from the provided list. <br>
+                                            Click the name of the category where you want to add a list item. .</p>
                                     </div>
-                                    <a href="page-add-product.html" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
+                                    <a href="page-add-category.html" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Category</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox1">
-                                                        <label for="checkbox1" class="mb-0"></label>
-                                                    </div>
-                                                </th>
-                                                <th>Product</th>
                                                 <th>Code</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>Brand Name</th>
-                                                <th>Quantity</th>
                                                 <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
-                                        <c:forEach items="${pro}" var="p">
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox2">
-                                                        <label for="checkbox2" class="mb-0"></label>
-                                                    </div>
-                                                </td>
-                                                <td>${p.getName()}</td>
-                                                <td>${p.getId()}</td>
-                                                <td>${p.productCategories.getName()}</td>
-                                                <td>${p.getPrice()}</td>
-                                                <td>${p.suppliers.getName()}</td>
-                                                <td>${p.getWeight()}</td>
-                                                <td>${p.weightUnit.getName()}</td>                                       
+                                        <c:forEach items="${wu}" var="pc">
+                                            <tr>                                                
+                                                <td>${pc.getId()}</td>
+                                                <td>${pc.getName()}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
@@ -105,7 +84,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </c:forEach>                                  
+                                        </c:forEach>                      
                                     </tbody>
                                 </table>
                             </div>
@@ -185,5 +164,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>
