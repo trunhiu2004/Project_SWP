@@ -67,7 +67,6 @@ public class AccountDAO extends DBContext {
         } catch (Exception e) {
         }
         return accounts;
-
     }
 
     public int getAccountId(String email) {
@@ -118,6 +117,8 @@ public class AccountDAO extends DBContext {
 
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
-        System.out.println(ac.getAccountId("friendzone112004@gmail.com"));
+        for (Accounts arg : ac.getAllAccount()) {
+            System.out.println(arg);
+        }
     }
 }
