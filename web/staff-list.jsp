@@ -115,9 +115,9 @@
                                                             <div class="flex align-items-center list-user-action">
                                                                 
                                                                 <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Edit" href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                                                   data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
                                                                 <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                                   data-original-title="Delete" href="staffDelete?id=${employee.getEmployee_id()}"><i class="ri-delete-bin-line mr-0"></i></a>
                                                             </div>
                                                         </td>
                                                     </tr>

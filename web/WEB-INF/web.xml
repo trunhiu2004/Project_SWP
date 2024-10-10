@@ -36,6 +36,14 @@
         <servlet-name>StaffManageServlet</servlet-name>
         <servlet-class>controller.StaffManageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffUpdateServlet</servlet-name>
+        <servlet-class>controller.StaffUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffDeleteServlet</servlet-name>
+        <servlet-class>controller.StaffDeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -71,5 +79,13 @@
     <servlet-mapping>
         <servlet-name>StaffManageServlet</servlet-name>
         <url-pattern>/staffManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffUpdateServlet</servlet-name>
+        <url-pattern>/staffUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffDeleteServlet</servlet-name>
+        <url-pattern>/staffDelete</url-pattern>
     </servlet-mapping>
 </web-app>

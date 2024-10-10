@@ -217,18 +217,9 @@
                                             </svg>
                                         </a>
                                         <ul id="user" class="iq-submenu collapse" data-parent="#otherpage">
+                                            
                                             <li class="">
-                                                <a href="https://templates.iqonic.design/posdash/html/app/user-profile.html">
-                                                    <i class="las la-minus"></i><span>User Profile</span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="https://templates.iqonic.design/posdash/html/app/user-add.html">
-                                                    <i class="las la-minus"></i><span>User Add</span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="https://templates.iqonic.design/posdash/html/app/user-list.html">
+                                                <a href="staffManage">
                                                     <i class="las la-minus"></i><span>User List</span>
                                                 </a>
                                             </li>

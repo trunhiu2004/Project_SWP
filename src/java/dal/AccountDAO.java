@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Accounts;
 import java.sql.ResultSet;
+import java.util.logging.Level;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -42,7 +43,7 @@ public class AccountDAO extends DBContext {
         }
     }
 
-    public void changePassword(String email, String password){
+    public void changePassword(String email, String password) {
         String sql = "Update Accounts\n"
                 + "set password=?\n"
                 + "where email=?";
@@ -54,6 +55,7 @@ public class AccountDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+
     public List<Accounts> getAllAccount() {
         List<Accounts> accounts = new ArrayList<>();
         try {
@@ -113,7 +115,36 @@ public class AccountDAO extends DBContext {
         return null; // Trả về null nếu xác thực thất bại
     }
 
-    
+    public void updateStatus(int status, int account_id) {
+        String query = "UPDATE [dbo].[Accounts]\n"
+                + "   SET \n"
+                + "      [status_id] = ?\n"
+                + " WHERE account_id =?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, status);
+            statement.setInt(2, account_id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public void deleteAccount(int account_id) {
+        String query = "DELETE FROM [dbo].[Accounts]\n"
+                + "      WHERE account_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, account_id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
 
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
