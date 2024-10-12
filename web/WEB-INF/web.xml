@@ -44,6 +44,30 @@
         <servlet-name>StaffDeleteServlet</servlet-name>
         <servlet-class>controller.StaffDeleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InvoiceListServlet</servlet-name>
+        <servlet-class>controller.InvoiceListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InvoiceDetailServlet</servlet-name>
+        <servlet-class>controller.InvoiceDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadInvoiceServlet</servlet-name>
+        <servlet-class>controller.DownloadInvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteInvoiceServlet</servlet-name>
+        <servlet-class>controller.DeleteInvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditInvoiceServlet</servlet-name>
+        <servlet-class>controller.EditInvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateInvoiceServlet</servlet-name>
+        <servlet-class>controller.UpdateInvoiceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -87,5 +111,29 @@
     <servlet-mapping>
         <servlet-name>StaffDeleteServlet</servlet-name>
         <url-pattern>/staffDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InvoiceListServlet</servlet-name>
+        <url-pattern>/invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InvoiceDetailServlet</servlet-name>
+        <url-pattern>/invoice-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadInvoiceServlet</servlet-name>
+        <url-pattern>/download-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteInvoiceServlet</servlet-name>
+        <url-pattern>/delete-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInvoiceServlet</servlet-name>
+        <url-pattern>/edit-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInvoiceServlet</servlet-name>
+        <url-pattern>/update-invoice</url-pattern>
     </servlet-mapping>
 </web-app>

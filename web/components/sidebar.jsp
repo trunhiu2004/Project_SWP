@@ -7,9 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <div class="iq-sidebar  sidebar-default ">
                 <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                    <a href="index.html" class="header-logo">
+                    <a href="home.jsp" class="header-logo">
                         <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
                     </a>
                     <div class="iq-menu-bt-sidebar ml-0">
@@ -20,7 +21,7 @@
                     <nav class="iq-sidebar-menu">
                         <ul id="iq-sidebar-toggle" class="iq-menu">
                             <li class="">
-                                <a href="index.html" class="svg-icon">                        
+                                <a href="home.jsp" class="svg-icon">                        
                                     <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
                                     </svg>
@@ -39,12 +40,12 @@
                                 </a>
                                 <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-product.html">
+                                        <a href="page-list-product.jsp">
                                             <i class="las la-minus"></i><span>List Product</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-product.html">
+                                        <a href="page-add-product.jsp">
                                             <i class="las la-minus"></i><span>Add Product</span>
                                         </a>
                                     </li>
@@ -62,12 +63,12 @@
                                 </a>
                                 <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-category.html">
+                                        <a href="page-list-category.jsp">
                                             <i class="las la-minus"></i><span>List Category</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-category.html">
+                                        <a href="page-add-category.jsp">
                                             <i class="las la-minus"></i><span>Add Category</span>
                                         </a>
                                     </li>
@@ -85,12 +86,12 @@
                                 </a>
                                 <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-sale.html">
+                                        <a href="page-list-sale.jsp">
                                             <i class="las la-minus"></i><span>List Sale</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-sale.html">
+                                        <a href="page-add-sale.jsp">
                                             <i class="las la-minus"></i><span>Add Sale</span>
                                         </a>
                                     </li>
@@ -108,17 +109,29 @@
                                 </a>
                                 <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-purchase.html">
+                                        <a href="page-list-purchase.jsp">
                                             <i class="las la-minus"></i><span>List Purchases</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-purchase.html">
+                                        <a href="page-add-purchase.jsp">
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
+                            
+                            <li class="">
+                                <a href="invoice" class="">
+                                    <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                    <span class="ml-4">Invoices</span>
+                                </a>
+                                <ul id="reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                </ul>
+                            </li>
+                            
                             <li class=" ">
                                 <a href="#return" class="collapsed" data-toggle="collapse" aria-expanded="false">
                                     <svg class="svg-icon" id="p-dash6" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -131,12 +144,12 @@
                                 </a>
                                 <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-returns.html">
+                                        <a href="page-list-returns.jsp">
                                             <i class="las la-minus"></i><span>List Returns</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-return.html">
+                                        <a href="page-add-return.jsp">
                                             <i class="las la-minus"></i><span>Add Return</span>
                                         </a>
                                     </li>
@@ -154,39 +167,39 @@
                                 </a>
                                 <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-customers.html">
+                                        <a href="page-list-customers.jsp">
                                             <i class="las la-minus"></i><span>Customers</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-customers.html">
+                                        <a href="page-add-customers.jsp">
                                             <i class="las la-minus"></i><span>Add Customers</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-list-users.html">
+                                        <a href="page-list-users.jsp">
                                             <i class="las la-minus"></i><span>Users</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-users.html">
+                                        <a href="page-add-users.jsp">
                                             <i class="las la-minus"></i><span>Add Users</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-list-suppliers.html">
+                                        <a href="page-list-suppliers.jsp">
                                             <i class="las la-minus"></i><span>Suppliers</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-supplier.html">
+                                        <a href="page-add-supplier.jsp">
                                             <i class="las la-minus"></i><span>Add Suppliers</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="">
-                                <a href="page-report.html" class="">
+                                <a href="page-report.jsp" class="">
                                     <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
                                     </svg>
@@ -237,122 +250,122 @@
                                         </a>
                                         <ul id="ui" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="ui-avatars.html">
+                                                <a href="ui-avatars.jsp">
                                                     <i class="las la-minus"></i><span>Avatars</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-alerts.html">
+                                                <a href="ui-alerts.jsp">
                                                     <i class="las la-minus"></i><span>Alerts</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-badges.html">
+                                                <a href="ui-badges.jsp">
                                                     <i class="las la-minus"></i><span>Badges</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-breadcrumb.html">
+                                                <a href="ui-breadcrumb.jsp">
                                                     <i class="las la-minus"></i><span>Breadcrumb</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-buttons.html">
+                                                <a href="ui-buttons.jsp">
                                                     <i class="las la-minus"></i><span>Buttons</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-buttons-group.html">
+                                                <a href="ui-buttons-group.jsp">
                                                     <i class="las la-minus"></i><span>Buttons Group</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-boxshadow.html">
+                                                <a href="ui-boxshadow.jsp">
                                                     <i class="las la-minus"></i><span>Box Shadow</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-colors.html">
+                                                <a href="ui-colors.jsp">
                                                     <i class="las la-minus"></i><span>Colors</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-cards.html">
+                                                <a href="ui-cards.jsp">
                                                     <i class="las la-minus"></i><span>Cards</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-carousel.html">
+                                                <a href="ui-carousel.jsp">
                                                     <i class="las la-minus"></i><span>Carousel</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-grid.html">
+                                                <a href="ui-grid.jsp">
                                                     <i class="las la-minus"></i><span>Grid</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-helper-classes.html">
+                                                <a href="ui-helper-classes.jsp">
                                                     <i class="las la-minus"></i><span>Helper classes</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-images.html">
+                                                <a href="ui-images.jsp">
                                                     <i class="las la-minus"></i><span>Images</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-list-group.html">
+                                                <a href="ui-list-group.jsp">
                                                     <i class="las la-minus"></i><span>list Group</span>
                                                 </a>
                                             </li>
                                             <li  class="">
-                                                <a href="ui-media-object.html">
+                                                <a href="ui-media-object.jsp">
                                                     <i class="las la-minus"></i><span>Media</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-modal.html">
+                                                <a href="ui-modal.jsp">
                                                     <i class="las la-minus"></i><span>Modal</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-notifications.html">
+                                                <a href="ui-notifications.jsp">
                                                     <i class="las la-minus"></i><span>Notifications</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-pagination.html">
+                                                <a href="ui-pagination.jsp">
                                                     <i class="las la-minus"></i><span>Pagination</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-popovers.html">
+                                                <a href="ui-popovers.jsp">
                                                     <i class="las la-minus"></i><span>Popovers</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-progressbars.html">
+                                                <a href="ui-progressbars.jsp">
                                                     <i class="las la-minus"></i><span>Progressbars</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-typography.html">
+                                                <a href="ui-typography.jsp">
                                                     <i class="las la-minus"></i><span>Typography</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-tabs.html">
+                                                <a href="ui-tabs.jsp">
                                                     <i class="las la-minus"></i><span>Tabs</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-tooltips.html">
+                                                <a href="ui-tooltips.jsp">
                                                     <i class="las la-minus"></i><span>Tooltips</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="ui-embed-video.html">
+                                                <a href="ui-embed-video.jsp">
                                                     <i class="las la-minus"></i><span>Video</span>
                                                 </a>
                                             </li>
@@ -370,27 +383,27 @@
                                         </a>
                                         <ul id="auth" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="auth-sign-in.html">
+                                                <a href="auth-sign-in.jsp">
                                                     <i class="las la-minus"></i><span>Login</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="auth-sign-up.html">
+                                                <a href="auth-sign-up.jsp">
                                                     <i class="las la-minus"></i><span>Register</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="auth-recoverpw.html">
+                                                <a href="auth-recoverpw.jsp">
                                                     <i class="las la-minus"></i><span>Recover Password</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="auth-confirm-mail.html">
+                                                <a href="auth-confirm-mail.jsp">
                                                     <i class="las la-minus"></i><span>Confirm Mail</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="auth-lock-screen.html">
+                                                <a href="auth-lock-screen.jsp">
                                                     <i class="las la-minus"></i><span>Lock Screen</span>
                                                 </a>
                                             </li>
@@ -408,37 +421,37 @@
                                         </a>
                                         <ul id="form" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="form-layout.html">
+                                                <a href="form-layout.jsp">
                                                     <i class="las la-minus"></i><span class="">Form Elements</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="form-input-group.html" class="svg-icon">
+                                                <a href="form-input-group.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Input</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="form-validation.html" class="svg-icon">
+                                                <a href="form-validation.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Validation</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="form-switch.html" class="svg-icon">
+                                                <a href="form-switch.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Switch</span>
                                                 </a>
                                             </li>
                                             <li class="active">
-                                                <a href="form-chechbox.html" class="svg-icon">
+                                                <a href="form-chechbox.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Checkbox</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="form-radio.html" class="svg-icon">
+                                                <a href="form-radio.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Radio</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="form-textarea.html" class="svg-icon">
+                                                <a href="form-textarea.jsp" class="svg-icon">
                                                     <i class="las la-minus"></i><span class="">Form Textarea</span>
                                                 </a>
                                             </li>
@@ -456,17 +469,17 @@
                                         </a>
                                         <ul id="table" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="tables-basic.html">
+                                                <a href="tables-basic.jsp">
                                                     <i class="las la-minus"></i><span>Basic Tables</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="table-data.html">
+                                                <a href="table-data.jsp">
                                                     <i class="las la-minus"></i><span>Data Table</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="table-tree.html">
+                                                <a href="table-tree.jsp">
                                                     <i class="las la-minus"></i><span>Table Tree</span>
                                                 </a>
                                             </li>
@@ -484,19 +497,19 @@
                                         </a>
                                         <ul id="pricing" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="pricing.html">
+                                                <a href="pricing.jsp">
                                                     <i class="las la-minus"></i><span>Pricing 1</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="pricing-2.html">
+                                                <a href="pricing-2.jsp">
                                                     <i class="las la-minus"></i><span>Pricing 2</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="">
-                                        <a href="pages-invoice.html" class="svg-icon">
+                                        <a href="pages-invoice.jsp" class="svg-icon">
                                             <svg class="svg-icon" id="p-dash07" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
                                             </svg>
@@ -515,19 +528,19 @@
                                         </a>
                                         <ul id="pages-error" class="iq-submenu collapse" data-parent="#otherpage">
                                             <li class="">
-                                                <a href="pages-error.html">
+                                                <a href="pages-error.jsp">
                                                     <i class="las la-minus"></i><span>Error 404</span>
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="pages-error-500.html">
+                                                <a href="pages-error-500.jsp">
                                                     <i class="las la-minus"></i><span>Error 500</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="">
-                                        <a href="pages-blank-page.html">
+                                        <a href="pages-blank-page.jsp">
                                             <svg class="svg-icon" id="p-dash18" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
                                             </svg>
@@ -535,7 +548,7 @@
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="pages-maintenance.html">
+                                        <a href="pages-maintenance.jsp">
                                             <svg class="svg-icon" id="p-dash19" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                                             </svg>
