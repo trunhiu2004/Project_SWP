@@ -85,13 +85,13 @@
                                 </a>
                                 <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="page-list-sale.html">
-                                            <i class="las la-minus"></i><span>List Sale</span>
+                                        <a href="couponManage">
+                                            <i class="las la-minus"></i><span>Coupon List</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-sale.html">
-                                            <i class="las la-minus"></i><span>Add Sale</span>
+                                        <a href="promotionManage">
+                                            <i class="las la-minus"></i><span>Promotion List</span>
                                         </a>
                                     </li>
                                 </ul>

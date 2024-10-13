@@ -95,7 +95,7 @@ public class EmployeeDAO extends DBContext {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(1,name);
+            statement.setString(1, name);
             statement.setString(2, phone);
             statement.setString(3, address);
             statement.setInt(4, employee_id);
@@ -104,6 +104,36 @@ public class EmployeeDAO extends DBContext {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }
+
+    public List<Employees> searchByName(String txtSearch) {
+        List<Employees> list = new ArrayList<>();
+        String sql = "select e.account_id, e.employee_name,e.employee_phone,e.employee_address,e.account_id\n"
+                + "from Accounts a, Employees e\n"
+                + "where e.account_id = a.account_id\n"
+                + "	and a.role_id = 2\n"
+                + "	and e.employee_name like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + txtSearch + "%");
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+
+                Employees e = new Employees(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+                list.add(e);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+
     }
 
     public static void main(String[] args) {

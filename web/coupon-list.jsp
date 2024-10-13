@@ -59,13 +59,14 @@
                                         <div class="header-title">
                                             <h4 class="card-title">User List</h4>
                                         </div>
+                                        <a href="couponAdd" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Coupon</a>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <div class="row justify-content-between">
                                                 <div class="col-sm-6 col-md-6">
                                                     <div id="user_list_datatable_info" class="dataTables_filter">
-                                                        <form action="staffManage" method="post" class="mr-3 position-relative">
+                                                        <form action="couponManage" method="post" class="mr-3 position-relative">
                                                             <div class="form-group mb-0">
                                                                 <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search"
                                                                        aria-controls="user-list-table" name="search">
@@ -79,45 +80,31 @@
                                                    aria-describedby="user-list-page-info">
                                                 <thead>
                                                     <tr class="ligth">
-                                                        <th>Name</th>
-                                                        <th>Contact</th>
-                                                        <th>Email</th>
+                                                        <th>Code</th>
+                                                        <th>Discount Amount (%)</th>
+                                                        <th>Start Date</th>
+                                                        <th>Coupon End Date</th>
                                                         <th>Status</th>
-
                                                         <th style="min-width: 100px">Action</th>
                                                     </tr>
                                                 </thead>
-                                            <c:forEach items="${listEmployee}" var="employee">
+                                            <c:forEach items="${listCoupon}" var="coupon">
                                                 <tbody>
                                                     <tr>
-                                                        <td>${employee.getEmployee_name()}</td>
-                                                        <td>${employee.getEmployee_phone()}</td>
+                                                        <td>${coupon.coupon_code}</td>
+                                                        <td>${coupon.discount_amount}</td>
+                                                        <td>${coupon.coupon_start_date}</td>
+                                                        <td>${coupon.coupon_end_date}</td>
                                                         <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    ${account.getEmail()}
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </td>
-                                                        <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    <c:forEach items="${listAccountStatus}" var="accountStatus">
-                                                                        <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
-                                                                            <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                </c:if>
-                                                            </c:forEach>
-
+                                                            <span class="badge bg-primary">${coupon.coupon_status}</span>
                                                         </td>
                                                         <td>
                                                             <div class="flex align-items-center list-user-action">
 
                                                                 <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                                   data-original-title="Update" href="couponUpdate?id=${coupon.coupon_id}"><i class="ri-pencil-line mr-0"></i></a>
                                                                 <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                                   data-original-title="Delete" href="#" onclick="doDelete(${coupon.coupon_id})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -191,8 +178,8 @@
 
         <script type="text/javascript">
                                     function doDelete(id) {
-                                        if (confirm("Are you sure delete category which has id =" + id)) {
-                                            window.location = "staffDelete?id=" + id;
+                                        if (confirm("Are you sure delete coupon which has id =" + id)) {
+                                            window.location = "couponDelete?id=" + id;
                                         }
                                     }
         </script>

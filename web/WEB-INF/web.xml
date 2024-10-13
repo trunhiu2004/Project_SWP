@@ -44,6 +44,38 @@
         <servlet-name>StaffDeleteServlet</servlet-name>
         <servlet-class>controller.StaffDeleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CouponManageServlet</servlet-name>
+        <servlet-class>controller.CouponManageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CouponUpdateServlet</servlet-name>
+        <servlet-class>controller.CouponUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CouponDeleteServlet</servlet-name>
+        <servlet-class>controller.CouponDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CouponAddServlet</servlet-name>
+        <servlet-class>controller.CouponAddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PromotionManageServlet</servlet-name>
+        <servlet-class>controller.PromotionManageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PromotionAddServlet</servlet-name>
+        <servlet-class>controller.PromotionAddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PromotionDeleteServlet</servlet-name>
+        <servlet-class>controller.PromotionDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PromotionUpdateServlet</servlet-name>
+        <servlet-class>controller.PromotionUpdateServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -87,5 +119,37 @@
     <servlet-mapping>
         <servlet-name>StaffDeleteServlet</servlet-name>
         <url-pattern>/staffDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouponManageServlet</servlet-name>
+        <url-pattern>/couponManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouponUpdateServlet</servlet-name>
+        <url-pattern>/couponUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouponDeleteServlet</servlet-name>
+        <url-pattern>/couponDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouponAddServlet</servlet-name>
+        <url-pattern>/couponAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PromotionManageServlet</servlet-name>
+        <url-pattern>/promotionManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PromotionAddServlet</servlet-name>
+        <url-pattern>/promotionAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PromotionDeleteServlet</servlet-name>
+        <url-pattern>/promotionDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PromotionUpdateServlet</servlet-name>
+        <url-pattern>/promotionUpdate</url-pattern>
     </servlet-mapping>
 </web-app>

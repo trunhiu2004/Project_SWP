@@ -6,25 +6,19 @@
 package controller;
 
 import dal.AccountDAO;
-import dal.AccountStatusDAO;
-import dal.EmployeeDAO;
+import dal.CouponDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.AccountStatus;
-import model.Accounts;
-import model.Employees;
 
 /**
  *
  * @author frien
  */
-public class StaffUpdateServlet extends HttpServlet {
+public class CouponDeleteServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +35,10 @@ public class StaffUpdateServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffUpdateServlet</title>");  
+            out.println("<title>Servlet CouponDeleteServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffUpdateServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CouponDeleteServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,22 +55,10 @@ public class StaffUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        EmployeeDAO employeeDAO = new EmployeeDAO();
-//        AccountDAO accountDAO = new AccountDAO();
-//        AccountStatusDAO accountStatusDAO = new AccountStatusDAO();
-//        
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        Employees employee = employeeDAO.getEmployeeById(id);
-//        List<Accounts> listAccount = accountDAO.getAllAccount();
-        List<AccountStatus>  lstAccountStatus = (List<AccountStatus>) request.getSession().getAttribute("listAccountStatus");
-        List<Accounts> lstAccountses = (List<Accounts>) request.getSession().getAttribute("listAccount");
-        EmployeeDAO employeeDAO = new EmployeeDAO();
         int id = Integer.parseInt(request.getParameter("id"));
-        Employees employee = employeeDAO.getEmployeeById(id);
-        request.getSession().setAttribute("listAccountStatus", lstAccountStatus);
-        request.getSession().setAttribute("listAccount", lstAccountses);
-        request.getSession().setAttribute("employee", employee);
-        request.getRequestDispatcher("staff-update.jsp").forward(request, response);
+        CouponDAO couponDAO = new CouponDAO();
+        couponDAO.deleteCoupon(id);
+        response.sendRedirect("couponManage");
     } 
 
     /** 
@@ -89,17 +71,7 @@ public class StaffUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        AccountDAO accountDAO = new AccountDAO();
-        EmployeeDAO employeeDAO = new EmployeeDAO();
-        int empId = Integer.parseInt(request.getParameter("empId"));
-        int accId = Integer.parseInt(request.getParameter("accId"));
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        int status = Integer.parseInt(request.getParameter("status"));
-        String address = request.getParameter("address");
-        accountDAO.updateStatus(status, accId);
-        employeeDAO.updateEmployee(name, phone, address, empId);
-        response.sendRedirect("staffManage");
+        processRequest(request, response);
     }
 
     /** 
