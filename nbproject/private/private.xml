@@ -66,27 +66,19 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-category.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-users.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-layout.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/Promotion.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/PromotionAddServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-radio.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-customers.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/PromotionDAO.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/PromotionManageServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/components/sidebar.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponUpdateServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-sale.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pages-blank-page.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/ResetPasswordServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-input-group.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/PromotionDeleteServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-validation.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-supplier.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/auth-sign-in.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/promotion-add.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/Accounts.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/WEB-INF/web.xml</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/auth-lock-screen.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/coupon-update.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-checkbox.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/privacy-policy.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/EmployeeSettingServlet.java</file>
@@ -99,16 +91,9 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-product.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-suppliers.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/employeeSetting.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/CouponDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/changePassword.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/PromotionUpdateServlet.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/coupon-list.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/backend-bundle.min.js</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/Coupons.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/components/favicon.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/coupon-add.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponManageServlet.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/promotion-list.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-returns.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/forgot-password.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-sale.jsp</file>
@@ -127,11 +112,8 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-switch.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-report.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-category.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponAddServlet.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/promotion-update.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pages-error-500.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/AccountDAO.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponDeleteServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-users.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-purchase.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
