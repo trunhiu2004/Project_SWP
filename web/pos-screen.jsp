@@ -68,6 +68,7 @@
                                     onclick="addToOrder('${product.product_name}', '${product.product_image}', '${product.product_Price}')">
                                 Add to Cart
                             </button>
+
                         </div>
                     </c:forEach>
                 </section>
@@ -76,32 +77,21 @@
             <aside class="order-summary">
                 <h2>Current Order</h2>
                 <ul class="order-list">
-                    <li>
-                        <div class="order-details">
-                            <h3>Smoke Tenderloin Slice Croissant</h3>
-                            <div class="price">$10.01</div>
-                            <div class="quantity-control">
-                                <button class="quantity-btn">-</button>
-                                <span>1</span>
-                                <button class="quantity-btn">+</button>
-                            </div>
-                        </div>
-                        <button class="remove-btn" onclick="removeProduct(this)"><i class="fas fa-trash"></i></button>
-                    </li>
+                    <!-- Sản phẩm sẽ được thêm vào đây -->
                 </ul>
-
                 <div class="total-summary">
-                    <p>Subtotal: <span>$37.61</span></p>
-                    <p>Discount: <span>-$5.00</span></p>
-                    <p>Tax: <span>$2.25</span></p>
-                    <h3>Total: <span>$34.86</span></h3>
+                    <p>Subtotal: <span>$0.00</span></p>
+                    <p>Discount: <span>-$0.00</span></p>
+                    <p>Tax: <span>$0.00</span></p>
+                    <h3>Total: <span>$0.00</span></h3>
                 </div>
 
                 <button class="payment-btn">Continue to Payment</button>
             </aside>
+
         </div>
 
         <!-- Include external JavaScript for handling product and order logic -->
-        <script src="js/pos-screen.js"></script>
+        <script src="assets/js/pos-screen.js"></script>
     </body>
 </html>

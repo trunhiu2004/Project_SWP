@@ -1,82 +1,96 @@
-// Hàm thêm sản phẩm vào giỏ hàng
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
 function addToOrder(productName, productImage, productPrice) {
-    // Lấy danh sách order hiện tại
-    const orderList = document.querySelector('.order-list');
+    const existingProduct = cart.find(item => item.name === productName);
 
-    // Tạo phần tử li mới để chứa sản phẩm
-    const newOrderItem = document.createElement('li');
-    newOrderItem.innerHTML = `
-        <img src="assets/images/imageProducts/${productImage}" alt="${productName}">
-        <div class="order-details">
-            <h3>${productName}</h3>
-            <div class="price">$${parseFloat(productPrice).toFixed(2)}</div>
-            <div class="quantity-control">
-                <button class="quantity-btn">-</button>
-                <span>1</span>
-                <button class="quantity-btn">+</button>
-            </div>
-        </div>
-        <button class="remove-btn" onclick="removeProduct(this)">
-            <i class="fas fa-trash"></i>
-        </button>
-    `;
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        const product = {
+            name: productName,
+            image: productImage,
+            price: parseFloat(productPrice),
+            quantity: 1
+        };
+        cart.push(product);
+    }
 
-    // Thêm sản phẩm mới vào danh sách
-    orderList.appendChild(newOrderItem);
 
-    // Cập nhật tổng tiền sau khi thêm sản phẩm
-    updateTotal();
-
-    // Gắn sự kiện click cho các nút tăng/giảm số lượng
-    setupQuantityButtons();
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateOrderList();
 }
 
-// Hàm cập nhật tổng tiền
-function updateTotal() {
-    const orderItems = document.querySelectorAll('.order-list li');
-    let subtotal = 0;
 
-    orderItems.forEach(item => {
-        const priceText = item.querySelector('.price').innerText;
-        const price = parseFloat(priceText.replace('$', ''));
-        const quantity = parseInt(item.querySelector('.quantity-control span').innerText);
-        subtotal += price * quantity;
+function updateOrderList() {
+    const orderList = document.querySelector(".order-list");
+    orderList.innerHTML = "";
+
+    cart.forEach((product, index) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+            <img src="assets/images/imageProducts/${product.image}" alt="${product.name}">
+            <span>${product.name} - $${product.price}</span>
+            <div class="quantity-controls">
+                <button onclick="decreaseQuantity(${index})">-</button>
+                <span>${product.quantity}</span>
+                <button onclick="increaseQuantity(${index})">+</button>
+            </div>
+            <button class="delete-btn" onclick="deleteProduct(${index})">Delete</button>
+        `;
+        orderList.appendChild(listItem);
     });
 
-    // Cập nhật subtotal
-    document.querySelector('.total-summary p span').innerText = `$${subtotal.toFixed(2)}`;
+    updateTotalSummary();
+}
 
-    // Cập nhật tổng (thêm logic giảm giá và thuế nếu có)
-    const discount = 5.00;
-    const tax = 2.25;
+
+function updateTotalSummary() {
+    const subtotalElement = document.querySelector(".total-summary p span"); 
+    const taxElement = document.querySelector(".total-summary p:nth-of-type(3) span"); 
+    const totalElement = document.querySelector(".total-summary h3 span"); 
+
+    const subtotal = cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+    const discount = 0; 
+    const tax = subtotal * 0.1;
     const total = subtotal - discount + tax;
 
-    document.querySelector('.total-summary h3 span').innerText = `$${total.toFixed(2)}`;
+
+    subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+    taxElement.textContent = `$${tax.toFixed(2)}`;
+    totalElement.textContent = `$${total.toFixed(2)}`;
 }
 
-// Hàm cài đặt sự kiện cho nút số lượng
-function setupQuantityButtons() {
-    document.querySelectorAll('.quantity-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const quantitySpan = this.parentElement.querySelector('span');
-            let currentQuantity = parseInt(quantitySpan.innerText);
-
-            if (this.innerText === '+') {
-                currentQuantity++;
-            } else if (this.innerText === '-' && currentQuantity > 1) {
-                currentQuantity--;
-            }
-            quantitySpan.innerText = currentQuantity;
-
-            // Cập nhật tổng tiền khi thay đổi số lượng
-            updateTotal();
-        });
-    });
+function increaseQuantity(index) {
+    cart[index].quantity += 1;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateOrderList();
 }
 
-// Hàm xóa sản phẩm khỏi giỏ hàng
-function removeProduct(button) {
-    const productItem = button.parentElement;
-    productItem.remove();
-    updateTotal();
+
+function decreaseQuantity(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+    } else {
+        deleteProduct(index); 
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateOrderList();
 }
+
+
+function deleteProduct(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateOrderList();
+}
+
+
+window.onload = function() {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+        cart = JSON.parse(storedCart);
+        updateOrderList();
+    }
+};
