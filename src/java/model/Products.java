@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
+import java.time.LocalDate;
 /**
  *
  * @author PC
@@ -12,26 +12,41 @@ public class Products {
 
     private int id;
     private String name;
-    private float price, weight;
+    private float price;
     private String image;
     private String barcode;
     private ProductCategories productCategories;
     private Suppliers suppliers;
     private WeightUnit weightUnit;
+    private LocalDate manufactureDate;
+    private LocalDate expirationDate;
 
     public Products() {
     }
 
-    public Products(int id, String name, float price, float weight, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit) {
+    public Products(int id, String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.weight = weight;
         this.image = image;
         this.barcode = barcode;
         this.productCategories = productCategories;
         this.suppliers = suppliers;
         this.weightUnit = weightUnit;
+        this.manufactureDate = manufactureDate;
+        this.expirationDate = expirationDate;
+    }
+
+    public Products(String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.barcode = barcode;
+        this.productCategories = productCategories;
+        this.suppliers = suppliers;
+        this.weightUnit = weightUnit;
+        this.manufactureDate = manufactureDate;
+        this.expirationDate = expirationDate;
     }
 
     public int getId() {
@@ -56,14 +71,6 @@ public class Products {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
     }
 
     public String getImage() {
@@ -105,4 +112,24 @@ public class Products {
     public void setWeightUnit(WeightUnit weightUnit) {
         this.weightUnit = weightUnit;
     }
+
+    public LocalDate getManufactureDate() {
+        return manufactureDate;
+    }
+
+    public void setManufactureDate(LocalDate manufactureDate) {
+        this.manufactureDate = manufactureDate;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+    
+    
+
+    
 }

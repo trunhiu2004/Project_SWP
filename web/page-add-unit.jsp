@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-supplier.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,56 +51,24 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Add Supplier</h4>
+                                        <h4 class="card-title">Add Unit</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="addSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">
-                                        <div class="row"> 
-                                            <div class="col-md-6">                      
+                                    <form action="addUnit" data-toggle="validator">
+                                        <div class="row">                                                                          
+                                            <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Name *</label>
-                                                    <input type="text" name="nameSup" class="form-control" placeholder="Enter Name" required>
+                                                    <label>Unit Name *</label>
+                                                    <input type="text" name="nameUnit" class="form-control" placeholder="Enter Unit Name" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div>    
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Email *</label>
-                                                    <input type="text" name="emailSup" class="form-control" placeholder="Enter Email" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Phone Number *</label>
-                                                    <input type="text" name="phoneSup" class="form-control" placeholder="Enter Phone Number" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Contact Person *</label>
-                                                    <input type="text" name="personSup" class="form-control" placeholder="Contact Person" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Address</label>
-                                                    <textarea name="addressSup" class="form-control" rows="4"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control image-file" name="imgSup" accept="image/*">
-                                                </div>
-                                            </div>
-                                        </div>                             
-                                        <button type="submit" class="btn btn-primary mr-2">Add Supplier</button>
+                                            </div>                                                                  
+                                        </div>                            
+                                        <button type="submit" class="btn btn-primary mr-2">Add unit</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
+                                    <h3 style="color: red">${error}</h3>
                                 </div>
                             </div>
                         </div>
@@ -145,5 +113,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-supplier.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>

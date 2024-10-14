@@ -20,6 +20,10 @@ public class WeightUnit {
         this.id = id;
         this.name = name;
     }
+    
+    public WeightUnit(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;

@@ -12,7 +12,7 @@
             function doDelete(id) {
                 if(confirm("Are you sure delete category which has id ="+id)){
                     window.location="deleteCategory?category_id="+id;
-                }
+                }              
             }
                 </script>
         <!-- Favicon -->
@@ -95,7 +95,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                                           href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                                           href="updateCategory?category_id=${pc.getId()}"><i class="ri-pencil-line mr-0"></i></a>
                                                         <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
                                                            href="#" onclick="doDelete(${pc.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>

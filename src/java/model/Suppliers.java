@@ -10,18 +10,27 @@ package model;
  */
 public class Suppliers {
     private int id;
-    private String name, address, phone, email, contact;
+    private String name, address, phone, email, contact,img;
 
     public Suppliers() {
     }
 
-    public Suppliers(int id, String name, String address, String phone, String email, String contact) {
+    public Suppliers(int id, String name, String address, String phone, String email, String contact, String img) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.contact = contact;
+        this.img = img;
+    }
+    public Suppliers(String name, String address, String phone, String email, String contact, String img) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.contact = contact;
+        this.img = img;
     }
 
     public int getId() {
@@ -71,4 +80,14 @@ public class Suppliers {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    
 }

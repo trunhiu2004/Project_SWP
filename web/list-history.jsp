@@ -11,8 +11,8 @@
 
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Are you sure delete supplier which has id =" + id)) {
-                    window.location = "deleteSupplier?supplier_id=" + id;
+                if (confirm("Are you sure delete history which has id =" + id)) {
+                    window.location = "deleteHistory?historyId=" + id;
                 }
             }
         </script>
@@ -58,11 +58,11 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Suppliers List</h4>
+                                        <h4 class="mb-3">History Price List</h4>
                                         <p class="mb-0">Create and manage your vendor list, send and receive purchase orders ? your online<br>
                                             Dashboard is your new back of house.</p>
                                     </div>
-                                    <a href="page-add-supplier.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Supplier</a>
+                                    <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to List Product</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -71,31 +71,27 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Code</th>
-                                                <th>Supplier</th>
-                                                <th>Supplier Name</th>
-                                                <th>Address</th>
-                                                <th>Phone Number</th>
-                                                <th>Email</th>
-                                                <th>Contact Person</th>
-                                                <th>Action</th>
+                                                <th>Product Name</th>
+                                                <th>Price</th>
+                                                <th>Price Before</th>
+                                                <th>Last Update At</th>
+                                                <th>Status</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
-                                        <c:forEach items="${supplier}" var="sup">
+                                        <c:forEach items="${history}" var="h">
                                             <tr>    
-                                                <td>${sup.getId()}</td>
-                                                <td><img src="assets/images/supplier/${sup.getImg()}" width="80px" height="80px"/></td>
-                                                <td>${sup.getName()}</td>
-                                                <td>${sup.getAddress()}</td>
-                                                <td>${sup.getPhone()}</td>
-                                                <td>${sup.getEmail()}</td>
-                                                <td>${sup.getContact()}</td>
+                                                <td>${h.getHistoryId()}</td>
+                                                <td>${h.getProduct().getName()}</td>
+                                                <td>${h.getPrice()}</td>
+                                                <td>${h.getPriceBefore()}</td>
+                                                <td>${h.getUpdatedAt()}</td>
+                                                <td>${h.getStatus()}</td>
                                                 <td>
-                                                    <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                                           href="updateSupplier?supplier_id=${sup.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                    <div class="d-flex align-items-center list-action">                                     
                                                         <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                                           href="#" onclick="doDelete(${sup.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                           href="#" onclick="doDelete(${h.getHistoryId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

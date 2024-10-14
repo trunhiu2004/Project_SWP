@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -22,83 +23,91 @@
 
             <jsp:include page="components/sidebar.jsp"></jsp:include>     
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
-            <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="popup text-left">
-                                <h4 class="mb-3">New Order</h4>
-                                <div class="content create-workform bg-body">
-                                    <div class="pb-3">
-                                        <label class="mb-2">Email</label>
-                                        <input type="text" class="form-control" placeholder="Enter Name or Email">
-                                    </div>
-                                    <div class="col-lg-12 mt-4">
-                                        <div class="d-flex flex-wrap align-items-ceter justify-content-center">
-                                            <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
-                                            <div class="btn btn-outline-primary" data-dismiss="modal">Create</div>
+                <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="popup text-left">
+                                    <h4 class="mb-3">New Order</h4>
+                                    <div class="content create-workform bg-body">
+                                        <div class="pb-3">
+                                            <label class="mb-2">Email</label>
+                                            <input type="text" class="form-control" placeholder="Enter Name or Email">
+                                        </div>
+                                        <div class="col-lg-12 mt-4">
+                                            <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                                <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
+                                                <div class="btn btn-outline-primary" data-dismiss="modal">Create</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>      <div class="content-page">
-                <div class="container-fluid add-form-list">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Add Supplier</h4>
+                </div>      <div class="content-page">
+                    <div class="container-fluid add-form-list">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="header-title">
+                                            <h4 class="card-title">Update Supplier</h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <form action="addSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">
-                                        <div class="row"> 
+                                    <div class="card-body">
+                                    <c:set var="sup" value="${supplier}"/>
+                                    <form action="updateSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-md-12">                      
+                                                <div class="form-group">
+                                                    <label>Supplier ID</label>
+                                                    <input type="number" readonly name="idSup" class="form-control" value="${sup.getId()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
                                                     <label>Name *</label>
-                                                    <input type="text" name="nameSup" class="form-control" placeholder="Enter Name" required>
+                                                    <input type="text" name="nameSup" class="form-control" value="${sup.getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>    
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Email *</label>
-                                                    <input type="text" name="emailSup" class="form-control" placeholder="Enter Email" required>
+                                                    <input type="text" name="emailSup" class="form-control" value="${sup.getEmail()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone Number *</label>
-                                                    <input type="text" name="phoneSup" class="form-control" placeholder="Enter Phone Number" required>
+                                                    <input type="text" name="phoneSup" class="form-control" value="${sup.getPhone()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Contact Person *</label>
-                                                    <input type="text" name="personSup" class="form-control" placeholder="Contact Person" required>
+                                                    <input type="text" name="personSup" class="form-control" value="${sup.getContact()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    <textarea name="addressSup" class="form-control" rows="4"></textarea>
+                                                    <input type="text" name="addressSup" class="form-control" value="${sup.getAddress()}">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control image-file" name="imgSup" accept="image/*">
+                                                    <label>Image</label>                     
+                                                    <input type="file" class="form-control image-file" name="imgSup" accept="image/*" >
                                                 </div>
                                             </div>
                                         </div>                             
-                                        <button type="submit" class="btn btn-primary mr-2">Add Supplier</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update Supplier</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div>

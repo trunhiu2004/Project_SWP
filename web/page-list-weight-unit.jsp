@@ -8,7 +8,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
+        
+        <script type="text/javascript">
+            function doDelete(id) {               
+                if(confirm("Are you sure delete unit which has id ="+id)){
+                    window.location="deleteUnit?weight_unit_id="+id;
+                }
+            }
+        </script>
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include> </head>
         <body class="  ">
@@ -51,11 +58,11 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Category List</h4>
+                                        <h4 class="mb-3">Unit List</h4>
                                         <p class="mb-0">Use category list as to describe your overall core business from the provided list. <br>
                                             Click the name of the category where you want to add a list item. .</p>
                                     </div>
-                                    <a href="page-add-category.html" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Category</a>
+                                    <a href="page-add-unit.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Unit</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -64,23 +71,21 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Code</th>
-                                                <th>Category</th>
+                                                <th>Unit</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
-                                        <c:forEach items="${wu}" var="pc">
+                                        <c:forEach items="${wu}" var="u">
                                             <tr>                                                
-                                                <td>${pc.getId()}</td>
-                                                <td>${pc.getName()}</td>
+                                                <td>${u.getId()}</td>
+                                                <td>${u.getName()}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                                           href="#"><i class="ri-eye-line mr-0"></i></a>
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                                           href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                                           href="updateUnit?weight_unit_id=${u.getId()}"><i class="ri-pencil-line mr-0"></i></a>
                                                         <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                                           href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                           href="#" onclick="doDelete(${u.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

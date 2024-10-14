@@ -52,12 +52,14 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add Product</h4>
+                                            <h4 class="card-title">Update Product</h4>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form action="addProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
+                                        <c:set var="p" value="${product}"/>
+                                        <form action="updateProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
                                             <div class="row">
+                                                <input type="hidden" name="idPro" value="${p.getId()}">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Product Type *</label>
@@ -71,21 +73,21 @@
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
                                                     <label>Name *</label>
-                                                    <input type="text" name="namePro" class="form-control" placeholder="Enter Name" data-errors="Please Enter Name." required>
+                                                    <input type="text" name="namePro" class="form-control" value="${p.getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>    
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Bar Code *</label>
-                                                    <input type="text" name="barcode" class="form-control" placeholder="Enter Code" data-errors="Please Enter Code." required>
+                                                    <input type="text" name="barcode" class="form-control" value="${p.getBarcode()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                        
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Price *</label>
-                                                    <input type="text" name="pricePro" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                                                    <input type="text" readonly name="pricePro" class="form-control" value="${p.getPrice()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                           
@@ -112,14 +114,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="manufactureDate">manufactureDate:</label><br>
-                                                    <input type="date" id="manufactureDate" name="manufactureDate" required><br><br>
+                                                    <input type="date" id="manufactureDate" name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="expirationDate">expirationDate:</label><br>
-                                                    <input type="date" id="expirationDate" name="expirationDate" required><br><br>
+                                                    <input type="date" id="expirationDate" name="expirationDate" value="${p.getExpirationDate()}"><br><br>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -131,8 +133,7 @@
 
 
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Add Product</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update Product</button>
                                     </form>
                                 </div>
                             </div>

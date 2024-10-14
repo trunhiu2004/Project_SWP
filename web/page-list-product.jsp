@@ -8,7 +8,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
+        
+        <script type="text/javascript">
+            function doDelete(id) {
+                if (confirm("Are you sure delete product which has id =" + id)) {
+                    window.location = "deleteProduct?product_id=" + id;
+                }
+            }
+        </script>
+        
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
@@ -54,7 +62,7 @@
                                         <h4 class="mb-3">Product List</h4>
                                         <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
                                     </div>
-                                    <a href="page-add-product.html" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
+                                    <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -62,50 +70,47 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox1">
-                                                        <label for="checkbox1" class="mb-0"></label>
-                                                    </div>
-                                                </th>
+                                                <th>Barcode</th>
                                                 <th>Product</th>
-                                                <th>Code</th>
+                                                <th>Name</th>
                                                 <th>Category</th>
                                                 <th>Price</th>
                                                 <th>Brand Name</th>
-                                                <th>Quantity</th>
-                                                <th>Category</th>
+                                                <th>Unit</th>
+                                                <th>Manufacture Date</th>
+                                                <th>Expiration Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
                                         <c:forEach items="${pro}" var="p">
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox2">
-                                                        <label for="checkbox2" class="mb-0"></label>
-                                                    </div>
-                                                </td>
-                                                <td>${p.getName()}</td>
-                                                <td>${p.getId()}</td>
-                                                <td>${p.productCategories.getName()}</td>
-                                                <td>${p.getPrice()}</td>
-                                                <td>${p.suppliers.getName()}</td>
-                                                <td>${p.getWeight()}</td>
-                                                <td>${p.weightUnit.getName()}</td>                                       
-                                                <td>
-                                                    <div class="d-flex align-items-center list-action">
-                                                        <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                                           href="#"><i class="ri-eye-line mr-0"></i></a>
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                                           href="#"><i class="ri-pencil-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                                           href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>                                  
+                                            
+
+                                        <tr>
+                                            <td>${p.getBarcode()}</td>
+                                            <td><img src="assets/images/product/${p.getImage()}" width="80px" height="80px"/></td>
+                                            <td>${p.getName()}</td>
+                                            <td>${p.productCategories.getName()}</td>
+                                            <td>${p.getPrice()}</td>
+                                            <td>${p.suppliers.getName()}</td>
+                                            <td>${p.weightUnit.getName()}</td>
+                                            <td>${p.getManufactureDate()}</td>
+                                            <td>${p.getExpirationDate()}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center list-action">
+                                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View History Price"
+                                                       href="listPrice?product_id=${p.getId()}"><i class="ri-eye-line mr-0"></i></a>
+                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Price"
+                                                       href="updatePrice?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Information"
+                                                       href="updateProduct?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                                       href="#" onclick="doDelete(${p.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                </div>
+                                            </td>
+                                            
+                                        </tr>
+                                    </c:forEach>                                  
                                     </tbody>
                                 </table>
                             </div>
