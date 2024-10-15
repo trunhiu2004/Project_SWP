@@ -53,6 +53,7 @@
                                     <div class="header-title">
                                         <h4 class="card-title">Add Supplier</h4>
                                     </div>
+                                    <a href="listSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Supplier</a>
                                 </div>
                                 <div class="card-body">
                                     <form action="addSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">

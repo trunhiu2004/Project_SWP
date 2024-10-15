@@ -53,6 +53,7 @@
                                     <div class="header-title">
                                         <h4 class="card-title">Add category</h4>
                                     </div>
+                                    <a href="listCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Category</a>
                                 </div>
                                 <div class="card-body">
                                     <form action="addCategory" data-toggle="validator">

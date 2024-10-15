@@ -54,6 +54,7 @@
                                         <div class="header-title">
                                             <h4 class="card-title">Update Product</h4>
                                         </div>
+                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Product</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="p" value="${product}"/>

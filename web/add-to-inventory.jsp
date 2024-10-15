@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-supplier.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,63 +52,32 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Update Supplier</h4>
+                                            <h4 class="card-title">Add to Inventory</h4>
                                         </div>
-                                        <a href="listSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Supplier</a>
+                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
                                     </div>
                                     <div class="card-body">
-                                    <c:set var="sup" value="${supplier}"/>
-                                    <form action="updateSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-md-12">                      
-                                                <div class="form-group">
-                                                    <label>Supplier ID</label>
-                                                    <input type="number" readonly name="idSup" class="form-control" value="${sup.getId()}">
-                                                    <div class="help-block with-errors"></div>
+                                        <form action="addToInventory" method="post" data-toggle="validator">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Product</label>
+                                                        <select name="namePro" class="selectpicker form-control" data-style="py-0">
+                                                        <c:forEach items="${product}" var="p">
+                                                            <option value="${p.getId()}">${p.getName()}</option>            
+                                                        </c:forEach>  
+                                                    </select>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">                      
-                                                <div class="form-group">
-                                                    <label>Name *</label>
-                                                    <input type="text" name="nameSup" class="form-control" value="${sup.getName()}">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>    
+                                            </div>                                           
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Email *</label>
-                                                    <input type="text" name="emailSup" class="form-control" value="${sup.getEmail()}">
+                                                    <label>Quantity</label>
+                                                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" data-errors="Please Enter Quantity." required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Phone Number *</label>
-                                                    <input type="text" name="phoneSup" class="form-control" value="${sup.getPhone()}">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Contact Person *</label>
-                                                    <input type="text" name="personSup" class="form-control" value="${sup.getContact()}">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Address</label>
-                                                    <input type="text" name="addressSup" class="form-control" value="${sup.getAddress()}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Image</label>                     
-                                                    <input type="file" class="form-control image-file" name="imgSup" accept="image/*" >
-                                                </div>
-                                            </div>
-                                        </div>                             
-                                        <button type="submit" class="btn btn-primary mr-2">Update Supplier</button>
+                                            </div>                                                                                                                             
+                                        </div>                            
+                                        <button type="submit" class="btn btn-primary mr-2">Add to Inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div>
@@ -155,5 +124,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-supplier.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>
