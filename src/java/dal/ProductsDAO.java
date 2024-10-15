@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import model.HistoryPrice;
@@ -343,20 +345,31 @@ public class ProductsDAO extends DBContext {
         }
     }
 
-    public List<Products2> getAllProductExpired() {
-        List<Products2> list = new ArrayList<>();
+    public List<Products> getAllProductExpired() {
+        List<Products> list = new ArrayList<>();
 
         String sql = "SELECT * \n"
                 + "FROM Products \n"
-                + "WHERE DATEDIFF(day, GETDATE(), expiration_date) BETWEEN 0 AND 10;";
+                + "WHERE expiration_date > GETDATE() \n"
+                + "     AND expiration_date <= DATEADD(day, 7, GETDATE())";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Products2 p = new Products2(rs.getInt(1), rs.getInt(2),
-                        rs.getString(3), rs.getString(4),
-                        rs.getDouble(5), rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getDate(9),
-                        rs.getDate(10));
+                Products p = new Products();
+                p.setId(rs.getInt("product_id"));
+                p.setBarcode(rs.getString("barcode"));
+                p.setName(rs.getString("product_name"));
+                p.setPrice(rs.getFloat("product_price"));
+                p.setImage(rs.getString("product_image"));
+                ProductCategories pc = getCategoryById(rs.getInt("category_id"));
+                p.setProductCategories(pc);
+                WeightUnit wu = getWUById(rs.getInt("weight_unit_id"));
+                p.setWeightUnit(wu);
+                Suppliers sup = getSupById(rs.getInt("supplier_id"));
+                p.setSuppliers(sup);
+                p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
+                p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
                 list.add(p);
             }
 
@@ -368,7 +381,7 @@ public class ProductsDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductsDAO p = new ProductsDAO();
-        for (Products2 arg : p.getAllProductExpired()) {
+        for (Products arg : p.getAllProductExpired()) {
             System.out.println(arg);
         }
     }

@@ -58,6 +58,11 @@
                                     <i class="las la-minus"></i><span>List Weight Unit</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="listProductDiscount">
+                                    <i class="las la-minus"></i><span>List Product Expired</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class=" ">

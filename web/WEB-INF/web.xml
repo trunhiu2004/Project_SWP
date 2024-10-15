@@ -108,6 +108,14 @@
         <servlet-name>DeleteHistoryServlet</servlet-name>
         <servlet-class>controller.DeleteHistoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListProductDiscountServlet</servlet-name>
+        <servlet-class>controller.ListProductDiscountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductExpiredServlet</servlet-name>
+        <servlet-class>controller.ProductExpiredServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -215,5 +223,13 @@
     <servlet-mapping>
         <servlet-name>DeleteHistoryServlet</servlet-name>
         <url-pattern>/deleteHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductDiscountServlet</servlet-name>
+        <url-pattern>/listProductDiscount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductExpiredServlet</servlet-name>
+        <url-pattern>/productExpired</url-pattern>
     </servlet-mapping>
 </web-app>
