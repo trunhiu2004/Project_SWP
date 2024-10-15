@@ -14,6 +14,7 @@ import java.util.List;
 import model.HistoryPrice;
 import model.ProductCategories;
 import model.Products;
+import model.Products2;
 import model.Suppliers;
 import model.WeightUnit;
 
@@ -281,7 +282,7 @@ public class ProductsDAO extends DBContext {
 
     public List<HistoryPrice> getHistoryById(int product_id) {
         List<HistoryPrice> list = new ArrayList<>();
-        
+
         String sql = "select * from HistoryPrice where product_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -301,7 +302,7 @@ public class ProductsDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-       return list;
+        return list;
     }
 
     public void insertHisPrice(HistoryPrice h) {
@@ -318,19 +319,19 @@ public class ProductsDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public void updateProductPrice(int productId, float newPrice) {
-    String sql = "UPDATE Products SET product_price = ? WHERE product_id = ?";
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        st.setFloat(1, newPrice); // Set giá mới
-        st.setInt(2, productId); // Set product_id
-        st.executeUpdate();
-    } catch (SQLException e) {
-        System.out.println(e);
+        String sql = "UPDATE Products SET product_price = ? WHERE product_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setFloat(1, newPrice); // Set giá mới
+            st.setInt(2, productId); // Set product_id
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
-    }
-    
+
     public void deleteHis(int id) {
         String sql = "DELETE FROM HistoryPrice where history_id = ?";
         try {
@@ -342,9 +343,33 @@ public class ProductsDAO extends DBContext {
         }
     }
 
+    public List<Products2> getAllProductExpired() {
+        List<Products2> list = new ArrayList<>();
+
+        String sql = "SELECT * \n"
+                + "FROM Products \n"
+                + "WHERE DATEDIFF(day, GETDATE(), expiration_date) BETWEEN 0 AND 10;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Products2 p = new Products2(rs.getInt(1), rs.getInt(2),
+                        rs.getString(3), rs.getString(4),
+                        rs.getDouble(5), rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getDate(9),
+                        rs.getDate(10));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         ProductsDAO p = new ProductsDAO();
-        List<Products> list = p.getAllProduct();
-        System.out.println(list.get(0).getName());
+        for (Products2 arg : p.getAllProductExpired()) {
+            System.out.println(arg);
+        }
     }
 }
