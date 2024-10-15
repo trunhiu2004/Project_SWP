@@ -68,6 +68,50 @@
         <servlet-name>UpdateInvoiceServlet</servlet-name>
         <servlet-class>controller.UpdateInvoiceServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SaleListServlet</servlet-name>
+        <servlet-class>controller.SaleListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSaleServlet</servlet-name>
+        <servlet-class>controller.ViewSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <servlet-class>controller.EditSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSaleServlet</servlet-name>
+        <servlet-class>controller.DeleteSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSaleServlet</servlet-name>
+        <servlet-class>controller.AddSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSaleDetailsServlet</servlet-name>
+        <servlet-class>controller.ViewSaleDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrdersServlet</servlet-name>
+        <servlet-class>controller.ListOrdersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <servlet-class>controller.EditOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <servlet-class>controller.DeleteOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddOrderServlet</servlet-name>
+        <servlet-class>controller.AddOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -135,5 +179,49 @@
     <servlet-mapping>
         <servlet-name>UpdateInvoiceServlet</servlet-name>
         <url-pattern>/update-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaleListServlet</servlet-name>
+        <url-pattern>/sale-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSaleServlet</servlet-name>
+        <url-pattern>/view-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <url-pattern>/edit-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSaleServlet</servlet-name>
+        <url-pattern>/delete-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSaleServlet</servlet-name>
+        <url-pattern>/add-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSaleDetailsServlet</servlet-name>
+        <url-pattern>/view-sale-details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrdersServlet</servlet-name>
+        <url-pattern>/list-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <url-pattern>/view-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <url-pattern>/edit-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <url-pattern>/delete-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddOrderServlet</servlet-name>
+        <url-pattern>/add-order</url-pattern>
     </servlet-mapping>
 </web-app>

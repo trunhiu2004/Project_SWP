@@ -9,27 +9,14 @@ package model;
  * @author ankha
  */
 public class OrderDetail {
+
     private int orderDetailId;
-    private int orderId;
-    private int productId;
+    private String productName;
     private int quantity;
     private double unitPrice;
     private double totalPrice;
-    private String productName;
 
-    public OrderDetail() {
-    }
-
-    public OrderDetail(int orderDetailId, int orderId, int productId, int quantity, double unitPrice, double totalPrice, String productName) {
-        this.orderDetailId = orderDetailId;
-        this.orderId = orderId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
-        this.productName = productName;
-    }
-
+    // Getters and Setters
     public int getOrderDetailId() {
         return orderDetailId;
     }
@@ -38,20 +25,12 @@ public class OrderDetail {
         this.orderDetailId = orderDetailId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -77,14 +56,4 @@ public class OrderDetail {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    
-    
 }

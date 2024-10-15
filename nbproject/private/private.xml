@@ -74,26 +74,10 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/staff-update.jsp</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/web/ui-tabs.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/UpdateInvoiceServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/OrderDetail.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/DeleteInvoiceServlet.java</file>
             <file>file:/D:/Project_SWP/src/java/controller/DownloadInvoiceServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/PaymentMethod.java</file>
-            <file>file:/D:/Project_SWP/web/page-list-product.jsp</file>
             <file>file:/D:/Project_SWP/src/java/controller/InvoiceDetailServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/EditInvoiceServlet.java</file>
-            <file>file:/D:/Project_SWP/web/components/sidebar.jsp</file>
-            <file>file:/D:/Project_SWP/web/edit-invoice.jsp</file>
-            <file>file:/D:/Project_SWP/web/invoiceDetail.jsp</file>
-            <file>file:/D:/Project_SWP/web/employeeSetting.jsp</file>
             <file>file:/D:/Project_SWP/src/java/controller/InvoiceListServlet.java</file>
-            <file>file:/D:/Project_SWP/web/invoiceList.jsp</file>
-            <file>file:/D:/Project_SWP/web/home.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/model/Invoice.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/Product.java</file>
-            <file>file:/D:/Project_SWP/web/assets/css/backende209.css</file>
-            <file>file:/D:/Project_SWP/src/java/model/Customer.java</file>
-            <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

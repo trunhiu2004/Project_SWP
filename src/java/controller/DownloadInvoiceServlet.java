@@ -127,8 +127,8 @@ public class DownloadInvoiceServlet extends HttpServlet {
                     double totalPrice = resultSet.getDouble("total_price");
                     String productName = resultSet.getString("product_name");
 
-                    OrderDetail orderDetail = new OrderDetail(orderDetailId, orderId, productId, quantity, unitPrice, totalPrice, productName);
-                    orderDetails.add(orderDetail);
+//                    OrderDetail orderDetail = new OrderDetail(orderDetailId, orderId, productId, quantity, unitPrice, totalPrice, productName);
+//                    orderDetails.add(orderDetail);
                 }
             }
 
@@ -175,7 +175,7 @@ public class DownloadInvoiceServlet extends HttpServlet {
             int index = 1;
             for (OrderDetail detail : orderDetails) {
                 table.addCell(String.valueOf(index++));
-                table.addCell(detail.getProductName());
+//                table.addCell(detail.getProductName());
                 table.addCell(String.valueOf(detail.getQuantity()));
                 table.addCell("$" + detail.getUnitPrice());
                 table.addCell("$" + detail.getTotalPrice());

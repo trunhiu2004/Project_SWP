@@ -133,8 +133,8 @@ public class InvoiceDetailServlet extends HttpServlet {
                     double totalPrice = resultSet.getDouble("total_price");
                     String productName = resultSet.getString("product_name");
 
-                    OrderDetail orderDetail = new OrderDetail(orderDetailId, orderId, productId, quantity, unitPrice, totalPrice, productName);
-                    orderDetails.add(orderDetail);
+//                    OrderDetail orderDetail = new OrderDetail(orderDetailId, orderId, productId, quantity, unitPrice, totalPrice, productName);
+//                    orderDetails.add(orderDetail);
                 }
                 System.out.println("Number of order details fetched: " + orderDetails.size());
             }

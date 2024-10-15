@@ -85,7 +85,4 @@ public class Invoice {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
-
-    
-    
 }

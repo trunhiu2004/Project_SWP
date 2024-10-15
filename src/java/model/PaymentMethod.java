@@ -11,12 +11,12 @@ package model;
 public class PaymentMethod {
     private int paymentMethodId;
     private String paymentMethodName;
-    private String status;
+    private int status;
 
     public PaymentMethod() {
     }
 
-    public PaymentMethod(int paymentMethodId, String paymentMethodName, String status) {
+    public PaymentMethod(int paymentMethodId, String paymentMethodName, int status) {
         this.paymentMethodId = paymentMethodId;
         this.paymentMethodName = paymentMethodName;
         this.status = status;
@@ -38,12 +38,13 @@ public class PaymentMethod {
         this.paymentMethodName = paymentMethodName;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+    
     
 }
