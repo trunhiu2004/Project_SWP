@@ -124,6 +124,38 @@
         <servlet-name>LogInventoryServlet</servlet-name>
         <servlet-class>controller.LogInventoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListShop</servlet-name>
+        <servlet-class>controller.ListShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListShift</servlet-name>
+        <servlet-class>controller.ListShift</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controller.ListCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomePos</servlet-name>
+        <servlet-class>controller.HomePos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShiftDetailServlet</servlet-name>
+        <servlet-class>controller.ShiftDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProduct</servlet-name>
+        <servlet-class>controller.SearchProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShop</servlet-name>
+        <servlet-class>controller.EditShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomer</servlet-name>
+        <servlet-class>controller.EditCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -247,5 +279,37 @@
     <servlet-mapping>
         <servlet-name>LogInventoryServlet</servlet-name>
         <url-pattern>/listLogInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListShop</servlet-name>
+        <url-pattern>/ListShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListShift</servlet-name>
+        <url-pattern>/ListShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/ListCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomePos</servlet-name>
+        <url-pattern>/HomePos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShiftDetailServlet</servlet-name>
+        <url-pattern>/ShiftDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProduct</servlet-name>
+        <url-pattern>/SearchProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomer</servlet-name>
+        <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShop</servlet-name>
+        <url-pattern>/EditShop</url-pattern>
     </servlet-mapping>
 </web-app>
