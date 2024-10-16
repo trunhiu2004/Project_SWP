@@ -87,6 +87,7 @@ public class DiscountProductDAO extends DBContext {
         }
     }
 
+
     public static void main(String[] args) {
         DiscountProductDAO d = new DiscountProductDAO();
         System.out.println(d.isProductExists(7));

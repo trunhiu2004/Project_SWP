@@ -2,7 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group name="Java_BackEnd">
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/forgot-password.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/auth-sign-in.jsp</file>
@@ -58,6 +57,12 @@
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/WEB-INF/web.xml</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/auth-confirm-mail.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/src/java/dal/DBContext.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/src/java/controller/ListStoreStockServlet.java</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/src/java/dal/StoreStockDAO.java</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/src/java/model/StoreStock.java</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/list-store-stock.jsp</file>
         </group>
     </open-files>
 </project-private>

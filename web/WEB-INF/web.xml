@@ -132,6 +132,10 @@
         <servlet-name>LogInventoryServlet</servlet-name>
         <servlet-class>controller.LogInventoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListStoreStockServlet</servlet-name>
+        <servlet-class>controller.ListStoreStockServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -263,5 +267,9 @@
     <servlet-mapping>
         <servlet-name>LogInventoryServlet</servlet-name>
         <url-pattern>/listLogInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListStoreStockServlet</servlet-name>
+        <url-pattern>/listStoreStock</url-pattern>
     </servlet-mapping>
 </web-app>

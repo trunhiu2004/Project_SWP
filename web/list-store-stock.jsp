@@ -3,19 +3,11 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-suppliers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
-        <script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("Are you sure delete supplier which has id =" + id)) {
-                    window.location = "deleteSupplier?supplier_id=" + id;
-                }
-            }
-        </script>
+        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>      
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
@@ -56,49 +48,44 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Kho</h4>
-                                        <p class="mb-0">Create and manage your vendor list, send and receive purchase orders ? your online<br>
-                                            Dashboard is your new back of house.</p>
-                                    </div>
-                                    <a href="listLogInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>History Log Inventory</a>
-                                    <a href="addToInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add to Inventory</a>
+                                        <h4 class="mb-3">Product List</h4>
+                                        <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
                                 </div>
+                                <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
-                                        <thead class="bg-white text-uppercase">
-                                            <tr class="ligth ligth-data">
-                                                <th>Code</th>
-                                                <th>Product</th>
-                                                <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>Last Update</th>
-                                                <th>Alert</th>
-                                                <th>Action</th>
+
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="table-responsive rounded mb-3">
+                                <table class="data-tables table mb-0 tbl-server-info">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth ligth-data">
+                                            <th>Product</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Alert</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ligth-body">
+                                        <c:forEach items="${store}" var="s">
+                                            <tr>
+                                                <td><img src="assets/images/product/${s.getInventory().getProduct().getImage()}" width="80px" height="80px"/></td>
+                                                <td>${s.getInventory().getProduct().getName()}</td>
+                                                <td>${s.getStock()}</td>       
+                                                <c:choose>
+                                                    <c:when test="${s.getDiscount()== null}">
+                                                        <td>${s.getInventory().getProduct().getPrice()}</td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td>${s.getDiscount().getPriceSell()}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <td>${s.getAlert()}</td>
                                             </tr>
-                                        </thead>
-                                        <tbody class="ligth-body">
-                                        <c:forEach items="${inven}" var="i">
-                                            <tr>    
-                                                <td>${i.getId()}</td>
-                                                <td><img src="assets/images/product/${i.getProduct().getImage()}" width="80px" height="80px"/></td>
-                                                <td>${i.getProduct().getName()}</td>
-                                                <td>${i.getCurrentStock()}</td>
-                                                <td>${i.getInventoryStatus()}</td>
-                                                <td>${i.getLastRestockDate()}</td>
-                                                <td>${i.getAlert()}</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Import"
-                                                           href="importInventory?inventory_id=${i.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>   
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -155,7 +142,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
@@ -178,5 +165,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-suppliers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>
