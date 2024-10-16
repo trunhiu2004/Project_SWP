@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,77 +52,77 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Update Unit</h4>
+                                            <h4 class="card-title">Add to Inventory</h4>
                                         </div>
-                                        <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Unit</a>
+                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
                                     </div>
                                     <div class="card-body">
-                                    <c:set var="u" value="${unit}"/>
-                                    <form action="updateUnit" method="post" data-toggle="validator">
-                                        <div class="row">
-                                            <div class="col-md-12">                      
+                                        <c:set var="i" value="${inventory}"/>
+                                        <form action="importInventory" method="post" data-toggle="validator">
+                                            <input type="hidden" name="idInven" value="${i.getId()}">
+                                            <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Unit ID</label>
-                                                    <input type="number" readonly name="idUnit" class="form-control" value="${u.getId()}">
+                                                    <label>Name *</label>
+                                                    <input type="text" readonly name="namePro" class="form-control" value="${i.getProduct().getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div> 
-                                            <div class="col-md-12">                      
+                                            </div>                                          
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Unit Name *</label>
-                                                    <input type="text" name="nameUnit" class="form-control" value="${u.getName()}">
-                                                           <div class="help-block with-errors"></div>
+                                                    <label>Quantity</label>
+                                                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" data-errors="Please Enter Quantity." required>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div>
-                                        </div>                                                                  
-                                        <button type="submit" class="btn btn-primary mr-2">Update Unit</button>
+                                            </div>                                                                                                                             
+                                    <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
-                                </div> 
-                                <h3 style="color: red">${error}</h3>
+                                    
+                                    </div>                            
+                                      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page end  -->
+                </div>
+            </div>
+        </div>
+        <!-- Wrapper End-->
+        <footer class="iq-footer">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Page end  -->
             </div>
-        </div>
-    </div>
-    <!-- Wrapper End-->
-    <footer class="iq-footer">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                                <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Backend Bundle JavaScript -->
-    <script src="assets/js/backend-bundle.min.js"></script>
+        </footer>
+        <!-- Backend Bundle JavaScript -->
+        <script src="assets/js/backend-bundle.min.js"></script>
 
-    <!-- Table Treeview JavaScript -->
-    <script src="assets/js/table-treeview.js"></script>
+        <!-- Table Treeview JavaScript -->
+        <script src="assets/js/table-treeview.js"></script>
 
-    <!-- Chart Custom JavaScript -->
-    <script src="assets/js/customizer.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="assets/js/customizer.js"></script>
 
-    <!-- Chart Custom JavaScript -->
-    <script async src="assets/js/chart-custom.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script async src="assets/js/chart-custom.js"></script>
 
-    <!-- app JavaScript -->
-    <script src="assets/js/app.js"></script>
-</body>
+        <!-- app JavaScript -->
+        <script src="assets/js/app.js"></script>
+    </body>
 
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>

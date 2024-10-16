@@ -116,6 +116,22 @@
         <servlet-name>ProductExpiredServlet</servlet-name>
         <servlet-class>controller.ProductExpiredServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListInventoryServlet</servlet-name>
+        <servlet-class>controller.ListInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToInventoryServlet</servlet-name>
+        <servlet-class>controller.AddToInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImportInventoryServlet</servlet-name>
+        <servlet-class>controller.ImportInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogInventoryServlet</servlet-name>
+        <servlet-class>controller.LogInventoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -231,5 +247,21 @@
     <servlet-mapping>
         <servlet-name>ProductExpiredServlet</servlet-name>
         <url-pattern>/productExpired</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListInventoryServlet</servlet-name>
+        <url-pattern>/listInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToInventoryServlet</servlet-name>
+        <url-pattern>/addToInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportInventoryServlet</servlet-name>
+        <url-pattern>/importInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogInventoryServlet</servlet-name>
+        <url-pattern>/listLogInventory</url-pattern>
     </servlet-mapping>
 </web-app>

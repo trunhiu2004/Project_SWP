@@ -53,6 +53,7 @@
                                     <div class="header-title">
                                         <h4 class="card-title">Add Unit</h4>
                                     </div>
+                                    <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Unit</a>
                                 </div>
                                 <div class="card-body">
                                     <form action="addUnit" data-toggle="validator">
