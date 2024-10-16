@@ -3,7 +3,7 @@
     Created on : Oct 15, 2024, 10:36:31 PM
     Author     : ankha
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +14,6 @@
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
@@ -65,6 +64,15 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="orderStatus">Order Status:</label>
+                                            <select id="orderStatus" name="orderStatus" class="form-control" required>
+                                                <c:forEach var="status" items="${statuses}">
+                                                    <option value="${status}">${status}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
 
                                         <div class="form-group">
                                             <label for="couponId">Coupon Code:</label>
@@ -134,54 +142,113 @@
 
                 // Add Product to Order Table
                 $('#addProduct').click(function () {
+                    console.log("Add Product button clicked");
+
                     var selectedProduct = $('#productId').find(':selected');
                     var productId = selectedProduct.val();
-                    var productName = selectedProduct.text();
+                    var productName = selectedProduct.text().trim();
                     var barcode = selectedProduct.data('barcode');
-                    var unitPrice = selectedProduct.data('unitprice');
+                    var unitPrice = parseInt(selectedProduct.data('unitprice'));
 
-                    if (productId) {
+                    // Debugging: Log the values being used
+                    console.log("Selected Product ID:", productId);
+                    console.log("Product Name:", productName);
+                    console.log("Barcode:", barcode);
+                    console.log("Unit Price (Parsed):", unitPrice, typeof unitPrice);
+
+                    // Ensure a product is selected and unitPrice is valid
+                    if (productId && !isNaN(unitPrice)) {
                         var newRow = `
-                            <tr>
-                                <td>${productName}</td>
-                                <td>${barcode}</td>
-                                <td class="unit-price">${unitPrice}</td>
-                                <td><input type="number" name="quantity" class="form-control quantity" value="1" min="1" /></td>
-                                <td class="total-price">${unitPrice}</td>
-                                <td><button type="button" class="btn btn-danger remove-product">Remove</button></td>
-                            </tr>
-                        `;
+                <tr>
+                    <td class="product-name"></td>
+                    <td class="barcode"></td>
+                    <td class="unit-price"></td>
+                    <td><input type="number" name="quantity" class="form-control quantity" value="1" min="1" /></td>
+                    <td class="total-price"></td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-product">Remove</button>
+                    </td>
+                </tr>
+            `;
                         $('#productTable').append(newRow);
+                        console.log("Product added to table successfully");
+
+                        // Explicitly set the values for the newly added row to ensure correctness
+                        var addedRow = $('#productTable tr:last');
+                        addedRow.find('.product-name').text(productName);
+                        addedRow.find('.barcode').text(barcode);
+                        addedRow.find('.unit-price').text(unitPrice);
+                        addedRow.find('.total-price').text(unitPrice);
+
+                        // Re-check the newly added row content
+                        console.log("Re-check Added Row Product Name:", addedRow.find('.product-name').text());
+                        console.log("Re-check Added Row Unit Price:", addedRow.find('.unit-price').text());
+                        console.log("Re-check Added Row Total Price:", addedRow.find('.total-price').text());
+
+                        // Update the total amount after adding a row
                         updateTotalAmount();
+                    } else {
+                        alert("Please select a product to add.");
                     }
                 });
 
                 // Remove Product from Order Table
                 $(document).on('click', '.remove-product', function () {
+                    console.log("Remove button clicked");
                     $(this).closest('tr').remove();
                     updateTotalAmount();
                 });
 
                 // Update Total Price for a Product when Quantity Changes
                 $(document).on('input', '.quantity', function () {
-                    var quantity = $(this).val();
-                    var unitPrice = $(this).closest('tr').find('.unit-price').text();
-                    var totalPrice = quantity * unitPrice;
-                    $(this).closest('tr').find('.total-price').text(totalPrice);
+                    console.log("Quantity changed");
+
+                    var quantity = parseInt($(this).val());
+                    var unitPrice = parseInt($(this).closest('tr').find('.unit-price').text());
+
+                    // Debugging: Log the calculation
+                    console.log("New Quantity:", quantity, typeof quantity);
+                    console.log("Unit Price:", unitPrice, typeof unitPrice);
+
+                    if (!isNaN(quantity) && !isNaN(unitPrice)) {
+                        var totalPrice = quantity * unitPrice;
+                        console.log("Total Price Calculation:", totalPrice, typeof totalPrice);
+                        $(this).closest('tr').find('.total-price').text(totalPrice);
+                    } else {
+                        console.log("Invalid value for Quantity or Unit Price.");
+                    }
+
                     updateTotalAmount();
                 });
 
                 // Update Total Amount for the Order
                 function updateTotalAmount() {
                     var totalAmount = 0;
+
                     $('#productTable tr').each(function () {
-                        var totalPrice = parseFloat($(this).find('.total-price').text());
-                        totalAmount += totalPrice;
+                        var totalPriceText = $(this).find('.total-price').text().trim();
+                        console.log("Total Price Text:", totalPriceText);
+
+                        // Parse totalPriceText to integer
+                        var totalPrice = parseInt(totalPriceText);
+                        console.log("Parsed Total Price:", totalPrice, typeof totalPrice);
+
+                        if (!isNaN(totalPrice)) {
+                            totalAmount += totalPrice;
+                        }
                     });
-                    $('#totalAmount').val(totalAmount.toFixed(2));
+
+                    console.log("Total Amount Updated:", totalAmount, typeof totalAmount);
+                    if (!isNaN(totalAmount)) {
+                        $('#totalAmount').val(totalAmount);
+                    } else {
+                        console.log("Total Amount calculation failed due to NaN value.");
+                    }
                 }
             });
+
         </script>
+
     </body>
 
 </html>

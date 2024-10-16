@@ -38,7 +38,7 @@ public class OrderDAO extends DBContext {
                 Order order = new Order();
                 order.setOrderId(rs.getInt("order_id"));
                 order.setOrderDate(rs.getDate("order_date"));
-                order.setOrderTotalAmount(rs.getDouble("order_total_amount"));
+                order.setOrderTotalAmount(rs.getInt("order_total_amount"));
                 order.setOrderStatus(rs.getString("order_status"));
                 order.setCustomerName(rs.getString("customer_name"));
                 order.setEmployeeName(rs.getString("employee_name"));
@@ -68,7 +68,7 @@ public class OrderDAO extends DBContext {
                 Order order = new Order();
                 order.setOrderId(rs.getInt("order_id"));
                 order.setOrderDate(rs.getDate("order_date"));
-                order.setOrderTotalAmount(rs.getDouble("order_total_amount"));
+                order.setOrderTotalAmount(rs.getInt("order_total_amount"));
                 order.setOrderStatus(rs.getString("order_status"));
                 order.setCustomerName(rs.getString("customer_name"));
                 order.setEmployeeName(rs.getString("employee_name"));
@@ -96,8 +96,8 @@ public class OrderDAO extends DBContext {
                 detail.setOrderDetailId(rs.getInt("order_detail_id"));
                 detail.setProductName(rs.getString("product_name"));
                 detail.setQuantity(rs.getInt("quantity"));
-                detail.setUnitPrice(rs.getDouble("unit_price"));
-                detail.setTotalPrice(rs.getDouble("total_price"));
+                detail.setUnitPrice(rs.getInt("unit_price"));
+                detail.setTotalPrice(rs.getInt("total_price"));
                 orderDetails.add(detail);
             }
         } catch (SQLException e) {
@@ -221,31 +221,56 @@ public class OrderDAO extends DBContext {
         return false;
     }
 
+//    public boolean addOrder(Order order) {
+//        String sql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id, customer_coupon_id) VALUES (?, ?, ?, ?, ?, ?)";
+//        try {
+//            PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//            statement.setInt(1, order.getCustomerId());
+//            statement.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
+//            statement.setInt(3, order.getOrderTotalAmount());
+//            statement.setString(4, order.getOrderStatus());
+//            statement.setInt(5, order.getEmployeeId());
+//            if (order.getCustomerCouponId() > 0) {
+//                statement.setInt(6, order.getCustomerCouponId());
+//            } else {
+//                statement.setNull(6, java.sql.Types.INTEGER);
+//            }
+//
+//            int rowsInserted = statement.executeUpdate();
+//            if (rowsInserted > 0) {
+//                ResultSet generatedKeys = statement.getGeneratedKeys();
+//                if (generatedKeys.next()) {
+//                    order.setOrderId(generatedKeys.getInt(1));
+//                    return true;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return false;
+//    }
     public boolean addOrder(Order order) {
-        String sql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id, customer_coupon_id) VALUES (?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        String sql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id, customer_coupon_id, store_stock_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, order.getCustomerId());
             statement.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
-            statement.setDouble(3, order.getOrderTotalAmount());
+            statement.setInt(3, order.getOrderTotalAmount());
             statement.setString(4, order.getOrderStatus());
             statement.setInt(5, order.getEmployeeId());
-            if (order.getCustomerCouponId() > 0) {
-                statement.setInt(6, order.getCustomerCouponId());
-            } else {
-                statement.setNull(6, java.sql.Types.INTEGER);
-            }
+            statement.setObject(6, order.getCustomerCouponId(), java.sql.Types.INTEGER);
+            statement.setInt(7, order.getStoreStockId());
 
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                ResultSet generatedKeys = statement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    order.setOrderId(generatedKeys.getInt(1));
-                    return true;
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        order.setOrderId(generatedKeys.getInt(1));
+                        return true;
+                    }
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return false;
     }
@@ -266,10 +291,8 @@ public class OrderDAO extends DBContext {
 
     public boolean addOrderDetails(int orderId, List<OrderDetail> orderDetails) {
         String sql = "INSERT INTO OrdersDetails (order_id, product_id, quantity, unit_price, total_price) VALUES (?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             for (OrderDetail detail : orderDetails) {
-                // Get product ID by joining with the Products table based on product name
                 int productId = getProductIdByName(detail.getProductName());
                 if (productId == -1) {
                     throw new SQLException("Product not found for name: " + detail.getProductName());
@@ -277,14 +300,14 @@ public class OrderDAO extends DBContext {
                 statement.setInt(1, orderId);
                 statement.setInt(2, productId);
                 statement.setInt(3, detail.getQuantity());
-                statement.setDouble(4, detail.getUnitPrice());
-                statement.setDouble(5, detail.getTotalPrice());
+                statement.setInt(4, detail.getUnitPrice());
+                statement.setInt(5, detail.getTotalPrice());
                 statement.addBatch();
             }
             int[] rowsInserted = statement.executeBatch();
             return rowsInserted.length == orderDetails.size();
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return false;
     }
@@ -316,7 +339,7 @@ public class OrderDAO extends DBContext {
                 product.setCategoryId(rs.getInt("category_id"));
                 product.setBarcode(rs.getString("barcode"));
                 product.setProductName(rs.getString("product_name"));
-                product.setProductPrice(rs.getDouble("product_price"));
+                product.setProductPrice(rs.getInt("product_price"));
                 product.setProductWeight(rs.getDouble("product_weight"));
                 product.setWeightUnitId(rs.getInt("weight_unit_id"));
                 product.setSupplierId(rs.getInt("supplier_id"));
@@ -329,4 +352,11 @@ public class OrderDAO extends DBContext {
         return products;
     }
 
+    public List<String> getOrderStatuses() {
+        List<String> statuses = new ArrayList<>();
+        statuses.add("Pending");
+        statuses.add("Paid");
+        statuses.add("Cancelled");
+        return statuses;
+    }
 }

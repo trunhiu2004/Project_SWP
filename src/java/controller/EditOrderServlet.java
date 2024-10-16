@@ -103,7 +103,7 @@ public class EditOrderServlet extends HttpServlet {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             int customerId = Integer.parseInt(request.getParameter("customerId"));
             String orderDate = request.getParameter("orderDate");
-            double totalAmount = Double.parseDouble(request.getParameter("totalAmount"));
+            int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
             String status = request.getParameter("status");
             int employeeId = Integer.parseInt(request.getParameter("employeeId"));
             int couponId = Integer.parseInt(request.getParameter("couponId"));

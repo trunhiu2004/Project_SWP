@@ -13,10 +13,20 @@ public class OrderDetail {
     private int orderDetailId;
     private String productName;
     private int quantity;
-    private double unitPrice;
-    private double totalPrice;
+    private int unitPrice;
+    private int totalPrice;
 
-    // Getters and Setters
+    public OrderDetail() {
+    }
+
+    public OrderDetail(int orderDetailId, String productName, int quantity, int unitPrice, int totalPrice) {
+        this.orderDetailId = orderDetailId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.totalPrice = totalPrice;
+    }
+
     public int getOrderDetailId() {
         return orderDetailId;
     }
@@ -41,19 +51,21 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public double getUnitPrice() {
+    public int getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    
 }

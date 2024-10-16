@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import model.Order;
 import model.OrderDetail;
@@ -67,6 +68,7 @@ public class AddOrderServlet extends HttpServlet {
         request.setAttribute("employees", orderDAO.getAllEmployees());
         request.setAttribute("coupons", orderDAO.getAllCoupons());
         request.setAttribute("products", orderDAO.getAllProducts());
+        request.setAttribute("statuses", orderDAO.getOrderStatuses());
 
         request.getRequestDispatcher("addOrder.jsp").forward(request, response);
     }
@@ -83,14 +85,33 @@ public class AddOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int customerId = Integer.parseInt(request.getParameter("customerId"));
+            System.out.println("AddOrderServlet: Starting to process add order.");
+
+            // Retrieve and parse parameters safely
+            String customerIdStr = request.getParameter("customerId");
+            int customerId = (customerIdStr != null && !customerIdStr.isEmpty()) ? Integer.parseInt(customerIdStr) : 0;
+
             String orderDate = request.getParameter("orderDate");
-            double totalAmount = Double.parseDouble(request.getParameter("totalAmount"));
-            String status = request.getParameter("status");
-            int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+            int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
+
+            String status = request.getParameter("orderStatus");
+
+            String employeeIdStr = request.getParameter("employeeId");
+            int employeeId = (employeeIdStr != null && !employeeIdStr.isEmpty()) ? Integer.parseInt(employeeIdStr) : 0;
+
             String couponIdStr = request.getParameter("couponId");
             Integer couponId = (couponIdStr != null && !couponIdStr.isEmpty()) ? Integer.parseInt(couponIdStr) : null;
-            int storeStockId = Integer.parseInt(request.getParameter("storeStockId"));
+
+            String storeStockIdStr = request.getParameter("storeStockId");
+            int storeStockId = (storeStockIdStr != null && !storeStockIdStr.isEmpty()) ? Integer.parseInt(storeStockIdStr) : 0;
+
+            System.out.println("Customer ID: " + customerId);
+            System.out.println("Order Date: " + orderDate);
+            System.out.println("Total Amount: " + totalAmount);
+            System.out.println("Order Status: " + status);
+            System.out.println("Employee ID: " + employeeId);
+            System.out.println("Coupon ID: " + couponId);
+            System.out.println("Store Stock ID: " + storeStockId);
 
             Order order = new Order();
             order.setCustomerId(customerId);
@@ -110,13 +131,25 @@ public class AddOrderServlet extends HttpServlet {
 
             if (productNames != null && quantities != null && unitPrices != null) {
                 for (int i = 0; i < productNames.length; i++) {
+                    if (productNames[i] == null || quantities[i] == null || unitPrices[i] == null) {
+                        continue;
+                    }
+
                     OrderDetail detail = new OrderDetail();
                     detail.setProductName(productNames[i]);
                     detail.setQuantity(Integer.parseInt(quantities[i]));
-                    detail.setUnitPrice(Double.parseDouble(unitPrices[i]));
+                    detail.setUnitPrice(Integer.parseInt(unitPrices[i]));
                     detail.setTotalPrice(detail.getQuantity() * detail.getUnitPrice());
+
+                    System.out.println("Adding OrderDetail - Product Name: " + detail.getProductName()
+                            + ", Quantity: " + detail.getQuantity()
+                            + ", Unit Price: " + detail.getUnitPrice()
+                            + ", Total Price: " + detail.getTotalPrice());
+
                     orderDetails.add(detail);
                 }
+            } else {
+                System.out.println("AddOrderServlet: One or more parameter values for products, quantities, or unit prices are null.");
             }
 
             OrderDAO orderDAO = new OrderDAO();
@@ -124,18 +157,27 @@ public class AddOrderServlet extends HttpServlet {
                 int orderId = order.getOrderId();
                 boolean orderDetailsSuccess = orderDAO.addOrderDetails(orderId, orderDetails);
                 if (orderDetailsSuccess) {
+                    System.out.println("AddOrderServlet: Order and OrderDetails added successfully.");
                     response.sendRedirect("list-order");
                 } else {
+                    System.out.println("AddOrderServlet: Failed to add order details.");
                     request.setAttribute("errorMessage", "Failed to add order details. Please try again.");
                     doGet(request, response);
                 }
             } else {
+                System.out.println("AddOrderServlet: Failed to add order.");
                 request.setAttribute("errorMessage", "Failed to add order. Please try again.");
                 doGet(request, response);
             }
+        } catch (NumberFormatException e) {
+            System.out.println("AddOrderServlet: Exception - " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Invalid input. Please correct the errors and try again.");
+            doGet(request, response);
         } catch (Exception e) {
             System.out.println("AddOrderServlet: Exception - " + e.getMessage());
-            request.setAttribute("errorMessage", "Invalid input. Please correct the errors and try again.");
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "An unexpected error occurred. Please try again.");
             doGet(request, response);
         }
     }

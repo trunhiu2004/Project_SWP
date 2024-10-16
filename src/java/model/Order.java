@@ -15,7 +15,7 @@ public class Order {
     private int orderId;
     private int customerId;
     private Date orderDate;
-    private double orderTotalAmount;
+    private int orderTotalAmount;
     private String orderStatus;
     private int employeeId;
     private int customerCouponId;
@@ -24,6 +24,25 @@ public class Order {
     private String employeeName;
     private String couponCode;
 
+    public Order() {
+    }
+
+    public Order(int orderId, int customerId, Date orderDate, int orderTotalAmount, String orderStatus, int employeeId, int customerCouponId, int storeStockId, String customerName, String employeeName, String couponCode) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.orderDate = orderDate;
+        this.orderTotalAmount = orderTotalAmount;
+        this.orderStatus = orderStatus;
+        this.employeeId = employeeId;
+        this.customerCouponId = customerCouponId;
+        this.storeStockId = storeStockId;
+        this.customerName = customerName;
+        this.employeeName = employeeName;
+        this.couponCode = couponCode;
+    }
+
+    
+    
     // Getters and Setters
     public int getOrderId() {
         return orderId;
@@ -49,11 +68,11 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public double getOrderTotalAmount() {
+    public int getOrderTotalAmount() {
         return orderTotalAmount;
     }
 
-    public void setOrderTotalAmount(double orderTotalAmount) {
+    public void setOrderTotalAmount(int orderTotalAmount) {
         this.orderTotalAmount = orderTotalAmount;
     }
 

@@ -85,10 +85,6 @@
         <servlet-class>controller.DeleteSaleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddSaleServlet</servlet-name>
-        <servlet-class>controller.AddSaleServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewSaleDetailsServlet</servlet-name>
         <servlet-class>controller.ViewSaleDetailsServlet</servlet-class>
     </servlet>
@@ -195,10 +191,6 @@
     <servlet-mapping>
         <servlet-name>DeleteSaleServlet</servlet-name>
         <url-pattern>/delete-sale</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddSaleServlet</servlet-name>
-        <url-pattern>/add-sale</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewSaleDetailsServlet</servlet-name>

@@ -13,7 +13,7 @@ public class Product {
     private int categoryId;
     private String barcode;
     private String productName;
-    private double productPrice;
+    private int productPrice;
     private double productWeight;
     private int weightUnitId;
     private int supplierId;
@@ -22,7 +22,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productId, int categoryId, String barcode, String productName, double productPrice, double productWeight, int weightUnitId, int supplierId, String productImage) {
+    public Product(int productId, int categoryId, String barcode, String productName, int productPrice, double productWeight, int weightUnitId, int supplierId, String productImage) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.barcode = barcode;
@@ -70,7 +70,7 @@ public class Product {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
 
