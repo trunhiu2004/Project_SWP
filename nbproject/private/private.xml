@@ -2,7 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group name="Java_BackEnd">
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/forgot-password.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/auth-sign-in.jsp</file>
@@ -58,6 +57,23 @@
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/WEB-INF/web.xml</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/web/auth-confirm-mail.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_PROJECT/Project_SWP/src/java/dal/DBContext.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/backend-plugin.min.css</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/components/favicon.jsp</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/fonts/slick-3.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/components/sidebar.jsp</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/fonts/slick.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/fonts/slick-4.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/fonts/slickd41d.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/js/app.js</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/components/topnavbar.jsp</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/ajax-loader.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/home.jsp</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/fonts/slick-2.html</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/css/backende209.css</file>
+            <file>file:/C:/Users/hungt/OneDrive/Desktop/Fall24/SWP/PROJECT/Project_SWP/web/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css</file>
         </group>
     </open-files>
 </project-private>
