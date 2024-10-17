@@ -51,31 +51,56 @@
                 </header>
 
                 <section class="products">
-                   
+
                     <c:forEach var="product" items="${requestScope.product}">
                         <div class="product-card">
                             <img src="assets/images/product/${product.image}" alt="${product.name}">
                             <h3><a href="#">${product.name}</a></h3>
                             <div class="product-price">$${product.price}</div>
-                            <button class="add-cart-btn" 
-                                    onclick="addToOrder('${product.name}', '${product.image}', '${product.price}')">
-                                Add to Cart
-                            </button>
+
+                            <form action="SolveAddToCartPos" method="post">
+                                <input type="hidden" name="name" value="${product.name}">
+                                <input type="hidden" name="price" value="${product.price}">
+                                <input type="hidden" name="image" value="${product.image}">
+                                <input type="hidden" name="barcode" value="${product.barcode}">
+                                <button type="submit" class="add-cart-btn">Add to Cart</button>
+                            </form>
+
+
                         </div>
-                        </c:forEach>
+                    </c:forEach>
                 </section>
             </main>
 
             <aside class="order-summary">
                 <h2>Current Order</h2>
                 <ul class="order-list">
-                   
+                    <c:forEach var="item" items="${sessionScope.cart}">
+                        <li>
+                            <img src="assets/images/product/${item.product.image}" alt="${item.product.name}">
+                            <span>${item.product.name}</span>
+                            <span>$${item.product.price}</span>
+
+
+
+
+                            <form action="SolveUpdateCarServlet" method="post" class="quantity-control">
+                                <input type="hidden" name="name" value="${item.product.name}">
+                                <button type="submit" name="action" value="decrease">-</button>
+                                    
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button type="submit" name="action" value="increase">+</button>
+                            </form>
+                            
+                        </li>
+                    </c:forEach>
                 </ul>
                 <div class="total-summary">
-                    <p>Subtotal: <span>$0.00</span></p>
-                    <p>Discount: <span>-$0.00</span></p>
-                    <p>Tax: <span>$0.00</span></p>
-                    <h3>Total: <span>$0.00</span></h3>
+                    <c:set var="total" value="0"/>
+                    <c:forEach var="item" items="${sessionScope.cart}">
+                        <c:set var="total" value="${total + item.totalPrice}" />
+                    </c:forEach>
+                    <p>Total: <span>$${total}</span></p>
                 </div>
 
                 <div class="payment-method">
@@ -90,10 +115,17 @@
                 </div>
 
                 <button class="payment-btn">Continue to Payment</button>
+
             </aside>
+
+
         </div>
 
         <!-- Include external JavaScript for handling product and order logic -->
         <script src="assets/js/pos-screen.js"></script>
     </body>
 </html>
+
+
+
+

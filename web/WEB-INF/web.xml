@@ -156,6 +156,18 @@
         <servlet-name>EditCustomer</servlet-name>
         <servlet-class>controller.EditCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolveAddToCartPos</servlet-name>
+        <servlet-class>controller.SolveAddToCartPos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolveAddItemServlet</servlet-name>
+        <servlet-class>controller.SolveAddItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolveUpdateCarServlet</servlet-name>
+        <servlet-class>controller.SolveUpdateCarServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -311,5 +323,17 @@
     <servlet-mapping>
         <servlet-name>EditShop</servlet-name>
         <url-pattern>/EditShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolveAddToCartPos</servlet-name>
+        <url-pattern>/SolveAddToCartPos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolveAddItemServlet</servlet-name>
+        <url-pattern>/SolveAddItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolveUpdateCarServlet</servlet-name>
+        <url-pattern>/SolveUpdateCarServlet</url-pattern>
     </servlet-mapping>
 </web-app>
