@@ -15,18 +15,19 @@ public class Shop {
     private String shopPhone;
     private String shopEmail;
     private String shopOpeningHours;
-    
+    private String shopLogo;
 
     public Shop() {
     }
 
-    public Shop(int shopId, String shopName, String shopAddress, String shopPhone, String shopEmail, String shopOpeningHours) {
+    public Shop(int shopId, String shopName, String shopAddress, String shopPhone, String shopEmail, String shopOpeningHours, String shopLogo) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.shopAddress = shopAddress;
         this.shopPhone = shopPhone;
         this.shopEmail = shopEmail;
         this.shopOpeningHours = shopOpeningHours;
+        this.shopLogo = shopLogo;
     }
 
     public int getShopId() {
@@ -75,6 +76,14 @@ public class Shop {
 
     public void setShopOpeningHours(String shopOpeningHours) {
         this.shopOpeningHours = shopOpeningHours;
+    }
+
+    public String getShopLogo() {
+        return shopLogo;
+    }
+
+    public void setShopLogo(String shopLogo) {
+        this.shopLogo = shopLogo;
     }
 
     

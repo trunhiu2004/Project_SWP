@@ -61,6 +61,8 @@ public class ListCustomer extends HttpServlet {
         
         request.setAttribute("customer", customer);
         request.getRequestDispatcher("page-list-customers_1.jsp").forward(request, response);
+        
+
     } 
 
     /** 

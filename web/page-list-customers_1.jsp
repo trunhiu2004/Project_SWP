@@ -30,7 +30,7 @@
 
                 <div class="iq-sidebar  sidebar-default ">
                     <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                        <a href="index.html" class="header-logo">
+                        <a href="home_1.jsp" class="header-logo">
                             <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
                             <h5 class="logo-title light-logo ml-3">POSDash</h5>
                         </a>
@@ -42,7 +42,7 @@
                         <nav class="iq-sidebar-menu">
                             <ul id="iq-sidebar-toggle" class="iq-menu">
                                 <li class="">
-                                    <a href="index.html" class="svg-icon">
+                                    <a href="home_1.jsp" class="svg-icon">
                                         <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -241,11 +241,7 @@
                                                 <i class="las la-minus"></i><span>Customers</span>
                                             </a>
                                         </li>
-                                        <li class="">
-                                            <a href="page-add-customers.html">
-                                                <i class="las la-minus"></i><span>Add Customers</span>
-                                            </a>
-                                        </li>
+                                        
                                         <li class="">
                                             <a href="page-list-users.html">
                                                 <i class="las la-minus"></i><span>Users</span>
@@ -308,18 +304,13 @@
                         <nav class="navbar navbar-expand-lg navbar-light p-0">
                             <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                                 <i class="ri-menu-line wrapper-menu"></i>
-                                <a href="index.html" class="header-logo">
+                                <a href="home_1.jsp" class="header-logo">
                                     <img src="assets/images/logo.png" class="img-fluid rounded-normal" alt="logo">
                                     <h5 class="logo-title ml-3">POSDash</h5>
 
                                 </a>
                             </div>
-                            <div class="iq-search-bar device-search">
-                                <form action="#" class="searchbox">
-                                    <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                    <input type="text" class="text search-input" placeholder="Search here...">
-                                </form>
-                            </div>
+                            
                             <div class="d-flex align-items-center">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -330,7 +321,7 @@
                                     <ul class="navbar-nav ml-auto navbar-list align-items-center">
 
                                         <li>
-                                            <a href="#"
+                                            <a href="HomePos"
                                                 class="btn border add-btn shadow-none mx-2 d-none d-md-block"></i>POS</a>
                                         </li>
 
@@ -380,11 +371,21 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
                                         <h4 class="mb-3">Customer List</h4>
-                                        <p class="mb-0">A customer dashboard lets you easily gather and visualize
-                                            customer data from optimizing <br>
-                                            the customer experience, ensuring customer retention. </p>
+                                        
+                                        <div class="iq-search-bar device-search">
+                                            
+                                            
+                                <form action="SearchCustomer" method="post" class="searchbox">
+                                    <a type = "submit" class="search-link"><i class="ri-search-line"></i></a>
+                                    <input name="txt" type="text" class="text search-input" placeholder="Search here...">
+                                </form>
+                            </div>
+                                        
                                     </div>
-                                    <a href="page-add-customers.jsp" class="btn btn-primary add-list"><i
+                                    
+                                    
+                                    
+                                    <a href="addCustomer.jsp" class="btn btn-primary add-list"><i
                                             class="las la-plus mr-3"></i>Add Customer</a>
                                 </div>
                             </div>
@@ -420,7 +421,7 @@
                                                                 href="EditCustomer?id=${customer.customerId}"><i class="ri-pencil-line mr-0"></i></a>
                                                             <a class="badge bg-warning mr-2" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Delete" href="#"><i
+                                                                data-original-title="Delete" href="DeleteCustomerServlet?id=${customer.customerId}"><i
                                                                     class="ri-delete-bin-line mr-0"></i></a>
                                                         </div>
                                                     </td>
@@ -471,7 +472,7 @@
                                                         visualize customer data from optimizing <br>
                                                         the customer experience, ensuring customer retention. </p>
                                                 </div>
-                                                <a href="page-add-customers.html" class="btn btn-primary add-list"><i
+                                                <a href="addCustomer.jsp" class="btn btn-primary add-list"><i
                                                         class="las la-plus mr-3"></i>Add Customer</a>
                                             </div>
                                         </div>

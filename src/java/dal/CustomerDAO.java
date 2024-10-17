@@ -106,9 +106,59 @@ public class CustomerDAO extends DBContext{
         }
     }
 }
+    
+    public void insertCustomer(String customerName, String customerPhone, String point) {
+        String sql = "INSERT INTO Customers (customer_name, customer_phone, point, customer_type_id) VALUES (?, ?, ?, 1)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, customerName);
+            st.setString(2, customerPhone);
+            st.setString(3, point);
+            
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void deleteCustomer(String id){
+        String sql = "delete from Customers where customer_id = ?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setString(1, id);
+            statement.executeUpdate();
+            
+        }catch(Exception e){
+             
+        }
+    }
 
+    public List<Customer> searchCustomer(String txt){
+    List<Customer> list = new ArrayList<>();
+    String sql = "SELECT Customers.customer_id, Customers.customer_name, Customers.customer_phone, Customers.point, CustomerTypes.type_name, Customers.customer_type_id\n" +
+"                 FROM Customers INNER JOIN CustomerTypes ON Customers.customer_type_id = CustomerTypes.customer_type_id WHERE Customers.customer_name LIKE ?";
+    try{
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, "%" + txt + "%");
+        ResultSet rs = statement.executeQuery();
+        while(rs.next()){
+            Customer customer = new Customer();
+            customer.setCustomerId(rs.getInt("customer_id"));
+            customer.setCustomerName(rs.getString("customer_name"));
+            customer.setCustomerPhone(rs.getString("customer_phone"));
+             customer.setPoint(rs.getInt("point"));
+             customer.setCustomerTypeId(rs.getInt("customer_type_id"));
+             customer.setTypeName( rs.getString("type_name"));                  
+            list.add(customer);
+        }
+    }catch(SQLException e){
+        System.out.println(e.getMessage());
+    }
+    return list;
+}
 
+    
     
     public static void main(String[] args) {
         CustomerDAO acc = new CustomerDAO();

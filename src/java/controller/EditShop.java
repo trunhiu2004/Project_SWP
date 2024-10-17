@@ -61,10 +61,11 @@ public class EditShop extends HttpServlet {
         String shopPhone = request.getParameter("shop_phone");
         String shopEmail = request.getParameter("shop_email");
         String shopOpening = request.getParameter("shop_opening_hours");
+        String shopLogo = request.getParameter("shop_logo");
 
         
         Shop shop = new Shop(shopId, shopName, 
-                shopAddress, shopPhone, shopEmail, shopOpening);
+                shopAddress, shopPhone, shopEmail, shopOpening, shopLogo);
         
         
         shopDAO.updateShop(shop);

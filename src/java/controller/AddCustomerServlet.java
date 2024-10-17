@@ -5,26 +5,20 @@
 
 package controller;
 
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import model.CartItem;
-
-
-
 
 /**
  *
  * @author pqtru
  */
-public class SolveUpdateCarServlet extends HttpServlet {
+public class AddCustomerServlet extends HttpServlet {
    
-    private static final long serialVersionUID = 1L;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,18 +29,15 @@ public class SolveUpdateCarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SolveUpdateCarServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SolveUpdateCarServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        String name = request.getParameter("customerName");
+        String phone = request.getParameter("customerPhone");
+        String point = request.getParameter("point");
+        
+        
+        CustomerDAO dao = new CustomerDAO();
+        dao.insertCustomer(name, phone, point);
+        response.sendRedirect("ListCustomer");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,32 +63,8 @@ public class SolveUpdateCarServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String action = request.getParameter("action");
-
-        HttpSession session = request.getSession();
-        
-        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
-
-        if (cart != null) {
-            for (CartItem item : cart) {
-                if (item.getProduct().getName().equals(name)) {
-                    if ("increase".equals(action)) {
-                        item.setQuantity(item.getQuantity() + 1);
-                    } else if ("decrease".equals(action)) {
-                        item.setQuantity(item.getQuantity() - 1);
-                        if (item.getQuantity() <= 0) {
-                            cart.remove(item);
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-
-        session.setAttribute("cart", cart);
-        response.sendRedirect("HomePos");
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /** 

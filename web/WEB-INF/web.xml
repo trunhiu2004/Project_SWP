@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet-mapping>
+        <servlet-name>SearchCustomer</servlet-name>
+        <url-pattern>/SearchCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShop</servlet-name>
+        <url-pattern>/SearchShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListShopPhanTrang</servlet-name>
+        <url-pattern>/ListShopPhanTrang</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaginationShopServlet</servlet-name>
+        <url-pattern>/PaginationShopServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>100</session-timeout>
+        <!-- Thời gian tính bằng phút -->
+    </session-config>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
@@ -168,6 +188,38 @@
         <servlet-name>SolveUpdateCarServlet</servlet-name>
         <servlet-class>controller.SolveUpdateCarServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <servlet-class>controller.AddCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>controller.DeleteCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteShop</servlet-name>
+        <servlet-class>controller.DeleteShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddShopServlet</servlet-name>
+        <servlet-class>controller.AddShopServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCustomer</servlet-name>
+        <servlet-class>controller.SearchCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShop</servlet-name>
+        <servlet-class>controller.SearchShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListShopPhanTrang</servlet-name>
+        <servlet-class>controller.ListShopPhanTrang</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaginationShopServlet</servlet-name>
+        <servlet-class>controller.PaginationShopServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -335,5 +387,21 @@
     <servlet-mapping>
         <servlet-name>SolveUpdateCarServlet</servlet-name>
         <url-pattern>/SolveUpdateCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <url-pattern>/AddCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteShop</servlet-name>
+        <url-pattern>/DeleteShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddShopServlet</servlet-name>
+        <url-pattern>/AddShopServlet</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,9 +1,9 @@
-    
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-users.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-return.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,7 +28,7 @@
 
             <div class="iq-sidebar  sidebar-default ">
                 <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                    <a href="index.html" class="header-logo">
+                    <a href="home_1.jsp" class="header-logo">
                         <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
                     </a>
                     <div class="iq-menu-bt-sidebar ml-0">
@@ -39,7 +39,7 @@
                     <nav class="iq-sidebar-menu">
                         <ul id="iq-sidebar-toggle" class="iq-menu">
                             <li class="">
-                                <a href="index.html" class="svg-icon">                        
+                                <a href="home_1.jsp" class="svg-icon">                        
                                     <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
                                     </svg>
@@ -154,7 +154,7 @@
                                             <i class="las la-minus"></i><span>List Returns</span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    <li class="active">
                                         <a href="page-add-return.html">
                                             <i class="las la-minus"></i><span>Add Return</span>
                                         </a>
@@ -173,31 +173,38 @@
                                 </a>
                                 <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                        <a href="ListCustomer">
+                                        <a href="page-list-customers.jsp">
                                             <i class="las la-minus"></i><span>Customers</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-customers.html">
+                                        <a href="page-add-customers.jsp">
                                             <i class="las la-minus"></i><span>Add Customers</span>
                                         </a>
                                     </li>
-                                    <li class="active">
-                                        <a href="page-list-shop.jsp">
-                                            <i class="las la-minus"></i><span>shop</span>
+                                    <li class="">     
+                                        <a href="EmployeeList">
+                                            <i class="las la-minus"></i><span>Employee</span>
                                         </a>
                                     </li>
 
                                     <li class="">
-                                        <a href="page-list-suppliers.html">
+                                        <a href="page-list-suppliers.jsp">
                                             <i class="las la-minus"></i><span>Suppliers</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="page-add-supplier.html">
+                                        <a href="page-add-supplier.jsp">
                                             <i class="las la-minus"></i><span>Add Suppliers</span>
                                         </a>
                                     </li>
+
+                                    <li class="">
+                                        <a href="ListShop">
+                                            <i class="las la-minus"></i><span>Shop</span>
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </li>
                             <li class="">
@@ -231,13 +238,15 @@
                     <nav class="navbar navbar-expand-lg navbar-light p-0">
                         <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                             <i class="ri-menu-line wrapper-menu"></i>
-                            <a href="index.html" class="header-logo">
+                            <a href="home_1.jsp" class="header-logo">
                                 <img src="assets/images/logo.png" class="img-fluid rounded-normal" alt="logo">
                                 <h5 class="logo-title ml-3">POSDash</h5>
 
                             </a>
                         </div>
-
+                        <div class="iq-search-bar device-search">
+                            
+                        </div>
                         <div class="d-flex align-items-center">
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -246,7 +255,19 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                                    <li class="nav-item nav-icon dropdown">
 
+
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
+                                           ><i class="las la-plus mr-2"></i>POS</a>
+                                    </li>
+
+                                    <li class="nav-item nav-icon dropdown">
+
+
+                                    </li>
 
                                     <li class="nav-item nav-icon dropdown caption-content">
                                         <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
@@ -280,78 +301,71 @@
                     </nav>
                 </div>
             </div>
-            <div class="content-page">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                                <div>
-                                    <h4 class="mb-3">Shop</h4>
 
-                                    <div class="iq-search-bar device-search">
-                                        <form action="SearchShop" method="post" class="searchbox">
-                                            <a type = "submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                            <input name="txt" type="text" class="text search-input" placeholder="Search here...">
-                                        </form>
+            <div class="content-page">
+                <div class="container-fluid add-form-list">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">Add Shop</h4>
                                     </div>
+                                </div>
+                                <div class="card-body">
+                                    <form action="AddShopServlet" method="post">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name *</label>
+                                                    <input type="text" class="form-control" name="shopName" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone *</label>
+                                                    <input type="number" class="form-control" name="shopPhone" maxlength="10" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Address *</label>
+                                                    <input type="text" class="form-control" name="shopAddress" required>
+                                                </div>
+                                            </div>                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email *</label>
+                                                    <input type="email" class="form-control" name="shopEmail"  required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Opening Hours *</label>
+                                                    <input type="time" class="form-control" name="shopOpeningHours" required>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Image *</label>
+                                                    <input type="text" class="form-control" name="shopLogo" required>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mr-2">Save</button>
+                                    </form>
+
+
 
                                 </div>
-                                <a href="addShop.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Shop</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="table-responsive rounded mb-3">
-                                <table class="data-table table mb-0 tbl-server-info">
-                                    <thead class="bg-white text-uppercase">
-                                        <tr class="ligth ligth-data">
-
-
-                                            <th>Name</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
-                                            <th>Email</th>
-                                            <th>Opening</th>   
-                                            <th>Image</th>
-                                            <th>Action</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="shop" items="${requestScope.shop}">
-                                            <tr>
-
-                                                <td>${shop.shopName}</td>
-                                                <td>${shop.shopPhone}</td>
-                                                <td>${shop.shopAddress}</td>
-                                                <td>${shop.shopEmail}</td>
-                                                <td>${shop.shopOpeningHours}</td>
-
-                                                <td><img src="assets/images/logoshop/${shop.shopLogo}" width="80px" height="80px"/></td>
-                                                <th>
-                                                    <a href="DeleteShop?id=${shop.shopId}" class="btn btn-warning">Delete</a>
-                                                    <a href="EditShop?id=${shop.shopId}" class="btn btn-primary">Edit</a>
-
-
-                                                </th>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                                
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
-
                     <!-- Page end  -->
                 </div>
-                
-                
-                
-                
-                
             </div>
         </div>
         <!-- Wrapper End-->
@@ -367,7 +381,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>Â©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
@@ -390,5 +404,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-users.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-return.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>

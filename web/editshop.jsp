@@ -315,7 +315,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="EditShop" method="post">
+                        <form action="EditShop" method="post" >
                             <input type="hidden" name="shop_id" value="${shop.shopId}">
                             <div class="row">                                  
                                 <div class="col-md-6">                      
@@ -357,8 +357,15 @@
                                     </div>
                                 </div>  
                                         
-                                
-                                
+                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Image *</label>
+                                        <input type="text" class="form-control" name="shop_opening_hours" value="${shop.shopLogo}" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                                        
 
                                 
                             </div>                            
