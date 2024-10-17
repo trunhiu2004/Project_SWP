@@ -20,7 +20,12 @@
 
                     </a>
                 </div>
-
+                <div class="iq-search-bar device-search">
+                      <form action="#" class="searchbox">
+                          
+                            
+                      </form>
+                  </div>
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
