@@ -79,6 +79,7 @@
                                                 <th>Unit</th>
                                                 <th>Manufacture Date</th>
                                                 <th>Expiration Date</th>
+                                                <th>Batch</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -96,6 +97,7 @@
                                             <td>${p.weightUnit.getName()}</td>
                                             <td>${p.getManufactureDate()}</td>
                                             <td>${p.getExpirationDate()}</td>
+                                            <td>${p.getBatch()}</td>
                                             <td>
                                                 <div class="d-flex align-items-center list-action">
                                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View History Price"

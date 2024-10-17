@@ -13,9 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import model.Inventory;
+import model.InventoryDetails;
 import model.Products;
 
 /**
@@ -64,10 +66,9 @@ public class AddToInventoryServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         ProductsDAO pd = new ProductsDAO();
-        List<Products> p = pd.getAllProduct();
+        Products p = pd.getLatestProduct();
         session.setAttribute("product", p);
         request.getRequestDispatcher("add-to-inventory.jsp").forward(request, response);
-
     }
 
     /**
@@ -82,13 +83,13 @@ public class AddToInventoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+
         InventoryDAO id = new InventoryDAO();
         ProductsDAO pd = new ProductsDAO();
-        String namePro = request.getParameter("namePro");
+
+        String idPro_raw = request.getParameter("idPro");
         String quantity = request.getParameter("quantity");
-        int idPro = Integer.parseInt(namePro);
-        Inventory i = id.getInventoryByProductId(idPro);
-        if (i == null) {
+        int idPro = Integer.parseInt(idPro_raw);
             Products pNew = pd.getProductById(idPro);
             int q = Integer.parseInt(quantity);
             String status;
@@ -102,16 +103,11 @@ public class AddToInventoryServlet extends HttpServlet {
             } else {
                 status = "Còn hàng";
                 alert = "Không";
-            }  
+            }
             LocalDateTime lastUpdate = LocalDateTime.now();
             Inventory iNew = new Inventory(pNew, q, status, lastUpdate, alert);
             id.insertInven(iNew);
-            
-            response.sendRedirect("listInventory");
-        } else {
-            session.setAttribute("error", "Loai san pham da ton tai");
-            request.getRequestDispatcher("add-to-inventory.jsp").forward(request, response);
-        }
+            response.sendRedirect("importInventory");
     }
 
     /**

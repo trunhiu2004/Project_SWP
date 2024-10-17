@@ -7,16 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
-        <script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("Are you sure delete this unit?")) {
-                    window.location = "deleteUnit?weight_unit_id=" + id;
-                }
-            }
-        </script>
-
+        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>      
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
@@ -53,43 +44,54 @@
                             </div>
                         </div>
                     </div>
-                </div>      
-                <div class="content-page">
+                </div>      <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Unit List</h4>
+                                        <h4 class="mb-3">Store</h4>
                                     </div>
-                                    <a href="page-add-unit.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Unit</a>
                                 </div>
+
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Code</th>
-                                                <th>Unit</th>
+                                                <th>Product</th>
+                                                <th>Product Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Alert</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
-                                        <c:forEach items="${wu}" var="u">
-                                            <tr>                                                
-                                                <td>${u.getId()}</td>
-                                                <td>${u.getName()}</td>
+                                        <c:forEach items="${store}" var="s">
+                                            <tr>
+                                                <td><img src="assets/images/product/${s.getInventory().getProduct().getImage()}" width="80px" height="80px"/></td>
+                                                <td>${s.getInventory().getProduct().getName()}</td>
+                                                <td>${s.getStock()}</td>       
+                                                <c:choose>
+                                                    <c:when test="${s.getDiscount()== null}">
+                                                        <td>${s.getInventory().getProduct().getPrice()}</td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td>${s.getDiscount().getPriceSell()}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <td>${s.getAlert()}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                                           href="updateUnit?weight_unit_id=${u.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                                           href="#" onclick="doDelete(${u.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Import"
+                                                           href="importInventory?inventory_id=${i.getId()}"><i class="ri-pencil-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </c:forEach>                      
+                                        
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

@@ -156,7 +156,8 @@ public class UpdateProductServlet extends HttpServlet {
         String supplier_raw = request.getParameter("supPro");
         String manufactureDateStr = request.getParameter("manufactureDate");
         String expirationDateStr = request.getParameter("expirationDate");
-
+        String batch_raw = request.getParameter("batch");
+        
         int id = Integer.parseInt(id_raw);
         int cate = Integer.parseInt(cate_raw);
         ProductCategories ci = pcd.getCategoryById(cate);
@@ -169,7 +170,8 @@ public class UpdateProductServlet extends HttpServlet {
         LocalDate expirationDate = LocalDate.parse(expirationDateStr);
         Products p1 = pd.getProductById(id);
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : p1.getImage();
-        Products pNew = new Products(id, name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate);
+        int batch = Integer.parseInt(batch_raw);
+        Products pNew = new Products(id, name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate,batch);
         
         pd.updateProduct(pNew);
         response.sendRedirect("listProduct");

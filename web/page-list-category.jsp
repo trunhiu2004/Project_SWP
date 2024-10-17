@@ -3,20 +3,22 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+
         <script type="text/javascript">
             function doDelete(id) {
-                if(confirm("Are you sure delete category which has id ="+id)){
-                    window.location="deleteCategory?category_id="+id;
-                }              
+                if (confirm("Are you sure delete this Category")) {
+                    window.location = "deleteCategory?category_id=" + id;
+                }
             }
-                </script>
+        </script>
+
         <!-- Favicon -->
-        <jsp:include page="components/favicon.jsp"></jsp:include> </head>
+        <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
             <!-- loader Start -->
             <div id="loading">
@@ -51,30 +53,24 @@
                             </div>
                         </div>
                     </div>
-                </div>      <div class="content-page">
+                </div>      
+                <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
                                         <h4 class="mb-3">Category List</h4>
-                                        <p class="mb-0">Use category list as to describe your overall core business from the provided list. <br>
-                                            Click the name of the category where you want to add a list item. .</p>
                                     </div>
                                     <a href="page-add-category.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Category</a>
+
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
+                                    <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox1">
-                                                        <label for="checkbox1" class="mb-0"></label>
-                                                    </div>
-                                                </th>
                                                 <th>Code</th>
                                                 <th>Category</th>
                                                 <th>Action</th>
@@ -83,13 +79,6 @@
                                         <tbody class="ligth-body">
                                         <c:forEach items="${cate}" var="pc">
                                             <tr>
-                                                <td>
-                                                    <div class="checkbox d-inline-block">
-                                                        <input type="checkbox" class="checkbox-input" id="checkbox2">
-                                                        <label for="checkbox2" class="mb-0"></label>
-                                                    </div>
-                                                </td>
-
                                                 <td>${pc.getId()}</td>
                                                 <td>${pc.getName()}</td>
                                                 <td>
@@ -101,8 +90,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </c:forEach>                      
-                                    </tbody>             
+                                        </c:forEach>                                 
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -181,5 +170,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>

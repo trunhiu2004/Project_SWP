@@ -6,6 +6,7 @@ package controller;
 
 import dal.DiscountProductDAO;
 import dal.ProductsDAO;
+import dal.StoreStockDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -87,6 +88,7 @@ public class ProductExpiredServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idPro"));
         int discount = Integer.parseInt(request.getParameter("discount"));
+        StoreStockDAO ss = new StoreStockDAO();
         ProductsDAO pd = new ProductsDAO();
         Products p = pd.getProductById(id);
         double newPrice = p.getPrice() * (1 - discount * 0.05);
@@ -96,6 +98,7 @@ public class ProductExpiredServlet extends HttpServlet {
             discountProductDAO.updateProduct(discountProduct);
         } else {
             discountProductDAO.insertPro(discountProduct);
+            ss.updateStore();
         }
 
         response.sendRedirect("listProductDiscount");

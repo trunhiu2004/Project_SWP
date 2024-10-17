@@ -10,13 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
-        <script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("Are you sure delete product which has id =" + id)) {
-                    window.location = "deleteProduct?product_id=" + id;
-                }
-            }
-        </script>
+      
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
@@ -60,7 +54,7 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Product List</h4>
+                                        <h4 class="mb-3">Product Discount List</h4>
                                         <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
                                     </div>
                                     <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
@@ -71,6 +65,7 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
+                                                <th>Batch</th>
                                                 <th>Barcode</th>
                                                 <th>Product</th>
                                                 <th>Name</th>
@@ -88,6 +83,7 @@
 
 
                                             <tr>
+                                                <td>${p.getBatch()}</td>
                                                 <td>${p.getBarcode()}</td>
                                                 <td><img src="assets/images/product/${p.getImage()}" width="80px" height="80px"/></td>
                                                 <td>${p.getName()}</td>

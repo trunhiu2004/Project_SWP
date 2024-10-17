@@ -22,11 +22,12 @@ public class Products2 {
     private String product_image;
     private Date manufacture_date;
     private Date expiration_date;
+    private int batch;
 
     public Products2() {
     }
 
-    public Products2(int product_id, int category_id, String barcode, String product_name, double product_price, int weight_unit_id, int supplier_id, String product_image, Date manufacture_date, Date expiration_date) {
+    public Products2(int product_id, int category_id, String barcode, String product_name, double product_price, int weight_unit_id, int supplier_id, String product_image, Date manufacture_date, Date expiration_date, int batch) {
         this.product_id = product_id;
         this.category_id = category_id;
         this.barcode = barcode;
@@ -37,6 +38,7 @@ public class Products2 {
         this.product_image = product_image;
         this.manufacture_date = manufacture_date;
         this.expiration_date = expiration_date;
+        this.batch = batch;
     }
 
     public int getProduct_id() {
@@ -119,6 +121,14 @@ public class Products2 {
         this.expiration_date = expiration_date;
     }
 
+    public int getBatch() {
+        return batch;
+    }
+
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+    
     @Override
     public String toString() {
         return "Products2{" + "product_id=" + product_id + ", category_id=" + category_id + ", barcode=" + barcode + ", product_name=" + product_name + ", product_price=" + product_price + ", weight_unit_id=" + weight_unit_id + ", supplier_id=" + supplier_id + ", product_image=" + product_image + ", manufacture_date=" + manufacture_date + ", expiration_date=" + expiration_date + '}';

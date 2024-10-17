@@ -20,11 +20,12 @@ public class Products {
     private WeightUnit weightUnit;
     private LocalDate manufactureDate;
     private LocalDate expirationDate;
+    private int batch;
 
     public Products() {
     }
 
-    public Products(int id, String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate) {
+    public Products(int id, String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate, int batch) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -35,9 +36,10 @@ public class Products {
         this.weightUnit = weightUnit;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
+        this.batch = batch;
     }
 
-    public Products(String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate) {
+    public Products(String name, float price, String image, String barcode, ProductCategories productCategories, Suppliers suppliers, WeightUnit weightUnit, LocalDate manufactureDate, LocalDate expirationDate, int batch) {
         this.name = name;
         this.price = price;
         this.image = image;
@@ -47,6 +49,7 @@ public class Products {
         this.weightUnit = weightUnit;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
+        this.batch = batch;
     }
 
     public int getId() {
@@ -129,12 +132,16 @@ public class Products {
         this.expirationDate = expirationDate;
     }
 
+    public int getBatch() {
+        return batch;
+    }
+
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+
     @Override
     public String toString() {
-        return "Products{" + "id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", barcode=" + barcode + ", productCategories=" + productCategories + ", suppliers=" + suppliers + ", weightUnit=" + weightUnit + ", manufactureDate=" + manufactureDate + ", expirationDate=" + expirationDate + '}';
-    }
-    
-    
-
-    
+        return "Products{" + "id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", barcode=" + barcode + ", productCategories=" + productCategories + ", suppliers=" + suppliers + ", weightUnit=" + weightUnit + ", manufactureDate=" + manufactureDate + ", expirationDate=" + expirationDate + ", batch=" + batch + '}';
+    }    
 }

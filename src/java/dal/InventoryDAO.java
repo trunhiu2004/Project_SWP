@@ -190,7 +190,7 @@ public class InventoryDAO extends DBContext {
 
     public Inventory getInventoryById(int inventory_id) {
         ProductsDAO pd = new ProductsDAO();
-        String sql = "SELECT * FROM [dbo].[Inventory] WHERE inventory_id = ?";
+        String sql = "SELECT * FROM [dbo].[Inventory] WHERE inventory_id = ? ";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -258,7 +258,7 @@ public class InventoryDAO extends DBContext {
     public List<InventoryDetails> getAllLogInventory() {
         List<InventoryDetails> list = new ArrayList<>();
         InventoryDAO invenD = new InventoryDAO();
-        
+
         String sql = "SELECT [inventory_detail_id]\n"
                 + "      ,[inventory_id]\n"
                 + "      ,[quantity]\n"
@@ -286,19 +286,47 @@ public class InventoryDAO extends DBContext {
     }
 
     public void insertInventoryDetails(InventoryDetails d) {
-        String sql = "INSERT INTO InventoryDetails  VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO InventoryDetails  VALUES (?, ?, ?, ?) ";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, d.getInventory().getId());
+            st.setInt(1, d.getInventory().getId());  
             st.setInt(2, d.getQuantity());
-            st.setDate(3, java.sql.Date.valueOf(d.getDate()));
+            st.setDate(3, Date.valueOf(d.getDate()));  
             st.setString(4, d.getStatus());
             st.executeUpdate();
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public Inventory getInventoryLast() {
+        String sql = "SELECT TOP 1 * FROM Inventory ORDER BY inventory_id DESC"; 
+        ProductsDAO pd = new ProductsDAO();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Inventory inventory = new Inventory();
+                inventory.setId(rs.getInt("inventory_id"));
+                inventory.setProduct(pd.getProductById(rs.getInt("product_id"))); // Giả sử bạn có hàm này để lấy Product
+                inventory.setCurrentStock(rs.getInt("current_stock"));
+                inventory.setInventoryStatus(rs.getString("inventory_status"));
+                inventory.setLastRestockDate(rs.getTimestamp("last_restock_date").toLocalDateTime());
+                inventory.setAlert(rs.getString("alert"));
+                return inventory;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public static void main(String[] args) {
+        InventoryDAO c = new InventoryDAO();
+        Inventory list = c.getInventoryLast();
+        System.out.println(list.getId());
     }
 
 }

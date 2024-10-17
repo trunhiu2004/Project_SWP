@@ -61,12 +61,10 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Product</label>
-                                                        <select name="namePro" class="selectpicker form-control" data-style="py-0">
-                                                        <c:forEach items="${product}" var="p">
-                                                            <option value="${p.getId()}">${p.getName()}</option>            
-                                                        </c:forEach>  
-                                                    </select>
+                                                   <c:set var="product" value="${sessionScope.product}" />    
+                                                   <label>Product</label>
+                                                   <input type="hidden" name="idPro" class="form-control" value="${product.id}">
+                                                   <input type="text" readonly name="name" class="form-control" value="${product.name}">
                                                 </div>
                                             </div>                                           
                                             <div class="col-md-6">

@@ -58,23 +58,78 @@
                                     </div>
                                     <div class="card-body">
                                     <c:set var="i" value="${inventory}"/>
-                                    <form action="importInventory" method="post" data-toggle="validator">
+                                    <form action="importProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
                                         <input type="hidden" name="idInven" value="${i.getId()}">
-                                        <div class="col-md-6">                      
-                                            <div class="form-group">
-                                                <label>Name *</label>
-                                                
-                                                <input type="text" readonly name="nameInven" class="form-control" value="${i.getProduct().getName()}">
-                                                <div class="help-block with-errors"></div>
+                                        <div class="row">
+                                            <div class="col-md-6">                      
+                                                <div class="form-group">
+                                                    <label>Name *</label>
+                                                    <input type="text" readonly name="namePro" class="form-control" value="${i.getProduct().getName()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
                                             </div>
-                                        </div>                                          
+                                            <div class="col-md-6">                      
+                                                <div class="form-group">
+                                                    <label>Category *</label>
+                                                    <input type="hidden" name="catePro" value="${i.getProduct().getProductCategories().getId()}">
+                                                    <input type="text" readonly name="cateProduct" class="form-control" value="${i.getProduct().getProductCategories().getName()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">                      
+                                                <div class="form-group">
+                                                    <label>Supplier *</label>
+                                                    <input type="hidden" name="supPro" value="${i.getProduct().getProductCategories().getId()}">
+                                                    <input type="text" readonly name="supProduct" class="form-control" value="${i.getProduct().getSuppliers().getName()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">                      
+                                                <div class="form-group">
+                                                    <label>Unit *</label>
+                                                    <input type="hidden" name="unitPro" value="${i.getProduct().getProductCategories().getId()}">
+                                                    <input type="text" readonly name="unitProduct" class="form-control" value="${i.getProduct().getWeightUnit().getName()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                        </div>         
+                                        <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Quantity</label>
-                                                <input type="text" readonly name="quantityInven" class="form-control" value="${i.getCurrentStock()}">
+                                                <label>Barcode</label>
+                                                <input type="text" name="barcode" class="form-control" placeholder="Enter Barcode" data-errors="Please Enter Barcode." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
-                                        </div>                                                                                                                             
+                                        </div>            
+                                                    
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Price</label>
+                                                <input type="number" name="pricePro" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="manufactureDate">manufactureDate:</label><br>
+                                                    <input type="date" id="manufactureDate" name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
+                                                </div>
+                                            </div>
+
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="expirationDate">expirationDate:</label><br>
+                                                    <input type="date" id="expirationDate" name="expirationDate" value="${p.getExpirationDate()}"><br><br>
+                                                </div>
+                                        </div>     
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Image</label>
+                                                <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
+                                            </div>
+                                        </div>
+                                        </div>        
                                         <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>

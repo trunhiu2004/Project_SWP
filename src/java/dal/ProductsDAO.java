@@ -100,6 +100,7 @@ public class ProductsDAO extends DBContext {
                 + "      ,[product_image]\n"
                 + "      ,[manufacture_date]\n"
                 + "      ,[expiration_date]\n"
+                + "      ,[batch]\n"
                 + "  FROM [dbo].[Products]\n"
                 + "  where 1=1\n";
         try {
@@ -120,6 +121,7 @@ public class ProductsDAO extends DBContext {
                 p.setSuppliers(sup);
                 p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
                 p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
                 list.add(p);
             }
 
@@ -151,6 +153,7 @@ public class ProductsDAO extends DBContext {
                 p.setSuppliers(sup);
                 p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
                 p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
                 return p;
             }
         } catch (SQLException e) {
@@ -181,6 +184,7 @@ public class ProductsDAO extends DBContext {
                 p.setSuppliers(sup);
                 p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
                 p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
                 return p;
             }
         } catch (SQLException e) {
@@ -189,8 +193,54 @@ public class ProductsDAO extends DBContext {
         return null;
     }
 
+    public int getLatestBatchByName(String name) {
+        String query = "SELECT MAX(batch) FROM Products WHERE product_name = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+    public Products getLatestProduct() {
+        String sql = "SELECT TOP 1 * FROM Products\n"
+                + "ORDER BY product_id DESC;";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Products p = new Products();
+                p.setId(rs.getInt("product_id"));
+                p.setBarcode(rs.getString("barcode"));
+                p.setName(rs.getString("product_name"));
+                p.setPrice(rs.getFloat("product_price"));
+                p.setImage(rs.getString("product_image"));
+                ProductCategories pc = getCategoryById(rs.getInt("category_id"));
+                p.setProductCategories(pc);
+                WeightUnit wu = getWUById(rs.getInt("weight_unit_id"));
+                p.setWeightUnit(wu);
+                Suppliers sup = getSupById(rs.getInt("supplier_id"));
+                p.setSuppliers(sup);
+                p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
+                p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
+                return p;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null; // Trả về null nếu không tìm thấy sản phẩm
+    }
+
     public void insertPro(Products p) {
-        String sql = "INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, p.getProductCategories().getId());
@@ -202,6 +252,7 @@ public class ProductsDAO extends DBContext {
             st.setString(7, p.getImage());
             st.setDate(8, java.sql.Date.valueOf(p.getManufactureDate()));
             st.setDate(9, java.sql.Date.valueOf(p.getExpirationDate()));
+            st.setInt(10, p.getBatch());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -219,6 +270,7 @@ public class ProductsDAO extends DBContext {
                 + "      ,[product_image] = ?\n"
                 + "      ,[manufacture_date] = ?\n"
                 + "      ,[expiration_date] = ?\n"
+                + "      ,[batch] = ?\n"
                 + " WHERE product_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -231,7 +283,8 @@ public class ProductsDAO extends DBContext {
             st.setString(7, p.getImage());
             st.setDate(8, java.sql.Date.valueOf(p.getManufactureDate()));
             st.setDate(9, java.sql.Date.valueOf(p.getExpirationDate()));
-            st.setInt(10, p.getId());
+            st.setInt(10, p.getBatch());
+            st.setInt(11, p.getId());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -370,6 +423,7 @@ public class ProductsDAO extends DBContext {
                 p.setSuppliers(sup);
                 p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
                 p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
                 list.add(p);
             }
 

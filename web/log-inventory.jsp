@@ -61,23 +61,23 @@
                                         <h4 class="mb-3">Kho</h4>
                                         <p class="mb-0">Create and manage your vendor list, send and receive purchase orders ? your online<br>
                                             Dashboard is your new back of house.</p>   
+                                    </div>
+                                    <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to Inventory</a>
                                 </div>
-                                <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to Inventory</a>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="table-responsive rounded mb-3">
-                                <table class="data-table table mb-0 tbl-server-info">
-                                    <thead class="bg-white text-uppercase">
-                                        <tr class="ligth ligth-data">
-                                            <th>Product</th>
-                                            <th>Product Name</th>
-                                            <th>Quantity</th>
-                                            <th>Status</th>
-                                            <th>Last Update</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="ligth-body">
+                            <div class="col-lg-12">
+                                <div class="table-responsive rounded mb-3">
+                                    <table class="data-table table mb-0 tbl-server-info">
+                                        <thead class="bg-white text-uppercase">
+                                            <tr class="ligth ligth-data">
+                                                <th>Product</th>
+                                                <th>Product Name</th>
+                                                <th>Quantity</th>
+                                                <th>Status</th>
+                                                <th>Last Update</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="ligth-body">
 
                                         <c:forEach items="${logInventory}" var="l"> 
                                             <tr>                                                   

@@ -115,14 +115,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="manufactureDate">manufactureDate:</label><br>
-                                                    <input type="date" id="manufactureDate" name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
+                                                    <input type="date" id="manufactureDate" readonly name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="expirationDate">expirationDate:</label><br>
-                                                    <input type="date" id="expirationDate" name="expirationDate" value="${p.getExpirationDate()}"><br><br>
+                                                    <input type="date" id="expirationDate" readonly name="expirationDate" value="${p.getExpirationDate()}"><br><br>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -131,7 +131,13 @@
                                                     <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Batch</label>
+                                                    <input type="text" readonly name="batch" class="form-control" value="${p.getBatch()}">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
 
                                         </div>                            
                                         <button type="submit" class="btn btn-primary mr-2">Update Product</button>

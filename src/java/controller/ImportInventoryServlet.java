@@ -5,9 +5,15 @@
 package controller;
 
 import dal.InventoryDAO;
+import dal.ProductCategoriesDAO;
+import dal.ProductsDAO;
+import dal.SuppliersDAO;
+import dal.WeightUnitDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import model.Inventory;
 import model.InventoryDetails;
+import model.Products;
 
 /**
  *
@@ -62,17 +69,10 @@ public class ImportInventoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String id_raw = request.getParameter("inventory_id");
-        int id;
         InventoryDAO inventoryd = new InventoryDAO();
-        try {
-            id = Integer.parseInt(id_raw);
-            Inventory inven = inventoryd.getInventoryById(id);
-            session.setAttribute("inventory", inven);
-            request.getRequestDispatcher("import-inventory.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
+        Inventory inven = inventoryd.getInventoryLast();
+        session.setAttribute("inventory", inven);
+        request.getRequestDispatcher("import-inventory.jsp").forward(request, response);
     }
 
     /**
@@ -86,38 +86,17 @@ public class ImportInventoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("idInven");
-        String quantity_raw = request.getParameter("quantity");
+        InventoryDAO inventoryd = new InventoryDAO();
         
-        InventoryDAO invenD = new InventoryDAO();
-        int id = Integer.parseInt(id_raw);
-        int quantity = Integer.parseInt(quantity_raw);
-        Inventory inven = invenD.getInventoryById(id);
-       
-        int q = inven.getCurrentStock() + quantity;
-        inven.setCurrentStock(q);
-
-        if (inven.getCurrentStock() == 0) {
-            inven.setInventoryStatus("Hết hàng"); 
-            inven.setAlert("Khẩn cấp");
-        } else if (0 < inven.getCurrentStock() && inven.getCurrentStock() <= 50) {
-            inven.setInventoryStatus("Sắp hết hàng"); 
-            inven.setAlert("Cảnh báo");
-        } else {
-            inven.setInventoryStatus("Còn hàng"); 
-            inven.setAlert("Không");
-        }
-        LocalDateTime lastUpdate = LocalDateTime.now();
-        inven.setLastRestockDate(lastUpdate);
-        invenD.updateInven(inven);
-        
+        Inventory inven = inventoryd.getInventoryLast();
+        String q_raw = request.getParameter("quantityInven");
+        int q = Integer.parseInt(q_raw);
         String statusDetails = "Nhập hàng";
         LocalDate updateAt = LocalDate.now();
-        InventoryDetails detail = new InventoryDetails(inven,quantity,updateAt,statusDetails);
-        invenD.insertInventoryDetails(detail);
+        InventoryDetails detail = new InventoryDetails(inven, q, updateAt, statusDetails);
+        inventoryd.insertInventoryDetails(detail);
         
-        response.sendRedirect("listInventory");
-        
+        response.sendRedirect("listLogInventory");
     }
 
     /**
