@@ -104,10 +104,6 @@
         <servlet-name>DeleteOrderServlet</servlet-name>
         <servlet-class>controller.DeleteOrderServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AddOrderServlet</servlet-name>
-        <servlet-class>controller.AddOrderServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -211,9 +207,5 @@
     <servlet-mapping>
         <servlet-name>DeleteOrderServlet</servlet-name>
         <url-pattern>/delete-order</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddOrderServlet</servlet-name>
-        <url-pattern>/add-order</url-pattern>
     </servlet-mapping>
 </web-app>

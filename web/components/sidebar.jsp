@@ -90,11 +90,6 @@
                                             <i class="las la-minus"></i><span>List Order</span>
                                         </a>
                                     </li>
-                                    <li class="">
-                                        <a href="add-order">
-                                            <i class="las la-minus"></i><span>Add Order</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class=" ">

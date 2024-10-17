@@ -16,16 +16,15 @@
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>
         </head>
-        <body class="  ">
+        <body class="">
             <!-- loader Start -->
             <div id="loading">
-                <div id="loading-center">
-                </div>
+                <div id="loading-center"></div>
             </div>
             <!-- loader END -->
+
             <!-- Wrapper Start -->
             <div class="wrapper">
-
             <jsp:include page="components/sidebar.jsp"></jsp:include>
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
 
@@ -41,6 +40,8 @@
                                 <a href="list-order" class="btn btn-primary add-list"><i class="las la-arrow-left mr-3"></i>Back to Orders</a>
                             </div>
                         </div>
+
+                        <!-- Customer & Order Information -->
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
@@ -50,10 +51,12 @@
                                     <p><strong>Total Amount:</strong> $${order.orderTotalAmount}</p>
                                     <p><strong>Status:</strong> ${order.orderStatus}</p>
                                     <p><strong>Handled By:</strong> ${order.employeeName}</p>
-                                    <p><strong>Coupon Code:</strong> ${order.couponCode}</p>
+                                    <p><strong>Coupon Code:</strong> ${order.couponCode != null ? order.couponCode : "N/A"}</p>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Product Details -->
                         <div class="col-lg-12">
                             <div class="table-responsive rounded mb-3">
                                 <table class="data-table table mb-0 tbl-server-info">
@@ -82,7 +85,8 @@
                 </div>
             </div>
         </div>
-        <!-- Wrapper End-->
+        <!-- Wrapper End -->
+
         <footer class="iq-footer">
             <div class="container-fluid">
                 <div class="card">
@@ -95,13 +99,14 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
+
         <!-- Backend Bundle JavaScript -->
         <script src="assets/js/backend-bundle.min.js"></script>
 

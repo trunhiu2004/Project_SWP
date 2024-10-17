@@ -10,29 +10,19 @@ package model;
  */
 public class OrderDetail {
 
-    private int orderDetailId;
+    private int productId;
     private String productName;
     private int quantity;
-    private int unitPrice;
-    private int totalPrice;
+    private double unitPrice;
+    private double totalPrice;
 
-    public OrderDetail() {
+    // Getters and Setters
+    public int getProductId() {
+        return productId;
     }
 
-    public OrderDetail(int orderDetailId, String productName, int quantity, int unitPrice, int totalPrice) {
-        this.orderDetailId = orderDetailId;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
-    }
-
-    public int getOrderDetailId() {
-        return orderDetailId;
-    }
-
-    public void setOrderDetailId(int orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -51,21 +41,19 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public int getUnitPrice() {
+    public double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(int unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-    
 }

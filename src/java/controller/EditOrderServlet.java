@@ -16,6 +16,7 @@ import model.Coupon;
 import model.Customer;
 import model.Employees;
 import model.Order;
+import model.OrderDetail;
 
 /**
  *
@@ -61,81 +62,57 @@ public class EditOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderIdStr = request.getParameter("orderId");
-
-        if (orderIdStr != null) {
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null) {
             try {
-                int orderId = Integer.parseInt(orderIdStr);
+                int orderId = Integer.parseInt(orderIdParam);
                 OrderDAO orderDAO = new OrderDAO();
                 Order order = orderDAO.getOrderById(orderId);
-
-                List<Customer> customers = orderDAO.getAllCustomers();
-                List<Employees> employees = orderDAO.getAllEmployees();
-                List<Coupon> coupons = orderDAO.getAllCoupons();     
+                List<OrderDetail> orderDetails = orderDAO.getOrderDetailsByOrderId(orderId);
 
                 request.setAttribute("order", order);
-                request.setAttribute("customers", customers);
-                request.setAttribute("employees", employees);
-                request.setAttribute("coupons", coupons);
-
+                request.setAttribute("orderDetails", orderDetails);
                 request.getRequestDispatcher("editOrder.jsp").forward(request, response);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid Order ID");
-                response.sendRedirect("list-order");
+                e.printStackTrace();
+                response.sendRedirect("list-orders");
             }
         } else {
-            response.sendRedirect("list-order");
+            response.sendRedirect("list-orders");
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
-            int customerId = Integer.parseInt(request.getParameter("customerId"));
-            String orderDate = request.getParameter("orderDate");
-            int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
-            String status = request.getParameter("status");
-            int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-            int couponId = Integer.parseInt(request.getParameter("couponId"));
+        int orderId = Integer.parseInt(request.getParameter("orderId"));
+        String orderStatus = request.getParameter("orderStatus");
 
-            Order order = new Order();
-            order.setOrderId(orderId);
-            order.setCustomerId(customerId);
-            order.setOrderDate(java.sql.Date.valueOf(orderDate));
-            order.setOrderTotalAmount(totalAmount);
-            order.setOrderStatus(status);
-            order.setEmployeeId(employeeId);
-            order.setCustomerCouponId(couponId);
+        OrderDAO orderDAO = new OrderDAO();
+        Order order = orderDAO.getOrderById(orderId);
+        if (order != null) {
+            order.setOrderStatus(orderStatus);
+            boolean updated = orderDAO.updateOrder(order);
 
-            OrderDAO orderDAO = new OrderDAO();
-            if (orderDAO.updateOrder(order)) {
-                response.sendRedirect("list-order");
-            } else {
-                request.setAttribute("errorMessage", "Failed to update order");
-
-                List<Customer> customers = orderDAO.getAllCustomers();
-                List<Employees> employees = orderDAO.getAllEmployees();
-                List<Coupon> coupons = orderDAO.getAllCoupons();
-
-                request.setAttribute("customers", customers);
-                request.setAttribute("employees", employees);
-                request.setAttribute("coupons", coupons);
-                request.setAttribute("order", order);
-                request.getRequestDispatcher("editOrder.jsp").forward(request, response);
+            // Update each product's quantity if modified
+            for (OrderDetail detail : orderDAO.getOrderDetailsByOrderId(orderId)) {
+                String quantityParam = request.getParameter("quantity_" + detail.getProductId());
+                if (quantityParam != null) {
+                    int newQuantity = Integer.parseInt(quantityParam);
+                    if (newQuantity != detail.getQuantity()) {
+                        orderDAO.updateProductQuantity(orderId, detail.getProductId(), newQuantity);
+                    }
+                }
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid Input");
-            response.sendRedirect("list-order");
+
+            if (updated) {
+                response.sendRedirect("view-order?orderId=" + orderId);
+            } else {
+                request.setAttribute("error", "Failed to update order.");
+                doGet(request, response);
+            }
+        } else {
+            response.sendRedirect("list-orders");
         }
     }
 

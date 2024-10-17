@@ -59,18 +59,19 @@ public class ViewOrderDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderIdStr = request.getParameter("orderId");
-        if (orderIdStr != null) {
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null) {
             try {
-                int orderId = Integer.parseInt(orderIdStr);
+                int orderId = Integer.parseInt(orderIdParam);
                 OrderDAO orderDAO = new OrderDAO();
                 Order order = orderDAO.getOrderById(orderId);
                 List<OrderDetail> orderDetails = orderDAO.getOrderDetailsByOrderId(orderId);
+
                 request.setAttribute("order", order);
                 request.setAttribute("orderDetails", orderDetails);
                 request.getRequestDispatcher("viewOrderDetail.jsp").forward(request, response);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid Order ID");
+                e.printStackTrace();
                 response.sendRedirect("list-order");
             }
         } else {
