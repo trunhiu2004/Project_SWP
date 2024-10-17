@@ -144,6 +144,10 @@
         <servlet-name>PoSHomeServlet</servlet-name>
         <servlet-class>controller.PoSHomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>controller.CartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -287,5 +291,9 @@
     <servlet-mapping>
         <servlet-name>PoSHomeServlet</servlet-name>
         <url-pattern>/PoSHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
 </web-app>

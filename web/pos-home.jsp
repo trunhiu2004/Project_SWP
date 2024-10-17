@@ -542,14 +542,32 @@
               <div class="single_header_column" id="single_order_price">Price</div>
               <div class="single_header_column" id="single_order_qty">Quantity</div>
 
-              <div class="single_header_column" id="single_order_total">Sub Total</div>
+              <div class="single_header_column" id="single_order_total">Action</div>
             </div>
 
             <div class="order_holder1">
-                <div  style="display: inline-block; text-align: center; width: 200.13px; height: 31.2px;">abc</div>
-              <div style="display: inline-block;text-align: center; width: 133.41px;  height: 31.2px;">abcd</div>
-              <div style="display: inline-block;text-align: center; width: 100.06px;  height: 31.2px;">abcde</div>
-              <div style="display: inline-block; text-align: center;width: 113.4px;  height: 31.2px;">abcdef</div>
+                <c:forEach var="item" items="${sessionScope.cart.items}">
+                <div  style="display: inline-block; text-align: center; width: 200.13px; height: 31.2px;">${item.product.name}</div>
+              <div style="display: inline-block;text-align: center; width: 133.41px;  height: 31.2px;">${item.totalPrice}</div>
+              <div style="display: inline-block;text-align: center; width: 100.06px;  height: 31.2px;">
+                        <form action="cart" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="decrease">
+                                <input type="hidden" name="productId" value="${item.product.id}">
+                                <button type="submit">-</button>
+                            </form>
+                            ${item.quantity}
+                            <form action="cart" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="increase">
+                                <input type="hidden" name="productId" value="${item.product.id}">
+                                <button type="submit">+</button>
+                            </form></div>
+<!--              <div style="display: inline-block; text-align: center;width: 113.4px;  height: 31.2px;">abcdef</div>-->
+              <div style="display: inline-block; text-align: center;width: 113.4px;  height: 31.2px;"><form action="cart" method="post">
+                                <input type="hidden" name="action" value="remove">
+                                <input type="hidden" name="productId" value="${item.product.id}">
+                                <button type="submit">Remove</button>
+                            </form></div>
+              </c:forEach>
             </div>
             <input type="hidden" id="edit_sale_customer" value="">
             <input type="hidden" id="edit_sale_customer_name" value="">
@@ -576,7 +594,7 @@
                 </span>
               </div>
               <div class="item">
-                <span class="cart-footer-title">Total: </span>
+                <span class="cart-footer-title">Total: ${sessionScope.cart.totalPrice}</span>
                 <span class="p-l-3" id="sub_total_show">0.00 </span>
                 <span id="sub_total" class="op_display_none"> 0.00</span>
                 <span id="total_item_discount" class="op_display_none">0</span>
@@ -703,7 +721,16 @@
                 <div id="searched_item_found1" class="specific_category_items_holder1">
                   <div class="single-inner-div grocery_single_off">
                       <c:forEach items="${store}" var="s">
-                    <a href="#" item-type="General_Product" plain-id="487" data-last_purchase_price="310" is_promo="No"
+                          <c:choose>
+                            <c:when test="${s.getDiscount()== null}">
+                                  <c:set var="price" value="${s.getInventory().getProduct().getPrice()}" />
+                            </c:when>
+                             <c:otherwise>
+                            <c:set var="price" value="${s.getDiscount().getPriceSell()}" />
+                            </c:otherwise>
+                            </c:choose>
+
+                    <a href="cart?id=${s.getInventory().getProduct().getId()}&name=${s.getInventory().getProduct().getName()}&price=${price}" item-type="General_Product" plain-id="487" data-last_purchase_price="310" is_promo="No"
                       data-whole_sale_price="340" data-sale_price="350" class="single_item  all_brand brand_0 "
                       id="item_487" style="text-decoration: none; display: inline-block;">
                       <div class="single-item-img">
