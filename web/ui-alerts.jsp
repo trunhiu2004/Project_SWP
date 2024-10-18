@@ -10,7 +10,7 @@
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico" />
+        <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
         <link rel="stylesheet" href="assets/css/backend-plugin.min.css">
         <link rel="stylesheet" href="assets/css/backende209.css?v=1.0.0">
         <link rel="stylesheet" href="assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css">
