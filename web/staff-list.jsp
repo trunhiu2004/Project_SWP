@@ -1,28 +1,30 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
-
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
-
-
         <!-- Favicon -->
-        <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
-        <body class="  ">
-            <!-- loader Start -->
-            <div id="loading">
-                <div id="loading-center">
-                </div>
+        <link rel="shortcut icon" href="assets/images/favicon.ico" />
+        <link rel="stylesheet" href="assets/css/backend-plugin.min.css">
+        <link rel="stylesheet" href="assets/css/backend.css?v=1.0.0">
+        <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+        <link rel="stylesheet" href="assets/vendor/remixicon/fonts/remixicon.css">  </head>
+    <body class="  ">
+        <!-- loader Start -->
+        <div id="loading">
+            <div id="loading-center">
             </div>
-            <!-- loader END -->
-            <!-- Wrapper Start -->
-            <div class="wrapper">
+        </div>
+        <!-- loader END -->
+        <!-- Wrapper Start -->
+        <div class="wrapper">
 
             <jsp:include page="components/sidebar.jsp"></jsp:include>     
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
@@ -48,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                </div>     
+                </div>      
                 <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
@@ -66,56 +68,49 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Batch</th>
-                                                <th>Barcode</th>
-                                                <th>Product</th>
                                                 <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>New Price</th>
-                                                <th>Brand Name</th>
-                                                <th>Unit</th>
-                                                <th>Expiration Date</th>
-                                                <th>Action</th>
+                                                <th>Contact</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+
+                                                <th style="min-width: 100px">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
-                                        <c:forEach items="${productListExpired}" var="p">
-
-
+                                        <c:forEach items="${listEmployee}" var="employee">
                                             <tr>
-                                                <td>${p.getBatch()}</td>
-                                                <td>${p.getBarcode()}</td>
-                                                <td><img src="assets/images/product/${p.getImage()}" width="80px" height="80px"/></td>
-                                                <td>${p.getName()}</td>
-                                                <td>${p.productCategories.getName()}</td>
-                                                <td>${p.getPrice()}</td>
-                                                <c:set var="found" value="false" /> 
-
-                                                <c:forEach items="${discountProductList}" var="disProduct">
-                                                    <c:if test="${p.id == disProduct.productId}">
-                                                        <c:set var="found" value="true" /> 
-                                                        <td>${disProduct.priceSell}</td> 
-                                                    </c:if>
-                                                </c:forEach>
-                                                <c:if test="${!found}">
-                                                    <td></td> 
-                                                </c:if>
-                                                </td>
-
-                                                <td>${p.suppliers.getName()}</td>
-                                                <td>${p.weightUnit.getName()}</td>
-                                                <td>${p.getExpirationDate()}</td>
+                                                <td>${employee.getEmployee_name()}</td>
+                                                <td>${employee.getEmployee_phone()}</td>
                                                 <td>
-                                                    <div class="d-flex align-items-center list-action">
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            ${account.getEmail()}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            <c:forEach items="${listAccountStatus}" var="accountStatus">
+                                                                <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
+                                                                    <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:if>
+                                                    </c:forEach>
 
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
 
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit New Price"
-                                                           href="productExpired?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Delete" href="staffDelete?id=${employee.getEmployee_id()}"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
-
                                             </tr>
+
 
                                         </c:forEach>                                  
                                     </tbody>
@@ -169,8 +164,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                                    <li class="list-inline-item"><a href="backend/privacy-policy.html">Privacy Policy</a></li>
+                                    <li class="list-inline-item"><a href="backend/terms-of-service.html">Terms of Use</a></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
@@ -196,6 +191,4 @@
         <!-- app JavaScript -->
         <script src="assets/js/app.js"></script>
     </body>
-
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>
