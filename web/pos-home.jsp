@@ -280,7 +280,7 @@
 
 
             <li>
-              <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard" target="_blank"
+              <a tabindex="-1" href="home.jsp" target="_blank"
                 class="header_menu_icon" data-tippy-content="Dashboard">
                 <iconify-icon icon="solar:chart-2-broken" width="22"></iconify-icon>
               </a>
@@ -547,9 +547,9 @@
 
             <div class="order_holder1">
                 <c:forEach var="item" items="${sessionScope.cart.items}">
-                <div  style="display: inline-block; text-align: center; width: 200.13px; height: 31.2px;">${item.product.name}</div>
-              <div style="display: inline-block;text-align: center; width: 133.41px;  height: 31.2px;">${item.totalPrice}</div>
-              <div style="display: inline-block;text-align: center; width: 100.06px;  height: 31.2px;">
+                    <div  style="display: inline-block; text-align: center; width: 200.13px; height: 31.2px;">${item.product.name}</div>
+                    <div style="display: inline-block;text-align: center; width: 133.41px;  height: 31.2px;">${item.totalPrice}</div>
+                    <div style="display: inline-block;text-align: center; width: 100.06px;  height: 31.2px;">
                         <form action="cart" method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="decrease">
                                 <input type="hidden" name="productId" value="${item.product.id}">
@@ -1567,7 +1567,7 @@
                   </a>
                 </li>
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard"
+                  <a tabindex="-1" href="home.jsp"
                     target="_blank" class="header_menu_icon" data-tippy-content="Dashboard">
                     <iconify-icon icon="solar:chart-2-broken" width="22"></iconify-icon>
                   </a>

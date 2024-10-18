@@ -81,9 +81,11 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("account", a);
-            
+            if(a.getRole_id()==1){
             response.sendRedirect("home.jsp");
-
+            }else if(a.getRole_id() == 2){
+                response.sendRedirect("PoSHome");
+            }
         }
     }
 

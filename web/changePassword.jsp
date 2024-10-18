@@ -1,4 +1,5 @@
 
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 
 <!doctype html>
@@ -30,13 +31,13 @@
                                     <div class="d-flex align-items-center auth-content">
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
-                                                <h2 class="mb-2">??i m?t kh?u</h2>
+                                                <h2 class="mb-2">Đổi mật khẩu</h2>
                                                 <form action="changePassword" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="floating-label form-group">
                                                                 <input class="floating-input form-control" type="password" placeholder=" " name="passwordRegister">
-                                                                <label>M?t kh?u m?i</label>
+                                                                <label>Mật khẩu mới</label>
                                                             </div>
                                                         </div>
 
