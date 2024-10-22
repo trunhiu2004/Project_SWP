@@ -68,17 +68,15 @@ public class EditOrderServlet extends HttpServlet {
                 int orderId = Integer.parseInt(orderIdParam);
                 OrderDAO orderDAO = new OrderDAO();
                 Order order = orderDAO.getOrderById(orderId);
-                List<OrderDetail> orderDetails = orderDAO.getOrderDetailsByOrderId(orderId);
 
                 request.setAttribute("order", order);
-                request.setAttribute("orderDetails", orderDetails);
                 request.getRequestDispatcher("editOrder.jsp").forward(request, response);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                response.sendRedirect("list-orders");
+                response.sendRedirect("list-order");
             }
         } else {
-            response.sendRedirect("list-orders");
+            response.sendRedirect("list-order");
         }
     }
 
@@ -92,27 +90,16 @@ public class EditOrderServlet extends HttpServlet {
         Order order = orderDAO.getOrderById(orderId);
         if (order != null) {
             order.setOrderStatus(orderStatus);
-            boolean updated = orderDAO.updateOrder(order);
-
-            // Update each product's quantity if modified
-            for (OrderDetail detail : orderDAO.getOrderDetailsByOrderId(orderId)) {
-                String quantityParam = request.getParameter("quantity_" + detail.getProductId());
-                if (quantityParam != null) {
-                    int newQuantity = Integer.parseInt(quantityParam);
-                    if (newQuantity != detail.getQuantity()) {
-                        orderDAO.updateProductQuantity(orderId, detail.getProductId(), newQuantity);
-                    }
-                }
-            }
+            boolean updated = orderDAO.updateOrderStatus(order);
 
             if (updated) {
                 response.sendRedirect("view-order?orderId=" + orderId);
             } else {
-                request.setAttribute("error", "Failed to update order.");
+                request.setAttribute("error", "Failed to update order status.");
                 doGet(request, response);
             }
         } else {
-            response.sendRedirect("list-orders");
+            response.sendRedirect("list-order");
         }
     }
 

@@ -116,13 +116,12 @@ public class OrderDAO extends DBContext {
         return orderDetails;
     }
 
-    public boolean updateOrder(Order order) {
-        String sql = "UPDATE Orders SET order_status = ?, employee_id = ? WHERE order_id = ?";
+    public boolean updateOrderStatus(Order order) {
+        String sql = "UPDATE Orders SET order_status = ? WHERE order_id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, order.getOrderStatus());
-            ps.setInt(2, order.getEmployeeId());
-            ps.setInt(3, order.getOrderId());
+            ps.setInt(2, order.getOrderId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,31 +129,46 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public boolean updateProductQuantity(int orderId, int productId, int quantity) {
-        String sql = "UPDATE OrdersDetails SET quantity = ?, total_price = unit_price * ? WHERE order_id = ? AND product_id = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, quantity);
-            ps.setInt(2, quantity);
-            ps.setInt(3, orderId);
-            ps.setInt(4, productId);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    public boolean deleteOrder(int orderId) {
+        String deleteOrderDetailsSql = "DELETE FROM OrdersDetails WHERE order_id = ?";
+        String deleteOrderSql = "DELETE FROM Orders WHERE order_id = ?";
 
-    public boolean deleteProductFromOrder(int orderId, int productId) {
-        String sql = "DELETE FROM OrdersDetails WHERE order_id = ? AND product_id = ?";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, orderId);
-            ps.setInt(2, productId);
-            return ps.executeUpdate() > 0;
+            connection.setAutoCommit(false);
+
+            // Delete order details first
+            try (PreparedStatement psDetails = connection.prepareStatement(deleteOrderDetailsSql)) {
+                psDetails.setInt(1, orderId);
+                psDetails.executeUpdate();
+            }
+
+            // Then delete the order
+            try (PreparedStatement psOrder = connection.prepareStatement(deleteOrderSql)) {
+                psOrder.setInt(1, orderId);
+                int rowsAffected = psOrder.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    connection.commit();
+                    return true;
+                } else {
+                    connection.rollback();
+                    return false;
+                }
+            }
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

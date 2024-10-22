@@ -37,7 +37,6 @@
                                         <p class="mb-0">Order List enables you to effectively control sales KPIs and monitor them in one central<br>
                                             place while helping teams to reach sales goals. </p>
                                     </div>
-                                    <a href="add-order" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Order</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -72,9 +71,12 @@
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Edit" href="edit-order?orderId=${order.orderId}">
                                                             <i class="ri-pencil-line mr-0"></i>
                                                         </a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="Delete" href="delete-order?orderId=${order.orderId}" onclick="return confirm('Are you sure you want to delete this order?');">
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="Delete" 
+                                                           href="delete-order?orderId=${order.orderId}" 
+                                                           onclick="return confirm('Are you sure you want to delete this order?');">
                                                             <i class="ri-delete-bin-line mr-0"></i>
                                                         </a>
+
                                                     </div>
                                                 </td>
                                             </tr>

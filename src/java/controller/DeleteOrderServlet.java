@@ -56,31 +56,23 @@ public class DeleteOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderIdStr = request.getParameter("orderId");
-        if (orderIdStr != null) {
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null && !orderIdParam.isEmpty()) {
             try {
-                int orderId = Integer.parseInt(orderIdStr);
+                int orderId = Integer.parseInt(orderIdParam);
                 OrderDAO orderDAO = new OrderDAO();
-                boolean success = orderDAO.deleteOrderById(orderId);
+                boolean deleted = orderDAO.deleteOrder(orderId);
 
-                if (success) {
-                    response.sendRedirect("list-order");
+                if (deleted) {
+                    response.sendRedirect("list-order?message=Order deleted successfully");
                 } else {
-                    request.setAttribute("errorMessage", "Failed to delete order. Please try again or contact support if the issue persists.");
-                    request.getRequestDispatcher("listOrders.jsp").forward(request, response);
+                    response.sendRedirect("list-order?error=Failed to delete order");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("DeleteOrderServlet: Invalid Order ID - " + e.getMessage());
-                request.setAttribute("errorMessage", "Invalid Order ID. Please try again.");
-                request.getRequestDispatcher("listOrders.jsp").forward(request, response);
-            } catch (Exception e) {
-                System.out.println("DeleteOrderServlet: Exception - " + e.getMessage());
-                e.printStackTrace();
-                request.setAttribute("errorMessage", "An unexpected error occurred. Please try again later.");
-                request.getRequestDispatcher("listOrders.jsp").forward(request, response);
+                response.sendRedirect("list-order?error=Invalid order ID");
             }
         } else {
-            response.sendRedirect("list-order");
+            response.sendRedirect("list-order?error=No order ID provided");
         }
     }
 
