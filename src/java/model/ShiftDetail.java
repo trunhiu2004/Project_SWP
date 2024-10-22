@@ -6,6 +6,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -23,13 +24,12 @@ public class ShiftDetail {
     private BigDecimal totalPrice; 
     private int employeeId; 
     private String productName;
+    private String productImage;
 
     public ShiftDetail() {
     }
-    
-    
 
-    public ShiftDetail(int shiftManagerId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal totalHours, int orderId, int quantity, BigDecimal orderTotalAmount, BigDecimal unitPrice, BigDecimal totalPrice, int employeeId, String productName) {
+    public ShiftDetail(int shiftManagerId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal totalHours, int orderId, int quantity, BigDecimal orderTotalAmount, BigDecimal unitPrice, BigDecimal totalPrice, int employeeId, String productName, String productImage) {
         this.shiftManagerId = shiftManagerId;
         this.shiftStartTime = shiftStartTime;
         this.shiftEndTime = shiftEndTime;
@@ -41,6 +41,7 @@ public class ShiftDetail {
         this.totalPrice = totalPrice;
         this.employeeId = employeeId;
         this.productName = productName;
+        this.productImage = productImage;
     }
 
     public int getShiftManagerId() {
@@ -131,8 +132,23 @@ public class ShiftDetail {
         this.productName = productName;
     }
 
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
     
     
+
+    public String getFormattedShiftStartTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return shiftStartTime != null ? shiftStartTime.format(formatter) : "";
+    }   
     
-    
+    public String getFormattedShiftEndTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return shiftEndTime != null ? shiftEndTime.format(formatter) : "";
+    }
 }

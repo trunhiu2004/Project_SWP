@@ -3,6 +3,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,5 +139,13 @@ public class Shift {
         this.employeeId = employeeId;
     }
 
+    public String getFormattedShiftStartTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return shiftStartTime != null ? shiftStartTime.format(formatter) : "";
+    }   
     
+    public String getFormattedShiftEndTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return shiftEndTime != null ? shiftEndTime.format(formatter) : "";
+    }
 }

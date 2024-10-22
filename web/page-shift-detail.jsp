@@ -1,4 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -35,7 +38,7 @@
                         <i class="las la-bars wrapper-menu"></i>
                     </div>
                 </div>
-              <jsp:include page="components/DashBoard.jsp"/>
+                <jsp:include page="components/DashBoard.jsp"/>
             </div>      <div class="iq-top-navbar">
                 <div class="iq-navbar-custom">
                     <nav class="navbar navbar-expand-lg navbar-light p-0">
@@ -339,35 +342,37 @@
                                             <th>End</th>
                                             <th>Total Hours</th>
                                             <th>Order ID</th>                                                                                       
-                                            <th>Quantity</th>
                                             <th>Order Total Amount</th>
                                             <th>Unit Price</th>
                                             <th>Total Price</th>
                                             <th>Employee ID</th>
                                             <th>Product Name</th>
+                                            <th>Product Image</th>
                                         </tr>
                                     </thead>
                                     <tbody class="ligth-body">
                                         <c:forEach var="shiftdetail" items="${requestScope.shiftDetails}">
                                             <tr>
                                                 <td>${shiftdetail.shiftManagerId}</td>
-                                                <td>${shiftdetail.shiftStartTime}</td>
-                                                <td>${shiftdetail.shiftEndTime}</td>
-                                                <td>${shiftdetail.totalHours}</td>
+                                                <td>${shiftdetail.formattedShiftStartTime}</td>
+                                                <td>${shiftdetail.formattedShiftEndTime}</td>
+                                                
+                                                <td><fmt:formatNumber value="${shiftdetail.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/>H</td>
+
                                                 <td>${shiftdetail.orderId}</td>
-                                                <td>${shiftdetail.quantity}</td>
-                                                <td>${shiftdetail.orderTotalAmount}</td>
-                                                <td>${shiftdetail.unitPrice}</td>
-                                                <td>${shiftdetail.totalPrice}</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.orderTotalAmount}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.unitPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
                                                 <td>${shiftdetail.employeeId}</td>
                                                 <td>${shiftdetail.productName}</td>
+                                                <td><img src="assets/images/product/${shiftdetail.productImage}" width="80px" height="80px"/></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
+
                     </div>
                     <!-- Page end  -->
                 </div>

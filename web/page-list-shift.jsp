@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!doctype html>
 <html lang="en">
 
@@ -334,7 +336,6 @@
                                 <table class="data-table table mb-0 tbl-server-info">
                                     <thead class="bg-white text-uppercase">
                                         <tr class="ligth ligth-data">
-                                            
                                             <th>Shift ID</th>
                                             <th>Start</th>
                                             <th>End</th>
@@ -347,35 +348,30 @@
                                         </tr>
                                     </thead>
                                     <tbody class="ligth-body">
-                                        <tr>
-                                            <c:forEach var="shift" items="${requestScope.shift}">
+                                        <c:forEach var="shift" items="${requestScope.shift}">
                                             <tr>
                                                 <td>${shift.shiftManageId}</td>
-                                                <td>${shift.shiftStartTime}</td>
-                                                <td>${shift.shiftEndTime}</td>
-                                                <td>${shift.cashStart}</td>
-                                                <td>${shift.cashEnd}</td>
-                                                <td>${shift.totalRevenue}</td>
-                                                <td>${shift.totalHours}</td>
+                                                <td>${shift.formattedShiftStartTime}</td>
+                                                <td>${shift.formattedShiftEndTime}</td>
+                                                <td><fmt:formatNumber value="${shift.cashStart}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
                                                 <td>${shift.employeeId}</td>
                                                 <td>
-                                                        <div class="d-flex align-items-center list-action">
-                                                            
-                                                            <a class="badge bg-success mr-2" data-toggle="tooltip"
-                                                                data-placement="top" title="" data-original-title="Detail"
-                                                                href="ShiftDetailServlet?id=${shift.shiftManageId}"><i class="ri-pencil-line mr-0"></i></a>
-                                                           
-                                                        </div>
-                                                    </td>
-                                                
+                                                    <div class="d-flex align-items-center list-action">
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Detail"
+                                                           href="ShiftDetailServlet?id=${shift.shiftManageId}">
+                                                            <i class="ri-pencil-line mr-0"></i></a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </c:forEach>
-                                        </tr>
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+
                     </div>
                     <!-- Page end  -->
                 </div>

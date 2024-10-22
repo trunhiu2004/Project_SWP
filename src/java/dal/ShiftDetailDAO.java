@@ -18,7 +18,7 @@ public class ShiftDetailDAO extends DBContext{
     public List<ShiftDetail> getShiftDetails() {
     List<ShiftDetail> shiftDetails = new ArrayList<>();
     String sql = "SELECT sm.shift_manager_id, sm.shift_start_time, sm.shift_end_time, sm.total_hours, " +
-                 "o.order_id, o.quantity, o.order_total_amount, od.unit_price, od.total_price, p.product_name, " +
+                 "o.order_id, o.order_total_amount, od.unit_price, od.total_price, p.product_name, p.product_image," +
                  "sm.employee_id " + 
                  "FROM ShiftManagers sm " +
                  "LEFT JOIN Orders o ON sm.employee_id = o.employee_id " +
@@ -37,13 +37,13 @@ public class ShiftDetailDAO extends DBContext{
             detail.setShiftEndTime(rs.getTimestamp("shift_end_time").toLocalDateTime());
             detail.setTotalHours(rs.getBigDecimal("total_hours"));
             detail.setOrderId(rs.getInt("order_id"));
-            detail.setQuantity(rs.getInt("quantity"));
+            
             detail.setOrderTotalAmount(rs.getBigDecimal("order_total_amount"));
             detail.setUnitPrice(rs.getBigDecimal("unit_price")); 
             detail.setTotalPrice(rs.getBigDecimal("total_price")); 
             detail.setEmployeeId(rs.getInt("employee_id")); 
             detail.setProductName(rs.getString("product_name"));
-
+            detail.setProductImage(rs.getString("product_image"));
             shiftDetails.add(detail);
 
               
@@ -57,7 +57,7 @@ public class ShiftDetailDAO extends DBContext{
     public List<ShiftDetail> getShiftDetailsById(int shiftManagerId) {
     List<ShiftDetail> shiftDetails = new ArrayList<>();
     String sql = "SELECT sm.shift_manager_id, sm.shift_start_time, sm.shift_end_time, sm.total_hours, " +
-                 "o.order_id, o.quantity, o.order_total_amount, od.unit_price, od.total_price, p.product_name, " +
+                 "o.order_id, o.order_total_amount, od.unit_price, od.total_price, p.product_name, p.product_image," +
                  "sm.employee_id " +
                  "FROM ShiftManagers sm " +
                  "LEFT JOIN Orders o ON sm.employee_id = o.employee_id " +
@@ -77,12 +77,13 @@ public class ShiftDetailDAO extends DBContext{
             detail.setShiftEndTime(rs.getTimestamp("shift_end_time").toLocalDateTime());
             detail.setTotalHours(rs.getBigDecimal("total_hours"));
             detail.setOrderId(rs.getInt("order_id"));
-            detail.setQuantity(rs.getInt("quantity"));
+            
             detail.setOrderTotalAmount(rs.getBigDecimal("order_total_amount"));
             detail.setUnitPrice(rs.getBigDecimal("unit_price"));
             detail.setTotalPrice(rs.getBigDecimal("total_price"));
             detail.setEmployeeId(rs.getInt("employee_id"));
             detail.setProductName(rs.getString("product_name"));
+            detail.setProductImage(rs.getString("product_image"));
 
             shiftDetails.add(detail);
         }
@@ -97,7 +98,7 @@ public class ShiftDetailDAO extends DBContext{
     public static void main(String[] args) {
         ShiftDetailDAO acc = new ShiftDetailDAO();
         List<ShiftDetail> list = acc.getShiftDetails();
-        System.out.println(list.get(0).getProductName());
+        System.out.println(list.get(0).getProductImage());
     }
 
 }
