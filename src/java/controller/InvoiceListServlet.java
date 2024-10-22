@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 import dal.DBContext;
+import dal.InvoiceDAO;
 import java.io.PrintWriter;
 import model.Invoice;
 
@@ -64,52 +65,12 @@ public class InvoiceListServlet extends HttpServlet {
      */
     private static final long serialVersionUID = 1L;
 
-    @Override
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Invoice> invoices = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            DBContext dbContext = new DBContext();
-            connection = dbContext.connection;
-            String query = "SELECT i.invoice_id, i.invoice_date, i.invoice_total_amount, i.invoice_status, e.employee_name, pm.payment_method_name, c.customer_name " +
-                    "FROM Invoices i " +
-                    "JOIN Employees e ON i.employee_id = e.employee_id " +
-                    "JOIN PaymentMethod pm ON i.payment_method_id = pm.payment_method_id " +
-                    "JOIN Customers c ON i.customer_id = c.customer_id";
-            preparedStatement = connection.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int invoiceId = resultSet.getInt("invoice_id");
-                String invoiceDate = resultSet.getString("invoice_date");
-                double totalAmount = resultSet.getDouble("invoice_total_amount");
-                String status = resultSet.getString("invoice_status");
-                String employeeName = resultSet.getString("employee_name");
-                String paymentMethodName = resultSet.getString("payment_method_name");
-                String customerName = resultSet.getString("customer_name");
-
-                Invoice invoice = new Invoice(invoiceId, invoiceDate, totalAmount, status, employeeName, paymentMethodName, customerName);
-                invoices.add(invoice);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
+        InvoiceDAO invoiceDAO = new InvoiceDAO();
+        List<Invoice> invoices = invoiceDAO.getAllInvoices();
         request.setAttribute("invoices", invoices);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("invoiceList.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("invoiceList.jsp").forward(request, response);
     }
 
 /**

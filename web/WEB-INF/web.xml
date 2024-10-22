@@ -61,10 +61,6 @@
         <servlet-class>controller.DeleteInvoiceServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditInvoiceServlet</servlet-name>
-        <servlet-class>controller.EditInvoiceServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UpdateInvoiceServlet</servlet-name>
         <servlet-class>controller.UpdateInvoiceServlet</servlet-class>
     </servlet>
@@ -163,10 +159,6 @@
     <servlet-mapping>
         <servlet-name>DeleteInvoiceServlet</servlet-name>
         <url-pattern>/delete-invoice</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditInvoiceServlet</servlet-name>
-        <url-pattern>/edit-invoice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateInvoiceServlet</servlet-name>

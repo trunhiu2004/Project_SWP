@@ -16,11 +16,12 @@ public class Invoice {
     private String employeeName;
     private String paymentMethodName;
     private String customerName;
+    private int orderId;
 
     public Invoice() {
     }
 
-    public Invoice(int invoiceId, String invoiceDate, double totalAmount, String status, String employeeName, String paymentMethodName, String customerName) {
+    public Invoice(int invoiceId, String invoiceDate, double totalAmount, String status, String employeeName, String paymentMethodName, String customerName, int orderId) {
         this.invoiceId = invoiceId;
         this.invoiceDate = invoiceDate;
         this.totalAmount = totalAmount;
@@ -28,6 +29,7 @@ public class Invoice {
         this.employeeName = employeeName;
         this.paymentMethodName = paymentMethodName;
         this.customerName = customerName;
+        this.orderId = orderId;
     }
 
     public int getInvoiceId() {
@@ -85,4 +87,14 @@ public class Invoice {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    
 }

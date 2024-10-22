@@ -56,9 +56,6 @@
                                                 <a class="badge badge-info" href="invoice-detail?invoiceId=<%= invoice.getInvoiceId() %>">
                                                     View
                                                 </a>
-                                                <a href="edit-invoice?invoiceId=<%= invoice.getInvoiceId() %>" class="badge badge-primary">
-                                                    Edit
-                                                </a>
 
                                                 <a class="badge badge-warning" href="delete-invoice?invoiceId=<%= invoice.getInvoiceId() %>">
                                                     Delete
