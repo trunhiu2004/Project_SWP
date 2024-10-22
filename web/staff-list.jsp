@@ -103,13 +103,17 @@
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
 
-                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                           data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                           data-original-title="Delete" href="staffDelete?id=${employee.getEmployee_id()}"><i class="ri-delete-bin-line mr-0"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex align-items-center list-user-action">
+
+                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                                   data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                                   data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
 
 
                                         </c:forEach>                                  
@@ -190,5 +194,13 @@
 
         <!-- app JavaScript -->
         <script src="assets/js/app.js"></script>
+
+        <script type="text/javascript">
+                                    function doDelete(id) {
+                                        if (confirm("Are you sure delete category which has id =" + id)) {
+                                            window.location = "staffDelete?id=" + id;
+                                        }
+                                    }
+        </script>
     </body>
 </html>
