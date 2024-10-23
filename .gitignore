@@ -6,4 +6,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-17-10_script.sql
