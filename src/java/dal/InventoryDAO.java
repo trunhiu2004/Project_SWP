@@ -325,8 +325,9 @@ public class InventoryDAO extends DBContext {
     
     public static void main(String[] args) {
         InventoryDAO c = new InventoryDAO();
-        Inventory list = c.getInventoryLast();
-        System.out.println(list.getId());
+        for (Inventory i : c.getAllInventory()) {
+            System.out.println(i);
+        }
     }
 
 }

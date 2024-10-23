@@ -113,6 +113,8 @@ public class StoreStockDAO extends DBContext {
     public static void main(String[] args) {
         StoreStockDAO c = new StoreStockDAO();
         List<StoreStock> list = c.getAllStoreStock();
-        System.out.println(list.get(0).getDiscount());
+        for (StoreStock storeStock : list) {
+            System.out.println(storeStock);
+        }
     }
 }

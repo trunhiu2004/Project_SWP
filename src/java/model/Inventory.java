@@ -85,6 +85,11 @@ public class Inventory {
     public void setAlert(String alert) {
         this.alert = alert;
     }
+
+    @Override
+    public String toString() {
+        return "Inventory{" + "id=" + id + ", product=" + product + ", currentStock=" + currentStock + ", inventoryStatus=" + inventoryStatus + ", lastRestockDate=" + lastRestockDate + ", alert=" + alert + '}';
+    }
     
     
 }

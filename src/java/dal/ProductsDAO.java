@@ -404,7 +404,7 @@ public class ProductsDAO extends DBContext {
         String sql = "SELECT * \n"
                 + "FROM Products \n"
                 + "WHERE expiration_date > GETDATE() \n"
-                + "     AND expiration_date <= DATEADD(day, 7, GETDATE())";
+                + "     AND expiration_date <= DATEADD(day, 10, GETDATE())";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

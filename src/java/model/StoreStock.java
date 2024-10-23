@@ -78,6 +78,11 @@ public class StoreStock {
         this.alert = alert;
     }
 
+    @Override
+    public String toString() {
+        return "StoreStock{" + "storeStockId=" + storeStockId + ", inventory=" + inventory + ", stock=" + stock + ", lastStockCheckDate=" + lastStockCheckDate + ", discount=" + discount + ", alert=" + alert + '}';
+    }
+
     
 
     

@@ -93,6 +93,18 @@
     .slimScrollDivCategory .category_button {
       font-family: Outfit, sans-serif;
     }
+    .specific_category_items_holder1 {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 15px; /* Optional: Space between the items */
+    max-height: 550px; /* Height at which the scroll bar will activate */
+    overflow-y: auto; /* Enable vertical scroll when content overflows */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding: 10px; /* Optional padding */
+    background-color: #f9f9f9; /* Optional background color */
+}
+
+
   </style>
 </head>
 
@@ -663,38 +675,7 @@
           </div>
         </div>
         <div class="op_position_relative" id="main_item_holder">
-          <div class="slimScrollDivCategory">
-            <button
-              class="category_button op_margin_bottom_5 op_box_shadow op_mb_10 element element-2 button_category_show_all button_category_show_all_left category_active_design"
-              data-id="">All</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="1">Food and Grocery</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="2">Clothes</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="3">Electronics</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="4">Mobile</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="5">Medicine</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="6">Service</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="7">Power Bank</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="8">Power Bank</button>
-            <button
-              class="category_button category_active_trigger op_width_100_p op_margin_bottom_6 op_box_shadow op_mb_10"
-              data-id="9">Tata ace</button>
-          </div>
+          
 
 
           <div class="item">
@@ -712,7 +693,8 @@
                       </div>
                       <p class="item_name" data-tippy-content="40 Pgs notebook(478)">${s.getInventory().getProduct().getName()}</p>
                       <p class="generic_name d-none" data-tippy-content=""></p>
-                      <p class="">SP: <span id=""><c:choose>
+                      <p class="">SP: <span id="">
+                              <c:choose>
                                                     <c:when test="${s.getDiscount()== null}">
                                                         <td>${s.getInventory().getProduct().getPrice()}</td>
                                                     </c:when>
@@ -724,7 +706,6 @@
                         class="item_vat_percentage d-none">[{"tax_field_id":"1","tax_field_company_id":"1","tax_field_name":"CGST","tax_field_percentage":0},{"tax_field_id":"1","tax_field_company_id":"1","tax_field_name":"SGST","tax_field_percentage":0},{"tax_field_id":"1","tax_field_company_id":"1","tax_field_name":"IGST","tax_field_percentage":0},{"tax_field_id":"1","tax_field_company_id":"1","tax_field_name":"VAT","tax_field_percentage":0}]</span>
                     </a>
                 </c:forEach>
-
                   </div>
                 </div>
                  
