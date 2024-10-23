@@ -362,7 +362,14 @@
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Detail"
                                                            href="ShiftDetailServlet?id=${shift.shiftManageId}">
-                                                            <i class="ri-pencil-line mr-0"></i></a>
+                                                            <i class="ri-eye-line mr-0"></i></a>
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" title="Edit" href="ShiftEditServlet?id=${shift.shiftManageId}">
+                                                            <i class="ri-edit-2-line"></i>
+                                                        </a>
+                                                        <a class="badge bg-danger" data-toggle="tooltip" title="Delete" href="ShiftDeleteServlet?id=${shift.shiftManageId}" onclick="return confirm('Are you sure you want to delete this shift?');">
+                                                            <i class="ri-delete-bin-line"></i>
+                                                        </a>
+
                                                     </div>
                                                 </td>
                                             </tr>

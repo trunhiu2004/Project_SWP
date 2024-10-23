@@ -51,13 +51,10 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-purchase.jsp</file>
         </group>
         <group>
-            <file>file:/E:/SWP391/Final/Project_SWP/web/editshop.jsp</file>
-            <file>file:/E:/SWP391/Final/Project_SWP/web/addCustomer.jsp</file>
+            <file>file:/E:/SWP391/Final/Project_SWP/src/java/model/ShiftDetail.java</file>
+            <file>file:/E:/SWP391/Final/Project_SWP/src/java/model/Shift.java</file>
             <file>file:/E:/SWP391/Final/Project_SWP/web/page-list-shift.jsp</file>
-            <file>file:/E:/SWP391/Final/Project_SWP/web/page-list-shop.jsp</file>
             <file>file:/E:/SWP391/Final/Project_SWP/web/page-shift-detail.jsp</file>
-            <file>file:/E:/SWP391/Final/Project_SWP/web/addShop.jsp</file>
-            <file>file:/E:/SWP391/Final/Project_SWP/web/page-list-customers_1.jsp</file>
         </group>
     </open-files>
 </project-private>
