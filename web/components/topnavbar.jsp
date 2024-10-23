@@ -37,7 +37,7 @@
                             <c:if test="${account.getRole_id()==1}">
                                 <li>
                                     <a href="register" class="btn border add-btn shadow-none mx-2 d-none d-md-block">
-                                        Thêm nhân viên
+                                        Đăng ký nhân viên
                                     </a>
                                 </li>
 
