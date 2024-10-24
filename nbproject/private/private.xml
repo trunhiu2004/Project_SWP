@@ -73,11 +73,6 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/staff-update.jsp</file>
         </group>
-        <group>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/dal/ShiftDAO.java</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/controller/EditShift.java</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/web/editShift.jsp</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/web/page-list-shift.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

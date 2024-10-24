@@ -22,16 +22,16 @@ import model.WeightUnit;
  * @author PC
  */
 public class ProductsDAO extends DBContext {
-    
+
     public List<Products> searchByName(String txtSearch) {
-    List<Products> list = new ArrayList<>();
-    String sql = "select * from Products where product_name like ?";
-    try {
-        PreparedStatement statement = connection.prepareStatement(sql);
-        
-        statement.setString(1, "%" + txtSearch + "%");
-        ResultSet rs = statement.executeQuery();
-        while (rs.next()) {
+        List<Products> list = new ArrayList<>();
+        String sql = "select * from Products where product_name like ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, "%" + txtSearch + "%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
                 Products p = new Products();
                 p.setId(rs.getInt("product_id"));
                 p.setBarcode(rs.getString("barcode"));
@@ -48,11 +48,11 @@ public class ProductsDAO extends DBContext {
                 p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
                 list.add(p);
             }
-    } catch (SQLException e) {
-        System.out.println("Error fetching products: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error fetching products: " + e.getMessage());
+        }
+        return list;
     }
-    return list;
-}
 
     public WeightUnit getWUById(int weight_unit_id) {
         String sql = "select * from Weight_unit where weight_unit_id = ?";
@@ -312,7 +312,7 @@ public class ProductsDAO extends DBContext {
 
     public List<HistoryPrice> getHistoryById(int product_id) {
         List<HistoryPrice> list = new ArrayList<>();
-        
+
         String sql = "select * from HistoryPrice where product_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -332,7 +332,7 @@ public class ProductsDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-       return list;
+        return list;
     }
 
     public void insertHisPrice(HistoryPrice h) {
@@ -349,19 +349,19 @@ public class ProductsDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public void updateProductPrice(int productId, float newPrice) {
-    String sql = "UPDATE Products SET product_price = ? WHERE product_id = ?";
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        st.setFloat(1, newPrice); // Set giá mới
-        st.setInt(2, productId); // Set product_id
-        st.executeUpdate();
-    } catch (SQLException e) {
-        System.out.println(e);
+        String sql = "UPDATE Products SET product_price = ? WHERE product_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setFloat(1, newPrice); // Set giá mới
+            st.setInt(2, productId); // Set product_id
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
-    }
-    
+
     public void deleteHis(int id) {
         String sql = "DELETE FROM HistoryPrice where history_id = ?";
         try {
@@ -373,9 +373,52 @@ public class ProductsDAO extends DBContext {
         }
     }
 
+    public List<Products> getTopProduct() {
+    List<Products> top = new ArrayList<>();
+    String sql = "SELECT \n"
+            + "    Products.product_image, \n"
+            + "    Products.product_name, \n"
+            + "    COUNT(*) AS appearance_count\n"
+            + "FROM \n"
+            + "    Invoices \n"
+            + "LEFT JOIN \n"
+            + "    OrdersDetails ON Invoices.order_id = OrdersDetails.order_id \n"
+            + "LEFT JOIN \n"
+            + "    Products ON OrdersDetails.product_id = Products.product_id\n"
+            + "GROUP BY \n"
+            + "    Products.product_image, \n"
+            + "    Products.product_name\n"
+            + "HAVING\n"
+            + "	COUNT(*) >= 2\n"
+            + "ORDER BY \n"
+            + "    appearance_count DESC";
+
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            
+            String image = rs.getString("product_image");
+            String name = rs.getString("product_name");
+
+            
+            Products topProduct = new Products(name, 0, image, null, null, null, null, null, null);
+
+            
+            top.add(topProduct);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return top;
+}
+
+
     public static void main(String[] args) {
         ProductsDAO p = new ProductsDAO();
-        List<Products> list = p.getAllProduct();
-        System.out.println(list.get(0).getName());
+        List<Products> list = p.getTopProduct();
+        System.out.println(list.get(3).getName());
     }
 }

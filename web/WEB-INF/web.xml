@@ -220,6 +220,14 @@
         <servlet-name>EditShift</servlet-name>
         <servlet-class>controller.EditShift</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListTopProduct</servlet-name>
+        <servlet-class>controller.ListTopProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeAdmin</servlet-name>
+        <servlet-class>controller.HomeAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -439,6 +447,14 @@
     <servlet-mapping>
         <servlet-name>EditShift</servlet-name>
         <url-pattern>/EditShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListTopProduct</servlet-name>
+        <url-pattern>/ListTopProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeAdmin</servlet-name>
+        <url-pattern>/HomeAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>100</session-timeout>
