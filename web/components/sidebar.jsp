@@ -38,17 +38,27 @@
                                     </svg>
                                 </a>
                                 <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                        <a href="page-list-product.html">
-                                            <i class="las la-minus"></i><span>List Product</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-add-product.html">
-                                            <i class="las la-minus"></i><span>Add Product</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                              <li class="">
+                                <a href="listProduct">
+                                    <i class="las la-minus"></i><span>List Product</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="listCategory">
+                                    <i class="las la-minus"></i><span>List Category</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="listSupplier">
+                                    <i class="las la-minus"></i><span>List Supplier</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="listUnit">
+                                    <i class="las la-minus"></i><span>List Weight Unit</span>
+                                </a>
+                            </li>
+                          </ul>
                             </li>
                             <li class=" ">
                                 <a href="#category" class="collapsed" data-toggle="collapse" aria-expanded="false">
@@ -143,48 +153,41 @@
                                 </ul>
                             </li>
                             <li class=" ">
-                                <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                    <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                    </svg>
-                                    <span class="ml-4">People</span>
-                                    <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                    </svg>
-                                </a>
-                                <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                        <a href="page-list-customers.html">
-                                            <i class="las la-minus"></i><span>Customers</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-add-customers.html">
-                                            <i class="las la-minus"></i><span>Add Customers</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-list-users.html">
-                                            <i class="las la-minus"></i><span>Users</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-add-users.html">
-                                            <i class="las la-minus"></i><span>Add Users</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-list-suppliers.html">
-                                            <i class="las la-minus"></i><span>Suppliers</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="page-add-supplier.html">
-                                            <i class="las la-minus"></i><span>Add Suppliers</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                          <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                              <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                              </svg>
+                              <span class="ml-4">People</span>
+                              <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                              </svg>
+                          </a>
+                          <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                  <li class="">
+                                          <a href="ListCustomer">
+                                              <i class="las la-minus"></i><span>Customers</span>
+                                          </a>
+                                  </li>
+                                  
+                                  <li class="">     
+                                          <a href="EmployeeList">
+                                              <i class="las la-minus"></i><span>Employee</span>
+                                          </a>
+                                  </li>
+                                  
+                                  
+                                  <li class="">
+                                          <a href="ListShop">
+                                              <i class="las la-minus"></i><span>Shop</span>
+                                          </a>
+                                  </li>
+                                  <li class="">
+                                          <a href="ListShift">
+                                              <i class="las la-minus"></i><span>Shift</span>
+                                          </a>
+                                  </li>
+                          </ul>
+                      </li>
                             <li class="">
                                 <a href="page-report.html" class="">
                                     <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
