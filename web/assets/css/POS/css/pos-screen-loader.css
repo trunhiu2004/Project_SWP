@@ -1,0 +1,18 @@
+.loader {
+  position: fixed;
+  top: -50px;
+  align-content: center;
+  width: 100%;
+  height: 500px;
+  display: none;
+  z-index: 9999;
+}
+.loader1 {
+  position: fixed;
+  top: -50px;
+  align-content: center;
+  width: 100%;
+  height:110%;
+  display: none;
+  z-index: 9999;
+}
