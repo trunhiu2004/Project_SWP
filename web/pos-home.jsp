@@ -19,7 +19,7 @@
     type="text/css">
   <link rel="stylesheet"
     href="assets/css/fonts/google_font_POS.css" type="text/css">
-  <link rel="stylesheet" href="assets/css/POS/css/font_awesome_all.css"
+  <link rel="stylesheet" href="assets/css/fontawesome-free-5.15.4-web/css/all.min.css"
     type="text/css">
   <link rel="stylesheet"
     href="assets/css/POS/css/sweetalert2-new.min.css" type="text/css">
@@ -144,7 +144,7 @@
   </div>
 
   <!-- Hidden Input For JS -->
-  <input type="hidden" id="base_url" value="https://doorsoft-demo.com/off_pos/all_types/">
+  <input type="hidden" id="base_url" value="http://localhost:9999/SWP_Project/">
   <input type="hidden" id="last_sale_id" value="PmIWYw8CiKZcgJcKUPzXtw==">
   <input type="hidden" id="role" value="1">
   <input type="hidden" id="register_status" value="1">
@@ -292,7 +292,7 @@
 
 
             <li>
-              <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard" target="_blank"
+              <a tabindex="-1" href="home.jsp" target="_blank"
                 class="header_menu_icon" data-tippy-content="Dashboard">
                 <iconify-icon icon="solar:chart-2-broken" width="22"></iconify-icon>
               </a>
@@ -731,13 +731,6 @@
             <i data-feather="x"></i>
           </a>
         </h1>
-        <div class="modal-body">
-          <!-- How to work for medicine -->
-          <iframe width="100%" height="500px" src="https://www.youtube.com/embed/RAFGa26p85Y?si=uxPVJgFso9fZCI8R"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
       </div>
     </div>
     <!-- End Add Item Modal -->
@@ -1168,7 +1161,7 @@
         href="assets/css/fonts/google_font_POS.css"
         type="text/css">
       <link rel="stylesheet"
-        href="assets/css/POS/css/font_awesome_all.css" type="text/css">
+        href="assets/css/fontawesome-free-5.15.4-web/css/all.min.css" type="text/css">
       <link rel="stylesheet"
         href="assets/css/POS/css/sweetalert2-new.min.css"
         type="text/css">
@@ -1286,7 +1279,7 @@
       </div>
 
       <!-- Hidden Input For JS -->
-      <input type="hidden" id="base_url" value="https://doorsoft-demo.com/off_pos/all_types/">
+      <input type="hidden" id="base_url" value="http://localhost:9999/SWP_Project/">
       <input type="hidden" id="last_sale_id" value="PmIWYw8CiKZcgJcKUPzXtw==">
       <input type="hidden" id="role" value="1">
       <input type="hidden" id="register_status" value="1">
@@ -1521,7 +1514,7 @@
                   </a>
                 </li>
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard"
+                  <a tabindex="-1" href="home.jsp"
                     target="_blank" class="header_menu_icon" data-tippy-content="Dashboard">
                     <iconify-icon icon="solar:chart-2-broken" width="22"></iconify-icon>
                   </a>
@@ -1982,13 +1975,6 @@
               <i data-feather="x"></i>
             </a>
           </h1>
-          <div class="modal-body">
-            <!-- How to work for medicine -->
-            <iframe width="100%" height="500px" src="https://www.youtube.com/embed/RAFGa26p85Y?si=uxPVJgFso9fZCI8R"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
         </div>
       </div>
       <!-- End Add Item Modal -->
@@ -2957,7 +2943,7 @@
                           <span class="change_amount_color mr-10">Opening Balance: </span>&nbsp;
                           <span class="change_amount_color" id="previous_due_show"></span>
                           <img id="cash_img" alt="cash image"
-                            src="https://doorsoft-demo.com/off_pos/all_types/assets/media/dollar_sign.png">
+                            src="assets/images/pos/dollar_sign.png">
                         </div>
                       </div>
                       <div class="loyalty_point_div">
@@ -3161,7 +3147,7 @@
                 Register </a>
             </li>
             <li class="mobile_menu_click_for_hide">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard">
+              <a href="home.jsp">
                 <iconify-icon icon="solar:chart-2-broken" width="18"></iconify-icon>
                 Dashboard</a></a>
             </li>
@@ -3610,7 +3596,7 @@
         <div class="brand__logo op_center">
           <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/userProfile">
             <img
-              src="https://doorsoft-demo.com/off_pos/all_types/uploads/site_settings/1c89efb05f2bda6fb4e61365e3bb61dd.png"
+              src="assets/images/pos/1c89efb05f2bda6fb4e61365e3bb61dd.png"
               width="50" alt="Logo Image">
           </a>
         </div>
@@ -3781,7 +3767,7 @@
             </ul>
           </li>
           <li data-access="view-30" class="have_sub_menu2 menu_assign_class">
-            <a href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard">
+            <a href="home.jsp">
               <iconify-icon icon="solar:chart-2-broken" width="30"></iconify-icon>
               <span>&nbsp;Dashboard</span>
             </a>
@@ -5280,7 +5266,7 @@
           </ul>
         </li>
         <li data-access="view-30" class="have_sub_menu2 menu_assign_class">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Dashboard/dashboard">
+          <a href="home.jsp">
             <iconify-icon icon="solar:chart-2-broken" width="30"></iconify-icon>
             <span>&nbsp;Dashboard</span>
           </a>
