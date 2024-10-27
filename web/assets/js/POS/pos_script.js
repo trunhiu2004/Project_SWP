@@ -364,14 +364,6 @@ $(function () {
     });
 
     // Code optimize by Azhar ** Final **
-    function searchItemAndConstructGallery(searchedValue, sort_id='',is_main_search='') {
-        let resultObject = search(searchedValue, window.items,sort_id,is_main_search);
-        return resultObject;
-    }
-
-
-
-    // Code optimize by Azhar ** Final **
     function getNewDateTime() {
         let refresh = 1000; // Refresh rate in milli seconds
         setTimeout(display_date_time, refresh);
@@ -420,70 +412,6 @@ $(function () {
         return $.datepicker.formatDate(date_format, formatted);
     }
 
-
-
-    // Code optimize by Azhar ** Final **
-    function put_cart_content() {
-        let total_items_in_cart = Number($("#total_items_in_cart_with_quantity").text());
-        let sub_total = parseFloat($("#sub_total_show").text());
-        let discounted_sub_total_amount = parseFloat($("#discounted_sub_total_amount").text());
-        let total_vat = parseFloat($("#show_vat_modal").text());
-        let total_payable = parseFloat($("#total_payable").text());
-        let total_discount_amount = parseFloat($("#all_items_discount").text());
-        let delivery_charge = Number($("#show_charge_amount").text());
-        let sub_total_discount = Number($("#sub_total_discount").text());
-        let sub_total_discount_value = $("#show_discount_amount").text();
-
-        let order = {
-            total_items_in_cart: getAmtPCustom(total_items_in_cart),
-            sub_total: getAmtPCustom(sub_total),
-            total_vat: getAmtPCustom(total_vat),
-            total_payable: getAmtPCustom(total_payable),
-            total_discount_amount: getAmtPCustom(total_discount_amount),
-            actual_discount: getAmtPCustom(discounted_sub_total_amount),
-            sub_total_discount: getAmtPCustom(sub_total_discount),
-            delivery_charge: getAmtPCustom(delivery_charge),
-            sub_total_discount_value: getAmtPCustom(sub_total_discount_value),
-            items: []
-        };
-
-        if ($(".single_order").length > 0) {
-            $(".single_order").each(function (i, obj) {
-                let item_id = Number($(this).attr("id").substr(15));
-                let item_name = $(this).find(".first_column").text();
-                let item_vat = $("#item_vat_percentage_table" + item_id).text() || '';
-                let item_note = $(".item_modal_description_table_" + item_id).text() || '';
-                let item_unit_price = $("#item_price_table_" + item_id).text() || '';
-                let item_quantity = $("#item_quantity_table_" + item_id).text() || '';
-                let item_total_price_table = $("#item_total_price_table_" + item_id).text() || '';
-                let item_g_w = $("#item_g_w_table_" + item_id).text() || '';
-                let discount = $("#percentage_table_" + item_id).text() || '';
-                let item = {
-                    item_id: $.trim(item_id),
-                    item_name: $.trim(item_name),
-                    item_note: $.trim(item_note),
-                    item_g_w: $.trim(item_g_w),
-                    item_total_price_table: getAmtPCustom($.trim(item_total_price_table)),
-                    discount: getAmtPCustom($.trim(discount)),
-                    item_vat: getAmtPCustom($.trim(item_vat)),
-                    item_unit_price: getAmtPCustom($.trim(item_unit_price)),
-                    item_quantity: getAmtPCustom($.trim(item_quantity))
-                };
-                order.items.push(item);
-            });
-        }
-        let order_object = JSON.stringify(order);
-        $.ajax({
-            url: base_url + "put-customer-panel-data",
-            method: "POST",
-            dataType: 'json',
-            data: {
-                order: order_object
-            },
-            success: function (response) {
-            }
-        });
-    }
     // Code optimize by Azhar ** Final **
 
     $(document).on('keyup', '#search_barcode', function(e){
@@ -1280,7 +1208,7 @@ $(function () {
     //when anything is searched
     $(document).on('keyup', '#search', function (e) {
         let searched_string = $(this).val().trim();
-        let foundItems = searchItemAndConstructGallery(searched_string,'',1);
+        let foundItems = null;
         let searched_category_items_to_show = `<div id="searched_item_found" class="specific_category_items_holder d-block"><div class="single-inner-div ${grocery_experience == 'Medicine' || grocery_experience == 'Grocery' ? 'grocery_single_on' : 'grocery_single_off'}">`;
         if(grocery_experience == 'Medicine' || grocery_experience == 'Grocery'){
             for (let key in foundItems) {
@@ -1324,7 +1252,7 @@ $(function () {
                 if(foundItems[0].item_type != '0'){
                     if (foundItems.hasOwnProperty(0)) {
                         if(foundItems[0].generic_name){
-                            let foundItemsForItems = searchItemAndConstructGallery(foundItems[0].generic_name,'','');
+                            let foundItemsForItems = null;
                             for (let key1 in foundItemsForItems) {
                             if(foundItemsForItems[key1].item_type != '0'){
                                 if (foundItemsForItems.hasOwnProperty(key1)) {
@@ -1644,7 +1572,6 @@ $(function () {
             storageCartDataInLocal();
         }
         itemModalHiddenDataClear();
-        cartItemCalculationInPOS();
         cartMobileItemCount();
         cartMobileSuccessMsgAndItemCount();
     }
@@ -2317,7 +2244,6 @@ $(function () {
             }
             itemModalHiddenDataClear();
         }
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -3229,7 +3155,6 @@ $(function () {
             let updated_total_price = (parseFloat(itemQty) * parseFloat(unit_price)).toFixed(op_precision);
             $(this).parent().parent().find('.item_price_without_discount').text(updated_total_price);
             $(this).siblings('.cart_quantity').text(itemQty)
-            cartItemCalculationInPOS();
             if(edit_mode == ''){
                 storageCartDataInLocal();
             }
@@ -3276,13 +3201,11 @@ $(function () {
             let updated_total_price = (parseFloat(item_quantity) * parseFloat(unit_price)).toFixed(op_precision);
             $(this).parent().parent().find('.item_price_without_discount').text(updated_total_price);
             $(this).siblings('.cart_quantity').text(item_quantity);
-            cartItemCalculationInPOS();
             if(edit_mode == ''){
                 storageCartDataInLocal();
             }
         } else {
             $(this).parent().parent().parent().remove();
-            cartItemCalculationInPOS();
             if(edit_mode == ''){
                 storageCartDataInLocal();
             }
@@ -3298,7 +3221,6 @@ $(function () {
         if (e.which != 96 && e.which != 97 && e.which != 98 && e.which != 99 && e.which != 100 && e.which != 101 && e.which != 102 && e.which != 103 && e.which != 104 && e.which != 105 && e.which != 110 && e.which != 190 && e.which != 16 && e.which != 53 && e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
             $(this).val('');
         }
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -3321,7 +3243,6 @@ $(function () {
         if (e.which != 96 && e.which != 97 && e.which != 98 && e.which != 99 && e.which != 100 && e.which != 101 && e.which != 102 && e.which != 103 && e.which != 104 && e.which != 105 && e.which != 110 && e.which != 190 && e.which != 16 && e.which != 53 && e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
             $(this).val('');
         }
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -3335,7 +3256,6 @@ $(function () {
         } else {
             $("#show_charge_amount").text(Number($(this).val()).toFixed(op_precision));
         }
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -3345,7 +3265,6 @@ $(function () {
     $(document).on('click', '.delivery_charge_submit', function(){
         let delivery = $('#delivery_charge').val();
         $('#show_charge_amount').text(Number(delivery).toFixed(op_precision));
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -3839,7 +3758,6 @@ $(function () {
                         singleItemDiscountSum += singleItemDiscount;
                     });
                     $('#all_items_discount').text(Number(singleItemDiscountSum).toFixed(op_precision));
-                    cartItemCalculationInPOS();
                     if(edit_mode == ''){
                         storageCartDataInLocal();
                     }
@@ -3859,43 +3777,6 @@ $(function () {
     $(document).on('click', '#cancel_set_qty_alert_sms_setting', function () {
         $('#show_qty_sms_setting_modal').slideUp('500');
     });
-
-    // Code optimize by Azhar ** Final **
-    function getAllCustomers(customer_id='',customer_previous_due_modal='',if_ignore){
-        let edit_customer = Number($('#edit_sale_customer').val());
-        $.ajax({
-            url: base_url + "Sale/getAllCustomers",
-            method: "GET",
-            success: function (response) {
-                let option_customers = '';
-                option_customers += `<option value="">${select} ${customer}</option>`;
-                $.each(response.data, function (i, v) { 
-                    option_customers += `<option id="cid_${v.id}" data-same_or_diff_state="${v.same_or_diff_state}" discount="${v.discount}" price_type="${v.price_type}" data-previous_due="${v.opening_balance}"  value="${v.id}" data-customer-name="${v.name}" ${v.id == edit_customer ? 'selected' : ''} > ${v.name} ${v.phone != null ? '(' + v.phone + ')' : ''}</option>`;
-                });
-                $('#walk_in_customer').html(option_customers);
-                if(edit_customer){ 
-                    if(customer_id && (customer_id == edit_customer)){
-                        $('#walk_in_customer').val(edit_customer).change();
-                    }else{
-                        $('#walk_in_customer').val(customer_id).change();
-                    }
-                }else{
-                    $('#walk_in_customer').val(customer_id).change();
-                }
-                $('.loader1').slideUp('500');
-                if(!if_ignore){
-                    $("#add_customer_modal").removeClass("active");
-                    $('.pos__modal__overlay').fadeOut(300);
-                }
-                resetAddCustomerModalAfterAddOrClose();
-            }
-        });
-    }
-    getAllCustomers(1,0,1);
-
-
-    
-
     // Code optimize by Azhar ** Final **
     function IsEmail(email) {
         let regex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -3993,7 +3874,6 @@ $(function () {
                             success: function (response) {
                                 if (response > 0) {
                                     $('.loader1').slideUp('500');
-                                    getAllCustomers(Number(response), opening_balance, '');
                                     customerModalFieldRest();
                                 }
                             }
@@ -4096,7 +3976,7 @@ $(function () {
     function showAllItems(brand_id='',sorting='') {
         $('.specific_category_items_holder').hide();
         setTimeout(function () {
-            let foundItems = searchItemAndConstructGallery('',sorting,'');
+            let foundItems = null;
             let searched_category_items_to_show = `<div id="searched_item_found" class="specific_category_items_holder"><div class="single-inner-div ${grocery_experience == 'Medicine' || grocery_experience == 'Grocery' ? 'grocery_single_on' : 'grocery_single_off'}">`;
             if(grocery_experience == 'Medicine' || grocery_experience == 'Grocery'){
                 let brand_id_tmp = Number(brand_id);
@@ -4196,7 +4076,7 @@ $(function () {
     function showAllItemByCategory(cat_id='') {
         $('.specific_category_items_holder').hide();
         setTimeout(function () {
-            let foundItems = searchItemAndConstructGallery('','','');
+            let foundItems = null;
             let searched_category_items_to_show = `<div id="searched_item_found" class="specific_category_items_holder d-block"><div class="single-inner-div ${grocery_experience == 'Medicine' || grocery_experience == 'Grocery' ? 'grocery_single_on' : 'grocery_single_off'}">`;
             if(grocery_experience == 'Medicine' || grocery_experience == 'Grocery'){
                 let cat_id_tmp = Number(cat_id);
@@ -4312,167 +4192,6 @@ $(function () {
         $('#sub_total_discount_amount').html(Number(0).toFixed(op_precision));
         $('#all_items_discount').html(Number(0).toFixed(op_precision));
         $('#delivery_charge').val(Number(0).toFixed(op_precision));
-    }
-
-    // add all prices of item and modifiers
-    function cartItemCalculationInPOS() {
-        let total_items_in_cart = $('.order_holder .single_order').length;
-        //if there is no item in cart reset necessary field and value
-        if (total_items_in_cart < 1) {
-            cartItemCalculationClear();
-        }
-        // Set Hidden And Visiable Discount
-        let this_item_original_price = 0;
-        let item_discount_value = 0;
-        let actual_discount_amount = 0;
-        let discounted_item_price = 0;
-        let this_item_discount_amount = 0;
-        let total_discount_sum = 0;
-        let all_item_total_price = 0;
-        let total_items_in_cart_with_quantity = 0;
-
-        let sub_total_sum = 0;
-        $('.single_order .first_portion .fifth_column span').each(function (i, obj) {
-            this_item_original_price = parseFloat($(this).parent().parent().find('.item_price_without_discount').text()).toFixed(op_precision);
-            item_discount_value = $(this).parent().parent().find('.forth_column input').val();
-            item_discount_value = (item_discount_value != "") ? item_discount_value : 0;
-            actual_discount_amount = getParticularItemDiscountAmount(item_discount_value, this_item_original_price);
-            $(this).parent().parent().find('.item_discount').text(actual_discount_amount);
-
-            discounted_item_price = (parseFloat(this_item_original_price) - parseFloat(actual_discount_amount)).toFixed(op_precision);
-            $(this).parent().parent().find('.fifth_column span').html(discounted_item_price);
-
-            this_item_discount_amount = (parseFloat($(this).parent().parent().find('.item_discount').html())).toFixed(op_precision);
-            total_discount_sum = (parseFloat(total_discount_sum) + parseFloat(this_item_discount_amount)).toFixed(op_precision);
-
-            all_item_total_price = parseFloat($(this).text()).toFixed(op_precision);
-            sub_total_sum += parseFloat(all_item_total_price);
-
-            total_items_in_cart_with_quantity = parseFloat($(this).parent().parent().find('.third_column span').eq(0).text());
-
-        });
-
-
-        $('#total_item_discount').html(total_discount_sum);
-
-        //set total items in cart to view
-        $('#total_items_in_cart_without_quantity').html($(".edit_item").length);
-        $('#total_items_in_cart_with_quantity').html(total_items_in_cart_with_quantity);
-
-
-        //set sub total
-        $('#sub_total').html(sub_total_sum);
-        $('#sub_total_show').html(parseFloat(sub_total_sum).toFixed(op_precision));
-
-        //get the value of the delivery charge amount
-        let delivery_charge_amount = ($('#delivery_charge').val() != "") ? $('#delivery_charge').val() : 0;
-
-        //check wether value is valid or not
-        removeLastTwoDigitWithoutPercentage(delivery_charge_amount, $('#delivery_charge'));
-
-        //get subtotal amount
-        let sub_total_amount = sub_total_sum;
-
-        //get subtotal discount amount
-        let sub_total_discount_amount = ($('#sub_total_discount').val() != "") ? $('#sub_total_discount').val() : 0;
-        //check wether value is valid or not
-        removeLastTwoDigitWithPercentage(sub_total_discount_amount, $('#sub_total_discount'));
-        sub_total_discount_amount = getSubTotalDiscountAmount(sub_total_discount_amount, sub_total_amount);
-
-        //if sub total discount amount is greater than subtotal then make it blank
-        if (parseFloat(sub_total_discount_amount) > parseFloat(sub_total_amount)) {
-            $('#sub_total_discount').val('');
-            cartItemCalculationInPOS();
-            if(edit_mode == ''){
-                storageCartDataInLocal();
-            }
-            return false;
-        }
-
-        //get total item discount amount
-        let total_item_discount_amount = (parseFloat(total_discount_sum)).toFixed(op_precision);
-
-        //get all discount of table
-        let total_discount = (parseFloat(sub_total_discount_amount) + parseFloat(total_item_discount_amount)).toFixed(op_precision);
-        
-        //set sub total discount amount
-        $('#sub_total_discount_amount').html(sub_total_discount_amount);
-
-        //set sub total amount after discount in a hidden field
-        let discounted_sub_total_amount = (parseFloat(sub_total_amount) - parseFloat(sub_total_discount_amount)).toFixed(op_precision);
-
-        $('#discounted_sub_total_amount').html(discounted_sub_total_amount)
-
-        let sub_total_discount_tmp = $("#sub_total_discount").val();
-        
-        if (sub_total_discount_tmp.indexOf('%') > 0) {
-            sub_total_discount_tmp = getSubTotalDiscountAmount(sub_total_discount_tmp,sub_total_amount);
-        } else {
-            sub_total_discount_tmp = Number(sub_total_discount_tmp).toFixed(op_precision);
-        }
-         
-        $("#show_discount_amount").html(sub_total_discount_tmp);
-        //set total discount
-        $('#all_items_discount').html(total_discount);
-        //get vat amount
-        let vat_amount = collect_tax == "Yes" ? getTotalVat() : null;
-        let total_vat_section_to_show = "";
-        let html_modal = "";
-        let total_tax_custom = 0;
-        $.each(vat_amount, function (key, value) {
-            total_vat_section_to_show +=
-                `<span class="tax_field" id="tax_field_${key.substring(key.indexOf("_") + 1)}">${key.substr(0, key.indexOf("_"))}</span>: <span class="tax_field_amount" id="tax_field_amount_${key.substring(key.indexOf("_") + 1)}">${value}</span><br>`;
-
-            html_modal +=`<tr class="tax_field" data-tax_field_id="${key.substr(0, key.indexOf("_"))}" data-tax_field_type="${key.substring(key.indexOf("_") + 1)}" data-tax_field_amount="${value}">
-                    <td>${key.substring(key.indexOf("_") + 1)}</td>
-                    <td>${value}</td>
-                </tr>`;
-            total_tax_custom += Number(value);
-        });
-        if (total_tax_custom) {
-            $("#show_vat_modal").text(parseFloat(total_tax_custom).toFixed(op_precision));
-        } else {
-            $("#show_vat_modal").text(Number(0).toFixed(op_precision));
-        }
-        $("#tax_row_show").html(html_modal);
-        //calculate total payable amount
-        let total_vat_amount = 0;
-        $.each(vat_amount, function (key, value) {
-            total_vat_amount = (parseFloat(total_vat_amount) + parseFloat(value)).toFixed(op_precision);
-        });
-        let tax_type = Number($("#tax_type").val());
-        if (total_vat_amount == "NaN" || tax_type==2) {
-            total_vat_amount = 0;
-        }
-        let total_payable = (parseFloat(discounted_sub_total_amount) + parseFloat(total_vat_amount) + parseFloat(delivery_charge_amount)).toFixed(op_precision);
-        //set total payable amount to view and set rounding value.
-        let pos_total_payable_type = $('#pos_total_payable_type').val();
-        let total_payable_round;
-        let decimal_round;
-        if(pos_total_payable_type == 0){
-            total_payable_round = parseFloat(total_payable);
-            decimal_round = 0;
-        } else if(pos_total_payable_type == 1){
-            total_payable_round = Math.round(total_payable);
-            decimal_round = total_payable - total_payable_round;
-        }else {
-            total_payable_round = customDecimalRound(parseFloat(total_payable), pos_total_payable_type, op_precision);
-            decimal_round = total_payable - total_payable_round;
-        }
-        $('#total_payable').html((parseFloat(total_payable_round)).toFixed(op_precision));
-        $('#rounding').text(parseFloat(decimal_round).toFixed(op_precision));
-
-
-        //set row number for every single item
-        setTimeout(function(){
-            $('.order_holder .single_order').each(function (i, obj) {
-                $(this).attr('data-single-order-row-no', i + 1);
-                $(this).find('.first_portion .fifth_column .remove_this_item_from_cart').attr('data-remove-order-row-no', i + 1);
-            });
-        }, 200)
-
-
-        put_cart_content();
     }
 
     
@@ -5557,7 +5276,6 @@ $(function () {
         let row_number = $(this).attr('data-remove-order-row-no');
         $('.single_order[data-single-order-row-no=' + row_number + ']').remove();
         productSound3.play();
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -6490,7 +6208,6 @@ $(function () {
                                     $('#show_discount_amount').text(Number(discountOriginal).toFixed(op_precision));
                                     $("#discount_modal").removeClass("active");
                                     $(".pos__modal__overlay").fadeOut(300);
-                                    cartItemCalculationInPOS();
                                     if(edit_mode == ''){
                                         storageCartDataInLocal();
                                     }
@@ -6500,7 +6217,6 @@ $(function () {
                                         $('#show_discount_amount').text(Number(discountOriginal).toFixed(op_precision));
                                         $("#discount_modal").removeClass("active");
                                         $(".pos__modal__overlay").fadeOut(300);
-                                        cartItemCalculationInPOS();
                                         if(edit_mode == ''){
                                             storageCartDataInLocal();
                                         }
@@ -6788,7 +6504,7 @@ $(function () {
         if(generic_name){
             let array_as = {};
             let alternativeProduct = '';
-            let foundItemsForItems = searchItemAndConstructGallery(generic_name,'','');
+            let foundItemsForItems = null;
             for (let key1 in foundItemsForItems) {
                 if(foundItemsForItems[key1].item_type != '0'){
                     if (foundItemsForItems.hasOwnProperty(key1)) {
@@ -7215,7 +6931,6 @@ $(function () {
 
 
     setTimeout(function () {
-        cartItemCalculationInPOS();
         if(edit_mode == ''){
             storageCartDataInLocal();
         }
@@ -7397,7 +7112,6 @@ $(function () {
         if(edit_mode == ''){
             $(".order_holder").html(local_cart_data);
         }
-        cartItemCalculationInPOS();
     }
 
     $('.off-pos-open-dropdown-menu').on('click', function(){

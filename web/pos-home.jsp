@@ -272,15 +272,15 @@
               </a>
               <ul class="sub__menu custom_dropdown" role="menu">
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/changeProfile">Change
+                  <a tabindex="-1" href="#">Change
                     Profile</a>
                 </li>
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/changePassword">Change
+                  <a tabindex="-1" href="#">Change
                     Password</a>
                 </li>
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/securityQuestion">Set Security
+                  <a tabindex="-1" href="#">Set Security
                     Question</a>
                 </li>
                 <li>
@@ -1407,15 +1407,15 @@
                   </a>
                   <ul class="sub__menu custom_dropdown" role="menu">
                     <li>
-                      <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/changeProfile">Change
+                      <a tabindex="-1" href="#">Change
                         Profile</a>
                     </li>
                     <li>
-                      <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/changePassword">Change
+                      <a tabindex="-1" href="#">Change
                         Password</a>
                     </li>
                     <li>
-                      <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/User/securityQuestion">Set
+                      <a tabindex="-1" href="#">Set
                         Security Question</a>
                     </li>
                     <li>
@@ -1432,49 +1432,49 @@
                   <ul class="sub__menu" role="menu">
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/arabic">
+                        href="#">
                         <span>Arabic</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/bangla">
+                        href="#">
                         <span>Bangla</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/english">
+                        href="#">
                         <span>English</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/french">
+                        href="#">
                         <span>French</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/hindi">
+                        href="#">
                         <span>Hindi</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/sinhala">
+                        href="#">
                         <span>Sinhala</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/spanish">
+                        href="#">
                         <span>Spanish</span>
                       </a>
                     </li>
                     <li data-lang="English">
                       <a tabindex="-1"
-                        href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/urdu">
+                        href="#">
                         <span>Urdu</span>
                       </a>
                     </li>
@@ -1520,7 +1520,7 @@
                   </a>
                 </li>
                 <li>
-                  <a tabindex="-1" href="https://doorsoft-demo.com/off_pos/all_types/customer-panel"
+                  <a tabindex="-1" href="#"
                     class="header_menu_icon" target="_blank" data-tippy-content="Customer Panel">
                     <iconify-icon icon="solar:monitor-broken" width="22"></iconify-icon>
                   </a>
@@ -3115,15 +3115,15 @@
                 Main Menu </a>
               <ul class="sub_menu" role="menu">
                 <li>
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/User/changeProfile">
+                  <a href="#">
                     Change Profile</a>
                 </li>
                 <li>
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/User/changePassword">
+                  <a href="#">
                     Change Password</a>
                 </li>
                 <li>
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/User/securityQuestion">
+                  <a href="#">
                     Set Security Question</a>
                 </li>
                 <li>
@@ -3173,42 +3173,42 @@
                 Language </a>
               <ul class="sub_menu mobile_ln_submenu" role="menu">
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/arabic">
+                  <a href="#">
                     <span>Arabic</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/bangla">
+                  <a href="#">
                     <span>Bangla</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/english">
+                  <a href="#">
                     <span>English</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/french">
+                  <a href="#">
                     <span>French</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/hindi">
+                  <a href="#">
                     <span>Hindi</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/sinhala">
+                  <a href="#">
                     <span>Sinhala</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/spanish">
+                  <a href="#">
                     <span>Spanish</span>
                   </a>
                 </li>
                 <li data-lang="English">
-                  <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/setlanguage/urdu">
+                  <a href="#">
                     <span>Urdu</span>
                   </a>
                 </li>
@@ -3230,7 +3230,7 @@
                 Keyboard Shortcut </a>
             </li>
             <li class="mobile_menu_click_for_hide">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/customer-panel">
+              <a href="#">
                 <iconify-icon icon="solar:monitor-broken" width="18"></iconify-icon>
                 Customer Panel </a>
             </li>
@@ -3594,7 +3594,7 @@
       <!-- POS Sidebar Start -->
       <aside id="pos__sidebar">
         <div class="brand__logo op_center">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/userProfile">
+          <a href="#">
             <img
               src="assets/images/pos/1c89efb05f2bda6fb4e61365e3bb61dd.png"
               width="50" alt="Logo Image">
@@ -3602,7 +3602,7 @@
         </div>
         <ul class="pos__menu__list">
           <li class="have_sub_menu2">
-            <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/userProfile">
+            <a href="#">
               <iconify-icon icon="solar:home-broken" width="30"></iconify-icon>
               <span>
                 Home </span>
@@ -3619,12 +3619,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-25" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Outlet/addEditOutlet">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Outlet </a>
               </li>
               <li data-access="list-25" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Outlet/outlets">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Outlet </a>
               </li>
@@ -3639,52 +3639,52 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="pos-138" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Sale/POS">
+                <a href="#">
                   <iconify-icon icon="solar:cart-large-broken" width="15"></iconify-icon>
                   POS Screen </a>
               </li>
               <li data-access="list-138" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Sale/sales">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Sale </a>
               </li>
               <li data-access="add-147" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Customer/addEditCustomer">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Customer </a>
               </li>
               <li data-access="list-147" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Customer/customers">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Customer </a>
               </li>
               <li data-access="add-154" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Group/addEditGroup">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Customer Group </a>
               </li>
               <li data-access="list-154" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Group/groups">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Customer Group </a>
               </li>
               <li data-access="add-133" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Promotion/addEditPromotion">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Promotion </a>
               </li>
               <li data-access="list-133" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Promotion/promotions">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Promotion </a>
               </li>
               <li data-access="add-159" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Delivery_partner/addEditPartner">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Delivery Partner </a>
               </li>
               <li data-access="list-159" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Delivery_partner/listPartner">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Delivery Partner </a>
               </li>
@@ -3699,68 +3699,68 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-49" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Item/addEditItem">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Item </a>
               </li>
               <li data-access="list-49" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Item/items">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Item </a>
               </li>
               <li data-access="list-49" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Item/bulkItemUpdate">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   Bulk Item Update </a>
               </li>
               <li data-access="add-60" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Category/addEditItemCategory">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Item Category </a>
               </li>
               <li data-access="list-60" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Category/itemCategories">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Item Category </a>
               </li>
               <li data-access="add-304" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Rack/addEditRack">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Rack </a>
               </li>
               <li data-access="list-304" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Rack/addEditRack">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Rack </a>
               </li>
 
               <li data-access="add-65" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Unit/addEditUnit">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Unit </a>
               </li>
               <li data-access="list-65" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Unit/units">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Unit </a>
               </li>
               <li data-access="add-70" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Variation/addEditVariation">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Variation Attribute </a>
               </li>
               <li data-access="list-70" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Variation/variations">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Variation Attribute </a>
               </li>
               <li data-access="add-297" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Brand/addEditBrand">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Brand </a>
               </li>
               <li data-access="list-297" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Brand/brands">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Brand </a>
               </li>
@@ -3773,7 +3773,7 @@
             </a>
           </li>
           <li data-access="view-164" class="have_sub_menu2">
-            <a href="https://doorsoft-demo.com/off_pos/all_types/Stock/stock">
+            <a href="#">
               <iconify-icon icon="solar:database-broken" width="30"></iconify-icon>
               <span>
                 Stock </span>
@@ -3788,22 +3788,22 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-109" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase/addEditPurchase">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Purchase </a>
               </li>
               <li data-access="list-109" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase/purchases">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Purchase </a>
               </li>
               <li data-access="add-117" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Supplier/addEditSupplier">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Supplier </a>
               </li>
               <li data-access="list-117" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Supplier/suppliers">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Supplier </a>
               </li>
@@ -3818,12 +3818,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-198" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Customer_due_receive/addCustomerDueReceive">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Customer Receive </a>
               </li>
               <li data-access="list-198" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Customer_due_receive/customerDueReceives">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Customer Receive </a>
               </li>
@@ -3838,12 +3838,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-192" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/SupplierPayment/addSupplierPayment">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Supplier Payment </a>
               </li>
               <li data-access="list-192" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/SupplierPayment/supplierPayments">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Supplier Payment </a>
               </li>
@@ -3858,37 +3858,37 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-218" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/PaymentMethod/addEditPaymentMethod">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Account </a>
               </li>
               <li data-access="list-218" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/PaymentMethod/paymentMethods">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Account </a>
               </li>
               <li data-access="add-223" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Deposit/addEditDeposit">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Deposit Or Withdraw </a>
               </li>
               <li data-access="list-223" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Deposit/deposits">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Deposit Or Withdraw </a>
               </li>
               <li data-access="list-228" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/balanceStatement">
+                <a href="#">
                   <iconify-icon icon="solar:notebook-broken" width="18"></iconify-icon>
                   Balance Statement </a>
               </li>
               <li data-access="list-230" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/trialBalance">
+                <a href="#">
                   <iconify-icon icon="solar:book-2-broken" width="18"></iconify-icon>
                   Trial Balance </a>
               </li>
               <li data-access="list-232" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/balanceSheet">
+                <a href="#">
                   <iconify-icon icon="solar:notebook-bookmark-broken" width="18"></iconify-icon>
                   Balance Sheet </a>
               </li>
@@ -3902,12 +3902,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-234" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Attendance/addEditAttendance">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Attendance </a>
               </li>
               <li data-access="list-234" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Attendance/attendances">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Attendance </a>
               </li>
@@ -3922,187 +3922,187 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="register_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/registerReport">
+                <a href="#">
                   <iconify-icon icon="solar:book-broken" width="18"></iconify-icon>
                   Register Report </a>
               </li>
               <li data-access="zReport-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/zReport">
+                <a href="#">
                   <iconify-icon icon="solar:bookmark-square-minimalistic-broken" width="18"></iconify-icon>
                   Z Report </a>
               </li>
               <li data-access="daily_summary_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/dailySummaryReport">
+                <a href="#">
                   <iconify-icon icon="solar:clipboard-list-broken" width="18"></iconify-icon>
                   Daily Summary Report </a>
               </li>
               <li data-access="sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/saleReport">
+                <a href="#">
                   <iconify-icon icon="solar:cart-check-broken" width="18"></iconify-icon>
                   Sale Report </a>
               </li>
               <li data-access="service_sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/serviceSaleReport">
+                <a href="#">
                   <iconify-icon icon="solar:hand-stars-broken" width="18"></iconify-icon>
                   Service Sale Report </a>
               </li>
               <li data-access="service_sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/comboServiceReport">
+                <a href="#">
                   <iconify-icon icon="solar:hand-stars-broken" width="18"></iconify-icon>
                   Combo Service Report </a>
               </li>
               <li data-access="stock_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/stockReport">
+                <a href="#">
                   <iconify-icon icon="solar:atom-broken" width="18"></iconify-icon>
                   Stock Report </a>
               </li>
               <li data-access="employee_sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/employeeSaleReport">
+                <a href="#">
                   <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
                   Employee Sale Report </a>
               </li>
               <li data-access="customer_receive_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/customerDueReceiveReport">
+                <a href="#">
                   <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
                   Customer Receive Report </a>
               </li>
               <li data-access="attendance_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/attendanceReport">
+                <a href="#">
                   <iconify-icon icon="solar:clock-square-broken" width="18"></iconify-icon>
                   Attendance Report </a>
               </li>
               <li data-access="product_profit_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productProfitReport">
+                <a href="#">
                   <iconify-icon icon="solar:dollar-broken" width="18"></iconify-icon>
                   Product Profit Report </a>
               </li>
               <li data-access="supplier_ledger-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/supplierLedgerReport">
+                <a href="#">
                   <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
                   Supplier Ledger </a>
               </li>
               <li data-access="supplier_balance_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/supplierDueReport">
+                <a href="#">
                   <iconify-icon icon="solar:banknote-broken" width="18"></iconify-icon>
                   Supplier Balance Report </a>
               </li>
 
               <li data-access="customer_ledger-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/customerLedgerReport">
+                <a href="#">
                   <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
                   Customer Ledger </a>
               </li>
               <li data-access="customer_balance_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/customerBalanceReport">
+                <a href="#">
                   <iconify-icon icon="solar:banknote-broken" width="18"></iconify-icon>
                   Customer Balance Report </a>
               </li>
               <li data-access="servicing_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/servicingReport">
+                <a href="#">
                   <iconify-icon icon="solar:sunrise-broken" width="18"></iconify-icon>
                   Servicing Report </a>
               </li>
               <li data-access="product_sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productSaleReport">
+                <a href="#">
                   <iconify-icon icon="solar:list-heart-broken" width="18"></iconify-icon>
                   Product Sale Report </a>
               </li>
 
 
               <li data-access="tax_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/taxReport">
+                <a href="#">
                   <iconify-icon icon="solar:target-broken" width="18"></iconify-icon>
                   Tax Report </a>
               </li>
               <li data-access="detailed_sale_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/detailedSaleReport">
+                <a href="#">
                   <iconify-icon icon="solar:cart-check-broken" width="18"></iconify-icon>
                   Detailed Sale Report </a>
               </li>
 
               <li data-access="low_stock_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Stock/getStockAlertList">
+                <a href="#">
                   <iconify-icon icon="solar:database-broken" width="18"></iconify-icon>
                   Low Stock Report </a>
               </li>
               <li data-access="profit_loss_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/profitLossReport">
+                <a href="#">
                   <iconify-icon icon="solar:money-bag-broken" width="18"></iconify-icon>
                   Profit Loss Report </a>
               </li>
               <li data-access="purchase_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/purchaseReportByDate">
+                <a href="#">
                   <iconify-icon icon="solar:archive-broken" width="18"></iconify-icon>
                   Purchase Report </a>
               </li>
               <li data-access="product_purchase_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productPurchaseReport">
+                <a href="#">
                   <iconify-icon icon="solar:archive-broken" width="18"></iconify-icon>
                   Product Purchase Report </a>
               </li>
               <li data-access="expense_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/expenseReport">
+                <a href="#">
                   <iconify-icon icon="solar:rewind-forward-broken" width="18"></iconify-icon>
                   Expense Report </a>
               </li>
               <li data-access="income_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/incomeReport">
+                <a href="#">
                   <iconify-icon icon="solar:rewind-back-broken" width="18"></iconify-icon>
                   Income Report </a>
               </li>
               <li data-access="salary_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/salaryReport">
+                <a href="#">
                   <iconify-icon icon="solar:transmission-broken" width="18"></iconify-icon>
                   Salary Report </a>
               </li>
               <li data-access="purchase_return_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/purchaseReturnReport">
+                <a href="#">
                   <iconify-icon icon="solar:multiple-forward-right-broken" width="18"></iconify-icon>
                   Purchase Return Report </a>
               </li>
               <li data-access="sale_return_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/saleReturnReport">
+                <a href="#">
                   <iconify-icon icon="solar:multiple-forward-left-broken" width="18"></iconify-icon>
                   Sale Return Report </a>
               </li>
               <li data-access="damage_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/damageReport">
+                <a href="#">
                   <iconify-icon icon="solar:trash-bin-minimalistic-broken" width="18"></iconify-icon>
                   Damage Report </a>
               </li>
               <li data-access="installment_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/installmentReport">
+                <a href="#">
                   <iconify-icon icon="solar:layers-broken" width="18"></iconify-icon>
                   Installment Report </a>
               </li>
               <li data-access="installment_due_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/installmentDueReport">
+                <a href="#">
                   <iconify-icon icon="solar:layers-broken" width="18"></iconify-icon>
                   Installment Due Report </a>
               </li>
               <li data-access="item_tracing_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/itemMoving">
+                <a href="#">
                   <iconify-icon icon="solar:list-heart-broken" width="18"></iconify-icon>
                   Item Movement Report </a>
               </li>
               <li data-access="price_history_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/priceHistory">
+                <a href="#">
                   <iconify-icon icon="solar:chat-round-money-broken" width="18"></iconify-icon>
                   Price History Report </a>
               </li>
               <li data-access="cash_flow_report-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/cashFlowReport">
+                <a href="#">
                   <iconify-icon icon="solar:hand-money-broken" width="18"></iconify-icon>
                   Cash Flow Report </a>
               </li>
 
               <li data-access="available_loyalty_point-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/availableLoyaltyPointReport">
+                <a href="#">
                   <iconify-icon icon="solar:diploma-broken" width="18"></iconify-icon>
                   Available Loyalty Point Report </a>
               </li>
               <li data-access="usage_loyalty_point-249" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Report/usageLoyaltyPointReport">
+                <a href="#">
                   <iconify-icon icon="solar:diploma-verified-broken" width="18"></iconify-icon>
                   Usage Loyalty Point Report </a>
               </li>
@@ -4117,22 +4117,22 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-172" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Expense/addEditExpense">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Expense </a>
               </li>
               <li data-access="list-172" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Expense/expenses">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Expense </a>
               </li>
               <li data-access="add-177" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/ExpenseItem/addEditExpenseItem">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Expense Category </a>
               </li>
               <li data-access="list-177" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/ExpenseItem/expenseItems">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Expense Category </a>
               </li>
@@ -4146,22 +4146,22 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-182" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Income/addEditIncome">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Income </a>
               </li>
               <li data-access="list-182" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Income/incomes">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Income </a>
               </li>
               <li data-access="add-187" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/IncomeItem/addEditIncomeItem">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Income Item </a>
               </li>
               <li data-access="list-187" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/IncomeItem/incomeItems">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Income Item </a>
               </li>
@@ -4177,12 +4177,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-204" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Sale_return/addEditSaleReturn">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Sale Return </a>
               </li>
               <li data-access="list-204" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Sale_return/saleReturns">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Sale Return </a>
               </li>
@@ -4196,12 +4196,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-211" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase_return/addEditPurchaseReturn">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Purchase Return </a>
               </li>
               <li data-access="list-211" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase_return/purchaseReturns">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Purchase Return </a>
               </li>
@@ -4217,99 +4217,99 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="edit-1" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Setting/index">
+                <a href="#">
                   <iconify-icon icon="solar:settings-broken" width="18"></iconify-icon>
                   Setting </a>
               </li>
               <li data-access="whatsappSetting-327" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Setting/whatsappSetting">
+                <a href="#">
                   <iconify-icon icon="solar:settings-minimalistic-broken" width="18"></iconify-icon>
                   WhatsApp Setting </a>
               </li>
               <li data-access="add-3" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Denomination/addEditDenomination">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Denomination </a>
               </li>
               <li data-access="list-3" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Denomination/denominations">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Denominations </a>
               </li>
               <li data-access="add-340" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Counter/addEditCounter">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Counter </a>
               </li>
               <li data-access="list-340" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Counter/counters">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Counter </a>
               </li>
               <li data-access="edit-8" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Tax_setting/tax">
+                <a href="#">
                   <iconify-icon icon="solar:target-broken" width="18"></iconify-icon>
                   Tax Setting </a>
               </li>
               <li data-access="edit-10" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Email_setting/emailConfiguration">
+                <a href="#">
                   <iconify-icon icon="solar:letter-unread-broken" width="18"></iconify-icon>
                   Email Setting </a>
               </li>
               <li data-access="edit-12" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Short_message_service/smsService">
+                <a href="#">
                   <iconify-icon icon="solar:letter-opened-broken" width="18"></iconify-icon>
                   SMS Settings </a>
               </li>
               <li data-access="edit-14" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Printer/printerSetup">
+                <a href="#">
                   <iconify-icon icon="solar:printer-broken" width="18"></iconify-icon>
                   Printer Setup </a>
               </li>
               <li data-access="edit-23" class="menu_assign_class d-block">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/WhiteLabel/index">
+                <a href="#">
                   <iconify-icon icon="solar:sledgehammer-broken" width="18"></iconify-icon>
                   White Label </a>
               </li>
               <li data-access="edit-23" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/logingPage">
+                <a href="#">
                   <iconify-icon icon="solar:sledgehammer-broken" width="18"></iconify-icon>
                   Login Page </a>
               </li>
 
               <li data-access="edit-335" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Payment_getway/paymentGetway">
+                <a href="#">
                   <iconify-icon icon="solar:password-broken" width="18"></iconify-icon>
                   Payment Getway </a>
               </li>
               <li data-access="add-311" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/MultipleCurrency/addEditMultipleCurrency">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Multiple Currency </a>
               </li>
               <li data-access="list-311" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/MultipleCurrency/multipleCurrencies">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Multiple Currency </a>
               </li>
               <li data-access="add_dummy_data-325" class="menu_assign_class">
-                <a class="add_dummy_data" href="https://doorsoft-demo.com/off_pos/all_types/Setting/add_dummy_data">
+                <a class="add_dummy_data" href="#">
                   <iconify-icon icon="solar:import-broken" width="18"></iconify-icon>
                   Import Dummy Data </a>
               </li>
 
               <li data-access="deleteDummyData-329" class="menu_assign_class">
-                <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/deleteDummyData">
+                <a class="delete" href="#">
                   <iconify-icon icon="solar:trash-bin-2-broken" width="18"></iconify-icon>
                   Delete Dummy Data </a>
               </li>
               <li data-access="wipeTransactionalData-331" class="menu_assign_class">
-                <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/wipeTransactionalData">
+                <a class="delete" href="#">
                   <iconify-icon icon="solar:transfer-horizontal-broken" width="18"></iconify-icon>
                   Wipe Transactional Data </a>
               </li>
               <li data-access="wipeAllData-333" class="menu_assign_class">
-                <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/wipeAllData">
+                <a class="delete" href="#">
                   <iconify-icon icon="solar:translation-broken" width="18"></iconify-icon>
                   Wipe All Data </a>
               </li>
@@ -4325,37 +4325,37 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-282" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Role/addEditRole">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Role </a>
               </li>
               <li data-access="list-282" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Role/listRole">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Role </a>
               </li>
               <li data-access="add-287" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/User/addEditUser">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Employee </a>
               </li>
               <li data-access="list-287" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/User/users">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Employee </a>
               </li>
               <li data-access="add-287" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/User/changeProfile">
+                <a href="#">
                   <iconify-icon icon="solar:user-check-broken" width="18"></iconify-icon>
                   Change Profile </a>
               </li>
               <li data-access="add-287" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/User/changePassword">
+                <a href="#">
                   <iconify-icon icon="solar:key-broken" width="18"></iconify-icon>
                   Change Password </a>
               </li>
               <li data-access="add-287" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/User/securityQuestion">
+                <a href="#">
                   <iconify-icon icon="solar:question-circle-broken" width="18"></iconify-icon>
                   Set Security Question </a>
               </li>
@@ -4370,32 +4370,32 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-93" data-access="add-244" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/addEditCustomer">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Installment Customer </a>
               </li>
               <li data-access="list-93" data-access="add-244" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/customers">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Installment Customer </a>
               </li>
               <li data-access="add-100" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/addEditInstallmentSale">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Installment Sale </a>
               </li>
               <li data-access="list-100" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/installmentSales">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Installment Sale </a>
               </li>
               <li data-access="installment_collection-100" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/installmentCollections">
+                <a href="#">
                   <iconify-icon icon="solar:copyright-broken" width="18"></iconify-icon>
                   Installment Collection </a>
               </li>
               <li data-access="due_installment-100" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/listDueInstallment">
+                <a href="#">
                   <iconify-icon icon="solar:sale-broken" width="18"></iconify-icon>
                   List Due Installment </a>
               </li>
@@ -4410,28 +4410,28 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-75" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Servicing/addEditServicing">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Servicing </a>
               </li>
               <li data-access="list-75" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Servicing/listServicing">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Servicing </a>
               </li>
 
               <li data-access="filter-85" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Warranty/checkWarranty">
+                <a href="#">
                   <iconify-icon icon="solar:card-search-broken" width="18"></iconify-icon>
                   Warranty Checking </a>
               </li>
               <li data-access="add-80" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/WarrantyProducts/addEditWarrantyProduct">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Warranty Products </a>
               </li>
               <li data-access="list-80" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/WarrantyProducts/listWarrantyProduct">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Warranty Products </a>
               </li>
@@ -4446,7 +4446,7 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="list-87" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Salary/generate">
+                <a href="#">
                   <iconify-icon icon="solar:transmission-broken" width="18"></iconify-icon>
                   List Salary/Payroll </a>
               </li>
@@ -4461,37 +4461,37 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-32" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_assets/addEditItem">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Item </a>
               </li>
               <li data-access="list-32" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_assets/listItem">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Item </a>
               </li>
               <li data-access="add-37" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/addEditStock">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Stock In </a>
               </li>
               <li data-access="list-37" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/listStock">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Stock In </a>
               </li>
               <li data-access="add-42" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock_out/addEditStockOut">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Stock Out </a>
               </li>
               <li data-access="list-42" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock_out/listStockOut">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Stock Out </a>
               </li>
               <li data-access="view-47" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/stocks">
+                <a href="#">
                   <iconify-icon icon="solar:database-broken" width="18"></iconify-icon>
                   Stocks </a>
               </li>
@@ -4506,12 +4506,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-239" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Quotation/addEditQuotation">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Quotation </a>
               </li>
               <li data-access="list-239" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Quotation/quotations">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Quotation </a>
               </li>
@@ -4526,12 +4526,12 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-125" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Transfer/addEditTransfer">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Transfer </a>
               </li>
               <li data-access="list-125" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Transfer/transfers">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Transfer </a>
               </li>
@@ -4546,25 +4546,25 @@
             <div class="triangle"></div>
             <ul class="sub__menu__list">
               <li data-access="add-166" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Damage/addEditDamage">
+                <a href="#">
                   <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
                   Add Damage </a>
               </li>
               <li data-access="list-166" class="menu_assign_class">
-                <a href="https://doorsoft-demo.com/off_pos/all_types/Damage/damages">
+                <a href="#">
                   <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
                   List Damage </a>
               </li>
             </ul>
           </li>
           <li data-access="update-247" class="have_sub_menu2">
-            <a href="https://doorsoft-demo.com/off_pos/all_types/Update/index">
+            <a href="#">
               <iconify-icon icon="solar:cloud-download-broken" width="30"></iconify-icon>
               <span>Update Software</span>
             </a>
           </li>
           <li data-access="update-318" class="have_sub_menu2">
-            <a href="https://doorsoft-demo.com/off_pos/all_types/Update/UninstallLicense">
+            <a href="#">
               <iconify-icon icon="solar:cloud-cross-broken" width="30"></iconify-icon>
               <span>Uninstall License</span>
             </a>
@@ -5090,986 +5090,6 @@
     </div>
     <!-- Promo Modal End -->
 
-    <!-- POS Sidebar Start -->
-    <aside id="pos__sidebar">
-      <div class="brand__logo op_center">
-        <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/userProfile">
-          <img
-            src="https://doorsoft-demo.com/off_pos/all_types/uploads/site_settings/1c89efb05f2bda6fb4e61365e3bb61dd.png"
-            width="50" alt="Logo Image">
-        </a>
-      </div>
-      <ul class="pos__menu__list">
-        <li class="have_sub_menu2">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/userProfile">
-            <iconify-icon icon="solar:home-broken" width="30"></iconify-icon>
-            <span>
-              Home </span>
-          </a>
-        </li>
-
-
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:widget-2-broken" width="30"></iconify-icon>
-            <span>Outlets</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-25" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Outlet/addEditOutlet">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Outlet </a>
-            </li>
-            <li data-access="list-25" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Outlet/outlets">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Outlet </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:cart-large-broken" width="30"></iconify-icon>
-            <span>Sales</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="pos-138" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Sale/POS">
-                <iconify-icon icon="solar:cart-large-broken" width="15"></iconify-icon>
-                POS Screen </a>
-            </li>
-            <li data-access="list-138" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Sale/sales">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Sale </a>
-            </li>
-            <li data-access="add-147" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Customer/addEditCustomer">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Customer </a>
-            </li>
-            <li data-access="list-147" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Customer/customers">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Customer </a>
-            </li>
-            <li data-access="add-154" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Group/addEditGroup">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Customer Group </a>
-            </li>
-            <li data-access="list-154" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Group/groups">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Customer Group </a>
-            </li>
-            <li data-access="add-133" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Promotion/addEditPromotion">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Promotion </a>
-            </li>
-            <li data-access="list-133" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Promotion/promotions">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Promotion </a>
-            </li>
-            <li data-access="add-159" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Delivery_partner/addEditPartner">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Delivery Partner </a>
-            </li>
-            <li data-access="list-159" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Delivery_partner/listPartner">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Delivery Partner </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:list-heart-broken" width="30"></iconify-icon>
-            <span>Item/Product</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-49" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Item/addEditItem">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Item </a>
-            </li>
-            <li data-access="list-49" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Item/items">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Item </a>
-            </li>
-            <li data-access="list-49" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Item/bulkItemUpdate">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                Bulk Item Update </a>
-            </li>
-            <li data-access="add-60" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Category/addEditItemCategory">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Item Category </a>
-            </li>
-            <li data-access="list-60" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Category/itemCategories">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Item Category </a>
-            </li>
-            <li data-access="add-304" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Rack/addEditRack">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Rack </a>
-            </li>
-            <li data-access="list-304" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Rack/addEditRack">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Rack </a>
-            </li>
-
-            <li data-access="add-65" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Unit/addEditUnit">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Unit </a>
-            </li>
-            <li data-access="list-65" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Unit/units">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Unit </a>
-            </li>
-            <li data-access="add-70" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Variation/addEditVariation">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Variation Attribute </a>
-            </li>
-            <li data-access="list-70" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Variation/variations">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Variation Attribute </a>
-            </li>
-            <li data-access="add-297" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Brand/addEditBrand">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Brand </a>
-            </li>
-            <li data-access="list-297" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Brand/brands">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Brand </a>
-            </li>
-          </ul>
-        </li>
-        <li data-access="view-30" class="have_sub_menu2 menu_assign_class">
-          <a href="home.jsp">
-            <iconify-icon icon="solar:chart-2-broken" width="30"></iconify-icon>
-            <span>&nbsp;Dashboard</span>
-          </a>
-        </li>
-        <li data-access="view-164" class="have_sub_menu2">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Stock/stock">
-            <iconify-icon icon="solar:database-broken" width="30"></iconify-icon>
-            <span>
-              Stock </span>
-          </a>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:archive-broken" width="30"></iconify-icon>
-            <span>Purchase</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-109" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase/addEditPurchase">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Purchase </a>
-            </li>
-            <li data-access="list-109" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase/purchases">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Purchase </a>
-            </li>
-            <li data-access="add-117" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Supplier/addEditSupplier">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Supplier </a>
-            </li>
-            <li data-access="list-117" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Supplier/suppliers">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Supplier </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:card-recive-broken" width="30"></iconify-icon>
-            <span>Customer Receive</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-198" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Customer_due_receive/addCustomerDueReceive">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Customer Receive </a>
-            </li>
-            <li data-access="list-198" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Customer_due_receive/customerDueReceives">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Customer Receive </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:card-send-broken" width="30"></iconify-icon>
-            <span>Supplier Payment</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-192" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/SupplierPayment/addSupplierPayment">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Supplier Payment </a>
-            </li>
-            <li data-access="list-192" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/SupplierPayment/supplierPayments">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Supplier Payment </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:wallet-money-broken" width="30"></iconify-icon>
-            <span>Accounting</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-218" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/PaymentMethod/addEditPaymentMethod">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Account </a>
-            </li>
-            <li data-access="list-218" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/PaymentMethod/paymentMethods">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Account </a>
-            </li>
-            <li data-access="add-223" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Deposit/addEditDeposit">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Deposit Or Withdraw </a>
-            </li>
-            <li data-access="list-223" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Deposit/deposits">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Deposit Or Withdraw </a>
-            </li>
-            <li data-access="list-228" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/balanceStatement">
-                <iconify-icon icon="solar:notebook-broken" width="18"></iconify-icon>
-                Balance Statement </a>
-            </li>
-            <li data-access="list-230" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/trialBalance">
-                <iconify-icon icon="solar:book-2-broken" width="18"></iconify-icon>
-                Trial Balance </a>
-            </li>
-            <li data-access="list-232" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Accounting/balanceSheet">
-                <iconify-icon icon="solar:notebook-bookmark-broken" width="18"></iconify-icon>
-                Balance Sheet </a>
-            </li>
-          </ul>
-        </li>
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:clock-square-broken" width="30"></iconify-icon>
-            <span>Attendance</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-234" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Attendance/addEditAttendance">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Attendance </a>
-            </li>
-            <li data-access="list-234" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Attendance/attendances">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Attendance </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:diagram-down-broken" width="30"></iconify-icon>
-            <span>Report</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="register_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/registerReport">
-                <iconify-icon icon="solar:book-broken" width="18"></iconify-icon>
-                Register Report </a>
-            </li>
-            <li data-access="zReport-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/zReport">
-                <iconify-icon icon="solar:bookmark-square-minimalistic-broken" width="18"></iconify-icon>
-                Z Report </a>
-            </li>
-            <li data-access="daily_summary_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/dailySummaryReport">
-                <iconify-icon icon="solar:clipboard-list-broken" width="18"></iconify-icon>
-                Daily Summary Report </a>
-            </li>
-            <li data-access="sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/saleReport">
-                <iconify-icon icon="solar:cart-check-broken" width="18"></iconify-icon>
-                Sale Report </a>
-            </li>
-            <li data-access="service_sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/serviceSaleReport">
-                <iconify-icon icon="solar:hand-stars-broken" width="18"></iconify-icon>
-                Service Sale Report </a>
-            </li>
-            <li data-access="service_sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/comboServiceReport">
-                <iconify-icon icon="solar:hand-stars-broken" width="18"></iconify-icon>
-                Combo Service Report </a>
-            </li>
-            <li data-access="stock_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/stockReport">
-                <iconify-icon icon="solar:atom-broken" width="18"></iconify-icon>
-                Stock Report </a>
-            </li>
-            <li data-access="employee_sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/employeeSaleReport">
-                <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
-                Employee Sale Report </a>
-            </li>
-            <li data-access="customer_receive_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/customerDueReceiveReport">
-                <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
-                Customer Receive Report </a>
-            </li>
-            <li data-access="attendance_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/attendanceReport">
-                <iconify-icon icon="solar:clock-square-broken" width="18"></iconify-icon>
-                Attendance Report </a>
-            </li>
-            <li data-access="product_profit_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productProfitReport">
-                <iconify-icon icon="solar:dollar-broken" width="18"></iconify-icon>
-                Product Profit Report </a>
-            </li>
-            <li data-access="supplier_ledger-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/supplierLedgerReport">
-                <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
-                Supplier Ledger </a>
-            </li>
-            <li data-access="supplier_balance_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/supplierDueReport">
-                <iconify-icon icon="solar:banknote-broken" width="18"></iconify-icon>
-                Supplier Balance Report </a>
-            </li>
-
-            <li data-access="customer_ledger-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/customerLedgerReport">
-                <iconify-icon icon="solar:users-group-two-rounded-broken" width="18"></iconify-icon>
-                Customer Ledger </a>
-            </li>
-            <li data-access="customer_balance_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/customerBalanceReport">
-                <iconify-icon icon="solar:banknote-broken" width="18"></iconify-icon>
-                Customer Balance Report </a>
-            </li>
-            <li data-access="servicing_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/servicingReport">
-                <iconify-icon icon="solar:sunrise-broken" width="18"></iconify-icon>
-                Servicing Report </a>
-            </li>
-            <li data-access="product_sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productSaleReport">
-                <iconify-icon icon="solar:list-heart-broken" width="18"></iconify-icon>
-                Product Sale Report </a>
-            </li>
-
-
-            <li data-access="tax_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/taxReport">
-                <iconify-icon icon="solar:target-broken" width="18"></iconify-icon>
-                Tax Report </a>
-            </li>
-            <li data-access="detailed_sale_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/detailedSaleReport">
-                <iconify-icon icon="solar:cart-check-broken" width="18"></iconify-icon>
-                Detailed Sale Report </a>
-            </li>
-
-            <li data-access="low_stock_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Stock/getStockAlertList">
-                <iconify-icon icon="solar:database-broken" width="18"></iconify-icon>
-                Low Stock Report </a>
-            </li>
-            <li data-access="profit_loss_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/profitLossReport">
-                <iconify-icon icon="solar:money-bag-broken" width="18"></iconify-icon>
-                Profit Loss Report </a>
-            </li>
-            <li data-access="purchase_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/purchaseReportByDate">
-                <iconify-icon icon="solar:archive-broken" width="18"></iconify-icon>
-                Purchase Report </a>
-            </li>
-            <li data-access="product_purchase_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/productPurchaseReport">
-                <iconify-icon icon="solar:archive-broken" width="18"></iconify-icon>
-                Product Purchase Report </a>
-            </li>
-            <li data-access="expense_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/expenseReport">
-                <iconify-icon icon="solar:rewind-forward-broken" width="18"></iconify-icon>
-                Expense Report </a>
-            </li>
-            <li data-access="income_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/incomeReport">
-                <iconify-icon icon="solar:rewind-back-broken" width="18"></iconify-icon>
-                Income Report </a>
-            </li>
-            <li data-access="salary_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/salaryReport">
-                <iconify-icon icon="solar:transmission-broken" width="18"></iconify-icon>
-                Salary Report </a>
-            </li>
-            <li data-access="purchase_return_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/purchaseReturnReport">
-                <iconify-icon icon="solar:multiple-forward-right-broken" width="18"></iconify-icon>
-                Purchase Return Report </a>
-            </li>
-            <li data-access="sale_return_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/saleReturnReport">
-                <iconify-icon icon="solar:multiple-forward-left-broken" width="18"></iconify-icon>
-                Sale Return Report </a>
-            </li>
-            <li data-access="damage_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/damageReport">
-                <iconify-icon icon="solar:trash-bin-minimalistic-broken" width="18"></iconify-icon>
-                Damage Report </a>
-            </li>
-            <li data-access="installment_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/installmentReport">
-                <iconify-icon icon="solar:layers-broken" width="18"></iconify-icon>
-                Installment Report </a>
-            </li>
-            <li data-access="installment_due_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/installmentDueReport">
-                <iconify-icon icon="solar:layers-broken" width="18"></iconify-icon>
-                Installment Due Report </a>
-            </li>
-            <li data-access="item_tracing_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/itemMoving">
-                <iconify-icon icon="solar:list-heart-broken" width="18"></iconify-icon>
-                Item Movement Report </a>
-            </li>
-            <li data-access="price_history_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/priceHistory">
-                <iconify-icon icon="solar:chat-round-money-broken" width="18"></iconify-icon>
-                Price History Report </a>
-            </li>
-            <li data-access="cash_flow_report-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Company_report/cashFlowReport">
-                <iconify-icon icon="solar:hand-money-broken" width="18"></iconify-icon>
-                Cash Flow Report </a>
-            </li>
-
-            <li data-access="available_loyalty_point-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/availableLoyaltyPointReport">
-                <iconify-icon icon="solar:diploma-broken" width="18"></iconify-icon>
-                Available Loyalty Point Report </a>
-            </li>
-            <li data-access="usage_loyalty_point-249" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Report/usageLoyaltyPointReport">
-                <iconify-icon icon="solar:diploma-verified-broken" width="18"></iconify-icon>
-                Usage Loyalty Point Report </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:rewind-forward-broken" width="30"></iconify-icon>
-            <span>Expense</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-172" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Expense/addEditExpense">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Expense </a>
-            </li>
-            <li data-access="list-172" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Expense/expenses">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Expense </a>
-            </li>
-            <li data-access="add-177" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/ExpenseItem/addEditExpenseItem">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Expense Category </a>
-            </li>
-            <li data-access="list-177" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/ExpenseItem/expenseItems">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Expense Category </a>
-            </li>
-          </ul>
-        </li>
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:rewind-back-broken" width="30"></iconify-icon>
-            <span>Income</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-182" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Income/addEditIncome">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Income </a>
-            </li>
-            <li data-access="list-182" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Income/incomes">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Income </a>
-            </li>
-            <li data-access="add-187" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/IncomeItem/addEditIncomeItem">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Income Item </a>
-            </li>
-            <li data-access="list-187" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/IncomeItem/incomeItems">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Income Item </a>
-            </li>
-          </ul>
-        </li>
-
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:multiple-forward-left-broken" width="30"></iconify-icon>
-            <span>Sale Return</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-204" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Sale_return/addEditSaleReturn">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Sale Return </a>
-            </li>
-            <li data-access="list-204" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Sale_return/saleReturns">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Sale Return </a>
-            </li>
-          </ul>
-        </li>
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:multiple-forward-right-broken" width="30"></iconify-icon>
-            <span>Purchase Return</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-211" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase_return/addEditPurchaseReturn">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Purchase Return </a>
-            </li>
-            <li data-access="list-211" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Purchase_return/purchaseReturns">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Purchase Return </a>
-            </li>
-          </ul>
-        </li>
-
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:settings-broken" width="30"></iconify-icon>
-            <span>Setting</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="edit-1" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Setting/index">
-                <iconify-icon icon="solar:settings-broken" width="18"></iconify-icon>
-                Setting </a>
-            </li>
-            <li data-access="whatsappSetting-327" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Setting/whatsappSetting">
-                <iconify-icon icon="solar:settings-minimalistic-broken" width="18"></iconify-icon>
-                WhatsApp Setting </a>
-            </li>
-            <li data-access="add-3" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Denomination/addEditDenomination">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Denomination </a>
-            </li>
-            <li data-access="list-3" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Denomination/denominations">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Denominations </a>
-            </li>
-            <li data-access="add-340" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Counter/addEditCounter">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Counter </a>
-            </li>
-            <li data-access="list-340" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Counter/counters">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Counter </a>
-            </li>
-            <li data-access="edit-8" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Tax_setting/tax">
-                <iconify-icon icon="solar:target-broken" width="18"></iconify-icon>
-                Tax Setting </a>
-            </li>
-            <li data-access="edit-10" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Email_setting/emailConfiguration">
-                <iconify-icon icon="solar:letter-unread-broken" width="18"></iconify-icon>
-                Email Setting </a>
-            </li>
-            <li data-access="edit-12" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Short_message_service/smsService">
-                <iconify-icon icon="solar:letter-opened-broken" width="18"></iconify-icon>
-                SMS Settings </a>
-            </li>
-            <li data-access="edit-14" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Printer/printerSetup">
-                <iconify-icon icon="solar:printer-broken" width="18"></iconify-icon>
-                Printer Setup </a>
-            </li>
-            <li data-access="edit-23" class="menu_assign_class d-block">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/WhiteLabel/index">
-                <iconify-icon icon="solar:sledgehammer-broken" width="18"></iconify-icon>
-                White Label </a>
-            </li>
-            <li data-access="edit-23" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Authentication/logingPage">
-                <iconify-icon icon="solar:sledgehammer-broken" width="18"></iconify-icon>
-                Login Page </a>
-            </li>
-
-            <li data-access="edit-335" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Payment_getway/paymentGetway">
-                <iconify-icon icon="solar:password-broken" width="18"></iconify-icon>
-                Payment Getway </a>
-            </li>
-            <li data-access="add-311" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/MultipleCurrency/addEditMultipleCurrency">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Multiple Currency </a>
-            </li>
-            <li data-access="list-311" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/MultipleCurrency/multipleCurrencies">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Multiple Currency </a>
-            </li>
-            <li data-access="add_dummy_data-325" class="menu_assign_class">
-              <a class="add_dummy_data" href="https://doorsoft-demo.com/off_pos/all_types/Setting/add_dummy_data">
-                <iconify-icon icon="solar:import-broken" width="18"></iconify-icon>
-                Import Dummy Data </a>
-            </li>
-
-            <li data-access="deleteDummyData-329" class="menu_assign_class">
-              <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/deleteDummyData">
-                <iconify-icon icon="solar:trash-bin-2-broken" width="18"></iconify-icon>
-                Delete Dummy Data </a>
-            </li>
-            <li data-access="wipeTransactionalData-331" class="menu_assign_class">
-              <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/wipeTransactionalData">
-                <iconify-icon icon="solar:transfer-horizontal-broken" width="18"></iconify-icon>
-                Wipe Transactional Data </a>
-            </li>
-            <li data-access="wipeAllData-333" class="menu_assign_class">
-              <a class="delete" href="https://doorsoft-demo.com/off_pos/all_types/Setting/wipeAllData">
-                <iconify-icon icon="solar:translation-broken" width="18"></iconify-icon>
-                Wipe All Data </a>
-            </li>
-          </ul>
-        </li>
-
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:shield-keyhole-minimalistic-broken" width="30"></iconify-icon>
-            <span>Authentication</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-282" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Role/addEditRole">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Role </a>
-            </li>
-            <li data-access="list-282" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Role/listRole">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Role </a>
-            </li>
-            <li data-access="add-287" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/User/addEditUser">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Employee </a>
-            </li>
-            <li data-access="list-287" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/User/users">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Employee </a>
-            </li>
-            <li data-access="add-287" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/User/changeProfile">
-                <iconify-icon icon="solar:user-check-broken" width="18"></iconify-icon>
-                Change Profile </a>
-            </li>
-            <li data-access="add-287" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/User/changePassword">
-                <iconify-icon icon="solar:key-broken" width="18"></iconify-icon>
-                Change Password </a>
-            </li>
-            <li data-access="add-287" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/User/securityQuestion">
-                <iconify-icon icon="solar:question-circle-broken" width="18"></iconify-icon>
-                Set Security Question </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:layers-broken" width="30"></iconify-icon>
-            <span>Installment Sale</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-93" data-access="add-244" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/addEditCustomer">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Installment Customer </a>
-            </li>
-            <li data-access="list-93" data-access="add-244" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/customers">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Installment Customer </a>
-            </li>
-            <li data-access="add-100" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/addEditInstallmentSale">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Installment Sale </a>
-            </li>
-            <li data-access="list-100" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/installmentSales">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Installment Sale </a>
-            </li>
-            <li data-access="installment_collection-100" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/installmentCollections">
-                <iconify-icon icon="solar:copyright-broken" width="18"></iconify-icon>
-                Installment Collection </a>
-            </li>
-            <li data-access="due_installment-100" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Installment/listDueInstallment">
-                <iconify-icon icon="solar:sale-broken" width="18"></iconify-icon>
-                List Due Installment </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:sunset-broken" width="30"></iconify-icon>
-            <span>Warranty/Servicing</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-75" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Servicing/addEditServicing">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Servicing </a>
-            </li>
-            <li data-access="list-75" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Servicing/listServicing">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Servicing </a>
-            </li>
-
-            <li data-access="filter-85" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Warranty/checkWarranty">
-                <iconify-icon icon="solar:card-search-broken" width="18"></iconify-icon>
-                Warranty Checking </a>
-            </li>
-            <li data-access="add-80" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/WarrantyProducts/addEditWarrantyProduct">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Warranty Products </a>
-            </li>
-            <li data-access="list-80" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/WarrantyProducts/listWarrantyProduct">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Warranty Products </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:transmission-broken" width="30"></iconify-icon>
-            <span>Salary/Payroll</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="list-87" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Salary/generate">
-                <iconify-icon icon="solar:transmission-broken" width="18"></iconify-icon>
-                List Salary/Payroll </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:cassette-broken" width="30"></iconify-icon>
-            <span>Fixed Assets</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-32" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_assets/addEditItem">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Item </a>
-            </li>
-            <li data-access="list-32" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_assets/listItem">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Item </a>
-            </li>
-            <li data-access="add-37" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/addEditStock">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Stock In </a>
-            </li>
-            <li data-access="list-37" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/listStock">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Stock In </a>
-            </li>
-            <li data-access="add-42" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock_out/addEditStockOut">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Stock Out </a>
-            </li>
-            <li data-access="list-42" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock_out/listStockOut">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Stock Out </a>
-            </li>
-            <li data-access="view-47" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Fixed_asset_stock/stocks">
-                <iconify-icon icon="solar:database-broken" width="18"></iconify-icon>
-                Stocks </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:ruler-pen-broken" width="30"></iconify-icon>
-            <span>Quotation</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-239" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Quotation/addEditQuotation">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Quotation </a>
-            </li>
-            <li data-access="list-239" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Quotation/quotations">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Quotation </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:bicycling-round-broken" width="30"></iconify-icon>
-            <span>Transfer</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-125" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Transfer/addEditTransfer">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Transfer </a>
-            </li>
-            <li data-access="list-125" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Transfer/transfers">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Transfer </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="have_sub_menu">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="solar:trash-bin-minimalistic-broken" width="30"></iconify-icon>
-            <span>Damage</span>
-          </a>
-          <div class="triangle"></div>
-          <ul class="sub__menu__list">
-            <li data-access="add-166" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Damage/addEditDamage">
-                <iconify-icon icon="solar:add-circle-broken" width="18"></iconify-icon>
-                Add Damage </a>
-            </li>
-            <li data-access="list-166" class="menu_assign_class">
-              <a href="https://doorsoft-demo.com/off_pos/all_types/Damage/damages">
-                <iconify-icon icon="solar:checklist-bold" width="18"></iconify-icon>
-                List Damage </a>
-            </li>
-          </ul>
-        </li>
-        <li data-access="update-247" class="have_sub_menu2">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Update/index">
-            <iconify-icon icon="solar:cloud-download-broken" width="30"></iconify-icon>
-            <span>Update Software</span>
-          </a>
-        </li>
-        <li data-access="update-318" class="have_sub_menu2">
-          <a href="https://doorsoft-demo.com/off_pos/all_types/Update/UninstallLicense">
-            <iconify-icon icon="solar:cloud-cross-broken" width="30"></iconify-icon>
-            <span>Uninstall License</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
     <div class="sidebar_sub_menu">
     </div>
     <!-- TOP Start-->
