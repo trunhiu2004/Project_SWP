@@ -691,7 +691,7 @@
                         <img src="assets/images/product/${s.getInventory().getProduct().getImage()}" alt=""
                           class="d-block" width="80px" height="80px">
                       </div>
-                      <p class="item_name" data-tippy-content="40 Pgs notebook(478)">${s.getInventory().getProduct().getName()}</p>
+                      <p class="item_name" data-tippy-content="${s.getInventory().getProduct().getName()}">${s.getInventory().getProduct().getName()}</p>
                       <p class="generic_name d-none" data-tippy-content=""></p>
                       <p class="">SP: <span id="">
                               <c:choose>
