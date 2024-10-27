@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.CategorySummary;
 import model.ProductCategories;
 
 /**
@@ -105,9 +106,85 @@ public class ProductCategoriesDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        ProductCategoriesDAO c = new ProductCategoriesDAO();
-        List<ProductCategories> list = c.getAll();
-        System.out.println(list.get(0).getName());
+    public List<CategorySummary> getBestCategory() {
+    List<CategorySummary> bestCategories = new ArrayList<>();
+    String sql = """
+                 WITH salesByMonth AS (
+                     SELECT 
+                         MONTH(o.order_date) AS order_month,  -- Lấy tháng từ order_date
+                         YEAR(o.order_date) AS order_year,    -- Lấy năm từ order_date
+                         p.product_id,
+                         p.product_name,
+                         p.product_image,
+                         pc.category_id,
+                         pc.category_name,
+                         SUM(o.order_total_amount) AS total_sales,  -- Tổng tiền của đơn hàng từ bảng Orders
+                         SUM(od.quantity) AS total_quantity,  -- Tổng số lượng của sản phẩm
+                         COUNT(DISTINCT o.order_id) AS total_order
+                     FROM 
+                         Orders o
+                     LEFT JOIN 
+                         OrdersDetails od ON o.order_id = od.order_id 
+                     LEFT JOIN 
+                         Products p ON od.product_id = p.product_id 
+                     LEFT JOIN 
+                         Product_Categories pc ON p.category_id = pc.category_id 
+                     LEFT JOIN 
+                         Customers c ON o.customer_id = c.customer_id
+                     WHERE
+                         YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
+                         AND o.order_status = 'Paid'
+                     GROUP BY 
+                         YEAR(o.order_date),   -- Nhóm theo năm
+                         MONTH(o.order_date),  -- Nhóm theo tháng
+                         p.product_id,
+                         p.product_name,
+                         p.product_image,
+                         pc.category_id,
+                         pc.category_name
+                 ),
+                 totalSalesByCategory AS (
+                     SELECT 
+                         category_id,
+                         category_name,
+                         SUM(total_quantity) AS total_category_quantity  -- Tổng số lượng theo category_id
+                     FROM 
+                         salesByMonth
+                     GROUP BY 
+                         category_id,
+                         category_name
+                 )
+                 
+                 SELECT 
+                     ts.category_name,  -- Tên danh mục
+                     ts.total_category_quantity  -- Tổng số lượng theo category_id
+                 FROM 
+                     totalSalesByCategory ts  -- Lấy từ bảng tổng số lượng theo danh mục
+                 ORDER BY 
+                     ts.total_category_quantity DESC;  -- Sắp xếp theo tổng số lượng giảm dần
+                 """;
+
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            String categoryName = rs.getString("category_name");
+            int totalQuantity = rs.getInt("total_category_quantity");
+            CategorySummary categorySummary = new CategorySummary(categoryName, totalQuantity);
+            bestCategories.add(categorySummary);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return bestCategories;
+}
+
+
+    public static void main(String[] args) {
+        ProductCategoriesDAO dao = new ProductCategoriesDAO();
+        List<CategorySummary> bestItem = dao.getBestCategory();
+        System.out.println(bestItem.get(0).getTotalCategoryQuantity());
+    }
+
 }

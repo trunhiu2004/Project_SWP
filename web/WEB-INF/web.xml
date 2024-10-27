@@ -228,6 +228,14 @@
         <servlet-name>HomeAdmin</servlet-name>
         <servlet-class>controller.HomeAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListSales</servlet-name>
+        <servlet-class>controller.ListSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrderMax</servlet-name>
+        <servlet-class>controller.ListOrderMax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -455,6 +463,14 @@
     <servlet-mapping>
         <servlet-name>HomeAdmin</servlet-name>
         <url-pattern>/HomeAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSales</servlet-name>
+        <url-pattern>/ListSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrderMax</servlet-name>
+        <url-pattern>/ListOrderMax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>100</session-timeout>

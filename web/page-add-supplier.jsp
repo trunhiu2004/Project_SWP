@@ -53,66 +53,52 @@
                                     <div class="header-title">
                                         <h4 class="card-title">Add Supplier</h4>
                                     </div>
+                                    <a href="listSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Supplier</a>
                                 </div>
                                 <div class="card-body">
-                                    <form action="https://templates.iqonic.design/posdash/html/backend/page-list-suppliers.html" data-toggle="validator">
+                                    <form action="addSupplier" method="post" data-toggle="validator" enctype="multipart/form-data">
                                         <div class="row"> 
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
                                                     <label>Name *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Name" required>
+                                                    <input type="text" name="nameSup" class="form-control" placeholder="Enter Name" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>    
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Email *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Email" required>
+                                                    <input type="text" name="emailSup" class="form-control" placeholder="Enter Email" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone Number *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Phone Number" required>
+                                                    <input type="text" name="phoneSup" class="form-control" placeholder="Enter Phone Number" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>GST Number *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter GST Number" required>
+                                                    <label>Contact Person *</label>
+                                                    <input type="text" name="personSup" class="form-control" placeholder="Contact Person" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    <textarea class="form-control" rows="4"></textarea>
+                                                    <textarea name="addressSup" class="form-control" rows="4"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>City *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter City" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>State *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter State" required>
-                                                    <div class="help-block with-errors"></div>
+                                                    <label>Image</label>
+                                                    <input type="file" class="form-control image-file" name="imgSup" accept="image/*">
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Country *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Country" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                        </div>                            
+                                        </div>                             
                                         <button type="submit" class="btn btn-primary mr-2">Add Supplier</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>

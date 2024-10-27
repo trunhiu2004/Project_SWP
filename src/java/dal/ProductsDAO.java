@@ -373,39 +373,164 @@ public class ProductsDAO extends DBContext {
         }
     }
 
-    public List<Products> getTopProduct() {
+    public List<Products> getTopProductByMonth() {
     List<Products> top = new ArrayList<>();
-    String sql = "SELECT \n"
-            + "    Products.product_image, \n"
-            + "    Products.product_name, \n"
-            + "    COUNT(*) AS appearance_count\n"
-            + "FROM \n"
-            + "    Invoices \n"
-            + "LEFT JOIN \n"
-            + "    OrdersDetails ON Invoices.order_id = OrdersDetails.order_id \n"
-            + "LEFT JOIN \n"
-            + "    Products ON OrdersDetails.product_id = Products.product_id\n"
-            + "GROUP BY \n"
-            + "    Products.product_image, \n"
-            + "    Products.product_name\n"
-            + "HAVING\n"
-            + "	COUNT(*) >= 2\n"
-            + "ORDER BY \n"
-            + "    appearance_count DESC";
+    String sql = """
+        WITH salesByMonth AS (
+                SELECT 
+                    MONTH(o.order_date) AS order_month,  -- Lấy tháng từ order_date
+                    YEAR(o.order_date) AS order_year,     -- Lấy năm từ order_date
+                    p.product_name,
+                    p.product_image,
+                    pc.category_name,
+                    SUM(o.order_total_amount) AS total_sales,  -- Tổng tiền của đơn hàng từ bảng Orders
+                    COUNT(DISTINCT o.order_id) AS total_order
+                FROM 
+                    Orders o
+                LEFT JOIN 
+                    OrdersDetails od ON o.order_id = od.order_id 
+                LEFT JOIN 
+                    Products p ON od.product_id = p.product_id 
+                LEFT JOIN 
+                    Product_Categories pc ON p.category_id = pc.category_id 
+                LEFT JOIN 
+                    Customers c ON o.customer_id = c.customer_id
+                WHERE
+                    YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
+                    AND o.order_status = 'Paid'
+                GROUP BY 
+                    YEAR(o.order_date),   -- Nhóm theo năm
+                    MONTH(o.order_date),  -- Nhóm theo tháng
+                    p.product_name,
+                    p.product_image,
+                    pc.category_name
+            )
+            
+            SELECT TOP 5  -- Lấy 5 sản phẩm bán chạy nhất
+                product_name,
+                product_image,
+                category_name,
+                SUM(total_order) AS total_sold
+            FROM 
+                salesByMonth
+            GROUP BY 
+                product_name,
+                product_image,
+                category_name
+            ORDER BY 
+                total_sold DESC;  -- Sắp xếp theo số lượng bán giảm dần
+             
+    """;
 
     try {
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();
 
         while (rs.next()) {
-            
             String image = rs.getString("product_image");
             String name = rs.getString("product_name");
+            String category = rs.getString("category_name");
+            int totalSold = rs.getInt("total_sold");
 
-            
-            Products topProduct = new Products(name, 0, image, null, null, null, null, null, null);
+            Products topProduct = new Products(name, totalSold, image, null, null, null, null, null, null);
 
-            
+            top.add(topProduct);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return top;
+}
+    
+    
+    public List<Products> getTopProductDetail() {
+    List<Products> top = new ArrayList<>();
+    String sql = """
+        WITH salesByMonth AS (
+                SELECT 
+                    MONTH(o.order_date) AS order_month,
+                    YEAR(o.order_date) AS order_year,
+                    p.product_name,
+                    p.product_image,
+                    pc.category_name,
+                    SUM(o.order_total_amount) AS total_sales,
+                    COUNT(DISTINCT o.order_id) AS total_order,
+                    SUM(od.quantity) AS total_quantity  -- Tổng số lượng sản phẩm
+                FROM 
+                    Orders o
+                LEFT JOIN 
+                    OrdersDetails od ON o.order_id = od.order_id 
+                LEFT JOIN 
+                    Products p ON od.product_id = p.product_id 
+                LEFT JOIN 
+                    Product_Categories pc ON p.category_id = pc.category_id 
+                LEFT JOIN 
+                    Customers c ON o.customer_id = c.customer_id
+                WHERE
+                    YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
+                    AND o.order_status = 'Paid'
+                GROUP BY 
+                    YEAR(o.order_date),
+                    MONTH(o.order_date),
+                    p.product_name,
+                    p.product_image,
+                    pc.category_name
+            ),
+            topProducts AS (
+                SELECT TOP 5 
+                    product_name,
+                    product_image,
+                    category_name,
+                    SUM(total_order) AS total_sold
+                FROM 
+                    salesByMonth
+                GROUP BY 
+                    product_name,
+                    product_image,
+                    category_name
+                ORDER BY 
+                    total_sold DESC
+            )
+            SELECT 
+                tp.product_name,
+                tp.product_image,
+                tp.category_name,
+                SUM(o.order_total_amount) AS total_sales_amount,  -- Tổng số tiền từ các đơn hàng
+                SUM(od.quantity) AS total_quantity  -- Tổng số lượng sản phẩm
+            FROM 
+                Orders o
+            JOIN 
+                OrdersDetails od ON o.order_id = od.order_id
+            JOIN 
+                Products p ON od.product_id = p.product_id
+            JOIN 
+                Product_Categories pc ON p.category_id = pc.category_id
+            JOIN 
+                topProducts tp ON p.product_name = tp.product_name  -- Kết nối với danh sách sản phẩm bán chạy
+            GROUP BY 
+                tp.product_name,
+                tp.product_image,
+                tp.category_name
+            ORDER BY 
+                total_sales_amount DESC;  -- Sắp xếp theo tổng số tiền bán hàng
+             
+    """;
+
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            String image = rs.getString("product_image");
+            String name = rs.getString("product_name");
+            String category = rs.getString("category_name");
+            int totalSold = rs.getInt("total_quantity");
+            String total_sale  = rs.getString("total_sales_amount");
+
+
+            Products topProduct = new Products(name, totalSold, image, category, null, null, null, null, null);
+
             top.add(topProduct);
         }
     } catch (SQLException e) {
@@ -416,9 +541,7 @@ public class ProductsDAO extends DBContext {
 }
 
 
-    public static void main(String[] args) {
-        ProductsDAO p = new ProductsDAO();
-        List<Products> list = p.getTopProduct();
-        System.out.println(list.get(3).getName());
-    }
+    
+
+    
 }
