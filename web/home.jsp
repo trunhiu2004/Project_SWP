@@ -97,8 +97,11 @@
                                                     <img src="assets/images/product/3.png" class="img-fluid" alt="image">
                                                 </div>
                                                 <div>
+                                                    <c:forEach var="sum" items="${requestScope.sum}">
                                                     <p class="mb-2">Product Sold</p>
-                                                    <h4>${sum} $</h4>
+                                                                ${sum.totalSales}
+                                                        
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                             <div class="iq-progress-bar mt-2">
@@ -123,14 +126,9 @@
                                         <form action="HomeAdmin" method="get">
                                             <div class="dropdown">
                                                 <div class="card-header-toolbar d-flex align-items-center">
-                                                    <div><a href="#" class="btn btn-primary view-btn font-size-14">View All</a></div>
+                                                    <div><a href="BestSellProduct" class="btn btn-primary view-btn font-size-14">View All</a></div>
                                                 </div>
-                                                <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                                     aria-labelledby="dropdownMenuButton006">
-                                                    <a class="dropdown-item" href="#">2024</a>
-                                                    <a class="dropdown-item" href="#">2025</a>
-
-                                                </div>
+                                                
                                             </div>
                                         </form>
                                     </div>
@@ -144,13 +142,13 @@
                                                     <div class="card-body">
                                                         <div class="bg-warning-light rounded">
 
-                                                            <img src="assets/images/product/${product.image}" 
+                                                            <img src="assets/images/product/${product.productImage}" 
                                                                  class="style-img img-fluid m-auto p-3" 
-                                                                 alt="${product.name}">
+                                                                 alt="${product.productName}">
                                                         </div>
                                                         <div class="style-text text-left mt-3">
 
-                                                            <h5 class="mb-1">${product.name}</h5>
+                                                            <h5 class="mb-1">${product.productName}</h5>
 
 
                                                         </div>

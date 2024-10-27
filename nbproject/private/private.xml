@@ -74,14 +74,14 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/staff-update.jsp</file>
         </group>
         <group>
-            <file>file:/E:/SWP391/final1/Project_SWP/web/page-list-sale.jsp</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/controller/ListSales.java</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/controller/ListOrderMax.java</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/web/page-list-maxOrder.jsp</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/dal/OrderDAO.java</file>
-            <file>file:/E:/SWP391/final1/Project_SWP/src/java/dal/SalesListDAO.java</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/src/java/dal/SalesReportDAO.java</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/src/java/controller/BestSellProduct.java</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/src/java/model/TopSellingProduct.java</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/web/components/sidebar.jsp</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/src/java/controller/HomeAdmin.java</file>
             <file>file:/E:/SWP391/final1/Project_SWP/web/home.jsp</file>
             <file>file:/E:/SWP391/final1/Project_SWP/src/java/dal/ProductsDAO.java</file>
+            <file>file:/E:/SWP391/final1/Project_SWP/src/java/model/SalesReport.java</file>
         </group>
     </open-files>
 </project-private>

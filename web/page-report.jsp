@@ -1,9 +1,29 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
+        <meta name="keywords" content="free dashboard template, free admin, free bootstrap template, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+        <meta name="author" content="codedthemes">
+        <!-- Favicon icon -->
+        <link rel="icon" href="assets2/assets/images/favicon.ico" type="image/x-icon">
+        <!-- Google font-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+        <!-- Required Fremwork -->
+        <link rel="stylesheet" type="text/css" href="assets2/assets/css/bootstrap/css/bootstrap.min.css">
+        <!-- themify-icons line icon -->
+        <link rel="stylesheet" type="text/css" href="assets2/assets/icon/themify-icons/themify-icons.css">
+        <link rel="stylesheet" type="text/css" href="assets2/assets/icon/font-awesome/css/font-awesome.min.css">
+        <!-- ico font -->
+        <link rel="stylesheet" type="text/css" href="assets2/assets/icon/icofont/css/icofont.css">
+        <!-- Style.css -->
+        <link rel="stylesheet" type="text/css" href="assets2/assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="assets2/assets/css/jquery.mCustomScrollbar.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
@@ -44,132 +64,46 @@
                         </div>
                     </div>
                 </div>
-            </div>      <div class="content-page">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card card-block card-stretch card-height">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Overview</h4>
-                                    </div>                        
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton1"
-                                                  data-toggle="dropdown">
-                                                This Month<i class="ri-arrow-down-s-line ml-1"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                                 aria-labelledby="dropdownMenuButton1">
-                                                <a class="dropdown-item" href="#">Year</a>
-                                                <a class="dropdown-item" href="#">Month</a>
-                                                <a class="dropdown-item" href="#">Week</a>
-                                            </div>
-                                        </div>
+            </div>
+            
+            
+            
+            
+                <!-- Wrapper End-->
+                <footer class="iq-footer">
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                                            <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                                        </ul>
                                     </div>
-                                </div>                    
-                                <div class="card-body">
-                                    <div id="report-chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-block card-stretch card-height">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Daily Sales</h4>
-                                    </div>                        
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div><a href="#" class="btn light-gray view-btn">$ 25,000.00</a></div>
+                                    <div class="col-lg-6 text-right">
+                                        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                                     </div>
-                                </div>   
-                                <div class="card-body">
-                                    <div id="report-chart2" style="min-height: 340px;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-block card-stretch card-height">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Monthly Sales</h4>
-                                    </div>                        
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div><a href="#" class="btn light-gray view-btn">$ 25,000.00</a></div>
-                                    </div>
-                                </div>   
-                                <div class="card-body">
-                                    <div id="report-chart3"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-block card-stretch card-height">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">Best Seller</h4>
-                                    </div>                        
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton002"
-                                                  data-toggle="dropdown">
-                                                This Month<i class="ri-arrow-down-s-line ml-1"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                                 aria-labelledby="dropdownMenuButton002">
-                                                <a class="dropdown-item" href="#">Year</a>
-                                                <a class="dropdown-item" href="#">Month</a>
-                                                <a class="dropdown-item" href="#">Week</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                    
-                                <div class="card-body">
-                                    <div id="report-chart4"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Page end  -->
-                </div>
-            </div>
-        </div>
-        <!-- Wrapper End-->
-        <footer class="iq-footer">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Backend Bundle JavaScript -->
-        <script src="assets/js/backend-bundle.min.js"></script>
+                </footer>
+                <!-- Backend Bundle JavaScript -->
+                <script src="assets/js/backend-bundle.min.js"></script>
 
-        <!-- Table Treeview JavaScript -->
-        <script src="assets/js/table-treeview.js"></script>
+                <!-- Table Treeview JavaScript -->
+                <script src="assets/js/table-treeview.js"></script>
 
-        <!-- Chart Custom JavaScript -->
-        <script src="assets/js/customizer.js"></script>
+                <!-- Chart Custom JavaScript -->
+                <script src="assets/js/customizer.js"></script>
 
-        <!-- Chart Custom JavaScript -->
-        <script async src="assets/js/chart-custom.js"></script>
+                <!-- Chart Custom JavaScript -->
+                <script async src="assets/js/chart-custom.js"></script>
 
-        <!-- app JavaScript -->
-        <script src="assets/js/app.js"></script>
-    </body>
+                <!-- app JavaScript -->
+                <script src="assets/js/app.js"></script>
+                </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
-</html>
+                <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+                </html>

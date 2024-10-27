@@ -236,6 +236,26 @@
         <servlet-name>ListOrderMax</servlet-name>
         <servlet-class>controller.ListOrderMax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportCustomer</servlet-name>
+        <servlet-class>controller.ReportCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomerReport</servlet-name>
+        <servlet-class>controller.ListCustomerReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductSales</servlet-name>
+        <servlet-class>controller.ProductSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductCategorySale</servlet-name>
+        <servlet-class>controller.ProductCategorySale</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BestSellProduct</servlet-name>
+        <servlet-class>controller.BestSellProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -471,6 +491,26 @@
     <servlet-mapping>
         <servlet-name>ListOrderMax</servlet-name>
         <url-pattern>/ListOrderMax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportCustomer</servlet-name>
+        <url-pattern>/ReportCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomerReport</servlet-name>
+        <url-pattern>/ListCustomerReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductSales</servlet-name>
+        <url-pattern>/ProductSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductCategorySale</servlet-name>
+        <url-pattern>/ProductCategorySale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BestSellProduct</servlet-name>
+        <url-pattern>/BestSellProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>100</session-timeout>
