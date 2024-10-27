@@ -50,16 +50,17 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Store</h4>
+                                        <h4 class="mb-3">Store</h4>          
                                     </div>
+                                    <a href="exportNewToStore" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add new product to Store</a>
                                 </div>
-
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
+                                                <th>Batch</th>
                                                 <th>Product</th>
                                                 <th>Product Name</th>
                                                 <th>Quantity</th>
@@ -71,6 +72,7 @@
                                         <tbody class="ligth-body">
                                         <c:forEach items="${store}" var="s">
                                             <tr>
+                                                <td>${s.getInventory().getProduct().getBatch()}</td>
                                                 <td><img src="assets/images/product/${s.getInventory().getProduct().getImage()}" width="80px" height="80px"/></td>
                                                 <td>${s.getInventory().getProduct().getName()}</td>
                                                 <td>${s.getStock()}</td>       
@@ -86,12 +88,12 @@
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Import"
-                                                           href="importInventory?inventory_id=${i.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                           href="exportOldBatch?store_stock_id=${s.getStoreStockId()}"><i class="ri-pencil-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        
-                                    </c:forEach>
+
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

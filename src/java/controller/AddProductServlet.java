@@ -133,16 +133,19 @@ public class AddProductServlet extends HttpServlet {
             }
         }
 
-        HttpSession session = request.getSession();
-                    
+        String manufactureDateStr = request.getParameter("manufactureDate");
+        String expirationDateStr = request.getParameter("expirationDate");
+        LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
+        LocalDate expirationDate = LocalDate.parse(expirationDateStr);
+        LocalDate currentDate = LocalDate.now();
+
         String cate_raw = request.getParameter("catePro");
         String name = request.getParameter("namePro");
         String barcode = request.getParameter("barcode");
         String price_raw = request.getParameter("pricePro");
         String unit_raw = request.getParameter("unitPro");
         String supplier_raw = request.getParameter("supPro");
-        String manufactureDateStr = request.getParameter("manufactureDate");
-        String expirationDateStr = request.getParameter("expirationDate");
+
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : null;
 
         ProductsDAO pd = new ProductsDAO();
@@ -150,38 +153,41 @@ public class AddProductServlet extends HttpServlet {
         WeightUnitDAO wud = new WeightUnitDAO();
         ProductCategoriesDAO pcd = new ProductCategoriesDAO();
 
-        Products s = pd.getProductByName(name);
-        if (s == null) {
-            int cate = Integer.parseInt(cate_raw);
-            ProductCategories ci = pcd.getCategoryById(cate);
-            int unit = Integer.parseInt(unit_raw);
-            WeightUnit ui = wud.getUnitById(unit);
-            int sup = Integer.parseInt(supplier_raw);
-            Suppliers si = sd.getSupById(sup);
-            float price = Float.parseFloat(price_raw);
-            LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
-            LocalDate expirationDate = LocalDate.parse(expirationDateStr);
-            int batch = 1;
-            Products pNew = new Products(name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate, batch);
-            pd.insertPro(pNew);
-            response.sendRedirect("listProduct");
+        if (expirationDate.isBefore(manufactureDate)) {
+            request.setAttribute("errorMessage", "Ngày hết hạn phải sau ngày sản xuất.");
+            request.getRequestDispatcher("page-add-product.jsp").forward(request, response);
+        } else if (expirationDate.isBefore(currentDate)) {
+            request.setAttribute("errorMessage", "Ngày hết hạn phải sau ngày hiện tại.");
+            request.getRequestDispatcher("page-add-product.jsp").forward(request, response);
         } else {
-            int latestBatch = pd.getLatestBatchByName(name); // Hàm lấy batch mới nhất theo tên
-            int newBatch = latestBatch + 1;
+            Products s = pd.getProductByName(name);
+            if (s == null) {
+                int cate = Integer.parseInt(cate_raw);
+                ProductCategories ci = pcd.getCategoryById(cate);
+                int unit = Integer.parseInt(unit_raw);
+                WeightUnit ui = wud.getUnitById(unit);
+                int sup = Integer.parseInt(supplier_raw);
+                Suppliers si = sd.getSupById(sup);
+                float price = Float.parseFloat(price_raw);
+                int batch = 1;
+                Products pNew = new Products(name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate, batch);
+                pd.insertPro(pNew);
+                response.sendRedirect("listProduct");
+            } else {
+                int latestBatch = pd.getLatestBatchByName(name); // Hàm lấy batch mới nhất theo tên
+                int newBatch = latestBatch + 1;
 
-            int cate = Integer.parseInt(cate_raw);
-            ProductCategories ci = pcd.getCategoryById(cate);
-            int unit = Integer.parseInt(unit_raw);
-            WeightUnit ui = wud.getUnitById(unit);
-            int sup = Integer.parseInt(supplier_raw);
-            Suppliers si = sd.getSupById(sup);
-            float price = Float.parseFloat(price_raw);
-            LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
-            LocalDate expirationDate = LocalDate.parse(expirationDateStr);
-            Products pNew = new Products(name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate, newBatch);
-
-            pd.insertPro(pNew);
-            response.sendRedirect("listProduct");
+                int cate = Integer.parseInt(cate_raw);
+                ProductCategories ci = pcd.getCategoryById(cate);
+                int unit = Integer.parseInt(unit_raw);
+                WeightUnit ui = wud.getUnitById(unit);
+                int sup = Integer.parseInt(supplier_raw);
+                Suppliers si = sd.getSupById(sup);
+                float price = Float.parseFloat(price_raw);
+                Products pNew = new Products(name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate, newBatch);
+                pd.insertPro(pNew);
+                response.sendRedirect("listProduct");
+            }
         }
 
     }

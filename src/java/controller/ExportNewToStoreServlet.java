@@ -5,30 +5,26 @@
 package controller;
 
 import dal.InventoryDAO;
-import dal.ProductCategoriesDAO;
-import dal.ProductsDAO;
-import dal.SuppliersDAO;
-import dal.WeightUnitDAO;
+import dal.StoreStockDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import model.Inventory;
 import model.InventoryDetails;
-import model.Products;
+import model.StoreStock;
 
 /**
  *
- * @author PC
+ * @author hungt
  */
-public class ImportInventoryServlet extends HttpServlet {
+public class ExportNewToStoreServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +43,10 @@ public class ImportInventoryServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ImportInventoryServlet</title>");
+            out.println("<title>Servlet ExportNewToStoreServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ImportInventoryServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ExportNewToStoreServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,10 +65,10 @@ public class ImportInventoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        InventoryDAO inventoryd = new InventoryDAO();
-        Inventory inven = inventoryd.getInventoryLast();
-        session.setAttribute("inventory", inven);
-        request.getRequestDispatcher("import-inventory.jsp").forward(request, response);
+        StoreStockDAO ssd = new StoreStockDAO();
+        List<Inventory> in = ssd.getInventoryNotInStore();
+        session.setAttribute("inventory", in);
+        request.getRequestDispatcher("export-to-store.jsp").forward(request, response);
     }
 
     /**
@@ -86,15 +82,62 @@ public class ImportInventoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InventoryDAO inventoryd = new InventoryDAO();
-        Inventory inven = inventoryd.getInventoryLast();
-        String q_raw = request.getParameter("quantityInven");
-        int q = Integer.parseInt(q_raw);
-        String statusDetails = "Nhập hàng";
-        LocalDate updateAt = LocalDate.now();
-        InventoryDetails detail = new InventoryDetails(inven, q, updateAt, statusDetails);
-        inventoryd.insertInventoryDetails(detail);
-        response.sendRedirect("listLogInventory");
+        StoreStockDAO ssd = new StoreStockDAO();
+        InventoryDAO inD = new InventoryDAO();
+        String idInven = request.getParameter("idInven");
+        String quantity = request.getParameter("quantity");
+        int id = Integer.parseInt(idInven);
+        int q = Integer.parseInt(quantity);
+
+        Inventory in = inD.getInventoryById(id);
+        if (in.getCurrentStock() < q) {
+            request.setAttribute("errorMessage", "The entered quantity exceeds the available stock.");
+            request.getRequestDispatcher("export-to-store.jsp").forward(request, response);
+        } else {
+            int stock = in.getCurrentStock();
+            in.setCurrentStock(stock - q);
+            String status;
+            String alert;
+            if (in.getCurrentStock() <= 0) {
+                status = "Hết hàng";
+                alert = "Khẩn cấp";
+            } else if (0 < in.getCurrentStock() && in.getCurrentStock() <= 50) {
+                status = "Sắp hết hàng";
+                alert = "Cảnh báo";
+            } else {
+                status = "Còn hàng";
+                alert = "Không";
+            }
+            LocalDateTime lastUpdate = LocalDateTime.now();
+            in.setAlert(alert);
+            in.setInventoryStatus(status);
+            in.setLastRestockDate(lastUpdate);
+            inD.updateInven(in);
+
+            String statusDetails = "Xuất hàng";
+            LocalDate updateAt = LocalDate.now();
+            InventoryDetails detail = new InventoryDetails(in, q, updateAt, statusDetails);
+            inD.insertInventoryDetails(detail);
+            
+            StoreStock ss = new StoreStock();
+            ss.setInventory(in);
+            ss.setStock(q);
+            ss.setLastStockCheckDate(updateAt);
+            ss.setDiscount(null);
+            String alertStore;
+            if (q <= 0) {
+                alertStore = "Khẩn cấp";
+            } else if (0 < q && q <= 50) {
+                alertStore = "Cảnh báo";
+            } else {
+                alertStore = "Không";
+            }
+            ss.setAlert(alertStore);
+            ssd.insertStore(ss);
+            
+            response.sendRedirect("listStoreStock");  // Điều hướng đến trang thành công
+        }
+
     }
 
     /**

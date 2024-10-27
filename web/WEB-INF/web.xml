@@ -140,6 +140,18 @@
         <servlet-name>ImportProductServlet</servlet-name>
         <servlet-class>controller.ImportProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewProductServlet</servlet-name>
+        <servlet-class>controller.AddNewProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportNewToStoreServlet</servlet-name>
+        <servlet-class>controller.ExportNewToStoreServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportOldBatchServlet</servlet-name>
+        <servlet-class>controller.ExportOldBatchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -279,5 +291,17 @@
     <servlet-mapping>
         <servlet-name>ImportProductServlet</servlet-name>
         <url-pattern>/importProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewProductServlet</servlet-name>
+        <url-pattern>/addNewProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportNewToStoreServlet</servlet-name>
+        <url-pattern>/exportNewToStore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportOldBatchServlet</servlet-name>
+        <url-pattern>/exportOldBatch</url-pattern>
     </servlet-mapping>
 </web-app>

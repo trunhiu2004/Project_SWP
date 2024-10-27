@@ -70,6 +70,7 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
+                                                <th>Batch</th>
                                                 <th>Product</th>
                                                 <th>Product Name</th>
                                                 <th>Quantity</th>
@@ -80,7 +81,8 @@
                                         <tbody class="ligth-body">
 
                                         <c:forEach items="${logInventory}" var="l"> 
-                                            <tr>                                                   
+                                            <tr>
+                                                <td>${l.getInventory().getProduct().getBatch()}</td>
                                                 <td><img src="assets/images/product/${l.getInventory().getProduct().getImage()}" width="80px" height="80px"/></td>
                                                 <td>${l.getInventory().getProduct().getName()}</td>
                                                 <td>${l.getQuantity()}</td>

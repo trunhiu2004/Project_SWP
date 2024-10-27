@@ -52,7 +52,7 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add to Inventory</h4>
+                                            <h4 class="card-title">Submit to Log inventory</h4>
                                         </div>
                                         <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
                                     </div>
@@ -62,8 +62,7 @@
                                         <input type="hidden" name="idInven" value="${i.getId()}">
                                         <div class="col-md-6">                      
                                             <div class="form-group">
-                                                <label>Name *</label>
-                                                
+                                                <label>Name *</label>                                                
                                                 <input type="text" readonly name="nameInven" class="form-control" value="${i.getProduct().getName()}">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -75,7 +74,7 @@
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>                                                                                                                             
-                                        <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Submit to Log inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
 

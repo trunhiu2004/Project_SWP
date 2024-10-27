@@ -60,6 +60,7 @@
                                     <c:set var="i" value="${inventory}"/>
                                     <form action="importProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
                                         <input type="hidden" name="idInven" value="${i.getId()}">
+                                        <input type="hidden" name="idPro" value="${i.getProduct().getId()}">
                                         <div class="row">
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
@@ -129,6 +130,11 @@
                                                 <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
                                             </div>
                                         </div>
+                                        <c:if test="${not empty errorDate}">
+                                                <div class="alert alert-danger">
+                                                    ${errorDate}
+                                                </div>
+                                        </c:if>
                                         </div>        
                                         <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
