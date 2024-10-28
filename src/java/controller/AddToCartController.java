@@ -12,16 +12,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import model.Cart;
 import model.CartItem;
 import model.StoreStock;
 
 /**
  *
- * @author frien
+ * @author ankha
  */
-public class PoSHomeServlet extends HttpServlet {
+public class AddToCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +34,51 @@ public class PoSHomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PoSHomeServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PoSHomeServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            HttpSession session = request.getSession();
+            
+            // Lấy storeStockId từ request
+            int storeStockId = Integer.parseInt(request.getParameter("storeStockId"));
+            
+            // Lấy số lượng từ request, mặc định là 1
+            int quantity = 1;
+            String quantityStr = request.getParameter("quantity");
+            if(quantityStr != null && !quantityStr.isEmpty()) {
+                quantity = Integer.parseInt(quantityStr);
+            }
+            
+            // Lấy cart từ session
+            Cart cart = (Cart) session.getAttribute("cart");
+            if(cart == null) {
+                cart = new Cart();
+            }
+            
+            // Lấy thông tin sản phẩm từ database
+            StoreStockDAO storeStockDAO = new StoreStockDAO();
+            StoreStock storeStock = storeStockDAO.getStoreStockById(storeStockId);
+            
+            // Tính giá
+            double price;
+            if(storeStock.getDiscount() != null) {
+                price = storeStock.getDiscount().getPriceSell();
+            } else {
+                price = storeStock.getInventory().getProduct().getPrice();
+            }
+            
+            // Tạo cartItem mới
+            CartItem item = new CartItem(storeStock, quantity, price);
+            
+            // Thêm vào cart
+            cart.addItem(item);
+            
+            // Lưu cart vào session
+            session.setAttribute("cart", cart);
+            
+            response.sendRedirect("PoSHome");
+            
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            response.sendRedirect("PoSHome");
         }
     }
 
@@ -61,11 +94,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StoreStockDAO ss = new StoreStockDAO();
-        List<StoreStock> list = ss.getAllStoreStock();
-        request.setAttribute("store", list);
-
-        request.getRequestDispatcher("pos-home.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -79,7 +108,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

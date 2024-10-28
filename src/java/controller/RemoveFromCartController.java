@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dal.StoreStockDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,16 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import model.CartItem;
-import model.StoreStock;
+import model.Cart;
 
 /**
  *
- * @author frien
+ * @author ankha
  */
-public class PoSHomeServlet extends HttpServlet {
+public class RemoveFromCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +30,29 @@ public class PoSHomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PoSHomeServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PoSHomeServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            String storeStockIdStr = request.getParameter("storeStockId");
+            if (storeStockIdStr == null || storeStockIdStr.trim().isEmpty()) {
+                response.sendRedirect("PoSHome");
+                return;
+            }
+
+            int storeStockId = Integer.parseInt(storeStockIdStr);
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
+
+            if (cart != null) {
+                cart.removeItem(storeStockId);
+                session.setAttribute("cart", cart); // Cập nhật lại cart trong session
+            }
+
+            response.sendRedirect("PoSHome");
+        } catch (NumberFormatException e) {
+            response.sendRedirect("PoSHome");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -61,11 +64,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StoreStockDAO ss = new StoreStockDAO();
-        List<StoreStock> list = ss.getAllStoreStock();
-        request.setAttribute("store", list);
-
-        request.getRequestDispatcher("pos-home.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -79,7 +78,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

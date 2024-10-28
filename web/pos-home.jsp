@@ -8,6 +8,7 @@
         <title>POS Home</title>
         <!-- Font Awesome CDN -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <!-- Iconify CDN -->
         <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
         <!-- Select2 CSS CDN -->
@@ -95,16 +96,59 @@
                         </button>
                     </div>
 
-                    <div class="order_table_header_row">
-                        <div>Item</div>
-                        <div>Price</div>
-                        <div>Qty</div>
-                        <div>Total</div>
+                    <!--                    <div class="order_table_header_row">
+                                            <div>Item</div>
+                                            <div>Price</div>
+                                            <div>Qty</div>
+                                            <div>Total</div>
+                                        </div>-->
+
+                    <div class="cart-container">
+                        <div class="cart-header">
+                            <div class="cart-row">
+                                <div class="col-item">Item</div>
+                                <div class="col-price">Price</div>
+                                <div class="col-qty">Qty</div>
+                                <div class="col-total">Total</div>
+                                <div class="col-action">Action</div>
+                            </div>
+                        </div>
+                        <div class="cart-body">
+                            <c:if test="${sessionScope.cart != null && not empty sessionScope.cart.items}">
+                                <c:forEach items="${sessionScope.cart.items}" var="cartItem">
+                                    <div class="cart-row">
+                                        <div class="col-item">${cartItem.storeStock.inventory.product.name}</div>
+                                        <div class="col-price">
+                                            <fmt:formatNumber value="${cartItem.price}" pattern="#,##0đ"/>
+                                        </div>
+                                        <div class="col-qty">
+                                            <div class="quantity-control">
+                                                <button onclick="updateQuantity(${cartItem.storeStock.storeStockId}, 'decrease')">-</button>
+                                                <input type="number" value="${cartItem.quantity}" 
+                                                       onchange="updateQuantity(${cartItem.storeStock.storeStockId}, 'input', this.value)"
+                                                       min="1" max="${cartItem.storeStock.stock}">
+                                                <button onclick="updateQuantity(${cartItem.storeStock.storeStockId}, 'increase')">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-total">
+                                            <fmt:formatNumber value="${cartItem.quantity * cartItem.price}" pattern="#,##0đ"/>
+                                        </div>
+                                        <div class="col-action">
+                                            <button onclick="removeFromCart(${cartItem.storeStock.storeStockId})" class="btn-remove">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total">
+                                Total: <fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="order_holder">
-                        <!-- Cart items will go here -->
-                    </div>
 
                     <div id="bottom_absolute">
                         <div class="button_group">
@@ -139,21 +183,37 @@
                         </div>
                     </div>
 
-                    <div class="specific_category_items_holder1">
-                        <!-- Example Product Items -->
-                        <a href="#" class="single_item">
-                            <img src="https://via.placeholder.com/80" alt="" width="80" height="80">
-                            <p>Product 1</p>
-                            <p>Price: $10.00</p>
-                        </a>
-                        <a href="#" class="single_item">
-                            <img src="https://via.placeholder.com/80" alt="" width="80" height="80">
-                            <p>Product 2</p>
-                            <p>Price: $15.00</p>
-                        </a>
-                        <!-- Add more products as needed -->
+                    <div class="products-container">
+                        <div class="products-grid">
+                            <c:forEach items="${store}" var="s">
+                                <div class="product-card" onclick="addToCart(${s.getStoreStockId()})">
+                                    <div class="product-image">
+                                        <img src="assets/images/product/${s.getInventory().getProduct().getImage()}" 
+                                             alt="${s.getInventory().getProduct().getName()}"
+                                             class="product-img">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">${s.getInventory().getProduct().getName()}</h3>
+                                        <p class="product-price">
+                                            Giá: 
+                                            <span class="price-value">
+                                                <c:choose>
+                                                    <c:when test="${s.getDiscount()== null}">
+                                                        ${s.getInventory().getProduct().getPrice()}
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${s.getDiscount().getPriceSell()}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -203,6 +263,91 @@
                         document.exitFullscreen();
                         $(this).find('.material-icons').text('fullscreen');
                     }
+                });
+            });
+        </script>
+        <script>
+            function addToCart(storeStockId) {
+                window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
+            }
+            function updateQuantity(storeStockId, action, value = null) {
+                let data = new URLSearchParams();
+                data.append('storeStockId', storeStockId);
+                data.append('action', action);
+
+                if (value !== null) {
+                    data.append('quantity', value);
+                }
+
+                fetch('update-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: data.toString()
+                })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = 'PoSHome';
+                            } else {
+                                alert(data.error || 'Error updating cart');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error updating cart');
+                        });
+            }
+
+            function removeFromCart(storeStockId) {
+                if (confirm('Are you sure you want to remove this item?')) {
+                    window.location.href = `remove-from-cart?storeStockId=${storeStockId}`;
+                }
+            }
+
+            function initBarcodeScanner() {
+                const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
+                let barcode = '';
+
+                document.addEventListener('keydown', function (e) {
+                    if (barcodeInput === document.activeElement) {
+                        if (e.key === 'Enter') {
+                            searchProductByBarcode(barcode);
+                            barcode = '';
+                        } else {
+                            barcode += e.key;
+                        }
+                    }
+                });
+            }
+
+            function searchProductByBarcode(barcode) {
+                fetch(`search-product?barcode=${barcode}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.storeStockId) {
+                                addToCart(data.storeStockId);
+                            } else {
+                                alert('Product not found');
+                            }
+                        });
+            }
+            document.addEventListener('DOMContentLoaded', initBarcodeScanner);
+            // Tìm kiếm sản phẩm
+            document.querySelector('input[placeholder="Search by name, code, category"]').addEventListener('input', function (e) {
+                const searchText = e.target.value.toLowerCase();
+                const products = document.querySelectorAll('.product-card');
+
+                products.forEach(product => {
+                    const name = product.querySelector('.product-name').textContent.toLowerCase();
+                    const shouldShow = name.includes(searchText);
+                    product.style.display = shouldShow ? '' : 'none';
                 });
             });
         </script>

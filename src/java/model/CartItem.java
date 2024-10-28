@@ -9,16 +9,12 @@ package model;
  * @author ankha
  */
 public class CartItem {
+
     private StoreStock storeStock;
     private int quantity;
     private double price;
 
     public CartItem() {
-    }
-
-    public CartItem(StoreStock storeStock, int quantity) {
-        this.storeStock = storeStock;
-        this.quantity = quantity;
     }
 
     public CartItem(StoreStock storeStock, int quantity, double price) {
@@ -50,5 +46,8 @@ public class CartItem {
     public void setPrice(double price) {
         this.price = price;
     }
-    
+
+    public double getSubTotal() {
+        return this.quantity * this.price;
+    }
 }
