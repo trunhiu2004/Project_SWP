@@ -14,7 +14,7 @@ public class Products {
 
     private int id;
     private String name;
-    private double price;
+    private float price;
     private String image;
     private String barcode;
     private ProductCategories productCategories;
@@ -71,7 +71,7 @@ public class Products {
         this.name = name;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
