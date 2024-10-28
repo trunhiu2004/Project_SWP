@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Order;
 import model.OrderDetail;
+import model.Product;
 
 /**
  *
@@ -169,6 +170,79 @@ public class OrderDAO extends DBContext {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT product_id, product_name, product_price FROM Products"; // Simplified for example
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductId(rs.getInt("product_id"));
+                p.setProductName(rs.getString("product_name"));
+                p.setProductPrice(rs.getInt("product_price"));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getAllProducts: " + e);
+        }
+        return products;
+    }
+
+    //Add product to cart 
+    public void addProductToCart(int customerId, int productId, int quantity) throws Exception {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than 0");
+        }
+
+        // Create an order if one doesn't exist for the customer
+        String createOrderSql = "INSERT INTO Orders (customer_id, order_date, order_status)"
+                + " VALUES (?, GETDATE(), 'pending')"; // You might use a more specific status
+
+        try (PreparedStatement createOrderStm = connection.prepareStatement(createOrderSql, new String[]{"order_id"})) {
+            createOrderStm.setInt(1, customerId);
+
+            int affectedRows = createOrderStm.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating order failed, no rows affected.");
+            }
+
+            ResultSet generatedKeys = createOrderStm.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                int orderId = generatedKeys.getInt(1);
+
+                //Insert product and OrderDetails
+                String addProductToCartSql = "INSERT INTO OrdersDetails (product_id, quantity, unit_price, total_price, order_id)"
+                        + "SELECT ?, ?, product_price, ? * product_price, ? FROM Products WHERE product_id = ?";
+                try (PreparedStatement addProductStm = connection.prepareStatement(addProductToCartSql)) {
+                    addProductStm.setInt(1, productId);
+                    addProductStm.setInt(2, quantity);
+                    addProductStm.setInt(3, quantity);
+                    addProductStm.setInt(4, orderId);
+                    addProductStm.setInt(5, productId);
+
+                    addProductStm.executeUpdate();
+
+                    // Update inventory after successful cart addition 
+                    String updateInventorySql = "UPDATE Inventory SET current_stock = current_stock - ?"
+                            + " WHERE product_id = ?";
+                    try (PreparedStatement updateInventoryStm = connection.prepareStatement(updateInventorySql)) {
+                        updateInventoryStm.setInt(1, quantity);
+                        updateInventoryStm.setInt(2, productId);
+
+                        updateInventoryStm.executeUpdate();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to add product to cart: " + e.getMessage());
+            //rollback
+            connection.rollback();
+            throw new Exception("Failed to add product to cart.");
         }
     }
 }

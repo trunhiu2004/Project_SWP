@@ -117,4 +117,29 @@ public class StoreStockDAO extends DBContext {
             System.out.println(storeStock);
         }
     }
+    public StoreStock getStoreStockById(int storeStockId) {
+    String sql = "SELECT * FROM StoreStock WHERE store_stock_id = ?";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, storeStockId);
+        ResultSet rs = st.executeQuery();
+
+        if(rs.next()) {
+            StoreStock stock = new StoreStock();
+            stock.setStoreStockId(rs.getInt("store_stock_id"));
+            Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+            stock.setInventory(inventory);
+            stock.setStock(rs.getInt("quantity_in_stock"));
+            stock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
+            DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
+            stock.setDiscount(dp);
+            stock.setAlert(rs.getString("alert"));
+            return stock;
+        }
+    } catch (SQLException e) {
+        System.out.println("Lỗi khi truy vấn StoreStock: " + e.getMessage());
+    }
+    return null;
+}
+
 }
