@@ -286,6 +286,18 @@
         <servlet-name>SearchProductServlet</servlet-name>
         <servlet-class>controller.SearchProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadCustomersServlet</servlet-name>
+        <servlet-class>controller.LoadCustomersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetCustomerServlet</servlet-name>
+        <servlet-class>controller.SetCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <servlet-class>controller.ClearCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -559,6 +571,18 @@
     <servlet-mapping>
         <servlet-name>SearchProductServlet</servlet-name>
         <url-pattern>/search-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCustomersServlet</servlet-name>
+        <url-pattern>/load-customers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetCustomerServlet</servlet-name>
+        <url-pattern>/set-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <url-pattern>/clear-cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

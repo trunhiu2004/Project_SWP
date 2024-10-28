@@ -83,9 +83,8 @@
                         <div style="flex: 1;">
                             <select class="select2" id="select_customer">
                                 <option value="">Walk-in Customer</option>
-                                <option value="1">Customer 1</option>
-                                <option value="2">Customer 2</option>
                             </select>
+
                         </div>
 
                         <button class="customer_action_btn">
@@ -204,7 +203,10 @@
                                              class="product-img">
                                     </div>
                                     <div class="product-info">
-                                        <h3 class="product-name">${s.getInventory().getProduct().getName()}</h3>
+                                        <div class="product-header">
+                                            <h3 class="product-name">${s.getInventory().getProduct().getName()}</h3>
+                                            <span class="stock-badge">${s.getStock()}</span>
+                                        </div>
                                         <p class="product-price">
                                             Giá: 
                                             <span class="price-value">
@@ -219,6 +221,7 @@
                                             </span>
                                         </p>
                                     </div>
+
                                 </div>
                             </c:forEach>
                         </div>
@@ -227,208 +230,307 @@
 
             </div>
         </div>
-
         <script>
             $(document).ready(function () {
-                // Initialize Select2
-                $('.select2').select2({
+// Khởi tạo Select2 cho customer một lần duy nhất
+                $('#select_customer').select2({
                     theme: "classic",
-                    minimumResultsForSearch: Infinity,
                     width: '100%',
-                    dropdownCssClass: 'select2-dropdown-clean'
-                });
+                    placeholder: "Walk-in Customer",
+                    allowClear: true,
+                    ajax: {
+                        url: 'load-customers',
+                        dataType: 'json',
+                        delay: 250,
+                        processResults: function (data) {
+                            const results = data.map(customer => ({
+                                    id: customer.id,
+                                    text: `${customer.name} (${customer.phone}) - ${customer.type}`
+                                                            }));
 
-                // Update current time
-                function updateTime() {
-                    const now = new Date();
-                    const options = {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    };
-                    const dateTimeString = now.toLocaleDateString('en-US', options);
-                    document.getElementById('current_time').textContent = dateTimeString;
-                }
+                                                        results.unshift({
+                                                            id: '',
+                                                            text: 'Walk-in Customer'
+                                                        });
 
-                setInterval(updateTime, 1000);
-                updateTime();
+                                                        return {results};
+                                                    },
+                                                    cache: true
+                                                },
+                                                minimumInputLength: 0
+                                            });
 
-                // Initialize Select2 with custom theme
-                $('.select2').select2({
-                    theme: "classic",
-                    placeholder: "Select an option",
-                    minimumResultsForSearch: Infinity, // Ẩn ô tìm kiếm trong dropdown
-                    width: '100%'
-                });
+// Event handlers cho select customer
+                                            $('#select_customer')
+                                                    .on('select2:open', () => console.log('Select2 opened'))
+                                                    .on('select2:select', function (e) {
+                                                        const customerId = e.params.data.id;
 
-                //Full Screne Button
-                $('.fullscreen-btn').click(function () {
-                    if (!document.fullscreenElement) {
-                        document.documentElement.requestFullscreen();
-                        $(this).find('.material-icons').text('fullscreen_exit');
-                    } else {
-                        document.exitFullscreen();
-                        $(this).find('.material-icons').text('fullscreen');
-                    }
-                });
-            });
-        </script>
-        <script>
-            function addToCart(storeStockId) {
-                window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
-            }
-            function updateQuantity(storeStockId, action, value = null) {
-                let data = new URLSearchParams();
-                data.append('storeStockId', storeStockId);
-                data.append('action', action);
+                                                        fetch('set-customer?id=' + (customerId || ''))
+                                                                .then(response => response.json())
+                                                                .then(data => {
+                                                                    if (data.success) {
+                                                                        console.log(customerId ?
+                                                                                'Selected customer:' + data.customerName :
+                                                                                'Set to walk-in customer'
+                                                                                );
+                                                                    } else {
+                                                                        throw new Error(data.message || 'Error selecting customer');
+                                                                    }
+                                                                })
+                                                                .catch(error => {
+                                                                    console.error('Error:', error);
+                                                                    alert('Error selecting customer');
+                                                                });
+                                                    });
+                                            initializeStockBadges();
+// Load dữ liệu customer ban đầu
+                                            loadInitialCustomers();
 
-                if (value !== null) {
-                    data.append('quantity', value);
-                }
+// Khởi tạo các select2 khác
+                                            $('.select2:not(#select_customer)').select2({
+                                                theme: "classic",
+                                                minimumResultsForSearch: Infinity,
+                                                width: '100%',
+                                                dropdownCssClass: 'select2-dropdown-clean'
+                                            });
 
-                fetch('update-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: data.toString()
-                })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data.success) {
-                                window.location.href = 'PoSHome';
-                            } else {
-                                alert(data.error || 'Error updating cart');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Error updating cart');
-                        });
-            }
+// Khởi tạo các tính năng khác
+                                            initializeTimeUpdate();
+                                            initializeFullscreenButton();
+                                            initializeBarcodeScanner();
+                                            initializeSearchProduct();
+                                        });
 
-            function removeFromCart(storeStockId) {
-                console.log("Removing item with ID:", storeStockId); // Debug log
-                if (confirm('Are you sure you want to remove this item?')) {
-                    // Convert storeStockId to number if it's passed as string
-                    const id = parseInt(storeStockId);
-                    if (isNaN(id)) {
-                        alert('Invalid item ID');
-                        return;
-                    }
+// Cart Management Functions
+                                        function addToCart(storeStockId) {
+                                            window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
+                                        }
 
-                    fetch('remove-from-cart?storeStockId=' + id)
-                            .then(response => {
-                                if (response.ok) {
-                                    window.location.href = 'PoSHome';
-                                } else {
-                                    alert('Error removing item from cart');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                alert('Error removing item from cart');
-                            });
-                }
-            }
+                                        function updateQuantity(storeStockId, action, value = null) {
+                                            let data = new URLSearchParams();
+                                            data.append('storeStockId', storeStockId);
+                                            data.append('action', action);
 
+                                            if (value !== null) {
+                                                data.append('quantity', value);
+                                            }
 
-            function initBarcodeScanner() {
-                const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
-                let barcode = '';
+                                            fetch('update-cart', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                                },
+                                                body: data.toString()
+                                            })
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then(data => {
+                                                        if (data.success) {
+                                                            window.location.href = 'PoSHome';
+                                                        } else {
+                                                            alert(data.error || 'Error updating cart');
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error);
+                                                        alert('Error updating cart');
+                                                    });
+                                        }
 
-                // Event listener cho input barcode
-                barcodeInput.addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault(); // Ngăn form submit
-                        if (this.value.trim()) {
-                            console.log('Scanning barcode:', this.value);
-                            searchProductByBarcode(this.value.trim());
-                            this.value = ''; // Clear input sau khi quét
-                        }
-                    }
-                });
-            }
+                                        function removeFromCart(storeStockId) {
+                                            console.log("Removing item with ID:", storeStockId);
+                                            if (confirm('Are you sure you want to remove this item?')) {
+                                                const id = parseInt(storeStockId);
+                                                if (isNaN(id)) {
+                                                    alert('Invalid item ID');
+                                                    return;
+                                                }
 
-            function searchProductByBarcode(barcode) {
-                if (!barcode)
-                    return; // Không tìm kiếm nếu barcode rỗng
+                                                fetch('remove-from-cart?storeStockId=' + id)
+                                                        .then(response => {
+                                                            if (response.ok) {
+                                                                window.location.href = 'PoSHome';
+                                                            } else {
+                                                                alert('Error removing item from cart');
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                            alert('Error removing item from cart');
+                                                        });
+                                            }
+                                        }
 
-                console.log('Searching for barcode:', barcode);
+// Barcode and Search Functions
+                                        function searchProductByBarcode(barcode) {
+                                            if (!barcode)
+                                                return;
 
-                // Hiển thị loading nếu cần
-                // document.getElementById('loading').style.display = 'block';
+                                            console.log('Searching for barcode:', barcode);
 
-                fetch('search-product?barcode=' + encodeURIComponent(barcode))
-                        .then(response => {
-                            console.log('Response status:', response.status);
-                            return response.json().catch(error => {
-                                throw new Error('Invalid JSON response');
-                            });
-                        })
-                        .then(data => {
-                            console.log('Search result:', data);
-                            if (data.error) {
-                                alert(data.error);
-                                return;
-                            }
+                                            fetch('search-product?barcode=' + encodeURIComponent(barcode))
+                                                    .then(response => {
+                                                        console.log('Response status:', response.status);
+                                                        return response.json();
+                                                    })
+                                                    .then(data => {
+                                                        console.log('Search result:', data);
+                                                        if (data.error) {
+                                                            alert(data.error);
+                                                            return;
+                                                        }
 
-                            if (data.storeStockId) {
-                                console.log('Found product, adding to cart...');
-                                addToCart(data.storeStockId);
-                            } else {
-                                alert('Không tìm thấy sản phẩm');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Lỗi khi tìm kiếm sản phẩm');
-                        })
-                        .finally(() => {
-                            // Ẩn loading nếu có
-                            // document.getElementById('loading').style.display = 'none';
-                        });
-            }
-            document.addEventListener('DOMContentLoaded', initBarcodeScanner);
-            document.addEventListener('DOMContentLoaded', function () {
-                const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
-                // Focus vào ô scan khi trang vừa load
-                barcodeInput.focus();
+                                                        if (data.storeStockId) {
+                                                            console.log('Found product, adding to cart...');
+                                                            addToCart(data.storeStockId);
+                                                        } else {
+                                                            alert('Không tìm thấy sản phẩm');
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error);
+                                                        alert('Lỗi khi tìm kiếm sản phẩm');
+                                                    });
+                                        }
 
-                // Xử lý tìm kiếm sản phẩm thông thường
-                const searchInput = document.querySelector('input[placeholder="Search by name, code, category"]');
-                searchInput.addEventListener('input', function (e) {
-                    const searchText = e.target.value.toLowerCase();
-                    const products = document.querySelectorAll('.product-card');
+// Helper Functions
+                                        function loadInitialCustomers() {
+                                            $.ajax({
+                                                url: 'load-customers',
+                                                dataType: 'json'
+                                            }).then(function (data) {
+                                                console.log('Initial customers loaded:', data);
 
-                    products.forEach(product => {
-                        const name = product.querySelector('.product-name').textContent.toLowerCase();
-                        const shouldShow = name.includes(searchText);
-                        product.style.display = shouldShow ? '' : 'none';
-                    });
-                });
-            });
+                                                const formattedData = data.map(customer => ({
+                                                        id: customer.id,
+                                                        text: `${customer.name} (${customer.phone}) - ${customer.type}`
+                                                                        }));
 
-            // Tìm kiếm sản phẩm
-            document.querySelector('input[placeholder="Search by name, code, category"]').addEventListener('input', function (e) {
-                const searchText = e.target.value.toLowerCase();
-                const products = document.querySelectorAll('.product-card');
+                                                                    formattedData.unshift({
+                                                                        id: '',
+                                                                        text: 'Walk-in Customer'
+                                                                    });
 
-                products.forEach(product => {
-                    const name = product.querySelector('.product-name').textContent.toLowerCase();
-                    const shouldShow = name.includes(searchText);
-                    product.style.display = shouldShow ? '' : 'none';
-                });
-            });
+                                                                    const select = $('#select_customer');
+                                                                    formattedData.forEach(item => {
+                                                                        select.append(new Option(item.text, item.id, false, false));
+                                                                    });
+
+                                                                    select.val('').trigger('change');
+                                                                });
+                                                            }
+
+                                                            function initializeTimeUpdate() {
+                                                                function updateTime() {
+                                                                    const now = new Date();
+                                                                    const options = {
+                                                                        weekday: 'long',
+                                                                        year: 'numeric',
+                                                                        month: 'long',
+                                                                        day: 'numeric',
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        second: '2-digit'
+                                                                    };
+                                                                    document.getElementById('current_time').textContent =
+                                                                            now.toLocaleDateString('en-US', options);
+                                                                }
+
+                                                                setInterval(updateTime, 1000);
+                                                                updateTime();
+                                                            }
+
+                                                            function initializeFullscreenButton() {
+                                                                $('.fullscreen-btn').click(function () {
+                                                                    if (!document.fullscreenElement) {
+                                                                        document.documentElement.requestFullscreen();
+                                                                        $(this).find('.material-icons').text('fullscreen_exit');
+                                                                    } else {
+                                                                        document.exitFullscreen();
+                                                                        $(this).find('.material-icons').text('fullscreen');
+                                                                    }
+                                                                });
+                                                            }
+
+                                                            function initializeBarcodeScanner() {
+                                                                const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
+
+                                                                if (barcodeInput) {
+                                                                    barcodeInput.focus();
+
+                                                                    barcodeInput.addEventListener('keypress', function (e) {
+                                                                        if (e.key === 'Enter') {
+                                                                            e.preventDefault();
+                                                                            if (this.value.trim()) {
+                                                                                console.log('Scanning barcode:', this.value);
+                                                                                searchProductByBarcode(this.value.trim());
+                                                                                this.value = '';
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+
+                                                            function initializeSearchProduct() {
+                                                                const searchInput = document.querySelector('input[placeholder="Search by name, code, category"]');
+                                                                if (searchInput) {
+                                                                    searchInput.addEventListener('input', function (e) {
+                                                                        const searchText = e.target.value.toLowerCase();
+                                                                        const products = document.querySelectorAll('.product-card');
+
+                                                                        products.forEach(product => {
+                                                                            const name = product.querySelector('.product-name').textContent.toLowerCase();
+                                                                            const shouldShow = name.includes(searchText);
+                                                                            product.style.display = shouldShow ? '' : 'none';
+                                                                        });
+                                                                    });
+                                                                }
+                                                            }
+                                                            function initializeStockBadges() {
+                                                                document.querySelectorAll('.stock-badge').forEach(badge => {
+                                                                    const stock = parseInt(badge.textContent);
+                                                                    if (stock < 10) {
+                                                                        badge.setAttribute('data-stock', 'low');
+                                                                    }
+                                                                });
+                                                            }
+                                                            // Lấy reference đến nút Cancel
+                                                            const cancelButton = document.querySelector('.bg__red');
+
+// Thêm event listener
+                                                            cancelButton.addEventListener('click', function () {
+                                                                // Hiển thị confirm dialog để tránh việc click nhầm
+                                                                const confirmReset = confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?');
+
+                                                                if (confirmReset) {
+                                                                    // Gửi request đến server để xóa giỏ hàng
+                                                                    fetch('clear-cart', {
+                                                                        method: 'POST',
+                                                                        headers: {
+                                                                            'Content-Type': 'application/x-www-form-urlencoded',
+                                                                        }
+                                                                    })
+                                                                            .then(response => response.json())
+                                                                            .then(data => {
+                                                                                if (data.success) {
+                                                                                    // Reload trang để cập nhật UI
+                                                                                    window.location.reload();
+                                                                                } else {
+                                                                                    alert('Có lỗi xảy ra khi xóa giỏ hàng');
+                                                                                }
+                                                                            })
+                                                                            .catch(error => {
+                                                                                console.error('Error:', error);
+                                                                                alert('Có lỗi xảy ra khi xóa giỏ hàng');
+                                                                            });
+                                                                }
+                                                            });
+
         </script>
     </body>
 </html>

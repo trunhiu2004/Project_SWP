@@ -1152,8 +1152,55 @@ body {
     .cart-row {
         grid-template-columns: 2fr 1fr 1fr 0.5fr;
     }
-    
+
     .col-price, .col-weight {
         display: none;
     }
+}
+.product-card {
+    position: relative; /* Thêm position relative để làm điểm tham chiếu cho badge */
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-badge {
+    position: absolute; /* Đặt position absolute để có thể định vị chính xác */
+    top: 8px; /* Cách top 8px */
+    right: 8px; /* Cách right 8px */
+    background-color: #e2e8f0;
+    color: #64748b;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1; /* Đảm bảo badge luôn hiển thị trên cùng */
+}
+
+.stock-badge[data-stock="low"] {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.product-header {
+    margin-bottom: 4px;
+}
+
+.product-name {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2;
+    /* Cho phép tên sản phẩm xuống dòng thay vì dùng ellipsis */
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
