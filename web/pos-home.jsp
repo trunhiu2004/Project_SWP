@@ -134,10 +134,12 @@
                                             <fmt:formatNumber value="${cartItem.quantity * cartItem.price}" pattern="#,##0đ"/>
                                         </div>
                                         <div class="col-action">
-                                            <button onclick="removeFromCart(${cartItem.storeStock.storeStockId})" class="btn-remove">
+                                            <button onclick="removeFromCart('${cartItem.storeStock.storeStockId}')" class="btn-remove">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
+
+
                                     </div>
                                 </c:forEach>
                             </c:if>
@@ -145,6 +147,7 @@
                         <div class="cart-footer">
                             <div class="cart-total">
                                 Total: <fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/>
+
                             </div>
                         </div>
                     </div>
@@ -306,10 +309,30 @@
             }
 
             function removeFromCart(storeStockId) {
+                console.log("Removing item with ID:", storeStockId); // Debug log
                 if (confirm('Are you sure you want to remove this item?')) {
-                    window.location.href = `remove-from-cart?storeStockId=${storeStockId}`;
+                    // Convert storeStockId to number if it's passed as string
+                    const id = parseInt(storeStockId);
+                    if (isNaN(id)) {
+                        alert('Invalid item ID');
+                        return;
+                    }
+
+                    fetch('remove-from-cart?storeStockId=' + id)
+                            .then(response => {
+                                if (response.ok) {
+                                    window.location.href = 'PoSHome';
+                                } else {
+                                    alert('Error removing item from cart');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Error removing item from cart');
+                            });
                 }
             }
+
 
             function initBarcodeScanner() {
                 const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');

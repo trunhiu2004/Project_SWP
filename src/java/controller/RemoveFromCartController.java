@@ -12,12 +12,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Cart;
+//DEBUG
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author ankha
  */
 public class RemoveFromCartController extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(RemoveFromCartController.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,23 +35,36 @@ public class RemoveFromCartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // Lấy storeStockId từ request
             String storeStockIdStr = request.getParameter("storeStockId");
+
+            // Kiểm tra null hoặc empty
             if (storeStockIdStr == null || storeStockIdStr.trim().isEmpty()) {
                 response.sendRedirect("PoSHome");
                 return;
             }
 
-            int storeStockId = Integer.parseInt(storeStockIdStr);
+            // Parse storeStockId
+            int storeStockId = Integer.parseInt(storeStockIdStr.trim());
+
+            //DEBUG:
+            logger.info("Removing item with storeStockId: " + storeStockId);
+            // Lấy cart từ session
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
 
+            // Kiểm tra cart null
             if (cart != null) {
+                // Xóa item
                 cart.removeItem(storeStockId);
-                session.setAttribute("cart", cart); // Cập nhật lại cart trong session
+                // Cập nhật lại cart trong session
+                session.setAttribute("cart", cart);
             }
-
+            // Redirect về trang PoSHome
             response.sendRedirect("PoSHome");
+
         } catch (NumberFormatException e) {
+            logger.error("Error in RemoveFromCartController: " + e.getMessage(), e);
             response.sendRedirect("PoSHome");
         }
     }

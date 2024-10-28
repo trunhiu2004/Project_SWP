@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,8 +46,31 @@ public class Cart {
         }
     }
 
+//    public void removeItem(int storeStockId) {
+//        items.removeIf(item -> item.getStoreStock().getStoreStockId() == storeStockId);
+//    }
     public void removeItem(int storeStockId) {
-        items.removeIf(item -> item.getStoreStock().getStoreStockId() == storeStockId);
+        // Kiểm tra null
+        if (items == null) {
+            return;
+        }
+
+        // Sử dụng Iterator để tránh ConcurrentModificationException
+        Iterator<CartItem> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            CartItem item = iterator.next();
+            if (item.getStoreStock().getStoreStockId() == storeStockId) {
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
+    public void printCart() {
+        System.out.println("Cart items: " + items.size());
+        for (CartItem item : items) {
+            System.out.println("StoreStockId: " + item.getStoreStock().getStoreStockId());
+        }
     }
 
     public double getTotalMoney() {
