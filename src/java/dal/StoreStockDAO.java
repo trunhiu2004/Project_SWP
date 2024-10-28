@@ -4,6 +4,7 @@
  */
 package dal;
 
+import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import model.StoreStock;
@@ -12,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.DiscountProduct;
 import model.Inventory;
+import model.Product;
 import model.Products;
+import model.WeightUnit;
 
 /**
  *
@@ -117,29 +120,73 @@ public class StoreStockDAO extends DBContext {
             System.out.println(storeStock);
         }
     }
-    public StoreStock getStoreStockById(int storeStockId) {
-    String sql = "SELECT * FROM StoreStock WHERE store_stock_id = ?";
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        st.setInt(1, storeStockId);
-        ResultSet rs = st.executeQuery();
 
-        if(rs.next()) {
-            StoreStock stock = new StoreStock();
-            stock.setStoreStockId(rs.getInt("store_stock_id"));
-            Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
-            stock.setInventory(inventory);
-            stock.setStock(rs.getInt("quantity_in_stock"));
-            stock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
-            DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
-            stock.setDiscount(dp);
-            stock.setAlert(rs.getString("alert"));
-            return stock;
+    public StoreStock getStoreStockById(int storeStockId) {
+        String sql = "SELECT * FROM StoreStock WHERE store_stock_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, storeStockId);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                StoreStock stock = new StoreStock();
+                stock.setStoreStockId(rs.getInt("store_stock_id"));
+                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+                stock.setInventory(inventory);
+                stock.setStock(rs.getInt("quantity_in_stock"));
+                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
+                DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
+                stock.setDiscount(dp);
+                stock.setAlert(rs.getString("alert"));
+                return stock;
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi truy vấn StoreStock: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Lỗi khi truy vấn StoreStock: " + e.getMessage());
+        return null;
     }
-    return null;
-}
+
+    public StoreStock findByBarcode(String barcode) {
+        String sql = "SELECT ss.*, i.*, p.*, dp.* FROM StoreStock ss "
+                + "INNER JOIN Inventory i ON ss.inventory_id = i.inventory_id "
+                + "INNER JOIN Products p ON i.product_id = p.product_id "
+                + "LEFT JOIN DiscountProduct dp ON p.product_id = dp.product_id "
+                + "WHERE p.barcode = ? AND ss.quantity_in_stock > 0";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, barcode);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                StoreStock storeStock = new StoreStock();
+                storeStock.setStoreStockId(rs.getInt("store_stock_id"));
+
+                // Set inventory
+                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+                storeStock.setInventory(inventory);
+
+                // Set quantity
+                storeStock.setStock(rs.getInt("quantity_in_stock"));
+
+                // Set last check date
+                storeStock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
+
+                // Set discount if exists
+                int discountProductId = rs.getInt("discount_product_id");
+                if (!rs.wasNull()) {
+                    DiscountProduct dp = getDiscountProductById(discountProductId);
+                    storeStock.setDiscount(dp);
+                }
+
+                storeStock.setAlert(rs.getString("alert"));
+                return storeStock;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in findByBarcode: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

@@ -282,6 +282,10 @@
         <servlet-name>RemoveFromCartController</servlet-name>
         <servlet-class>controller.RemoveFromCartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <servlet-class>controller.SearchProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -551,6 +555,10 @@
     <servlet-mapping>
         <servlet-name>RemoveFromCartController</servlet-name>
         <url-pattern>/remove-from-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <url-pattern>/search-product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -110,7 +110,7 @@
                                 <div class="col-item">Item</div>
                                 <div class="col-price">Price</div>
                                 <div class="col-qty">Qty</div>
-                                <div class="col-weight">Weight</div>
+                                <div class="col-weight">Unit</div>
                                 <div class="col-total">Total</div>
                                 <div class="col-action">Action</div>
                             </div>
@@ -210,10 +210,10 @@
                                             <span class="price-value">
                                                 <c:choose>
                                                     <c:when test="${s.getDiscount()== null}">
-                                                        ${s.getInventory().getProduct().getPrice()}
+                                                        <fmt:formatNumber value="${s.getInventory().getProduct().getPrice()}" pattern="#,##0đ"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        ${s.getDiscount().getPriceSell()}
+                                                        <fmt:formatNumber value="${s.getDiscount().getPriceSell()}" pattern="#,##0đ"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </span>
@@ -346,30 +346,78 @@
                 const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
                 let barcode = '';
 
-                document.addEventListener('keydown', function (e) {
-                    if (barcodeInput === document.activeElement) {
-                        if (e.key === 'Enter') {
-                            searchProductByBarcode(barcode);
-                            barcode = '';
-                        } else {
-                            barcode += e.key;
+                // Event listener cho input barcode
+                barcodeInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault(); // Ngăn form submit
+                        if (this.value.trim()) {
+                            console.log('Scanning barcode:', this.value);
+                            searchProductByBarcode(this.value.trim());
+                            this.value = ''; // Clear input sau khi quét
                         }
                     }
                 });
             }
 
             function searchProductByBarcode(barcode) {
-                fetch(`search-product?barcode=${barcode}`)
-                        .then(response => response.json())
+                if (!barcode)
+                    return; // Không tìm kiếm nếu barcode rỗng
+
+                console.log('Searching for barcode:', barcode);
+
+                // Hiển thị loading nếu cần
+                // document.getElementById('loading').style.display = 'block';
+
+                fetch('search-product?barcode=' + encodeURIComponent(barcode))
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            return response.json().catch(error => {
+                                throw new Error('Invalid JSON response');
+                            });
+                        })
                         .then(data => {
+                            console.log('Search result:', data);
+                            if (data.error) {
+                                alert(data.error);
+                                return;
+                            }
+
                             if (data.storeStockId) {
+                                console.log('Found product, adding to cart...');
                                 addToCart(data.storeStockId);
                             } else {
-                                alert('Product not found');
+                                alert('Không tìm thấy sản phẩm');
                             }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Lỗi khi tìm kiếm sản phẩm');
+                        })
+                        .finally(() => {
+                            // Ẩn loading nếu có
+                            // document.getElementById('loading').style.display = 'none';
                         });
             }
             document.addEventListener('DOMContentLoaded', initBarcodeScanner);
+            document.addEventListener('DOMContentLoaded', function () {
+                const barcodeInput = document.querySelector('input[placeholder="Scan barcode"]');
+                // Focus vào ô scan khi trang vừa load
+                barcodeInput.focus();
+
+                // Xử lý tìm kiếm sản phẩm thông thường
+                const searchInput = document.querySelector('input[placeholder="Search by name, code, category"]');
+                searchInput.addEventListener('input', function (e) {
+                    const searchText = e.target.value.toLowerCase();
+                    const products = document.querySelectorAll('.product-card');
+
+                    products.forEach(product => {
+                        const name = product.querySelector('.product-name').textContent.toLowerCase();
+                        const shouldShow = name.includes(searchText);
+                        product.style.display = shouldShow ? '' : 'none';
+                    });
+                });
+            });
+
             // Tìm kiếm sản phẩm
             document.querySelector('input[placeholder="Search by name, code, category"]').addEventListener('input', function (e) {
                 const searchText = e.target.value.toLowerCase();
