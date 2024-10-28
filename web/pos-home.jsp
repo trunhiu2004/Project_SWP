@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,6 +110,7 @@
                                 <div class="col-item">Item</div>
                                 <div class="col-price">Price</div>
                                 <div class="col-qty">Qty</div>
+                                <div class="col-weight">Weight</div>
                                 <div class="col-total">Total</div>
                                 <div class="col-action">Action</div>
                             </div>
@@ -130,6 +132,11 @@
                                                 <button onclick="updateQuantity(${cartItem.storeStock.storeStockId}, 'increase')">+</button>
                                             </div>
                                         </div>
+                                        <div class="col-weight">
+                                            <c:if test="${not empty cartItem.storeStock.inventory.product.weightUnit}">
+                                                ${cartItem.storeStock.inventory.product.weightUnit.name}
+                                            </c:if>
+                                        </div>
                                         <div class="col-total">
                                             <fmt:formatNumber value="${cartItem.quantity * cartItem.price}" pattern="#,##0đ"/>
                                         </div>
@@ -138,22 +145,22 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
-
-
                                     </div>
                                 </c:forEach>
                             </c:if>
-                        </div>
-                        <div class="cart-footer">
-                            <div class="cart-total">
-                                Total: <fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/>
-
-                            </div>
                         </div>
                     </div>
 
 
                     <div id="bottom_absolute">
+                        <div class="cart-total-section">
+                            <div class="cart-summary">
+                                <div class="summary-row">
+                                    <span>Total:</span>
+                                    <span><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="button_group">
                             <button class="bg__red">
                                 <i class="material-icons">close</i>
@@ -169,6 +176,7 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Right Side - Products Area -->
