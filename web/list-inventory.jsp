@@ -60,9 +60,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Inventory</h4>                                    </div>
+                                        <h4 class="mb-3">Inventory</h4>                                    
+                                    </div>
                                     <a href="listLogInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>History Log Inventory</a>
-                                    <a href="addToInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add to Inventory</a>
+                                    <a href="addNewProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add New Product To Inventory</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">

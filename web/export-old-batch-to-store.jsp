@@ -52,81 +52,43 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add Product</h4>
+                                            <h4 class="card-title">Add to Inventory</h4>
                                         </div>
-                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Product</a>
+                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
                                     </div>
                                     <div class="card-body">
-                                        <form action="addProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
+                                        <c:set var="i" value="${inventory}"/>
+                                        <c:set var="s" value="${store}"/>
+                                        <form action="exportOldBatch" method="post" data-toggle="validator">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <input type="hidden" name="idInven" value="${i.getId()}">
+                                                <input type="hidden" name="idStore" value="${s.getStoreStockId()}">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Product Type *</label>
-                                                        <select name="catePro" class="selectpicker form-control" data-style="py-0">
-                                                        <c:forEach items="${cate}" var="cate">
-                                                            <option value="${cate.getId()}">${cate.getName()}</option>
-                                                        </c:forEach>  
-                                                    </select>
-                                                </div> 
-                                            </div>  
-                                            <div class="col-md-6">                      
-                                                <div class="form-group">
-                                                    <label>Name *</label>
-                                                    <input type="text" name="namePro" class="form-control" placeholder="Enter Name" data-errors="Please Enter Name." required>
+                                                    <label>Product Name</label>
+                                                    <input type="text" readonly name="nameProduct" class="form-control" value="${i.getProduct().getName()}">
                                                     <div class="help-block with-errors"></div>
+                                                    </div>
                                                 </div>
-                                            </div>    
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Bar Code *</label>
-                                                    <input type="text" name="barcode" class="form-control" placeholder="Enter Code" data-errors="Please Enter Code." required>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                    <label>Batch</label>
+                                                    <input type="number" readonly name="productBatch" class="form-control" value="${i.getProduct().getBatch()}">
                                                     <div class="help-block with-errors"></div>
+                                                    </div>
                                                 </div>
-                                            </div>                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Price *</label>
-                                                    <input type="text" name="pricePro" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                    <label>Quantity In Inventory</label>
+                                                    <input type="number" readonly name="currentstock" class="form-control" value="${i.getCurrentStock()}">
                                                     <div class="help-block with-errors"></div>
+                                                    </div>
                                                 </div>
-                                            </div>                                           
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Unit *</label>
-                                                    <select name="unitPro" class="selectpicker form-control" data-style="py-0">
-                                                        <c:forEach items="${wu}" var="u">
-                                                            <option value="${u.getId()}">${u.getName()}</option>
-                                                        </c:forEach>  
-                                                    </select>
-                                                </div> 
-                                            </div>  
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Supplier *</label>
-                                                    <select name="supPro" class="selectpicker form-control" data-style="py-0">
-                                                        <c:forEach items="${supplier}" var="sup">
-                                                            <option value="${sup.getId()}">${sup.getName()}</option>
-                                                        </c:forEach>  
-                                                    </select>
-                                                </div> 
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="manufactureDate">manufactureDate:</label><br>
-                                                    <input type="date" id="manufactureDate" name="manufactureDate" required><br><br>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="expirationDate">expirationDate:</label><br>
-                                                    <input type="date" id="expirationDate" name="expirationDate" required><br><br>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
+                                                    <label>Quantity</label>
+                                                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" data-errors="Please Enter Quantity." required>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <c:if test="${not empty errorMessage}">
@@ -135,7 +97,7 @@
                                                 </div>
                                             </c:if>
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Add Product</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Add to Inventory</button>
                                         <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div>
