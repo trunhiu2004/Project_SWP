@@ -617,6 +617,10 @@ function closeCashPaymentModal() {
 
 function closeReceiptModal() {
     document.getElementById('receiptModal').style.display = 'none';
+    // Chỉ clear cart và reload trang sau khi đóng modal receipt
+    clearCart().then(() => {
+        window.location.reload();
+    });
 }
 
 function calculateChange() {
@@ -641,6 +645,7 @@ function processCashPayment() {
     const selectedCustomer = $('#customerSelect').select2('data')[0];
     const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/[^\d]/g, ''));
     const receivedAmount = parseFloat(document.getElementById('receivedAmount').value);
+
     // Validate customer selection
     if (!selectedCustomer || !selectedCustomer.id) {
         alert('Vui lòng chọn khách hàng');
@@ -652,6 +657,7 @@ function processCashPayment() {
         alert('Giỏ hàng trống');
         return;
     }
+
     // Validate received amount
     if (!receivedAmount) {
         alert('Vui lòng nhập số tiền khách đưa');
@@ -661,8 +667,9 @@ function processCashPayment() {
         alert('Số tiền khách đưa không đủ');
         return;
     }
+
     const changeAmount = receivedAmount - totalAmount;
-// Disable nút thanh toán
+    // Disable nút thanh toán
     document.getElementById('confirmPayment').disabled = true;
 
     fetch('process-cash-payment', {
@@ -689,30 +696,28 @@ function processCashPayment() {
                 closeCashPaymentModal();
                 document.getElementById('receiptContent').innerHTML = html;
                 document.getElementById('receiptModal').style.display = 'block';
-                clearCart();
+
+                // Tự động in hoá đơn
+                setTimeout(() => {
+                    printReceipt();
+                }, 500);
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert(error.message || 'Có lỗi xảy ra khi xử lý thanh toán');
             })
             .finally(() => {
-                // Re-enable nút thanh toán
                 document.getElementById('confirmPayment').disabled = false;
             });
 }
 function clearCart() {
-    fetch('clear-cart', {
+    return fetch('clear-cart', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
     })
             .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.reload();
-                }
-            })
             .catch(error => {
                 console.error('Error:', error);
             });
@@ -727,7 +732,14 @@ function printReceipt() {
     printWindow.document.write(document.getElementById('receiptContent').innerHTML);
     printWindow.document.write('</body></html>');
     printWindow.document.close();
-    printWindow.print();
+
+    // Đợi CSS load xong
+    setTimeout(() => {
+        printWindow.print();
+        printWindow.onafterprint = function () {
+            printWindow.close();
+        };
+    }, 500);
 }
 
 // Format currency utility function

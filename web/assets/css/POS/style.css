@@ -1470,3 +1470,71 @@ body {
     text-align: center;
     font-style: italic;
 }
+/* CSS cho nút đóng modal */
+.modal .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* CSS cho footer của modal */
+.modal-footer {
+    margin-top: 20px;
+    text-align: right;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.modal-footer button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.receipt-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    table-layout: fixed; /* Cố định layout của bảng */
+}
+
+.receipt-items th,
+.receipt-items td {
+    border-bottom: 1px dotted #000;
+    padding: 5px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Định nghĩa độ rộng cho từng cột */
+.receipt-items th:nth-child(1), /* STT */
+.receipt-items td:nth-child(1) {
+    width: 10%;
+}
+
+.receipt-items th:nth-child(2), /* Tên sản phẩm */
+.receipt-items td:nth-child(2) {
+    width: 40%;
+}
+
+.receipt-items th:nth-child(3), /* Số lượng */
+.receipt-items td:nth-child(3) {
+    width: 15%;
+    text-align: center;
+}
+
+.receipt-items th:nth-child(4), /* Đơn giá */
+.receipt-items td:nth-child(4) {
+    width: 15%;
+    text-align: right;
+}
+
+.receipt-items th:nth-child(5), /* Thành tiền */
+.receipt-items td:nth-child(5) {
+    width: 20%;
+    text-align: right;
+}

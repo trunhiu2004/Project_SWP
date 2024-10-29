@@ -31,20 +31,20 @@
             </tr>
         </thead>
         <tbody>
-        <c:forEach var="item" items="${items}" varStatus="status">
-            <tr>
-                <td>${status.index + 1}</td>
-                <td>${item.product.name}</td>
-                <td>${item.quantity}</td>
-                <td><fmt:formatNumber value="${item.price}" type="currency" currencySymbol="₫"/></td>
-            <td><fmt:formatNumber value="${item.subTotal}" type="currency" currencySymbol="₫"/></td>
-            </tr>
-        </c:forEach>
+            <c:forEach var="item" items="${items}" varStatus="status">
+                <tr>
+                    <td>${status.index + 1}</td>
+                    <td>${item.product.name}</td>
+                    <td>${item.quantity}</td>
+                    <td><fmt:formatNumber value="${item.price}" pattern="#,##0" />₫</td>
+                    <td><fmt:formatNumber value="${item.subTotal}" pattern="#,##0" />₫</td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 
     <div class="receipt-summary">
-        <p>Tổng tiền: <fmt:formatNumber value="${order.orderTotalAmount}" type="currency" currencySymbol="₫"/></p>
+        <p>Tổng tiền: <fmt:formatNumber value="${order.orderTotalAmount}" pattern="#,##0" />₫</p>
         <c:if test="${not empty order.couponCode}">
             <p>Mã giảm giá: ${order.couponCode}</p>
         </c:if>
