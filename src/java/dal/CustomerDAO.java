@@ -127,4 +127,40 @@ public class CustomerDAO extends DBContext {
         }
     }
 
+    public boolean isPhoneNumberExists(String phoneNumber) {
+        String sql = "SELECT COUNT(*) FROM Customers WHERE customer_phone = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, phoneNumber);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in isPhoneNumberExists: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public int add(Customers customer) {
+        String sql = "INSERT INTO Customers (customer_name, customer_phone, customer_type_id, point) VALUES (?, ?, ?, 0)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(1, customer.getCustomerName());
+            st.setString(2, customer.getCustomerPhone());
+            st.setInt(3, customer.getCustomerType().getCustomerTypeId());
+
+            int affectedRows = st.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in add Customer: " + e.getMessage());
+        }
+        return -1;
+    }
+
 }

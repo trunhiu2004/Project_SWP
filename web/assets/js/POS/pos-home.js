@@ -348,13 +348,50 @@ function loadCustomers() {
 }
 
 function initializeCustomerModal() {
-    // Edit button click - sử dụng ID thay vì class
+    // Edit button click
     const editButton = document.getElementById('editCustomerBtn');
     if (editButton) {
         editButton.addEventListener('click', openEditCustomerModal);
         console.log('Edit button initialized');
     } else {
         console.error('Edit button not found');
+    }
+
+    // Add button click
+    const addButton = document.getElementById('addCustomerBtn');
+    if (addButton) {
+        addButton.addEventListener('click', openAddCustomerModal);
+        console.log('Add button initialized');
+    }
+
+    // Edit Modal Events
+    const editModal = document.getElementById('editCustomerModal');
+    if (editModal) {
+        const editCloseButton = editModal.querySelector('.close');
+        const editCancelButton = editModal.querySelector('.btn-cancel');
+        const editSaveButton = editModal.querySelector('.btn-save');
+
+        if (editCloseButton)
+            editCloseButton.addEventListener('click', closeEditCustomerModal);
+        if (editCancelButton)
+            editCancelButton.addEventListener('click', closeEditCustomerModal);
+        if (editSaveButton)
+            editSaveButton.addEventListener('click', saveCustomerChanges);
+    }
+
+    // Add Modal Events
+    const addModal = document.getElementById('addCustomerModal');
+    if (addModal) {
+        const addCloseButton = addModal.querySelector('.close');
+        const addCancelButton = addModal.querySelector('.btn-cancel');
+        const addSaveButton = addModal.querySelector('.btn-save');
+
+        if (addCloseButton)
+            addCloseButton.addEventListener('click', closeAddCustomerModal);
+        if (addCancelButton)
+            addCancelButton.addEventListener('click', closeAddCustomerModal);
+        if (addSaveButton)
+            addSaveButton.addEventListener('click', saveNewCustomer);
     }
 
     // Modal close button
@@ -378,11 +415,77 @@ function initializeCustomerModal() {
         console.log('Save button initialized');
     }
 
-    // Close modal when clicking outside
-    window.addEventListener('click', function(event) {
-        const modal = document.getElementById('editCustomerModal');
-        if (event.target === modal) {
+    // Close modals when clicking outside
+    window.addEventListener('click', function (event) {
+        const editModal = document.getElementById('editCustomerModal');
+        const addModal = document.getElementById('addCustomerModal');
+
+        if (event.target === editModal) {
             closeEditCustomerModal();
         }
+        if (event.target === addModal) {
+            closeAddCustomerModal();
+        }
     });
+}
+// Hàm mở modal thêm khách hàng
+function openAddCustomerModal() {
+    console.log('Opening add customer modal...');
+    const modal = document.getElementById('addCustomerModal');
+    modal.style.display = 'block';
+
+    // Reset form
+    document.getElementById('addCustomerForm').reset();
+}
+
+// Hàm đóng modal thêm khách hàng
+function closeAddCustomerModal() {
+    const modal = document.getElementById('addCustomerModal');
+    modal.style.display = 'none';
+}
+
+// Hàm xử lý việc thêm khách hàng mới
+function saveNewCustomer() {
+    const formData = new FormData(document.getElementById('addCustomerForm'));
+
+    // Validate form
+    const customerName = formData.get('customerName').trim();
+    const customerPhone = formData.get('customerPhone').trim();
+
+    if (!customerName || !customerPhone) {
+        alert('Vui lòng điền đầy đủ thông tin');
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(customerPhone)) {
+        alert('Số điện thoại không hợp lệ');
+        return;
+    }
+
+    fetch('add-customer', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+    })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Thêm khách hàng mới thành công');
+                    closeAddCustomerModal();
+
+                    // Refresh customer select và chọn khách hàng mới
+                    if (data.customerId) {
+                        loadCustomers().then(() => {
+                            $('#customerSelect').val(data.customerId).trigger('change');
+                        });
+                    } else {
+                        loadCustomers();
+                    }
+                } else {
+                    alert(data.message || 'Có lỗi xảy ra khi thêm khách hàng');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi thêm khách hàng');
+            });
 }

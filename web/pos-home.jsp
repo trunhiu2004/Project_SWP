@@ -267,6 +267,39 @@
                 </div>
             </div>
         </div>
-
+        <!-- Add Customer Modal -->
+        <div id="addCustomerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Thêm khách hàng mới</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="addCustomerForm">
+                        <div class="form-group">
+                            <label for="newCustomerName">Tên khách hàng:</label>
+                            <input type="text" id="newCustomerName" name="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newCustomerPhone">Số điện thoại:</label>
+                            <input type="tel" id="newCustomerPhone" name="customerPhone" required 
+                                   pattern="[0-9]{10}" title="Số điện thoại phải có 10 chữ số">
+                        </div>
+                        <div class="form-group">
+                            <label for="newCustomerType">Loại khách hàng:</label>
+                            <select id="newCustomerType" name="customerType" required>
+                                <option value="1">Đồng</option>
+                                <option value="2">Bạc</option>
+                                <option value="3">Vàng</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="button" class="btn-save">Thêm</button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
