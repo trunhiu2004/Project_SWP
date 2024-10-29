@@ -1,3 +1,27 @@
+<<<<<<< HEAD
 /build/
 /dist/
 /nbproject/private/
+=======
+# Ignore configuration files with sensitive data
+web/WEB-INF/config.properties
+
+# Ignore build directories
+
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+temp.txt
+output.txt
+>>>>>>> DiscountProduct_New

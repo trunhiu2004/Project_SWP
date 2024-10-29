@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author frien
  */
 public class DBContext {
-    protected Connection connection;
+    public Connection connection;
     public DBContext()
     {
         try {

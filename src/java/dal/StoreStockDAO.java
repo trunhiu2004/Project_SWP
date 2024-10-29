@@ -5,6 +5,7 @@
 package dal;
 
 import java.sql.Date;
+import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import model.StoreStock;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
 import model.DiscountProduct;
 import model.Inventory;
 import model.Products;
+import model.Product;
+import model.Products;
+import model.WeightUnit;
 
 /**
  *
@@ -198,10 +202,58 @@ public class StoreStockDAO extends DBContext {
         }
     }
 
+    
     public static void main(String[] args) {
         StoreStockDAO c = new StoreStockDAO();
-        for (Inventory arg : c.getInventoryNotInStore()) {
-            System.out.println(arg);
+        List<StoreStock> list = c.getAllStoreStock();
+        for (StoreStock storeStock : list) {
+            System.out.println(storeStock);
         }
     }
+
+    
+
+    public StoreStock findByBarcode(String barcode) {
+        String sql = "SELECT ss.*, i.*, p.*, dp.* FROM StoreStock ss "
+                + "INNER JOIN Inventory i ON ss.inventory_id = i.inventory_id "
+                + "INNER JOIN Products p ON i.product_id = p.product_id "
+                + "LEFT JOIN DiscountProduct dp ON p.product_id = dp.product_id "
+                + "WHERE p.barcode = ? AND ss.quantity_in_stock > 0";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, barcode);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                StoreStock storeStock = new StoreStock();
+                storeStock.setStoreStockId(rs.getInt("store_stock_id"));
+
+                // Set inventory
+                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+                storeStock.setInventory(inventory);
+
+                // Set quantity
+                storeStock.setStock(rs.getInt("quantity_in_stock"));
+
+                // Set last check date
+                storeStock.setLastStockCheckDate(rs.getDate("last_stock_check_date").toLocalDate());
+
+                // Set discount if exists
+                int discountProductId = rs.getInt("discount_product_id");
+                if (!rs.wasNull()) {
+                    DiscountProduct dp = getDiscountProductById(discountProductId);
+                    storeStock.setDiscount(dp);
+                }
+
+                storeStock.setAlert(rs.getString("alert"));
+                return storeStock;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in findByBarcode: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -139,13 +139,13 @@ public class AddProductServlet extends HttpServlet {
         LocalDate expirationDate = LocalDate.parse(expirationDateStr);
         LocalDate currentDate = LocalDate.now();
 
+
         String cate_raw = request.getParameter("catePro");
         String name = request.getParameter("namePro");
         String barcode = request.getParameter("barcode");
         String price_raw = request.getParameter("pricePro");
         String unit_raw = request.getParameter("unitPro");
         String supplier_raw = request.getParameter("supPro");
-
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : null;
 
         ProductsDAO pd = new ProductsDAO();
@@ -188,6 +188,7 @@ public class AddProductServlet extends HttpServlet {
                 pd.insertPro(pNew);
                 response.sendRedirect("listProduct");
             }
+
         }
 
     }

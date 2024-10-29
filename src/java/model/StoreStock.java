@@ -39,6 +39,7 @@ public class StoreStock {
         this.alert = alert;
     }
 
+
     public int getStoreStockId() {
         return storeStockId;
     }
@@ -94,8 +95,4 @@ public class StoreStock {
 
     
 
-    
-
-    
- 
 }

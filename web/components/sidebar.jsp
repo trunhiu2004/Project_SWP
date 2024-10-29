@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <div class="iq-sidebar  sidebar-default ">
         <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
             <a href="home.jsp" class="header-logo">
@@ -99,6 +100,16 @@
                             </svg>
                         </a>
                         <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                            <li class="">
+                                <a href="list-order">
+                                    <i class="las la-minus"></i><span>Order List</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="invoice">
+                                    <i class="las la-minus"></i><span>Invoice</span>
+                                </a>
+                            </li>
                             <li class="">
                                 <a href="couponManage">
                                     <i class="las la-minus"></i><span>Coupon List</span>

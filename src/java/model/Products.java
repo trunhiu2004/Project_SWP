@@ -4,6 +4,7 @@
  */
 package model;
 import java.time.LocalDate;
+
 /**
  *
  * @author PC
@@ -21,6 +22,7 @@ public class Products {
     private LocalDate manufactureDate;
     private LocalDate expirationDate;
     private int batch;
+
 
     public Products() {
     }
@@ -144,4 +146,5 @@ public class Products {
     public String toString() {
         return "Products{" + "id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", barcode=" + barcode + ", productCategories=" + productCategories + ", suppliers=" + suppliers + ", weightUnit=" + weightUnit + ", manufactureDate=" + manufactureDate + ", expirationDate=" + expirationDate + ", batch=" + batch + '}';
     }    
+
 }

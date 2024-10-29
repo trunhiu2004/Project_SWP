@@ -87,6 +87,7 @@ public class ImportInventoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         InventoryDAO inventoryd = new InventoryDAO();
+
         Inventory inven = inventoryd.getInventoryLast();
         String q_raw = request.getParameter("quantityInven");
         int q = Integer.parseInt(q_raw);
