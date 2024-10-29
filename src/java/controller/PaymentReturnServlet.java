@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.StoreStockDAO;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,16 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import model.CartItem;
-import model.StoreStock;
+import model.Cart;
+import java.util.logging.Logger;
+import model.Order;
 
 /**
  *
- * @author frien
+ * @author ankha
  */
-public class PoSHomeServlet extends HttpServlet {
+public class PaymentReturnServlet extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(PaymentReturnServlet.class.getName());
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class PoSHomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PoSHomeServlet</title>");
+            out.println("<title>Servlet PaymentReturnServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PoSHomeServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PaymentReturnServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,27 +62,47 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Xử lý thông báo từ payment return
-        String success = request.getParameter("success");
-        String error = request.getParameter("error");
 
-        if ("true".equals(success)) {
-            request.setAttribute("message", "Thanh toán thành công!");
-            request.setAttribute("messageType", "success");
-        } else if (error != null) {
-            String errorMessage = "Có lỗi xảy ra!";
-            if ("payment_failed".equals(error)) {
-                errorMessage = "Thanh toán không thành công!";
+        LOGGER.info("Payment return received with parameters: " + request.getQueryString());
+
+        String code = request.getParameter("code");
+        String orderCode = request.getParameter("orderCode");
+        String status = request.getParameter("status");
+
+        try {
+            if (code == null || orderCode == null || status == null) {
+                throw new ServletException("Missing required parameters");
             }
-            request.setAttribute("message", errorMessage);
-            request.setAttribute("messageType", "error");
+
+            OrderDAO orderDAO = new OrderDAO();
+            Order order = orderDAO.getOrderById(Integer.parseInt(orderCode));
+
+            if (order == null) {
+                throw new ServletException("Order not found: " + orderCode);
+            }
+
+            if ("00".equals(code) && "PAID".equals(status)) {
+                // Payment successful
+                order.setOrderStatus("PAID");
+                orderDAO.updateOrderStatus(order);
+
+                // Clear cart using session
+                HttpSession session = request.getSession();
+                session.removeAttribute("cart"); // Thay vì gọi cart.clear()
+
+                // Redirect to success page
+                response.sendRedirect("PoSHome?success=true");
+            } else {
+                // Payment failed or cancelled
+                order.setOrderStatus("CANCELLED");
+                orderDAO.updateOrderStatus(order);
+                response.sendRedirect("PoSHome?error=payment_failed");
+            }
+
+        } catch (Exception e) {
+            LOGGER.severe("Error processing payment return: " + e.getMessage());
+            response.sendRedirect("PoSHome?error=system_error");
         }
-
-        StoreStockDAO ss = new StoreStockDAO();
-        List<StoreStock> list = ss.getAllStoreStock();
-        request.setAttribute("store", list);
-
-        request.getRequestDispatcher("pos-home.jsp").forward(request, response);
     }
 
     /**
@@ -95,7 +116,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

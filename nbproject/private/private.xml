@@ -3,22 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project_SWP/src/java/model/StoreStock.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/CustomerType.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LoadCustomersServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/InitOrderServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/CustomerTypeDAO.java</file>
             <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/UpdateOrderStatusServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/utils/ReceiptGenerator.java</file>
+            <file>file:/D:/Project_SWP/web/assets/js/POS/pos-home.js</file>
+            <file>file:/D:/Project_SWP/web/assets/css/receipt.css</file>
+            <file>file:/D:/Project_SWP/src/java/model/Order.java</file>
+            <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/CreatePaymentLinkServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Project_SWP/src/java/model/Customers.java</file>
+            <file>file:/D:/Project_SWP/web/WEB-INF/views/qr-checkout.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/model/StoreStock.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/LoadCustomersServlet.java</file>
+            <file>file:/D:/Project_SWP/web/WEB-INF/views/receipt.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/model/Products.java</file>
             <file>file:/D:/Project_SWP/src/java/controller/SetCustomerServlet.java</file>
             <file>file:/D:/Project_SWP/src/java/dal/CustomerDAO.java</file>
             <file>file:/D:/Project_SWP/web/assets/css/POS/style.css</file>
+            <file>file:/D:/Project_SWP/src/java/model/OrderDetail.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/EditCustomerServlet.java</file>
             <file>file:/D:/Project_SWP/src/java/model/Cart.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/AddToCartController.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/PoSHomeServlet.java</file>
-            <file>file:/D:/Project_SWP/web/pos-home_backup.jsp</file>
             <file>file:/D:/Project_SWP/src/java/dal/StoreStockDAO.java</file>
-            <file>file:/D:/Project_SWP/web/assets/js/POS/pos-home.js</file>
-            <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/model/Customer.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/Customers.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/ProcessQRPaymentServlet.java</file>
             <file>file:/D:/Project_SWP/src/java/model/OrderItem.java</file>
             <file>file:/D:/Project_SWP/src/java/model/CartItem.java</file>
         </group>

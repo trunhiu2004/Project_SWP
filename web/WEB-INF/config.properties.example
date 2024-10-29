@@ -1,3 +1,4 @@
 payos.client_id=YOUR_CLIENT_ID
 payos.api_key=YOUR_API_KEY 
 payos.checksum_key=YOUR_CHECKSUM_KEY
+payos.api_url=PAYOS_API_URL
