@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.Customers;
 
 /**
@@ -60,33 +63,36 @@ public class LoadCustomersServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
 
+        PrintWriter out = response.getWriter();
         try {
             CustomerDAO customerDAO = new CustomerDAO();
-            List<Customers> customers = customerDAO.getAllCustomers();
+            String searchTerm = request.getParameter("search");
 
-            // Convert to JSON
-            StringBuilder json = new StringBuilder();
-            json.append("[");
-            for (int i = 0; i < customers.size(); i++) {
-                Customers c = customers.get(i);
-                json.append("{");
-                json.append("\"id\":").append(c.getCustomerId()).append(",");
-                json.append("\"name\":\"").append(c.getCustomerName()).append("\",");
-                json.append("\"phone\":\"").append(c.getCustomerPhone()).append("\",");
-                json.append("\"type\":\"").append(c.getCustomerType().getTypeName()).append("\"");
-                json.append("}");
-                if (i < customers.size() - 1) {
-                    json.append(",");
-                }
+            List<Customers> customers;
+            if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+                customers = customerDAO.searchCustomers(searchTerm);
+            } else {
+                customers = customerDAO.getAllCustomers();
             }
-            json.append("]");
 
-            out.print(json.toString());
+            // Chuyển đổi danh sách customers thành JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(customers.stream()
+                    .map(c -> new HashMap<String, Object>() {
+                {
+                    put("id", c.getCustomerId());
+                    put("name", c.getCustomerName());
+                    put("phone", c.getCustomerPhone());
+                    put("type", c.getCustomerType().getTypeName());
+                }
+            })
+                    .collect(Collectors.toList()));
 
+            out.print(json);
         } catch (Exception e) {
-            out.print("{\"error\":\"" + e.getMessage() + "\"}");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.print("{\"error\":\"" + e.getMessage().replace("\"", "\\\"") + "\"}");
         }
     }
 

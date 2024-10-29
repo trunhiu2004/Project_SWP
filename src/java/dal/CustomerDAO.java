@@ -77,4 +77,39 @@ public class CustomerDAO extends DBContext {
         }
         return null;
     }
+
+    public List<Customers> searchCustomers(String searchTerm) {
+        List<Customers> customers = new ArrayList<>();
+        String sql = "SELECT c.*, ct.type_name FROM Customers c "
+                + "LEFT JOIN CustomerTypes ct ON c.customer_type_id = ct.customer_type_id "
+                + "WHERE c.customer_name LIKE ? OR c.customer_phone LIKE ? "
+                + "ORDER BY c.customer_name";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            String searchPattern = "%" + (searchTerm != null ? searchTerm : "") + "%";
+            st.setString(1, searchPattern);
+            st.setString(2, searchPattern);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Customers customer = new Customers();
+                customer.setCustomerId(rs.getInt("customer_id"));
+                customer.setCustomerName(rs.getString("customer_name"));
+                customer.setCustomerPhone(rs.getString("customer_phone"));
+                customer.setPoint(rs.getInt("point"));
+
+                CustomerType type = new CustomerType();
+                type.setCustomerTypeId(rs.getInt("customer_type_id"));
+                type.setTypeName(rs.getString("type_name"));
+                customer.setCustomerType(type);
+
+                customers.add(customer);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in searchCustomers: " + e.getMessage());
+        }
+        return customers;
+    }
+
 }

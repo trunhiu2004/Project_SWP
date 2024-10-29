@@ -19,6 +19,8 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -103,6 +105,17 @@ public class CharacterEncodingFilter implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
+        // Thêm Content-Type cho JavaScript files
+        if (response instanceof HttpServletResponse) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            String requestURI = ((HttpServletRequest) request).getRequestURI();
+
+            if (requestURI.endsWith(".js")) {
+                httpResponse.setContentType("application/javascript; charset=UTF-8");
+            }
+        }
+
         chain.doFilter(request, response);
     }
 
