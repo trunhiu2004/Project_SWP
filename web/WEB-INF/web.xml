@@ -306,6 +306,10 @@
         <servlet-name>AddCustomerServlet</servlet-name>
         <servlet-class>controller.AddCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadCustomerTypesServlet</servlet-name>
+        <servlet-class>controller.LoadCustomerTypesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -599,6 +603,10 @@
     <servlet-mapping>
         <servlet-name>AddCustomerServlet</servlet-name>
         <url-pattern>/add-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCustomerTypesServlet</servlet-name>
+        <url-pattern>/load-customer-types</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

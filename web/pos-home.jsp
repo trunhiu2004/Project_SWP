@@ -170,12 +170,12 @@
                                 Cancel
                             </button>
                             <button class="bg_hold">
-                                <i class="material-icons">pause</i>
-                                Hold
+                                <i class="material-icons">payments</i>
+                                Pay via Cash
                             </button>
                             <button class="bg__green">
-                                <i class="material-icons">payment</i>
-                                Payment
+                                <i class="material-icons">qr_code</i>
+                                Pay via QRCode
                             </button>
                         </div>
                     </div>
@@ -255,8 +255,7 @@
                         <div class="form-group">
                             <label for="customerType">Loại khách hàng:</label>
                             <select id="customerType" name="customerType" required>
-                                <option value="1">Đồng</option>
-                                <option value="2">Bạc</option>
+                                <!-- Options sẽ được thêm bằng JavaScript -->
                             </select>
                         </div>
                     </form>
@@ -288,9 +287,7 @@
                         <div class="form-group">
                             <label for="newCustomerType">Loại khách hàng:</label>
                             <select id="newCustomerType" name="customerType" required>
-                                <option value="1">Đồng</option>
-                                <option value="2">Bạc</option>
-                                <option value="3">Vàng</option>
+                                <!-- Options sẽ được thêm bằng JavaScript -->
                             </select>
                         </div>
                     </form>

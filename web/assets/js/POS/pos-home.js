@@ -96,7 +96,38 @@ function initializeFeatures() {
     initializeCancelButton();
     initializeCustomerModal();
 }
+function loadCustomerTypes() {
+    return fetch('load-customer-types')
+            .then(response => response.json())
+            .then(types => {
+                // Lấy references đến cả hai select elements
+                const editSelect = document.getElementById('customerType');
+                const addSelect = document.getElementById('newCustomerType');
 
+                if (editSelect) {
+                    editSelect.innerHTML = '';
+                    types.forEach(type => {
+                        const option = document.createElement('option');
+                        option.value = type.customerTypeId;
+                        option.textContent = type.typeName;
+                        editSelect.appendChild(option);
+                    });
+                }
+
+                if (addSelect) {
+                    addSelect.innerHTML = '';
+                    types.forEach(type => {
+                        const option = document.createElement('option');
+                        option.value = type.customerTypeId;
+                        option.textContent = type.typeName;
+                        addSelect.appendChild(option);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading customer types:', error);
+            });
+}
 // Cart Management Functions
 function addToCart(storeStockId) {
     window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
@@ -293,26 +324,28 @@ function openEditCustomerModal() {
         return;
     }
 
-    fetch('edit-customer?id=' + selectedCustomer.id)
-            .then(response => {
-                console.log('Response:', response);
-                return response.json();
-            })
-            .then(customer => {
-                console.log('Customer data:', customer);
-                document.getElementById('customerId').value = customer.customerId;
-                document.getElementById('customerName').value = customer.customerName;
-                document.getElementById('customerPhone').value = customer.customerPhone;
-                document.getElementById('customerType').value = customer.customerType.customerTypeId;
-                modal.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra khi lấy thông tin khách hàng');
-            });
+    // Load customer types first
+    loadCustomerTypes().then(() => {
+        // Then load customer data
+        fetch('edit-customer?id=' + selectedCustomer.id)
+                .then(response => {
+                    console.log('Response:', response);
+                    return response.json();
+                })
+                .then(customer => {
+                    console.log('Customer data:', customer);
+                    document.getElementById('customerId').value = customer.customerId;
+                    document.getElementById('customerName').value = customer.customerName;
+                    document.getElementById('customerPhone').value = customer.customerPhone;
+                    document.getElementById('customerType').value = customer.customerType.customerTypeId;
+                    modal.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi lấy thông tin khách hàng');
+                });
+    });
 }
-
-
 function closeEditCustomerModal() {
     const modal = document.getElementById('editCustomerModal');
     modal.style.display = 'none';
@@ -344,9 +377,9 @@ function saveCustomerChanges() {
 }
 function loadCustomers() {
     $('#customerSelect').select2('destroy'); // Hủy select2 hiện tại
+    loadCustomerTypes(); // Load lại customer types
     initializeCustomerSelect(); // Khởi tạo lại select2
 }
-
 function initializeCustomerModal() {
     // Edit button click
     const editButton = document.getElementById('editCustomerBtn');
@@ -414,6 +447,7 @@ function initializeCustomerModal() {
         saveButton.addEventListener('click', saveCustomerChanges);
         console.log('Save button initialized');
     }
+    loadCustomerTypes();
 
     // Close modals when clicking outside
     window.addEventListener('click', function (event) {
@@ -432,10 +466,13 @@ function initializeCustomerModal() {
 function openAddCustomerModal() {
     console.log('Opening add customer modal...');
     const modal = document.getElementById('addCustomerModal');
-    modal.style.display = 'block';
 
-    // Reset form
-    document.getElementById('addCustomerForm').reset();
+    // Load customer types before showing modal
+    loadCustomerTypes().then(() => {
+        modal.style.display = 'block';
+        // Reset form
+        document.getElementById('addCustomerForm').reset();
+    });
 }
 
 // Hàm đóng modal thêm khách hàng
