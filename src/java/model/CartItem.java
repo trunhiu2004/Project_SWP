@@ -50,4 +50,11 @@ public class CartItem {
     public double getSubTotal() {
         return this.quantity * this.price;
     }
+
+    public Products getProduct() {
+        if (storeStock != null && storeStock.getInventory() != null) {
+            return storeStock.getInventory().getProduct();
+        }
+        return null;
+    }
 }

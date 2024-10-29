@@ -1,0 +1,70 @@
+.receipt {
+    width: 80mm;
+    padding: 10mm;
+    margin: 0 auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.customer-info {
+    margin-bottom: 20px;
+}
+
+.receipt-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.receipt-items th,
+.receipt-items td {
+    border-bottom: 1px dotted #000;
+    padding: 5px;
+    text-align: left;
+}
+
+.receipt-items th {
+    font-weight: bold;
+}
+
+.receipt-summary {
+    margin-top: 20px;
+    border-top: 1px solid #000;
+    padding-top: 10px;
+}
+
+.receipt-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.receipt-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-style: italic;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .receipt, .receipt * {
+        visibility: visible;
+    }
+    .receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

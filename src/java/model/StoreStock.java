@@ -81,11 +81,5 @@ public class StoreStock {
     @Override
     public String toString() {
         return "StoreStock{" + "storeStockId=" + storeStockId + ", inventory=" + inventory + ", stock=" + stock + ", lastStockCheckDate=" + lastStockCheckDate + ", discount=" + discount + ", alert=" + alert + '}';
-    }
-
-    
-
-    
-
-    
+    }   
 }

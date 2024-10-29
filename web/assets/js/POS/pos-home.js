@@ -95,6 +95,7 @@ function initializeFeatures() {
     initializeSearchProduct();
     initializeCancelButton();
     initializeCustomerModal();
+    initializePaymentFeatures();
 }
 function loadCustomerTypes() {
     return fetch('load-customer-types')
@@ -525,4 +526,214 @@ function saveNewCustomer() {
                 console.error('Error:', error);
                 alert('Có lỗi xảy ra khi thêm khách hàng');
             });
+}
+// Payment Functions
+function initializePaymentFeatures() {
+    initializeCashPayment();
+    initializePaymentModals();
+}
+
+function initializeCashPayment() {
+    const cashPaymentBtn = document.querySelector('.bg_hold');
+    if (cashPaymentBtn) {
+        cashPaymentBtn.addEventListener('click', openCashPaymentModal);
+    }
+}
+
+function initializePaymentModals() {
+    // Cash Payment Modal Events
+    const cashModal = document.getElementById('cashPaymentModal');
+    if (cashModal) {
+        const closeButtons = cashModal.querySelectorAll('.close, .btn-secondary');
+        const confirmButton = cashModal.querySelector('#confirmPayment');
+        const receivedInput = cashModal.querySelector('#receivedAmount');
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeCashPaymentModal);
+        });
+
+        if (confirmButton) {
+            confirmButton.addEventListener('click', processCashPayment);
+        }
+
+        if (receivedInput) {
+            receivedInput.addEventListener('input', calculateChange);
+        }
+    }
+
+    // Receipt Modal Events
+    const receiptModal = document.getElementById('receiptModal');
+    if (receiptModal) {
+        const closeButtons = receiptModal.querySelectorAll('.close, .btn-secondary');
+        const printButton = receiptModal.querySelector('.btn-primary');
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeReceiptModal);
+        });
+
+        if (printButton) {
+            printButton.addEventListener('click', printReceipt);
+        }
+    }
+}
+
+function openCashPaymentModal() {
+    console.log('Opening cash payment modal...');
+    const selectedCustomer = $('#customerSelect').select2('data')[0];
+
+    // Validate customer selection
+    if (!selectedCustomer || !selectedCustomer.id) {
+        alert('Vui lòng chọn khách hàng trước khi thanh toán');
+        return;
+    }
+
+    // Get total amount
+    const totalAmountElement = document.querySelector('.cart-summary .summary-row span:last-child');
+    if (!totalAmountElement) {
+        alert('Không thể lấy thông tin giỏ hàng');
+        return;
+    }
+
+    const totalAmount = parseFloat(totalAmountElement.textContent.replace(/[^\d]/g, ''));
+
+    // Validate cart
+    if (!totalAmount || totalAmount <= 0) {
+        alert('Giỏ hàng trống');
+        return;
+    }
+
+    // Open modal and set values
+    document.getElementById('totalAmount').value = formatCurrency(totalAmount);
+    document.getElementById('receivedAmount').value = '';
+    document.getElementById('changeAmount').value = '';
+    document.getElementById('cashPaymentModal').style.display = 'block';
+    document.getElementById('receivedAmount').focus();
+}
+
+
+function closeCashPaymentModal() {
+    document.getElementById('cashPaymentModal').style.display = 'none';
+}
+
+function closeReceiptModal() {
+    document.getElementById('receiptModal').style.display = 'none';
+}
+
+function calculateChange() {
+    const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/[^\d]/g, ''));
+    const receivedInput = document.getElementById('receivedAmount');
+    const receivedAmount = parseFloat(receivedInput.value) || 0;
+    const changeAmount = receivedAmount - totalAmount;
+
+    // Validate input
+    if (receivedAmount <= 0) {
+        document.getElementById('changeAmount').value = '';
+        document.getElementById('confirmPayment').disabled = true;
+        return;
+    }
+
+    document.getElementById('changeAmount').value = formatCurrency(Math.max(0, changeAmount));
+    document.getElementById('confirmPayment').disabled = changeAmount < 0;
+}
+
+
+function processCashPayment() {
+    const selectedCustomer = $('#customerSelect').select2('data')[0];
+    const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/[^\d]/g, ''));
+    const receivedAmount = parseFloat(document.getElementById('receivedAmount').value);
+    // Validate customer selection
+    if (!selectedCustomer || !selectedCustomer.id) {
+        alert('Vui lòng chọn khách hàng');
+        return;
+    }
+
+    // Validate cart
+    if (!totalAmount || totalAmount <= 0) {
+        alert('Giỏ hàng trống');
+        return;
+    }
+    // Validate received amount
+    if (!receivedAmount) {
+        alert('Vui lòng nhập số tiền khách đưa');
+        return;
+    }
+    if (receivedAmount < totalAmount) {
+        alert('Số tiền khách đưa không đủ');
+        return;
+    }
+    const changeAmount = receivedAmount - totalAmount;
+// Disable nút thanh toán
+    document.getElementById('confirmPayment').disabled = true;
+
+    fetch('process-cash-payment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            customerId: selectedCustomer.id,
+            totalAmount: totalAmount,
+            receivedAmount: receivedAmount,
+            changeAmount: changeAmount
+        })
+    })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text || 'Có lỗi xảy ra');
+                    });
+                }
+                return response.text();
+            })
+            .then(html => {
+                closeCashPaymentModal();
+                document.getElementById('receiptContent').innerHTML = html;
+                document.getElementById('receiptModal').style.display = 'block';
+                clearCart();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message || 'Có lỗi xảy ra khi xử lý thanh toán');
+            })
+            .finally(() => {
+                // Re-enable nút thanh toán
+                document.getElementById('confirmPayment').disabled = false;
+            });
+}
+function clearCart() {
+    fetch('clear-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+}
+
+
+function printReceipt() {
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write('<html><head><title>Hóa đơn</title>');
+    printWindow.document.write('<link rel="stylesheet" href="assets/css/receipt.css">');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(document.getElementById('receiptContent').innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
+// Format currency utility function
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }).format(amount);
 }

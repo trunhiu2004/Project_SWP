@@ -7,8 +7,10 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.CartItem;
 import model.Order;
 import model.OrderDetail;
 import model.Product;
@@ -245,4 +247,120 @@ public class OrderDAO extends DBContext {
             throw new Exception("Failed to add product to cart.");
         }
     }
+
+    public int createOrder(int customerId, double totalAmount, List<CartItem> items) throws SQLException {
+        try {
+            connection.setAutoCommit(false);
+
+            // Validate input
+            if (customerId <= 0 || totalAmount <= 0 || items == null || items.isEmpty()) {
+                throw new SQLException("Invalid input parameters");
+            }
+
+            // Verify customer exists
+            String checkCustomerSql = "SELECT COUNT(*) FROM Customers WHERE customer_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(checkCustomerSql)) {
+                ps.setInt(1, customerId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    throw new SQLException("Customer not found");
+                }
+            }
+
+            // Create order with transaction
+            String orderSql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id) "
+                    + "VALUES (?, GETDATE(), ?, 'Completed', 2)";
+
+            int orderId;
+            try (PreparedStatement ps = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, customerId);
+                ps.setDouble(2, totalAmount);
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if (!rs.next()) {
+                    throw new SQLException("Failed to create order");
+                }
+                orderId = rs.getInt(1);
+            }
+
+            // Process order details
+            processOrderDetails(orderId, items);
+
+            // Create invoice
+            createInvoice(orderId, customerId, totalAmount);
+
+            connection.commit();
+            return orderId;
+
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    throw new SQLException("Error rolling back transaction: " + ex.getMessage());
+                }
+            }
+            throw e;
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                } catch (SQLException e) {
+                    throw new SQLException("Error resetting auto-commit: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+    private void processOrderDetails(int orderId, List<CartItem> items) throws SQLException {
+        String detailSql = "INSERT INTO OrdersDetails (order_id, product_id, quantity, unit_price, total_price, store_stock_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+
+        String updateStockSql = "UPDATE StoreStock SET quantity_in_stock = quantity_in_stock - ? "
+                + "WHERE store_stock_id = ? AND quantity_in_stock >= ?";
+
+        try (PreparedStatement detailStm = connection.prepareStatement(detailSql); PreparedStatement stockStm = connection.prepareStatement(updateStockSql)) {
+
+            for (CartItem item : items) {
+                // Validate item
+                if (item.getQuantity() <= 0 || item.getPrice() <= 0) {
+                    throw new SQLException("Invalid item data");
+                }
+
+                // Insert order detail
+                detailStm.setInt(1, orderId);
+                detailStm.setInt(2, item.getProduct().getId());
+                detailStm.setInt(3, item.getQuantity());
+                detailStm.setDouble(4, item.getPrice());
+                detailStm.setDouble(5, item.getQuantity() * item.getPrice());
+                detailStm.setInt(6, item.getStoreStock().getStoreStockId());
+                detailStm.executeUpdate();
+
+                // Update stock
+                stockStm.setInt(1, item.getQuantity());
+                stockStm.setInt(2, item.getStoreStock().getStoreStockId());
+                stockStm.setInt(3, item.getQuantity());
+
+                int rowsAffected = stockStm.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new SQLException("Insufficient stock for product: " + item.getProduct().getName());
+                }
+            }
+        }
+    }
+
+    private void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
+        String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
+                + "payment_method_id, employee_id, customer_id, shift_manager_id) "
+                + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, 2, ?, 2)";
+
+        try (PreparedStatement ps = connection.prepareStatement(invoiceSql)) {
+            ps.setInt(1, orderId);
+            ps.setDouble(2, totalAmount);
+            ps.setInt(3, customerId);
+            ps.executeUpdate();
+        }
+    }
+
 }

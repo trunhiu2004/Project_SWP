@@ -310,6 +310,10 @@
         <servlet-name>LoadCustomerTypesServlet</servlet-name>
         <servlet-class>controller.LoadCustomerTypesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessCashPaymentServlet</servlet-name>
+        <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -607,6 +611,10 @@
     <servlet-mapping>
         <servlet-name>LoadCustomerTypesServlet</servlet-name>
         <url-pattern>/load-customer-types</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessCashPaymentServlet</servlet-name>
+        <url-pattern>/process-cash-payment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

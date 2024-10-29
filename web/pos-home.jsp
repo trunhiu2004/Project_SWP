@@ -298,5 +298,58 @@
                 </div>
             </div>
         </div>
+        <!-- Modal Thanh toán tiền mặt -->
+        <div class="modal fade" id="cashPaymentModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thanh toán tiền mặt</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="cashPaymentForm">
+                            <div class="form-group">
+                                <label>Tổng tiền:</label>
+                                <input type="text" class="form-control" id="totalAmount" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiền khách đưa:</label>
+                                <input type="number" class="form-control" id="receivedAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiền phải trả lại:</label>
+                                <input type="text" class="form-control" id="changeAmount" readonly>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" id="confirmPayment">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal hiển thị hóa đơn -->
+        <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hóa đơn</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="receiptContent">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="printReceipt()">In hóa đơn</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

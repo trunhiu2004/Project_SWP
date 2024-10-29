@@ -13,6 +13,7 @@ import java.util.Date;
 public class Order {
 
     private int orderId;
+    private int customerId;
     private String customerName;
     private Date orderDate;
     private int orderTotalAmount;
@@ -21,6 +22,33 @@ public class Order {
     private String couponCode;
     private int employeeId;
 
+    public Order() {
+    }
+
+    public Order(int orderId, String customerName, Date orderDate, int orderTotalAmount, String orderStatus, String employeeName, String couponCode, int employeeId) {
+        this.orderId = orderId;
+        this.customerName = customerName;
+        this.orderDate = orderDate;
+        this.orderTotalAmount = orderTotalAmount;
+        this.orderStatus = orderStatus;
+        this.employeeName = employeeName;
+        this.couponCode = couponCode;
+        this.employeeId = employeeId;
+    }
+
+    public Order(int orderId, int customerId, String customerName, Date orderDate, int orderTotalAmount, String orderStatus, String employeeName, String couponCode, int employeeId) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.orderDate = orderDate;
+        this.orderTotalAmount = orderTotalAmount;
+        this.orderStatus = orderStatus;
+        this.employeeName = employeeName;
+        this.couponCode = couponCode;
+        this.employeeId = employeeId;
+    }
+
+    
     // Getters and setters
     public int getOrderId() {
         return orderId;
@@ -85,4 +113,13 @@ public class Order {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+    
 }
