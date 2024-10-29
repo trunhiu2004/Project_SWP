@@ -112,4 +112,19 @@ public class CustomerDAO extends DBContext {
         return customers;
     }
 
+    public boolean updateCustomer(Customers customer) {
+        String sql = "UPDATE Customers SET customer_name=?, customer_phone=?, customer_type_id=? WHERE customer_id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, customer.getCustomerName());
+            st.setString(2, customer.getCustomerPhone());
+            st.setInt(3, customer.getCustomerType().getCustomerTypeId());
+            st.setInt(4, customer.getCustomerId());
+            return st.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error in updateCustomer: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

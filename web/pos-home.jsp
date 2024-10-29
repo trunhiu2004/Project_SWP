@@ -89,13 +89,15 @@
                         </div>
 
 
-                        <button class="customer_action_btn">
+                        <button id="editCustomerBtn" class="customer_action_btn">
                             <i class="material-icons">edit</i>
                         </button>
 
-                        <button class="customer_action_btn">
+
+                        <button id="addCustomerBtn" class="customer_action_btn">
                             <i class="material-icons">add</i>
                         </button>
+
                     </div>
 
                     <!--                    <div class="order_table_header_row">
@@ -232,5 +234,39 @@
 
             </div>
         </div>
+        <!-- Edit Customer Modal -->
+        <div id="editCustomerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Chỉnh sửa thông tin khách hàng</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="editCustomerForm">
+                        <input type="hidden" id="customerId" name="customerId">
+                        <div class="form-group">
+                            <label for="customerName">Tên khách hàng:</label>
+                            <input type="text" id="customerName" name="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Số điện thoại:</label>
+                            <input type="tel" id="customerPhone" name="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerType">Loại khách hàng:</label>
+                            <select id="customerType" name="customerType" required>
+                                <option value="1">Đồng</option>
+                                <option value="2">Bạc</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="button" class="btn-save">Lưu</button>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

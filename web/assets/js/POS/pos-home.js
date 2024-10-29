@@ -7,6 +7,8 @@ $(document).ready(function () {
     console.log('Customer select element exists:', $('#customerSelect').length > 0);
     console.log('Customer select HTML:', $('#customerSelect')[0]?.outerHTML);
 
+    console.log('Edit button exists:', document.querySelector('.customer_action_btn i.material-icons') !== null);
+
     initializeOtherSelects();
     initializeFeatures();
 });
@@ -92,6 +94,7 @@ function initializeFeatures() {
     initializeBarcodeScanner();
     initializeSearchProduct();
     initializeCancelButton();
+    initializeCustomerModal();
 }
 
 // Cart Management Functions
@@ -277,4 +280,109 @@ function initializeCancelButton() {
             }
         });
     }
+}
+function openEditCustomerModal() {
+    console.log('Opening modal...');
+    const modal = document.getElementById('editCustomerModal');
+    const selectedCustomer = $('#customerSelect').select2('data')[0];
+
+    console.log('Selected customer:', selectedCustomer);
+
+    if (!selectedCustomer || !selectedCustomer.id) {
+        alert('Vui lòng chọn khách hàng trước');
+        return;
+    }
+
+    fetch('edit-customer?id=' + selectedCustomer.id)
+            .then(response => {
+                console.log('Response:', response);
+                return response.json();
+            })
+            .then(customer => {
+                console.log('Customer data:', customer);
+                document.getElementById('customerId').value = customer.customerId;
+                document.getElementById('customerName').value = customer.customerName;
+                document.getElementById('customerPhone').value = customer.customerPhone;
+                document.getElementById('customerType').value = customer.customerType.customerTypeId;
+                modal.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi lấy thông tin khách hàng');
+            });
+}
+
+
+function closeEditCustomerModal() {
+    const modal = document.getElementById('editCustomerModal');
+    modal.style.display = 'none';
+}
+
+function saveCustomerChanges() {
+    const formData = new FormData(document.getElementById('editCustomerForm'));
+
+    fetch('edit-customer', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+    })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cập nhật thông tin khách hàng thành công');
+                    closeEditCustomerModal();
+                    // Refresh customer select
+                    $('#customerSelect').val(null).trigger('change');
+                    loadCustomers(); // Thêm hàm này nếu bạn cần refresh danh sách khách hàng
+                } else {
+                    alert('Có lỗi xảy ra khi cập nhật thông tin khách hàng');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi cập nhật thông tin khách hàng');
+            });
+}
+function loadCustomers() {
+    $('#customerSelect').select2('destroy'); // Hủy select2 hiện tại
+    initializeCustomerSelect(); // Khởi tạo lại select2
+}
+
+function initializeCustomerModal() {
+    // Edit button click - sử dụng ID thay vì class
+    const editButton = document.getElementById('editCustomerBtn');
+    if (editButton) {
+        editButton.addEventListener('click', openEditCustomerModal);
+        console.log('Edit button initialized');
+    } else {
+        console.error('Edit button not found');
+    }
+
+    // Modal close button
+    const closeButton = document.querySelector('#editCustomerModal .close');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeEditCustomerModal);
+        console.log('Close button initialized');
+    }
+
+    // Modal cancel button
+    const cancelButton = document.querySelector('#editCustomerModal .btn-cancel');
+    if (cancelButton) {
+        cancelButton.addEventListener('click', closeEditCustomerModal);
+        console.log('Cancel button initialized');
+    }
+
+    // Modal save button
+    const saveButton = document.querySelector('#editCustomerModal .btn-save');
+    if (saveButton) {
+        saveButton.addEventListener('click', saveCustomerChanges);
+        console.log('Save button initialized');
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('editCustomerModal');
+        if (event.target === modal) {
+            closeEditCustomerModal();
+        }
+    });
 }

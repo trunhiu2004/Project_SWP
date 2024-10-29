@@ -298,6 +298,10 @@
         <servlet-name>ClearCartServlet</servlet-name>
         <servlet-class>controller.ClearCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCustomerServlet</servlet-name>
+        <servlet-class>controller.EditCustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -583,6 +587,10 @@
     <servlet-mapping>
         <servlet-name>ClearCartServlet</servlet-name>
         <url-pattern>/clear-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomerServlet</servlet-name>
+        <url-pattern>/edit-customer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
