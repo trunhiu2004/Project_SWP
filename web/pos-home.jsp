@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="home.jsp" class="header_menu_icon" data-tippy-content="Dashboard">
+                                <a href="home.jsp" class="header_menu_icon" target="_blank" data-tippy-content="Dashboard">
                                     <span class="iconify" data-icon="solar:chart-2-broken" data-width="22"></span>
                                 </a>
                             </li>
