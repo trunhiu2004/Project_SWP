@@ -344,7 +344,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    private void processOrderDetails(int orderId, List<CartItem> items) throws SQLException {
+    public void processOrderDetails(int orderId, List<CartItem> items) throws SQLException {
         String detailSql = "INSERT INTO OrdersDetails (order_id, product_id, quantity, unit_price, total_price, store_stock_id) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -381,7 +381,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    private void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
+    public void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
         String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
                 + "payment_method_id, employee_id, customer_id, shift_manager_id) "
                 + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, 2, ?, 2)";

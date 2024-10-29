@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -77,11 +78,17 @@ public class ClearCartServlet extends HttpServlet {
             // Xóa giỏ hàng khỏi session
             HttpSession session = request.getSession();
             session.removeAttribute("cart");
+            session.removeAttribute("currentOrderId"); // Xóa cả orderId nếu có
 
             // Trả về response thành công
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("success", true);
             out.println("{\"success\": true}");
         } catch (Exception e) {
             // Trả về response lỗi
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("success", false);
+            jsonResponse.addProperty("error", e.getMessage());
             out.println("{\"success\": false, \"error\": \"" + e.getMessage() + "\"}");
         }
     }

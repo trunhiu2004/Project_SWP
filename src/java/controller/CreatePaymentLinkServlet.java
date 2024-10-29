@@ -5,6 +5,8 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -20,6 +22,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
@@ -119,26 +123,35 @@ public class CreatePaymentLinkServlet extends HttpServlet {
             String orderId = jsonRequest.get("orderId").getAsString();
             String description = jsonRequest.get("description").getAsString();
 
-            // Create item data
-            ItemData itemData = ItemData.builder()
-                    .name("Order #" + orderId)
-                    .quantity(1)
-                    .price((int) amount)
-                    .build();
+            // Giả sử bạn nhận được danh sách sản phẩm từ request
+            JsonArray items = jsonRequest.getAsJsonArray("items");
+
+            // Tạo danh sách ItemData
+            List<ItemData> itemDataList = new ArrayList<>();
+
+            // Thêm từng sản phẩm vào danh sách
+            for (JsonElement item : items) {
+                JsonObject itemObj = item.getAsJsonObject();
+                ItemData itemData = ItemData.builder()
+                        .name(itemObj.get("productName").getAsString())
+                        .quantity(itemObj.get("quantity").getAsInt())
+                        .price(itemObj.get("price").getAsInt())
+                        .build();
+                itemDataList.add(itemData);
+            }
 
             // Create payment data
             String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-
             String returnUrl = baseUrl + "/payment-return";
             String cancelUrl = baseUrl + "/payment-return";
-            
+
             PaymentData paymentData = PaymentData.builder()
                     .orderCode(Long.parseLong(orderId))
                     .amount((int) amount)
                     .description(description)
                     .returnUrl(returnUrl)
                     .cancelUrl(cancelUrl)
-                    .item(itemData)
+                    .items(itemDataList) // Thêm danh sách sản phẩm
                     .build();
 
             // Create payment link

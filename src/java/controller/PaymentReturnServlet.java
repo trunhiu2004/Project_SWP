@@ -4,7 +4,9 @@
  */
 package controller;
 
+import dal.CustomerDAO;
 import dal.OrderDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,9 +14,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import model.Cart;
 import java.util.logging.Logger;
 import model.Order;
+import model.Customers;
 
 /**
  *
@@ -69,39 +73,89 @@ public class PaymentReturnServlet extends HttpServlet {
         String orderCode = request.getParameter("orderCode");
         String status = request.getParameter("status");
 
+        OrderDAO orderDAO = new OrderDAO();
+
         try {
+            orderDAO.connection.setAutoCommit(false);  // Start transaction
+
             if (code == null || orderCode == null || status == null) {
                 throw new ServletException("Missing required parameters");
             }
 
-            OrderDAO orderDAO = new OrderDAO();
             Order order = orderDAO.getOrderById(Integer.parseInt(orderCode));
-
             if (order == null) {
                 throw new ServletException("Order not found: " + orderCode);
             }
 
             if ("00".equals(code) && "PAID".equals(status)) {
-                // Payment successful
-                order.setOrderStatus("PAID");
+                // Lấy cart từ session
+                HttpSession session = request.getSession();
+                Cart cart = (Cart) session.getAttribute("cart");
+
+                if (cart == null || cart.getItems().isEmpty()) {
+                    throw new ServletException("Cart is empty");
+                }
+
+                // Cập nhật order status
+                order.setOrderStatus("COMPLETED");
                 orderDAO.updateOrderStatus(order);
 
-                // Clear cart using session
-                HttpSession session = request.getSession();
-                session.removeAttribute("cart"); // Thay vì gọi cart.clear()
+                try {
+                    // Xử lý OrderDetails và StoreStock
+                    orderDAO.processOrderDetails(order.getOrderId(), cart.getItems());
 
-                // Redirect to success page
-                response.sendRedirect("PoSHome?success=true");
+                    // Tạo Invoice
+                    orderDAO.createInvoice(order.getOrderId(), order.getCustomerId(), order.getOrderTotalAmount());
+
+                    // Commit nếu mọi thứ OK
+                    orderDAO.connection.commit();
+
+                    // Lấy thông tin customer cho receipt
+                    CustomerDAO customerDAO = new CustomerDAO();
+                    Customers customer = customerDAO.getCustomerById(order.getCustomerId());
+
+                    // Set attributes cho receipt
+                    request.setAttribute("order", order);
+                    request.setAttribute("items", cart.getItems());
+                    request.setAttribute("customer", customer);
+                    request.setAttribute("receivedAmount", order.getOrderTotalAmount());
+                    request.setAttribute("changeAmount", 0.0);
+
+                    // Xóa cart
+                    session.removeAttribute("cart");
+
+                    // Forward to receipt JSP
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/receipt-auto-print.jsp");
+                    dispatcher.forward(request, response);
+
+                } catch (SQLException e) {
+                    // Rollback nếu có lỗi
+                    orderDAO.connection.rollback();
+                    throw e;
+                }
+
             } else {
                 // Payment failed or cancelled
                 order.setOrderStatus("CANCELLED");
                 orderDAO.updateOrderStatus(order);
+                orderDAO.connection.commit();
                 response.sendRedirect("PoSHome?error=payment_failed");
             }
 
         } catch (Exception e) {
             LOGGER.severe("Error processing payment return: " + e.getMessage());
+            try {
+                orderDAO.connection.rollback();
+            } catch (SQLException ex) {
+                LOGGER.severe("Error rolling back transaction: " + ex.getMessage());
+            }
             response.sendRedirect("PoSHome?error=system_error");
+        } finally {
+            try {
+                orderDAO.connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                LOGGER.severe("Error resetting auto commit: " + e.getMessage());
+            }
         }
     }
 
