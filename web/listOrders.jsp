@@ -5,6 +5,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -223,7 +224,7 @@
                                                 <td>${order.orderId}</td>
                                                 <td>${order.customerName}</td>
                                                 <td>${order.orderDate}</td>
-                                                <td>${order.orderTotalAmount} đ</td>
+                                                <td><fmt:formatNumber value="${order.orderTotalAmount}" pattern="#,##0" />₫</td>
                                                 <td>${order.orderStatus}</td>
                                                 <td>${order.employeeName}</td>
                                                 <td>${order.couponCode}</td>

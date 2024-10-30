@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.Invoice" %>
 <%@ page import="java.util.List" %>
@@ -131,7 +132,8 @@
                                         <tr>
                                             <td><%= invoice.getInvoiceId() %></td>
                                             <td><%= invoice.getInvoiceDate() %></td>
-                                            <td><%= invoice.getTotalAmount() %></td>
+                                            <fmt:formatNumber value="<%= invoice.getTotalAmount() %>" pattern="#,##0" />₫
+                                            <td><fmt:formatNumber value="<%= invoice.getTotalAmount() %>" pattern="#,##0" />₫</td>
                                             <td><%= invoice.getStatus() %></td>
                                             <td><%= invoice.getEmployeeName() %></td>
                                             <td><%= invoice.getCustomerName() %></td>

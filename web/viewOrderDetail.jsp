@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -48,7 +49,7 @@
                                     <h5 class="card-title">Customer & Order Information</h5>
                                     <p><strong>Customer Name:</strong> ${order.customerName}</p>
                                     <p><strong>Order Date:</strong> ${order.orderDate}</p>
-                                    <p><strong>Total Amount:</strong> $${order.orderTotalAmount}</p>
+                                    <p><strong>Total Amount:</strong> <fmt:formatNumber value="${order.orderTotalAmount}" pattern="#,##0" />₫</p>
                                     <p><strong>Status:</strong> ${order.orderStatus}</p>
                                     <p><strong>Handled By:</strong> ${order.employeeName}</p>
                                     <p><strong>Coupon Code:</strong> ${order.couponCode != null ? order.couponCode : "N/A"}</p>
@@ -73,8 +74,8 @@
                                             <tr>
                                                 <td>${detail.productName}</td>
                                                 <td>${detail.quantity}</td>
-                                                <td>$${detail.unitPrice}</td>
-                                                <td>$${detail.totalPrice}</td>
+                                                <td><fmt:formatNumber value="${detail.unitPrice}" pattern="#,##0" />₫</td>
+                                                <td><fmt:formatNumber value="${detail.totalPrice}" pattern="#,##0" />₫</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
