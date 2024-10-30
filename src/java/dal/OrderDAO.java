@@ -362,5 +362,72 @@ public class OrderDAO extends DBContext {
             ps.executeUpdate();
         }
     }
+    
+    
+    public int getTotalPriceOrder() {
+        int totalPriceOrder = 0;
+        String sql = "	select Sum(order_total_amount) as Total_Price_Order from Orders where order_status = 'Paid'";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                totalPriceOrder = rs.getInt("Total_Price_Order");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalPriceOrder;
+    }
+
+    public double getTotalOrderSale() {
+        double totalOrderSale = 0;
+        String sql = "	SELECT COUNT(order_id) AS total_order_sales FROM Orders where order_status = 'Paid'";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalOrderSale = rs.getDouble("total_order_sales");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalOrderSale;
+    }
+    
+    
+    public double getTotalOrderAvg() {
+        double totalAvg = 0;
+        String sql = "SELECT Avg(Orders.order_total_amount) AS total_avg FROM Orders  where order_status = 'Paid'";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalAvg = rs.getDouble("total_avg");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalAvg;
+    }
+    
+     public double getTotalMax() {
+        double totalMax = 0;
+        String sql = "SELECT MAX(Orders.order_total_amount) AS max_price FROM Orders  where order_status = 'Paid'";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalMax = rs.getDouble("max_price");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalMax;
+    }
+    
 
 }
