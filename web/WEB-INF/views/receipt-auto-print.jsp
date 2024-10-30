@@ -107,12 +107,6 @@
                     <c:if test="${not empty order.couponCode}">
                         <p>Mã giảm giá: ${order.couponCode}</p>
                     </c:if>
-                    <c:if test="${order.paymentMethod eq 'QR'}">
-                        <p>Phương thức thanh toán: Thanh toán QR</p>
-                    </c:if>
-                    <c:if test="${order.paymentMethod eq 'CASH'}">
-                        <p>Phương thức thanh toán: Tiền mặt</p>
-                    </c:if>
                 </div>
 
                 <div class="receipt-footer">
