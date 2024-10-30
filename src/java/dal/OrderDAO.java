@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import model.CartItem;
 import model.Order;
 import model.OrderDetail;
@@ -541,4 +543,24 @@ public class OrderDAO extends DBContext {
         }
     }
 
+    public void cleanupIncompleteOrders() throws SQLException {
+        String sql = "DELETE FROM Orders WHERE order_total_amount IS NULL AND order_status = 'PENDING'";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.executeUpdate();
+        }
+    }
+
+    public void scheduleCleanup() {
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    cleanupIncompleteOrders();
+                } catch (SQLException ex) {
+                    // Log error
+                }
+            }
+        }, 0, 15 * 60 * 1000); // Chạy mỗi 15 phút
+    }
 }

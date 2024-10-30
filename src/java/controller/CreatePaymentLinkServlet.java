@@ -123,7 +123,6 @@ public class CreatePaymentLinkServlet extends HttpServlet {
             String orderId = jsonRequest.get("orderId").getAsString();
             String description = jsonRequest.get("description").getAsString();
 
-            // Giả sử bạn nhận được danh sách sản phẩm từ request
             JsonArray items = jsonRequest.getAsJsonArray("items");
 
             // Tạo danh sách ItemData

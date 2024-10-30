@@ -327,16 +327,8 @@
         <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProcessQRPaymentServlet</servlet-name>
-        <servlet-class>controller.ProcessQRPaymentServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreatePaymentLinkServlet</servlet-name>
         <servlet-class>controller.CreatePaymentLinkServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateOrderStatusServlet</servlet-name>
-        <servlet-class>controller.UpdateOrderStatusServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InitOrderServlet</servlet-name>
@@ -657,16 +649,8 @@
         <url-pattern>/process-cash-payment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProcessQRPaymentServlet</servlet-name>
-        <url-pattern>/process-qr-payment/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreatePaymentLinkServlet</servlet-name>
         <url-pattern>/create-payment-link</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateOrderStatusServlet</servlet-name>
-        <url-pattern>/update-order-status</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InitOrderServlet</servlet-name>

@@ -11,10 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import model.CartItem;
 import model.StoreStock;
 
 /**
@@ -61,6 +58,11 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //clear PENDING Order
+//        OrderDAO orderDAO = new OrderDAO();
+//        orderDAO.scheduleCleanup();
+        
         // Xử lý thông báo từ payment return
         String success = request.getParameter("success");
         String error = request.getParameter("error");
