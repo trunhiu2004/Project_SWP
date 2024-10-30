@@ -410,4 +410,116 @@ public class OrderDAO extends DBContext {
             }
         }
     }
+
+    public List<Order> getOrdersWithFilter(String customerName, String orderDate,
+            String status, String employeeName, int page, int pageSize) {
+        List<Order> orders = new ArrayList<>();
+        int offset = (page - 1) * pageSize;
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT o.order_id, c.customer_name, o.order_date, o.order_total_amount, ")
+                .append("o.order_status, e.employee_name, co.coupon_code, o.employee_id ")
+                .append("FROM Orders o ")
+                .append("LEFT JOIN Customers c ON o.customer_id = c.customer_id ")
+                .append("LEFT JOIN Employees e ON o.employee_id = e.employee_id ")
+                .append("LEFT JOIN CustomerCoupon cc ON o.customer_coupon_id = cc.customer_coupon_id ")
+                .append("LEFT JOIN Coupons co ON cc.coupon_id = co.coupon_id ")
+                .append("WHERE 1=1 ");
+
+        List<Object> params = new ArrayList<>();
+
+        if (customerName != null && !customerName.trim().isEmpty()) {
+            sql.append("AND c.customer_name LIKE ? ");
+            params.add("%" + customerName + "%");
+        }
+
+        if (orderDate != null && !orderDate.trim().isEmpty()) {
+            sql.append("AND CONVERT(DATE, o.order_date) = ? ");
+            params.add(orderDate);
+        }
+
+        if (status != null && !status.trim().isEmpty()) {
+            sql.append("AND o.order_status = ? ");
+            params.add(status);
+        }
+
+        if (employeeName != null && !employeeName.trim().isEmpty()) {
+            sql.append("AND e.employee_name LIKE ? ");
+            params.add("%" + employeeName + "%");
+        }
+
+        sql.append("ORDER BY o.order_date DESC ")
+                .append("OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+        params.add(offset);
+        params.add(pageSize);
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderId(rs.getInt("order_id"));
+                order.setCustomerName(rs.getString("customer_name"));
+                order.setOrderDate(rs.getDate("order_date"));
+                order.setOrderTotalAmount(rs.getInt("order_total_amount"));
+                order.setOrderStatus(rs.getString("order_status"));
+                order.setEmployeeName(rs.getString("employee_name"));
+                order.setCouponCode(rs.getString("coupon_code"));
+                order.setEmployeeId(rs.getInt("employee_id"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    public int getTotalOrders(String customerName, String orderDate, String status, String employeeName) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT COUNT(*) ")
+                .append("FROM Orders o ")
+                .append("LEFT JOIN Customers c ON o.customer_id = c.customer_id ")
+                .append("LEFT JOIN Employees e ON o.employee_id = e.employee_id ")
+                .append("WHERE 1=1 ");
+
+        List<Object> params = new ArrayList<>();
+
+        if (customerName != null && !customerName.trim().isEmpty()) {
+            sql.append("AND c.customer_name LIKE ? ");
+            params.add("%" + customerName + "%");
+        }
+
+        if (orderDate != null && !orderDate.trim().isEmpty()) {
+            sql.append("AND CONVERT(DATE, o.order_date) = ? ");
+            params.add(orderDate);
+        }
+
+        if (status != null && !status.trim().isEmpty()) {
+            sql.append("AND o.order_status = ? ");
+            params.add(status);
+        }
+
+        if (employeeName != null && !employeeName.trim().isEmpty()) {
+            sql.append("AND e.employee_name LIKE ? ");
+            params.add("%" + employeeName + "%");
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

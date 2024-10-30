@@ -22,7 +22,6 @@
         <extension>js</extension>
         <mime-type>text/javascript;charset=UTF-8</mime-type>
     </mime-mapping>
-
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
@@ -351,6 +350,10 @@
         <servlet-name>PaymentReturnServlet</servlet-name>
         <servlet-class>controller.PaymentReturnServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DebugInvoiceServlet</servlet-name>
+        <servlet-class>debug.DebugInvoiceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -676,6 +679,10 @@
     <servlet-mapping>
         <servlet-name>PaymentReturnServlet</servlet-name>
         <url-pattern>/payment-return</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DebugInvoiceServlet</servlet-name>
+        <url-pattern>/debug-invoice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
