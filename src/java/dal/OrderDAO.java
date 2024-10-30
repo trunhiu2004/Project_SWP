@@ -284,10 +284,18 @@ public class OrderDAO extends DBContext {
             connection.setAutoCommit(false);
 
             // Validate input
-            if (customerId <= 0 || totalAmount <= 0 || items == null || items.isEmpty()) {
+            if (customerId <= 0 || items == null || items.isEmpty()) {
                 throw new SQLException("Invalid input parameters");
             }
+            // Tính lại tổng tiền hoá đơn
+            double calculatedTotal = items.stream()
+                    .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                    .sum();
 
+            // So sánh với tổng tiền được truyền vào để đảm bảo tính nhất quán
+            if (Math.abs(calculatedTotal - totalAmount) > 0.01) {
+                throw new SQLException("Total amount mismatch");
+            }
             // Verify customer exists
             String checkCustomerSql = "SELECT COUNT(*) FROM Customers WHERE customer_id = ?";
             try (PreparedStatement ps = connection.prepareStatement(checkCustomerSql)) {
@@ -298,14 +306,14 @@ public class OrderDAO extends DBContext {
                 }
             }
 
-            // Create order with transaction
+            // Create order
             String orderSql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id) "
-                    + "VALUES (?, GETDATE(), ?, 'Completed', 2)";
+                    + "VALUES (?, GETDATE(), ?, 'COMPLETED', 2)";
 
             int orderId;
             try (PreparedStatement ps = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, customerId);
-                ps.setDouble(2, totalAmount);
+                ps.setDouble(2, calculatedTotal);
                 ps.executeUpdate();
 
                 ResultSet rs = ps.getGeneratedKeys();
@@ -319,7 +327,7 @@ public class OrderDAO extends DBContext {
             processOrderDetails(orderId, items);
 
             // Create invoice
-            createInvoice(orderId, customerId, totalAmount);
+            createInvoice(orderId, customerId, calculatedTotal);
 
             connection.commit();
             return orderId;
@@ -522,4 +530,15 @@ public class OrderDAO extends DBContext {
         }
         return 0;
     }
+
+    public boolean updateOrder(Order order) throws SQLException {
+        String sql = "UPDATE Orders SET order_status = ?, order_total_amount = ? WHERE order_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, order.getOrderStatus());
+            ps.setDouble(2, order.getOrderTotalAmount());
+            ps.setInt(3, order.getOrderId());
+            return ps.executeUpdate() > 0;
+        }
+    }
+
 }

@@ -66,7 +66,6 @@ public class PaymentReturnServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         LOGGER.info("Payment return received with parameters: " + request.getQueryString());
 
         String code = request.getParameter("code");
@@ -76,68 +75,74 @@ public class PaymentReturnServlet extends HttpServlet {
         OrderDAO orderDAO = new OrderDAO();
 
         try {
-            orderDAO.connection.setAutoCommit(false);  // Start transaction
+            orderDAO.connection.setAutoCommit(false);
 
             if (code == null || orderCode == null || status == null) {
                 throw new ServletException("Missing required parameters");
             }
 
-            Order order = orderDAO.getOrderById(Integer.parseInt(orderCode));
-            if (order == null) {
-                throw new ServletException("Order not found: " + orderCode);
+            // Lấy cart từ session
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
+
+            if (cart == null || cart.getItems().isEmpty()) {
+                throw new ServletException("Cart is empty");
             }
 
-            if ("00".equals(code) && "PAID".equals(status)) {
-                // Lấy cart từ session
-                HttpSession session = request.getSession();
-                Cart cart = (Cart) session.getAttribute("cart");
+            // Tính tổng tiền từ cart
+            double totalAmount = cart.getItems().stream()
+                    .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                    .sum();
 
-                if (cart == null || cart.getItems().isEmpty()) {
-                    throw new ServletException("Cart is empty");
+            if ("00".equals(code) && "PAID".equals(status)) {
+                Order order = orderDAO.getOrderById(Integer.parseInt(orderCode));
+                if (order == null) {
+                    throw new ServletException("Order not found: " + orderCode);
                 }
 
-                // Cập nhật order status
+                // Cập nhật order với tổng tiền chính xác
                 order.setOrderStatus("COMPLETED");
-                orderDAO.updateOrderStatus(order);
+                order.setOrderTotalAmount((int) totalAmount);
+                orderDAO.updateOrder(order);
 
                 try {
                     // Xử lý OrderDetails và StoreStock
                     orderDAO.processOrderDetails(order.getOrderId(), cart.getItems());
 
-                    // Tạo Invoice
-                    orderDAO.createInvoice(order.getOrderId(), order.getCustomerId(), order.getOrderTotalAmount());
+                    // Tạo Invoice với tổng tiền chính xác
+                    orderDAO.createInvoice(order.getOrderId(), order.getCustomerId(), totalAmount);
 
                     // Commit nếu mọi thứ OK
                     orderDAO.connection.commit();
 
-                    // Lấy thông tin customer cho receipt
+                    // Cập nhật request attributes
                     CustomerDAO customerDAO = new CustomerDAO();
                     Customers customer = customerDAO.getCustomerById(order.getCustomerId());
 
-                    // Set attributes cho receipt
                     request.setAttribute("order", order);
                     request.setAttribute("items", cart.getItems());
                     request.setAttribute("customer", customer);
-                    request.setAttribute("receivedAmount", order.getOrderTotalAmount());
+                    request.setAttribute("receivedAmount", totalAmount);
                     request.setAttribute("changeAmount", 0.0);
 
                     // Xóa cart
                     session.removeAttribute("cart");
 
-                    // Forward to receipt JSP
+                    // Forward to receipt
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/receipt-auto-print.jsp");
                     dispatcher.forward(request, response);
 
                 } catch (SQLException e) {
-                    // Rollback nếu có lỗi
                     orderDAO.connection.rollback();
                     throw e;
                 }
-
             } else {
                 // Payment failed or cancelled
-                order.setOrderStatus("CANCELLED");
-                orderDAO.updateOrderStatus(order);
+                Order order = orderDAO.getOrderById(Integer.parseInt(orderCode));
+                if (order != null) {
+                    order.setOrderStatus("CANCELLED");
+                    orderDAO.updateOrder(order);
+                }
                 orderDAO.connection.commit();
                 response.sendRedirect("PoSHome?error=payment_failed");
             }
