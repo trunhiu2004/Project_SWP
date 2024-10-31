@@ -1,17 +1,17 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
         
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Are you sure delete product which has id =" + id)) {
+                if (confirm("Bạn có muốn xóa sản phẩm có mã là " + id +" không ?")) {
                     window.location = "deleteProduct?product_id=" + id;
                 }
             }
@@ -59,10 +59,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Product List</h4>
-                                        <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
+                                        <h4 class="mb-3">Danh sách sản phẩm</h4>
+                                        <p class="mb-0">Danh sách này có thể bao gồm nhiều yếu tố như tên, hình ảnh, mô tả, giá cả, <br>và thông tin liên quan đến từng sản phẩm.</p>
                                     </div>
-                                    <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
+                                    <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm sản phẩm</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -71,16 +71,16 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Barcode</th>
-                                                <th>Product</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>Brand Name</th>
-                                                <th>Unit</th>
-                                                <th>Manufacture Date</th>
-                                                <th>Expiration Date</th>
-                                                <th>Batch</th>
-                                                <th>Action</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Loại sản phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Nhãn hàng</th>
+                                                <th>Đơn vị</th>
+                                                <th>Ngày sản xuất</th>
+                                                <th>Ngày hết hạn</th>
+                                                <th>Lô</th>
+                                                <th>Chức năng khác</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -100,13 +100,13 @@
                                             <td>${p.getBatch()}</td>
                                             <td>
                                                 <div class="d-flex align-items-center list-action">
-                                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View History Price"
+                                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lịch sử giá"
                                                        href="listPrice?product_id=${p.getId()}"><i class="ri-eye-line mr-0"></i></a>
-                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Price"
+                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa giá"
                                                        href="updatePrice?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Information"
+                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa thông tin"
                                                        href="updateProduct?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa sản phẩm"
                                                        href="#" onclick="doDelete(${p.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                 </div>
                                             </td>
@@ -169,7 +169,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

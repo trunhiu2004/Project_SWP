@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,9 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add to Inventory</h4>
+                                            <h4 class="card-title">Thêm sản phẩm mới lên cửa hàng</h4>
                                         </div>
-                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
+                                        <a href="listStoreStock" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Danh sách sản phẩm trong cửa hàng</a>
                                     </div>
                                     <div class="card-body">
                                         <form action="exportNewToStore" method="post" data-toggle="validator">
@@ -62,12 +62,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">   
-                                                        <label>Product</label>
+                                                        <label>Tên sản phẩm</label>
                                                         <select name="idInven" class="selectpicker form-control" data-style="py-0">
                                                         <c:forEach items="${inventory}" var="i">
                                                             <option value="${i.getId()}">
-                                                                ${i.getProduct().getName()} - Batch: ${i.getProduct().getBatch()}
-                                                                - Quantity in Inventory: ${i.getCurrentStock()}
+                                                                ${i.getProduct().getName()} - Lô: ${i.getProduct().getBatch()}
+                                                                - Số lượng trong kho: ${i.getCurrentStock()}
                                                             </option>
                                                         </c:forEach>  
                                                         </select>
@@ -75,8 +75,8 @@
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Quantity</label>
-                                                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" data-errors="Please Enter Quantity." required>
+                                                    <label>Số lượng</label>
+                                                    <input type="text" name="quantity" class="form-control" placeholder="Nhập số lượng" data-errors="Please Enter Quantity." required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
@@ -86,8 +86,8 @@
                                                 </div>
                                             </c:if>
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Add to Inventory</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Thêm sản phẩm mới lên cửa hàng</button>
+                                        <button type="reset" class="btn btn-danger">Làm mới </button>
                                     </form>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

@@ -402,6 +402,14 @@
         <servlet-name>EditCustomer</servlet-name>
         <servlet-class>controller.EditCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <servlet-class>controller.DeleteInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <servlet-class>controller.DeleteStoreStockServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -791,6 +799,14 @@
     <servlet-mapping>
         <servlet-name>EditCustomer</servlet-name>
         <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <url-pattern>/deleteInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <url-pattern>/deleteStoreStock</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,9 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Update Product</h4>
+                                            <h4 class="card-title">Chỉnh sửa giá sản phẩm</h4>
                                         </div>
-                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Product</a>
+                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách sản phẩm</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="p" value="${product}"/>
@@ -63,20 +63,20 @@
                                             <input type="hidden" name="idPro" value="${p.getId()}">                                                 
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Name *</label>
+                                                    <label>Tên sản phẩm</label>
                                                     <input type="text" readonly name="namePro" class="form-control" value="${p.getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                            
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Price *</label>
+                                                    <label>Giá mới: </label>
                                                     <input type="text" name="pricePro" class="form-control" value="${p.getPrice()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>                                           
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Update Product</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Cập nhật giá</button>
                                     </form>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

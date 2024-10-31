@@ -201,6 +201,17 @@ public class StoreStockDAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+        public void deleteStock(int id) {
+        String sql = "delete from StoreStock where store_stock_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     
     public static void main(String[] args) {

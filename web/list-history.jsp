@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -58,11 +58,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">History Price List</h4>
-                                        <p class="mb-0">Create and manage your vendor list, send and receive purchase orders ? your online<br>
-                                            Dashboard is your new back of house.</p>
+                                        <h4 class="mb-3">Lịch sử thay đổi giá của sản phẩm</h4>
                                     </div>
-                                    <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to List Product</a>
+                                    <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách sản phẩm</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -70,19 +68,17 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Code</th>
-                                                <th>Product Name</th>
-                                                <th>Price</th>
-                                                <th>Price Before</th>
-                                                <th>Last Update At</th>
-                                                <th>Status</th>
-                                                <th>Delete</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá mới</th>
+                                                <th>Giá cũ</th>
+                                                <th>Lần cuối cập nhật</th>
+                                                <th>Trạng thái</th>
+                                                <th>Xóa lịch sử thay đổi</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
                                         <c:forEach items="${history}" var="h">
-                                            <tr>    
-                                                <td>${h.getHistoryId()}</td>
+                                            <tr>   
                                                 <td>${h.getProduct().getName()}</td>
                                                 <td>${h.getPrice()}</td>
                                                 <td>${h.getPriceBefore()}</td>
@@ -152,7 +148,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
