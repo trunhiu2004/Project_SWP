@@ -5,20 +5,21 @@
 
 package controller;
 
-import dal.SalesReportDAO;
+import com.google.gson.JsonObject;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import model.Order;
 
 /**
  *
- * @author pqtru
+ * @author ankha
  */
-public class ProductSales extends HttpServlet {
+public class CheckPaymentStatusServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +36,10 @@ public class ProductSales extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductSales</title>");  
+            out.println("<title>Servlet CheckPaymentStatusServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductSales at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CheckPaymentStatusServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,14 +54,26 @@ public class ProductSales extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        SalesReportDAO dao = new SalesReportDAO();
-        List<model.ProductSales> productSale = dao.getProductSales();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        response.setContentType("application/json");
+        String orderId = request.getParameter("orderId");
         
-        request.setAttribute("sale", productSale);
-        request.getRequestDispatcher("page-product-sales.jsp").forward(request, response);
-    } 
+        try {
+            // Kiểm tra trạng thái đơn hàng trong database
+            OrderDAO orderDAO = new OrderDAO();
+            Order order = orderDAO.getOrderById(Integer.parseInt(orderId));
+            
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("status", order.getOrderStatus());
+            response.getWriter().write(jsonResponse.toString());
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Error checking payment status");
+            response.getWriter().write(error.toString());
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

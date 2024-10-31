@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,9 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Cập nhật nhà cung cấp</h4>
+                                            <h4 class="card-title">Update Supplier</h4>
                                         </div>
-                                        <a href="listSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách nhà cung cấp</a>
+                                        <a href="listSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Supplier</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="sup" value="${supplier}"/>
@@ -62,14 +62,14 @@
                                         <div class="row">
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Mã nhà cung cấp</label>
+                                                    <label>Supplier ID</label>
                                                     <input type="number" readonly name="idSup" class="form-control" value="${sup.getId()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Tên nhà cung cấp</label>
+                                                    <label>Name *</label>
                                                     <input type="text" name="nameSup" class="form-control" value="${sup.getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
@@ -83,33 +83,33 @@
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Số điện thoại</label>
+                                                    <label>Phone Number *</label>
                                                     <input type="text" name="phoneSup" class="form-control" value="${sup.getPhone()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Người đại diện</label>
+                                                    <label>Contact Person *</label>
                                                     <input type="text" name="personSup" class="form-control" value="${sup.getContact()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Địa chỉ</label>
+                                                    <label>Address</label>
                                                     <input type="text" name="addressSup" class="form-control" value="${sup.getAddress()}">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Hình ảnh</label>                     
+                                                    <label>Image</label>                     
                                                     <input type="file" class="form-control image-file" name="imgSup" accept="image/*" >
                                                 </div>
                                             </div>
                                         </div>                             
-                                        <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
-                                        <button type="reset" class="btn btn-danger">Làm mới</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update Supplier</button>
+                                        <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

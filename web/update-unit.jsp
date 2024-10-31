@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,9 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Cập nhật đơn vị sản phẩm</h4>
+                                            <h4 class="card-title">Update Unit</h4>
                                         </div>
-                                        <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách đơn vị</a>
+                                        <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Unit</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="u" value="${unit}"/>
@@ -62,21 +62,21 @@
                                         <div class="row">
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Mã đơn vị</label>
+                                                    <label>Unit ID</label>
                                                     <input type="number" readonly name="idUnit" class="form-control" value="${u.getId()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Tên đơn vị</label>
+                                                    <label>Unit Name *</label>
                                                     <input type="text" name="nameUnit" class="form-control" value="${u.getName()}">
                                                            <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                         </div>                                                                  
-                                        <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
-                                        <button type="reset" class="btn btn-danger">Làm mới</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update Unit</button>
+                                        <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div> 
                                 <h3 style="color: red">${error}</h3>
@@ -101,7 +101,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@
  */
 package dal;
 
-import java.sql.Date;
 import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.DiscountProduct;
 import model.Inventory;
-import model.Products;
 import model.Product;
 import model.Products;
 import model.WeightUnit;
@@ -37,6 +35,7 @@ public class StoreStockDAO extends DBContext {
 
                 Inventory in = new Inventory();
                 in.setId(rs.getInt("inventory_id"));
+
                 Products p = pd.getProductById(rs.getInt("product_id"));
                 in.setProduct(p);
                 in.setCurrentStock(rs.getInt("current_stock"));
@@ -86,7 +85,7 @@ public class StoreStockDAO extends DBContext {
                 Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
                 stock.setInventory(inventory);
                 stock.setStock(rs.getInt("quantity_in_stock"));
-                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date").toLocalDate());
+                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
                 DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
                 stock.setDiscount(dp);
                 stock.setAlert(rs.getString("alert"));
@@ -97,32 +96,6 @@ public class StoreStockDAO extends DBContext {
         }
 
         return list;
-    }
-
-    public StoreStock getStoreStockById(int store_stock_id) {
-        String sql = "SELECT * FROM [dbo].[StoreStock] WHERE store_stock_id = ?";
-
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, store_stock_id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                StoreStock stock = new StoreStock();
-                stock.setStoreStockId(rs.getInt("store_stock_id"));
-                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
-                stock.setInventory(inventory);
-                stock.setStock(rs.getInt("quantity_in_stock"));
-                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date").toLocalDate());
-                DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
-                stock.setDiscount(dp);
-                stock.setAlert(rs.getString("alert"));
-                return stock;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-        return null;
     }
 
     public void updateStore() {
@@ -140,80 +113,6 @@ public class StoreStockDAO extends DBContext {
         }
     }
 
-    public List<Inventory> getInventoryNotInStore() {
-        List<Inventory> list = new ArrayList<>();
-        ProductsDAO pd = new ProductsDAO();
-        String sql = "SELECT i.*\n"
-                + "FROM Inventory i\n"
-                + "WHERE NOT EXISTS (\n"
-                + "    SELECT 1\n"
-                + "    FROM StoreStock s\n"
-                + "    WHERE s.inventory_id = i.inventory_id\n"
-                + ");";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Inventory in = new Inventory();
-                in.setId(rs.getInt("inventory_id"));
-                Products p = pd.getProductById(rs.getInt("product_id"));
-                in.setProduct(p);
-                in.setCurrentStock(rs.getInt("current_stock"));
-                in.setInventoryStatus(rs.getString("inventory_status"));
-                in.setLastRestockDate(rs.getTimestamp("last_restock_date").toLocalDateTime());
-                in.setAlert(rs.getString("alert"));
-                list.add(in);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
-    public void insertStore(StoreStock s) {
-        String sql = "INSERT INTO StoreStock VALUES (?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, s.getInventory().getId());
-            st.setInt(2, s.getStock());
-            st.setDate(3, Date.valueOf(s.getLastStockCheckDate()));
-            if (s.getDiscount() != null) {
-                st.setInt(4, s.getDiscount().getDiscountPrductId());  // Thiết lập discountProductId nếu không phải null
-            } else {
-                st.setNull(4, java.sql.Types.INTEGER);  // Thiết lập giá trị NULL trong cơ sở dữ liệu nếu discount là null
-            }
-            st.setString(5, s.getAlert());
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void exportStock(StoreStock s) {
-        String sql = "UPDATE StoreStock SET quantity_in_stock = ?, last_stock_check_date = ? WHERE store_stock_id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, s.getStock());
-            st.setDate(2, Date.valueOf(s.getLastStockCheckDate()));
-            st.setInt(3, s.getStoreStockId());
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-    
-        public void deleteStock(int id) {
-        String sql = "delete from StoreStock where store_stock_id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    
     public static void main(String[] args) {
         StoreStockDAO c = new StoreStockDAO();
         List<StoreStock> list = c.getAllStoreStock();
@@ -222,7 +121,30 @@ public class StoreStockDAO extends DBContext {
         }
     }
 
-    
+    public StoreStock getStoreStockById(int storeStockId) {
+        String sql = "SELECT * FROM StoreStock WHERE store_stock_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, storeStockId);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                StoreStock stock = new StoreStock();
+                stock.setStoreStockId(rs.getInt("store_stock_id"));
+                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+                stock.setInventory(inventory);
+                stock.setStock(rs.getInt("quantity_in_stock"));
+                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
+                DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
+                stock.setDiscount(dp);
+                stock.setAlert(rs.getString("alert"));
+                return stock;
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi truy vấn StoreStock: " + e.getMessage());
+        }
+        return null;
+    }
 
     public StoreStock findByBarcode(String barcode) {
         String sql = "SELECT ss.*, i.*, p.*, dp.* FROM StoreStock ss "
@@ -248,7 +170,7 @@ public class StoreStockDAO extends DBContext {
                 storeStock.setStock(rs.getInt("quantity_in_stock"));
 
                 // Set last check date
-                storeStock.setLastStockCheckDate(rs.getDate("last_stock_check_date").toLocalDate());
+                storeStock.setLastStockCheckDate(rs.getDate("last_stock_check_date"));
 
                 // Set discount if exists
                 int discountProductId = rs.getInt("discount_product_id");

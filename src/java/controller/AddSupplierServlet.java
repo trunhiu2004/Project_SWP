@@ -68,7 +68,7 @@ public class AddSupplierServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("page-add-supplier.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     private String extractFileName(Part part) {

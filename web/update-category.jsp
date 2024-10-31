@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,9 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Cập nhật loại sản phẩm</h4>
+                                            <h4 class="card-title">Update category</h4>
                                         </div>
-                                        <a href="listCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách loại sản phẩm</a>
+                                        <a href="listCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Category</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="c" value="${cate}"/>
@@ -62,21 +62,21 @@
                                         <div class="row">
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Mã loại sản phẩm</label>
+                                                    <label>Category ID</label>
                                                     <input type="number" readonly name="idCategory" class="form-control" value="${c.getId()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm*</label>
+                                                    <label>Category Name *</label>
                                                     <input type="text" name="nameCategory" class="form-control" value="${c.getName()}">
                                                            <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                         </div>                                                                  
-                                        <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
-                                        <button type="reset" class="btn btn-danger">Làm mới</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update category</button>
+                                        <button type="reset" class="btn btn-danger">Reset</button>
                                     </form>
                                 </div> 
                                 <h3 style="color: red">${error}</h3>
@@ -101,7 +101,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
                         </div>
                     </div>
                 </div>

@@ -4,12 +4,24 @@
     <!-- Authentication & User Management -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>filter.CharacterEncodingFilter</filter-class>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <mime-mapping>
+        <extension>js</extension>
+        <mime-type>text/javascript;charset=UTF-8</mime-type>
+    </mime-mapping>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
@@ -205,18 +217,6 @@
         <servlet-name>PromotionUpdateServlet</servlet-name>
         <servlet-class>controller.PromotionUpdateServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AddNewProductServlet</servlet-name>
-        <servlet-class>controller.AddNewProductServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ExportNewToStoreServlet</servlet-name>
-        <servlet-class>controller.ExportNewToStoreServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ExportOldBatchServlet</servlet-name>
-        <servlet-class>controller.ExportOldBatchServlet</servlet-class>
-    </servlet>
     <!-- Invoice Management -->
     <servlet>
         <servlet-name>InvoiceListServlet</servlet-name>
@@ -327,88 +327,24 @@
         <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddShopServlet</servlet-name>
-        <servlet-class>controller.AddShopServlet</servlet-class>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <servlet-class>controller.CreatePaymentLinkServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BestSellProduct</servlet-name>
-        <servlet-class>controller.BestSellProduct</servlet-class>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <servlet-class>controller.InitOrderServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteShop</servlet-name>
-        <servlet-class>controller.DeleteShop</servlet-class>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <servlet-class>controller.CheckPaymentStatusServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteShift</servlet-name>
-        <servlet-class>controller.DeleteShift</servlet-class>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <servlet-class>controller.PaymentReturnServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditShift</servlet-name>
-        <servlet-class>controller.EditShift</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditShop</servlet-name>
-        <servlet-class>controller.EditShop</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HomeAdmin</servlet-name>
-        <servlet-class>controller.HomeAdmin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListCustomerReport</servlet-name>
-        <servlet-class>controller.ListCustomerReport</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListOrderMax</servlet-name>
-        <servlet-class>controller.ListOrderMax</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListSales</servlet-name>
-        <servlet-class>controller.ListSales</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListShift</servlet-name>
-        <servlet-class>controller.ListShift</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListShop</servlet-name>
-        <servlet-class>controller.ListShop</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductCategorySale</servlet-name>
-        <servlet-class>controller.ProductCategorySale</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductSales</servlet-name>
-        <servlet-class>controller.ProductSales</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchShop</servlet-name>
-        <servlet-class>controller.SearchShop</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShiftDetailServlet</servlet-name>
-        <servlet-class>controller.ShiftDetailServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListCustomer</servlet-name>
-        <servlet-class>controller.ListCustomer</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchCustomer</servlet-name>
-        <servlet-class>controller.SearchCustomer</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditCustomer</servlet-name>
-        <servlet-class>controller.EditCustomer</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteInventoryServlet</servlet-name>
-        <servlet-class>controller.DeleteInventoryServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteStoreStockServlet</servlet-name>
-        <servlet-class>controller.DeleteStoreStockServlet</servlet-class>
+        <servlet-name>DebugInvoiceServlet</servlet-name>
+        <servlet-class>debug.DebugInvoiceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -605,18 +541,6 @@
         <servlet-name>PromotionUpdateServlet</servlet-name>
         <url-pattern>/promotionUpdate</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddNewProductServlet</servlet-name>
-        <url-pattern>/addNewProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ExportNewToStoreServlet</servlet-name>
-        <url-pattern>/exportNewToStore</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ExportOldBatchServlet</servlet-name>
-        <url-pattern>/exportOldBatch</url-pattern>
-    </servlet-mapping>
     <!-- Invoice Management Mappings -->
     <servlet-mapping>
         <servlet-name>InvoiceListServlet</servlet-name>
@@ -725,88 +649,24 @@
         <url-pattern>/process-cash-payment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddShopServlet</servlet-name>
-        <url-pattern>/AddShopServlet</url-pattern>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <url-pattern>/create-payment-link</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BestSellProduct</servlet-name>
-        <url-pattern>/BestSellProduct</url-pattern>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <url-pattern>/init-order</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteShop</servlet-name>
-        <url-pattern>/DeleteShop</url-pattern>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <url-pattern>/check-payment-status</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteShift</servlet-name>
-        <url-pattern>/DeleteShift</url-pattern>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <url-pattern>/payment-return</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditShift</servlet-name>
-        <url-pattern>/EditShift</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditShop</servlet-name>
-        <url-pattern>/EditShop</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeAdmin</servlet-name>
-        <url-pattern>/HomeAdmin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListCustomerReport</servlet-name>
-        <url-pattern>/ListCustomerReport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListOrderMax</servlet-name>
-        <url-pattern>/ListOrderMax</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListSales</servlet-name>
-        <url-pattern>/ListSales</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListShift</servlet-name>
-        <url-pattern>/ListShift</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListShop</servlet-name>
-        <url-pattern>/ListShop</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductCategorySale</servlet-name>
-        <url-pattern>/ProductCategorySale</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductSales</servlet-name>
-        <url-pattern>/ProductSales</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchShop</servlet-name>
-        <url-pattern>/SearchShop</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ShiftDetailServlet</servlet-name>
-        <url-pattern>/ShiftDetailServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListCustomer</servlet-name>
-        <url-pattern>/ListCustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchCustomer</servlet-name>
-        <url-pattern>/SearchCustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditCustomer</servlet-name>
-        <url-pattern>/EditCustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteInventoryServlet</servlet-name>
-        <url-pattern>/deleteInventory</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteStoreStockServlet</servlet-name>
-        <url-pattern>/deleteStoreStock</url-pattern>
+        <servlet-name>DebugInvoiceServlet</servlet-name>
+        <url-pattern>/debug-invoice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

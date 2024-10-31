@@ -14,19 +14,16 @@ public class Customer {
     private String customerPhone;
     private int point;
     private int customerTypeId;
-    private String typeName;
-    
-    
+
     public Customer() {
     }
 
-    public Customer(int customerId, String customerName, String customerPhone, int point, int customerTypeId, String typeName) {
+    public Customer(int customerId, String customerName, String customerPhone, int point, int customerTypeId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
         this.point = point;
         this.customerTypeId = customerTypeId;
-        this.typeName = typeName;
     }
 
     public int getCustomerId() {
@@ -68,14 +65,6 @@ public class Customer {
     public void setCustomerTypeId(int customerTypeId) {
         this.customerTypeId = customerTypeId;
     }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-
-   
+    
+    
 }

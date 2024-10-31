@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,18 +52,18 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Chỉnh sửa sản phẩm</h4>
+                                            <h4 class="card-title">Update Product</h4>
                                         </div>
-                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách sản phẩm</a>
+                                        <a href="listProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Product</a>
                                     </div>
                                     <div class="card-body">
                                         <c:set var="p" value="${product}"/>
                                         <form action="updateProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
                                             <div class="row">
                                                 <input type="hidden" name="idPro" value="${p.getId()}">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Loại sản phẩm: </label>
+                                                        <label>Product Type *</label>
                                                         <select name="catePro" class="selectpicker form-control" data-style="py-0">
                                                         <c:forEach items="${cate}" var="cate">
                                                             <option value="${cate.getId()}">${cate.getName()}</option>
@@ -73,28 +73,28 @@
                                             </div>  
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Tên sản phẩm: </label>
+                                                    <label>Name *</label>
                                                     <input type="text" name="namePro" class="form-control" value="${p.getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>    
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Mã vạch: </label>
+                                                    <label>Bar Code *</label>
                                                     <input type="text" name="barcode" class="form-control" value="${p.getBarcode()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                        
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Giá: </label>
+                                                    <label>Price *</label>
                                                     <input type="text" readonly name="pricePro" class="form-control" value="${p.getPrice()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                           
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Đơn vị: </label>
+                                                    <label>Unit *</label>
                                                     <select name="unitPro" class="selectpicker form-control" data-style="py-0">
                                                         <c:forEach items="${wu}" var="u">
                                                             <option value="${u.getId()}">${u.getName()}</option>
@@ -104,7 +104,7 @@
                                             </div>  
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Nhà cung cấp: </label>
+                                                    <label>Supplier *</label>
                                                     <select name="supPro" class="selectpicker form-control" data-style="py-0">
                                                         <c:forEach items="${supplier}" var="sup">
                                                             <option value="${sup.getId()}">${sup.getName()}</option>
@@ -114,33 +114,33 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="manufactureDate">Ngày sản xuất:</label><br>
+                                                    <label for="manufactureDate">manufactureDate:</label><br>
                                                     <input type="date" id="manufactureDate" readonly name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="expirationDate">Ngày hết hạn:</label><br>
+                                                    <label for="expirationDate">expirationDate:</label><br>
                                                     <input type="date" id="expirationDate" readonly name="expirationDate" value="${p.getExpirationDate()}"><br><br>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Hình ảnh: </label>
+                                                    <label>Image</label>
                                                     <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Lô:</label>
+                                                    <label>Batch</label>
                                                     <input type="text" readonly name="batch" class="form-control" value="${p.getBatch()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
 
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Cập nhật sản phẩm</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Update Product</button>
                                     </form>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

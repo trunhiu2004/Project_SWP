@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -11,7 +11,7 @@
 
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Bạn có muốn xóa loại sản phẩm có mã là " + id +" không ?")) {
+                if (confirm("Are you sure delete this Category")) {
                     window.location = "deleteCategory?category_id=" + id;
                 }
             }
@@ -60,10 +60,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Danh sách loại sản phẩm</h4>
-                                        <p class="mb-0">Danh sách loại sản phẩm là tập hợp các nhóm hoặc danh mục sản phẩm <br>được phân loại theo tính chất, chức năng, hoặc mục đích sử dụng.</p>
+                                        <h4 class="mb-3">Category List</h4>
                                     </div>
-                                    <a href="addCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm loại sản phẩm</a>
+                                    <a href="page-add-category.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Category</a>
 
                                 </div>
                             </div>
@@ -72,9 +71,9 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Mã</th>
-                                                <th>Loại sản phẩm</th>
-                                                <th>Chức năng khác</th>
+                                                <th>Code</th>
+                                                <th>Category</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -84,9 +83,9 @@
                                                 <td>${pc.getName()}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa loại sản phẩm"
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
                                                            href="updateCategory?category_id=${pc.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa loại sản phẩm"
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
                                                            href="#" onclick="doDelete(${pc.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
@@ -148,7 +147,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

@@ -55,8 +55,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Danh sách sản phẩm giảm giá</h4>
-                                        <p class="mb-0">Danh sách sản phẩm giảm giá do hết hạn là tập hợp các mặt hàng<br> được doanh nghiệp giảm giá vì sắp hoặc đã gần đến ngày hết hạn sử dụng.</p>
+                                        <h4 class="mb-3">Product Discount List</h4>
+                                        <p class="mb-0">The product list effectively dictates product presentation and provides space<br> to list your products and offering in the most appealing way.</p>
+                                    </div>
+                                    <a href="addProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Product</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -64,17 +66,17 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Lô</th>
+                                                <th>Batch</th>
                                                 <th>Barcode</th>
-                                                <th>Sản phẩm</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Loại sản phẩm</th>
-                                                <th>Giá cũ</th>
-                                                <th>Giá sau khi giảm</th>
-                                                <th>Nhãn hàng</th>
-                                                <th>Đơn vị</th>
-                                                <th>Ngày hết hạn</th>
-                                                <th>Chức năng khác</th>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>New Price</th>
+                                                <th>Brand Name</th>
+                                                <th>Unit</th>
+                                                <th>Expiration Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -108,7 +110,7 @@
                                                     <div class="d-flex align-items-center list-action">
 
 
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa giá mới"
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit New Price"
                                                            href="productExpired?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
                                                     </div>
                                                 </td>

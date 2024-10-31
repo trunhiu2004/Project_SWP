@@ -322,16 +322,7 @@ public class InventoryDAO extends DBContext {
         }
         return null;
     }
-        public void deleteInventory(int id) {
-        String sql = "delete from Inventory where inventory_id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
+    
     public static void main(String[] args) {
         InventoryDAO c = new InventoryDAO();
         for (Inventory i : c.getAllInventory()) {
