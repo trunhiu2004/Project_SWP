@@ -45,51 +45,17 @@ function initializeCustomerSelect() {
         minimumInputLength: 0
     }).on('select2:select', function (e) {
         var data = e.params.data;
-        console.log('Selected customer ID:', data.id); // Log cụ thể ID
+        console.log('Selected:', data);
 
-        // Set customer vào session
         $.ajax({
             url: 'set-customer',
             method: 'GET',
             data: {id: data.id},
             success: function (response) {
                 console.log('Set customer response:', response);
-                if (response.success) {
-                    console.log('Customer set successfully, initializing order...'); // Thêm log
-                    // Sau khi set customer thành công, tạo order mới
-                    fetch('init-order', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        credentials: 'same-origin' // Đảm bảo gửi cookies/session
-                    })
-                            .then(response => {
-                                console.log('Raw init-order response:', response.status); // Thêm log
-                                return response.json();
-                            })
-                            .then(data => {
-                                console.log('Init order response data:', data); // Thêm log
-                                if (data.success) {
-                                    document.getElementById('currentOrderId').value = data.orderId;
-                                    console.log('Order initialized:', data.orderId);
-                                } else {
-                                    console.error('Failed to initialize order:', data.error);
-                                    alert(data.error || 'Không thể tạo đơn hàng mới');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error initializing order:', error);
-                                alert('Có lỗi xảy ra khi tạo đơn hàng');
-                            });
-                } else {
-                    console.error('Failed to set customer:', response); // Thêm log
-                    alert(response.message || 'Có lỗi xảy ra khi chọn khách hàng');
-                }
             },
             error: function (xhr, status, error) {
-                console.error('Error setting customer:', {xhr, status, error}); // Log chi tiết hơn
-                alert('Có lỗi xảy ra khi chọn khách hàng');
+                console.error('Error:', error);
             }
         });
     });

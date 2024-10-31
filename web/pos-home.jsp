@@ -171,11 +171,11 @@
                             </button>
                             <button class="bg_hold">
                                 <i class="material-icons">payments</i>
-                                Thanh toán tiền mặt
+                                Pay via Cash
                             </button>
                             <button class="bg__green">
                                 <i class="material-icons">qr_code</i>
-                                Thanh toán QR
+                                Pay via QRCode
                             </button>
                         </div>
                     </div>
@@ -231,8 +231,8 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-            <input type="hidden" id="currentOrderId" value="${sessionScope.currentOrderId}">
         </div>
         <!-- Edit Customer Modal -->
         <div id="editCustomerModal" class="modal">
@@ -351,131 +351,5 @@
                 </div>
             </div>
         </div>
-        <!-- Modal Thanh toán QR -->
-        <div class="modal fade" id="qrPaymentModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thanh toán QR</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- PayOS Payment Form sẽ được nhúng vào đây -->
-                        <div id="payos-wrapper"></div>
-                    </div>
-                </div>
-            </div>
-        </div>      
-        <script>
-            // Xử lý nút thanh toán QR
-            document.querySelector('.bg__green').addEventListener('click', async function () {
-                try {
-                    // Kiểm tra giỏ hàng
-                    const cartRows = document.querySelectorAll('.cart-body .cart-row');
-                    if (cartRows.length <= 0) {
-                        alert('Vui lòng thêm sản phẩm vào giỏ hàng trước khi thanh toán');
-                        return;
-                    }
-
-                    // Kiểm tra khách hàng
-                    const currentOrderId = document.getElementById('currentOrderId').value;
-                    if (!currentOrderId) {
-                        alert('Vui lòng chọn khách hàng trước khi thanh toán');
-                        return;
-                    }
-
-                    // Lấy tổng tiền - đảm bảo là số
-                    const totalAmountText = document.querySelector('.cart-summary .summary-row span:last-child').textContent;
-                    const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''));
-
-                    if (isNaN(totalAmount) || totalAmount <= 0) {
-                        alert('Số tiền thanh toán không hợp lệ');
-                        return;
-                    }
-
-                    // Tạo danh sách items từ giỏ hàng
-                    const items = Array.from(cartRows).map(row => {
-                        const name = row.querySelector('.col-item').textContent.trim();
-                        const priceText = row.querySelector('.col-price').textContent.trim();
-                        const price = parseInt(priceText.replace(/[^\d]/g, ''));
-                        const quantity = parseInt(row.querySelector('.col-qty input').value);
-
-                        return {
-                            productName: name,
-                            quantity: quantity,
-                            price: price
-                        };
-                    });
-
-                    // Log request data để debug
-                    const requestData = {
-                        amount: totalAmount,
-                        orderId: currentOrderId,
-                        description: `Thanh toán đơn hàng #${currentOrderId}`,
-                        items: items
-                    };
-                    console.log('Request data:', requestData);
-
-                    // Gọi API để tạo payment
-                    const response = await fetch('create-payment-link', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(requestData)
-                    });
-
-                    if (!response.ok) {
-                        const errorText = await response.text();
-                        console.error('Error response:', errorText);
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    console.log('Response data:', data);
-
-                    if (!data || !data.checkoutUrl) {
-                        throw new Error('Invalid response: missing checkoutUrl');
-                    }
-
-                    // Mở URL thanh toán trong cửa sổ mới
-                    window.open(data.checkoutUrl, '_blank');
-
-                    // Theo dõi trạng thái thanh toán
-                    const checkPaymentStatus = setInterval(async () => {
-                        try {
-                            const statusResponse = await fetch(`check-payment-status?orderId=${currentOrderId}`);
-                            if (!statusResponse.ok) {
-                                throw new Error(`HTTP error! status: ${statusResponse.status}`);
-                            }
-
-                            const statusData = await statusResponse.json();
-                            if (statusData.status === 'PAID') {
-                                clearInterval(checkPaymentStatus);
-                                alert('Thanh toán thành công!');
-                                window.location.href = 'receipt-auto-print?orderId=' + currentOrderId;
-                            } else if (statusData.status === 'CANCELLED') {
-                                clearInterval(checkPaymentStatus);
-                                alert('Thanh toán đã bị hủy.');
-                            }
-                        } catch (error) {
-                            console.error('Error checking payment status:', error);
-                        }
-                    }, 5000);
-
-                    // Dừng kiểm tra sau 5 phút
-                    setTimeout(() => {
-                        clearInterval(checkPaymentStatus);
-                    }, 300000);
-
-                } catch (error) {
-                    console.error('Error creating payment:', error);
-                    alert('Có lỗi xảy ra khi tạo thanh toán. Vui lòng thử lại sau.');
-                }
-            });
-        </script>
     </body>
 </html>
