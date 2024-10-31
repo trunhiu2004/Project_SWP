@@ -217,7 +217,7 @@
         <servlet-name>ExportOldBatchServlet</servlet-name>
         <servlet-class>controller.ExportOldBatchServlet</servlet-class>
     </servlet>
-            <!-- Invoice Management -->
+    <!-- Invoice Management -->
     <servlet>
         <servlet-name>InvoiceListServlet</servlet-name>
         <servlet-class>controller.InvoiceListServlet</servlet-class>
@@ -325,6 +325,14 @@
     <servlet>
         <servlet-name>ProcessCashPaymentServlet</servlet-name>
         <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <servlet-class>controller.DeleteInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <servlet-class>controller.DeleteStoreStockServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -639,6 +647,14 @@
     <servlet-mapping>
         <servlet-name>ProcessCashPaymentServlet</servlet-name>
         <url-pattern>/process-cash-payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <url-pattern>/deleteInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <url-pattern>/deleteStoreStock</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

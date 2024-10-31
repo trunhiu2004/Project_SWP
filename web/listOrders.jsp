@@ -33,9 +33,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Order List</h4>
-                                        <p class="mb-0">Order List enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Danh sách đơn hàng</h4>
+                                        <p class="mb-0">Danh sách đơn hàng cho phép bạn kiểm soát các danh sách đơn hàng <br>
+                                            và có tác dụng đánh giá về các chỉ số KPI về doanh số và theo dõi chúng tại một cửa hàng. </p>
                                     </div>
                                 </div>
                             </div>
@@ -44,14 +44,14 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Order ID</th>
-                                                <th>Customer Name</th>
-                                                <th>Order Date</th>
-                                                <th>Total Amount</th>
-                                                <th>Status</th>
-                                                <th>Employee Name</th>
-                                                <th>Coupon Code</th>
-                                                <th>Action</th>
+                                                <th>Mã đơn hàng</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>Ngày</th>
+                                                <th>Tổng số tiền</th>
+                                                <th>Trạng thái</th>
+                                                <th>Tên thu ngân</th>
+                                                <th>Mã giảm giá</th>
+                                                <th>Các chức năng khác</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -66,14 +66,14 @@
                                                 <td>${order.couponCode}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="View"
+                                                        <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"
                                                            href="view-order?orderId=${order.orderId}"><i class="ri-eye-line mr-0"></i></a>
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Edit" href="edit-order?orderId=${order.orderId}">
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa đơn hàng" href="edit-order?orderId=${order.orderId}">
                                                             <i class="ri-pencil-line mr-0"></i>
                                                         </a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="Delete" 
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="Xóa đơn hàng" 
                                                            href="delete-order?orderId=${order.orderId}" 
-                                                           onclick="return confirm('Are you sure you want to delete this order?');">
+                                                           onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này?');">
                                                             <i class="ri-delete-bin-line mr-0"></i>
                                                         </a>
 

@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -58,11 +58,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Kho</h4>
-                                        <p class="mb-0">Create and manage your vendor list, send and receive purchase orders ? your online<br>
-                                            Dashboard is your new back of house.</p>   
+                                        <h4 class="mb-3">Lịch sử xuất/nhập kho</h4>
+                                        <p class="mb-0">Bản ghi chép chi tiết về tất cả các hoạt động xuất và nhập hàng hóa trong kho theo thời gian.</p>   
                                     </div>
-                                    <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to Inventory</a>
+                                    <a href="listInventory" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Trở về kho</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -70,12 +69,12 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Batch</th>
-                                                <th>Product</th>
-                                                <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>Last Update</th>
+                                                <th>Lô</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Trạng thái</th>
+                                                <th>Lần cuối cập nhật</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -146,7 +145,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

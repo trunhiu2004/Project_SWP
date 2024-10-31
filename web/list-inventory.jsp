@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -11,8 +11,8 @@
         
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Are you sure delete product which has id =" + id)) {
-                    window.location = "deleteProduct?product_id=" + id;
+                if (confirm("Bạn có muốn xóa sản phẩm này không ?")) {
+                    window.location = "deleteInventory?inventory_id=" + id;
                 }
             }
         </script>
@@ -60,10 +60,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Inventory</h4>                                    
+                                        <h4 class="mb-3">Kho</h4>                                    
                                     </div>
-                                    <a href="listLogInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>History Log Inventory</a>
-                                    <a href="addNewProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add New Product To Inventory</a>
+                                    <a href="listLogInventory" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Lịch sử nhập/xuất kho</a>
+                                    <a href="addNewProduct" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Nhập sản phẩm mới vào kho</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -71,14 +71,14 @@
                                     <table class="data-tables table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Batch</th>
-                                                <th>Product</th>
-                                                <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>Last Update</th>
-                                                <th>Alert</th>
-                                                <th>Action</th>
+                                                <th>Lô</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Trạng thái</th>
+                                                <th>Lần cuối cập nhập</th>
+                                                <th>Cảnh báo</th>
+                                                <th>Chức năng khác</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -93,8 +93,10 @@
                                                 <td>${i.getAlert()}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Import"
-                                                           href="importProduct?inventory_id=${i.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Nhập kho"
+                                                           href="importProduct?inventory_id=${i.getId()}"><i class="ri-add-fill mr-0"></i></a>
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa sản phẩm trong kho"
+                                                       href="#" onclick="doDelete(${i.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -155,7 +157,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
