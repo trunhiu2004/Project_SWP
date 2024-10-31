@@ -3,6 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Project_SWP/src/java/controller/PoSHomeServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/UpdateInvoiceServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/model/Order.java</file>
+            <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/CreatePaymentLinkServlet.java</file>
+            <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Project_SWP/web/WEB-INF/views/receipt-auto-print.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/PaymentReturnServlet.java</file>
             <file>file:/E:/SWP391/final2/Project_SWP/web/home.jsp</file>
             <file>file:/E:/SWP391/final2/Project_SWP/src/java/dal/OrderDAO.java</file>
             <file>file:/E:/SWP391/final2/Project_SWP/src/java/controller/HomeAdmin.java</file>
