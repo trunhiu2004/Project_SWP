@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,25 +52,26 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add to Inventory</h4>
+                                            <h4 class="card-title">Nhập lô mới cho sản phẩm</h4>
                                         </div>
-                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
+                                        <a href="listInventory" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Trở về kho</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="i" value="${inventory}"/>
                                     <form action="importProduct" method="post" data-toggle="validator" enctype="multipart/form-data">
                                         <input type="hidden" name="idInven" value="${i.getId()}">
+                                        <input type="hidden" name="idPro" value="${i.getProduct().getId()}">
                                         <div class="row">
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Name *</label>
+                                                    <label>Tên sản phẩm</label>
                                                     <input type="text" readonly name="namePro" class="form-control" value="${i.getProduct().getName()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Category *</label>
+                                                    <label>Loại sản phẩm</label>
                                                     <input type="hidden" name="catePro" value="${i.getProduct().getProductCategories().getId()}">
                                                     <input type="text" readonly name="cateProduct" class="form-control" value="${i.getProduct().getProductCategories().getName()}">
                                                     <div class="help-block with-errors"></div>
@@ -78,7 +79,7 @@
                                             </div>
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Supplier *</label>
+                                                    <label>Nhà cung cấp</label>
                                                     <input type="hidden" name="supPro" value="${i.getProduct().getProductCategories().getId()}">
                                                     <input type="text" readonly name="supProduct" class="form-control" value="${i.getProduct().getSuppliers().getName()}">
                                                     <div class="help-block with-errors"></div>
@@ -86,7 +87,7 @@
                                             </div>
                                             <div class="col-md-6">                      
                                                 <div class="form-group">
-                                                    <label>Unit *</label>
+                                                    <label>Đơn vị</label>
                                                     <input type="hidden" name="unitPro" value="${i.getProduct().getProductCategories().getId()}">
                                                     <input type="text" readonly name="unitProduct" class="form-control" value="${i.getProduct().getWeightUnit().getName()}">
                                                     <div class="help-block with-errors"></div>
@@ -96,42 +97,47 @@
                                         <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Barcode</label>
-                                                <input type="text" name="barcode" class="form-control" placeholder="Enter Barcode" data-errors="Please Enter Barcode." required>
+                                                <label>Mã vạch</label>
+                                                <input type="text" name="barcode" class="form-control" placeholder="Mã vạch mới" data-errors="Please Enter Barcode." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>            
                                                     
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Price</label>
-                                                <input type="number" name="pricePro" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                                                <label>Giá</label>
+                                                <input type="number" name="pricePro" class="form-control" placeholder="Giá sản phẩm" data-errors="Please Enter Price." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         
                                         <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="manufactureDate">manufactureDate:</label><br>
+                                                    <label for="manufactureDate">Ngày sản xuất</label><br>
                                                     <input type="date" id="manufactureDate" name="manufactureDate" value="${p.getManufactureDate()}"><br><br>
                                                 </div>
                                             </div>
 
                                         <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="expirationDate">expirationDate:</label><br>
+                                                    <label for="expirationDate">Ngày hết hạn</label><br>
                                                     <input type="date" id="expirationDate" name="expirationDate" value="${p.getExpirationDate()}"><br><br>
                                                 </div>
                                         </div>     
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Image</label>
+                                                <label>Hình ảnh</label>
                                                 <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
                                             </div>
                                         </div>
+                                        <c:if test="${not empty errorDate}">
+                                                <div class="alert alert-danger">
+                                                    ${errorDate}
+                                                </div>
+                                        </c:if>
                                         </div>        
-                                        <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Nhập lô mới</button>
+                                        <button type="reset" class="btn btn-danger">Làm mới</button>
                                     </form>
 
                                 </div>                            
@@ -143,7 +149,6 @@
                 <!-- Page end  -->
             </div>
         </div>
-    </div>
     <!-- Wrapper End-->
     <footer class="iq-footer">
         <div class="container-fluid">
@@ -157,7 +162,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                         </div>
                     </div>
                 </div>

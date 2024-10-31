@@ -162,5 +162,21 @@ public class CustomerDAO extends DBContext {
         }
         return -1;
     }
+    
+    
+    public void deleteCustomer(String id){
+        String sql = "delete from Customers where customer_id = ?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setString(1, id);
+            statement.executeUpdate();
+            
+        }catch(Exception e){
+             
+        }
+    }
+    
+    
 
 }

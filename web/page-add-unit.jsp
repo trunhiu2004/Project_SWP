@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -51,23 +51,23 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Add Unit</h4>
+                                        <h4 class="card-title">Thêm đơn vị mới</h4>
                                     </div>
-                                    <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Unit</a>
+                                    <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách đơn vị</a>
                                 </div>
                                 <div class="card-body">
-                                    <form action="addUnit" data-toggle="validator">
+                                    <form action="addUnit" method="post" data-toggle="validator">
                                         <div class="row">                                                                          
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Unit Name *</label>
-                                                    <input type="text" name="nameUnit" class="form-control" placeholder="Enter Unit Name" required>
+                                                    <label>Tên đơn vị</label>
+                                                    <input type="text" name="nameUnit" class="form-control" placeholder="Nhập tên đơn vị mới" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                                                  
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Add unit</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Thêm đơn vị mới</button>
+                                        <button type="reset" class="btn btn-danger">Làm mới</button>
                                     </form>
                                     <h3 style="color: red">${error}</h3>
                                 </div>
@@ -91,7 +91,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

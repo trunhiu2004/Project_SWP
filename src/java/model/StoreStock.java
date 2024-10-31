@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -14,14 +15,14 @@ public class StoreStock {
     private int storeStockId;
     private Inventory inventory;
     private int stock;
-    private Date lastStockCheckDate;
+    private LocalDate lastStockCheckDate;
     private DiscountProduct discount;
     private String alert;
 
     public StoreStock() {
     }
 
-    public StoreStock(int storeStockId, Inventory inventory, int stock, Date lastStockCheckDate, DiscountProduct discount, String alert) {
+    public StoreStock(int storeStockId, Inventory inventory, int stock, LocalDate lastStockCheckDate, DiscountProduct discount, String alert) {
         this.storeStockId = storeStockId;
         this.inventory = inventory;
         this.stock = stock;
@@ -29,6 +30,15 @@ public class StoreStock {
         this.discount = discount;
         this.alert = alert;
     }
+
+    public StoreStock(Inventory inventory, int stock, LocalDate lastStockCheckDate, DiscountProduct discount, String alert) {
+        this.inventory = inventory;
+        this.stock = stock;
+        this.lastStockCheckDate = lastStockCheckDate;
+        this.discount = discount;
+        this.alert = alert;
+    }
+
 
     public int getStoreStockId() {
         return storeStockId;
@@ -54,11 +64,11 @@ public class StoreStock {
         this.stock = stock;
     }
 
-    public Date getLastStockCheckDate() {
+    public LocalDate getLastStockCheckDate() {
         return lastStockCheckDate;
     }
 
-    public void setLastStockCheckDate(Date lastStockCheckDate) {
+    public void setLastStockCheckDate(LocalDate lastStockCheckDate) {
         this.lastStockCheckDate = lastStockCheckDate;
     }
 
@@ -81,5 +91,8 @@ public class StoreStock {
     @Override
     public String toString() {
         return "StoreStock{" + "storeStockId=" + storeStockId + ", inventory=" + inventory + ", stock=" + stock + ", lastStockCheckDate=" + lastStockCheckDate + ", discount=" + discount + ", alert=" + alert + '}';
-    }   
+    }
+
+    
+
 }

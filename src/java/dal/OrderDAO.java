@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import model.CartItem;
 import model.Order;
 import model.OrderDetail;
@@ -69,51 +67,20 @@ public class OrderDAO extends DBContext {
     // Method to get a specific order by its ID including details
     public Order getOrderById(int orderId) {
         Order order = null;
-        String sql = "SELECT o.order_id, o.customer_id, c.customer_name, o.order_date, "
-                + "o.order_total_amount, o.order_status, e.employee_name, co.coupon_code "
+        String sql = "SELECT o.order_id, c.customer_name, o.order_date, o.order_total_amount, o.order_status, e.employee_name, co.coupon_code, o.employee_id "
                 + "FROM Orders o "
                 + "LEFT JOIN Customers c ON o.customer_id = c.customer_id "
                 + "LEFT JOIN Employees e ON o.employee_id = e.employee_id "
                 + "LEFT JOIN CustomerCoupon cc ON o.customer_coupon_id = cc.customer_coupon_id "
                 + "LEFT JOIN Coupons co ON cc.coupon_id = co.coupon_id "
                 + "WHERE o.order_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, orderId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 order = new Order();
                 order.setOrderId(rs.getInt("order_id"));
-                order.setCustomerId(rs.getInt("customer_id")); // Thêm dòng này
-                order.setCustomerName(rs.getString("customer_name"));
-                order.setOrderDate(rs.getDate("order_date"));
-                order.setOrderTotalAmount(rs.getInt("order_total_amount"));
-                order.setOrderStatus(rs.getString("order_status"));
-                order.setEmployeeName(rs.getString("employee_name"));
-                order.setCouponCode(rs.getString("coupon_code"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return order;
-    }
-
-    public Order getOrderById1(int orderId) {
-        Order order = null;
-        String sql = "SELECT o.order_id, o.customer_id, c.customer_name, o.order_date, "
-                + "o.order_total_amount, o.order_status, e.employee_name, co.coupon_code "
-                + "FROM Orders o "
-                + "LEFT JOIN Customers c ON o.customer_id = c.customer_id "
-                + "LEFT JOIN Employees e ON o.employee_id = e.employee_id "
-                + "LEFT JOIN CustomerCoupon cc ON o.customer_coupon_id = cc.customer_coupon_id "
-                + "LEFT JOIN Coupons co ON cc.coupon_id = co.coupon_id "
-                + "WHERE o.order_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, orderId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                order = new Order();
-                order.setOrderId(rs.getInt("order_id"));
-                order.setCustomerId(rs.getInt("customer_id")); // Thêm dòng này
                 order.setCustomerName(rs.getString("customer_name"));
                 order.setOrderDate(rs.getDate("order_date"));
                 order.setOrderTotalAmount(rs.getInt("order_total_amount"));
@@ -286,18 +253,10 @@ public class OrderDAO extends DBContext {
             connection.setAutoCommit(false);
 
             // Validate input
-            if (customerId <= 0 || items == null || items.isEmpty()) {
+            if (customerId <= 0 || totalAmount <= 0 || items == null || items.isEmpty()) {
                 throw new SQLException("Invalid input parameters");
             }
-            // Tính lại tổng tiền hoá đơn
-            double calculatedTotal = items.stream()
-                    .mapToDouble(item -> item.getPrice() * item.getQuantity())
-                    .sum();
 
-            // So sánh với tổng tiền được truyền vào để đảm bảo tính nhất quán
-            if (Math.abs(calculatedTotal - totalAmount) > 0.01) {
-                throw new SQLException("Total amount mismatch");
-            }
             // Verify customer exists
             String checkCustomerSql = "SELECT COUNT(*) FROM Customers WHERE customer_id = ?";
             try (PreparedStatement ps = connection.prepareStatement(checkCustomerSql)) {
@@ -308,14 +267,14 @@ public class OrderDAO extends DBContext {
                 }
             }
 
-            // Create order
+            // Create order with transaction
             String orderSql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id) "
-                    + "VALUES (?, GETDATE(), ?, 'COMPLETED', 2)";
+                    + "VALUES (?, GETDATE(), ?, 'Completed', 2)";
 
             int orderId;
             try (PreparedStatement ps = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, customerId);
-                ps.setDouble(2, calculatedTotal);
+                ps.setDouble(2, totalAmount);
                 ps.executeUpdate();
 
                 ResultSet rs = ps.getGeneratedKeys();
@@ -329,7 +288,7 @@ public class OrderDAO extends DBContext {
             processOrderDetails(orderId, items);
 
             // Create invoice
-            createInvoice(orderId, customerId, calculatedTotal);
+            createInvoice(orderId, customerId, totalAmount);
 
             connection.commit();
             return orderId;
@@ -354,7 +313,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public void processOrderDetails(int orderId, List<CartItem> items) throws SQLException {
+    private void processOrderDetails(int orderId, List<CartItem> items) throws SQLException {
         String detailSql = "INSERT INTO OrdersDetails (order_id, product_id, quantity, unit_price, total_price, store_stock_id) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -391,7 +350,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
+    private void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
         String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
                 + "payment_method_id, employee_id, customer_id, shift_manager_id) "
                 + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, 2, ?, 2)";
@@ -403,164 +362,72 @@ public class OrderDAO extends DBContext {
             ps.executeUpdate();
         }
     }
-
-    public int createPendingOrder(int customerId) throws SQLException {
-        String sql = "INSERT INTO Orders (customer_id, order_date, order_status, employee_id) "
-                + "VALUES (?, GETDATE(), 'PENDING', 2)"; // Giả sử employee_id = 2 là default
-
-        try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, customerId);
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                throw new SQLException("Creating order failed, no ID obtained.");
-            }
-        }
-    }
-
-    public List<Order> getOrdersWithFilter(String customerName, String orderDate,
-            String status, String employeeName, int page, int pageSize) {
-        List<Order> orders = new ArrayList<>();
-        int offset = (page - 1) * pageSize;
-
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT o.order_id, c.customer_name, o.order_date, o.order_total_amount, ")
-                .append("o.order_status, e.employee_name, co.coupon_code, o.employee_id ")
-                .append("FROM Orders o ")
-                .append("LEFT JOIN Customers c ON o.customer_id = c.customer_id ")
-                .append("LEFT JOIN Employees e ON o.employee_id = e.employee_id ")
-                .append("LEFT JOIN CustomerCoupon cc ON o.customer_coupon_id = cc.customer_coupon_id ")
-                .append("LEFT JOIN Coupons co ON cc.coupon_id = co.coupon_id ")
-                .append("WHERE 1=1 ");
-
-        List<Object> params = new ArrayList<>();
-
-        if (customerName != null && !customerName.trim().isEmpty()) {
-            sql.append("AND c.customer_name LIKE ? ");
-            params.add("%" + customerName + "%");
-        }
-
-        if (orderDate != null && !orderDate.trim().isEmpty()) {
-            sql.append("AND CONVERT(DATE, o.order_date) = ? ");
-            params.add(orderDate);
-        }
-
-        if (status != null && !status.trim().isEmpty()) {
-            sql.append("AND o.order_status = ? ");
-            params.add(status);
-        }
-
-        if (employeeName != null && !employeeName.trim().isEmpty()) {
-            sql.append("AND e.employee_name LIKE ? ");
-            params.add("%" + employeeName + "%");
-        }
-
-        sql.append("ORDER BY o.order_date DESC ")
-                .append("OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-
-        params.add(offset);
-        params.add(pageSize);
-
-        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
-            for (int i = 0; i < params.size(); i++) {
-                ps.setObject(i + 1, params.get(i));
-            }
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Order order = new Order();
-                order.setOrderId(rs.getInt("order_id"));
-                order.setCustomerName(rs.getString("customer_name"));
-                order.setOrderDate(rs.getDate("order_date"));
-                order.setOrderTotalAmount(rs.getInt("order_total_amount"));
-                order.setOrderStatus(rs.getString("order_status"));
-                order.setEmployeeName(rs.getString("employee_name"));
-                order.setCouponCode(rs.getString("coupon_code"));
-                order.setEmployeeId(rs.getInt("employee_id"));
-                orders.add(order);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
-    }
-
-    public int getTotalOrders(String customerName, String orderDate, String status, String employeeName) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT COUNT(*) ")
-                .append("FROM Orders o ")
-                .append("LEFT JOIN Customers c ON o.customer_id = c.customer_id ")
-                .append("LEFT JOIN Employees e ON o.employee_id = e.employee_id ")
-                .append("WHERE 1=1 ");
-
-        List<Object> params = new ArrayList<>();
-
-        if (customerName != null && !customerName.trim().isEmpty()) {
-            sql.append("AND c.customer_name LIKE ? ");
-            params.add("%" + customerName + "%");
-        }
-
-        if (orderDate != null && !orderDate.trim().isEmpty()) {
-            sql.append("AND CONVERT(DATE, o.order_date) = ? ");
-            params.add(orderDate);
-        }
-
-        if (status != null && !status.trim().isEmpty()) {
-            sql.append("AND o.order_status = ? ");
-            params.add(status);
-        }
-
-        if (employeeName != null && !employeeName.trim().isEmpty()) {
-            sql.append("AND e.employee_name LIKE ? ");
-            params.add("%" + employeeName + "%");
-        }
-
-        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
-            for (int i = 0; i < params.size(); i++) {
-                ps.setObject(i + 1, params.get(i));
-            }
-
-            ResultSet rs = ps.executeQuery();
+    
+    
+    public int getTotalPriceOrder() {
+        int totalPriceOrder = 0;
+        String sql = "	select Sum(order_total_amount) as Total_Price_Order from Orders where order_status = 'Paid'";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                totalPriceOrder = rs.getInt("Total_Price_Order");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return totalPriceOrder;
     }
 
-    public boolean updateOrder(Order order) throws SQLException {
-        String sql = "UPDATE Orders SET order_status = ?, order_total_amount = ? WHERE order_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, order.getOrderStatus());
-            ps.setDouble(2, order.getOrderTotalAmount());
-            ps.setInt(3, order.getOrderId());
-            return ps.executeUpdate() > 0;
-        }
-    }
+    public double getTotalOrderSale() {
+        double totalOrderSale = 0;
+        String sql = "	SELECT COUNT(order_id) AS total_order_sales FROM Orders where order_status = 'Paid'";
 
-    public void cleanupIncompleteOrders() throws SQLException {
-        String sql = "DELETE FROM Orders WHERE order_total_amount IS NULL AND order_status = 'PENDING'";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.executeUpdate();
-        }
-    }
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
 
-    public void scheduleCleanup() {
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    cleanupIncompleteOrders();
-                } catch (SQLException ex) {
-                    // Log error
-                }
+            if (rs.next()) {
+                totalOrderSale = rs.getDouble("total_order_sales");
             }
-        }, 0, 15 * 60 * 1000); // Chạy mỗi 15 phút
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalOrderSale;
     }
+    
+    
+    public double getTotalOrderAvg() {
+        double totalAvg = 0;
+        String sql = "SELECT Avg(Orders.order_total_amount) AS total_avg FROM Orders  where order_status = 'Paid'";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalAvg = rs.getDouble("total_avg");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalAvg;
+    }
+    
+     public double getTotalMax() {
+        double totalMax = 0;
+        String sql = "SELECT MAX(Orders.order_total_amount) AS max_price FROM Orders  where order_status = 'Paid'";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalMax = rs.getDouble("max_price");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalMax;
+    }
+    
+
 }

@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dal.StoreStockDAO;
@@ -11,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.StoreStock;
 
@@ -19,6 +21,7 @@ import model.StoreStock;
  * @author frien
  */
 public class PoSHomeServlet extends HttpServlet {
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +40,7 @@ public class PoSHomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+
             out.println("<title>Servlet PoSHomeServlet</title>");
             out.println("</head>");
             out.println("<body>");
@@ -57,28 +61,7 @@ public class PoSHomeServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        //clear PENDING Order
-//        OrderDAO orderDAO = new OrderDAO();
-//        orderDAO.scheduleCleanup();
-        
-        // Xử lý thông báo từ payment return
-        String success = request.getParameter("success");
-        String error = request.getParameter("error");
-
-        if ("true".equals(success)) {
-            request.setAttribute("message", "Thanh toán thành công!");
-            request.setAttribute("messageType", "success");
-        } else if (error != null) {
-            String errorMessage = "Có lỗi xảy ra!";
-            if ("payment_failed".equals(error)) {
-                errorMessage = "Thanh toán không thành công!";
-            }
-            request.setAttribute("message", errorMessage);
-            request.setAttribute("messageType", "error");
-        }
-
+          throws ServletException, IOException {
         StoreStockDAO ss = new StoreStockDAO();
         List<StoreStock> list = ss.getAllStoreStock();
         request.setAttribute("store", list);
@@ -97,7 +80,7 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
 
     /**

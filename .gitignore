@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+/build/
+/dist/
+/nbproject/private/
+=======
 # Ignore configuration files with sensitive data
 web/WEB-INF/config.properties
 
@@ -19,3 +24,4 @@ nbdist/
 *.tmp
 temp.txt
 output.txt
+>>>>>>> DiscountProduct_New

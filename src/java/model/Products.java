@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
 import java.time.LocalDate;
 
 /**
@@ -23,7 +22,7 @@ public class Products {
     private LocalDate manufactureDate;
     private LocalDate expirationDate;
     private int batch;
-    private float weight;
+
 
     public Products() {
     }
@@ -143,16 +142,9 @@ public class Products {
         this.batch = batch;
     }
 
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
     @Override
     public String toString() {
         return "Products{" + "id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", barcode=" + barcode + ", productCategories=" + productCategories + ", suppliers=" + suppliers + ", weightUnit=" + weightUnit + ", manufactureDate=" + manufactureDate + ", expirationDate=" + expirationDate + ", batch=" + batch + '}';
-    }
+    }    
+
 }

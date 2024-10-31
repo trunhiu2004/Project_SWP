@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -52,9 +52,8 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">Add to Inventory</h4>
+                                            <h4 class="card-title">Thêm vào lịch sử xuất/nhập kho</h4>
                                         </div>
-                                        <a href="listInventory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>List Inventory</a>
                                     </div>
                                     <div class="card-body">
                                     <c:set var="i" value="${inventory}"/>
@@ -62,21 +61,19 @@
                                         <input type="hidden" name="idInven" value="${i.getId()}">
                                         <div class="col-md-6">                      
                                             <div class="form-group">
-                                                <label>Name *</label>
-                                                
+                                                <label>Tên sản phẩm</label>                                                
                                                 <input type="text" readonly name="nameInven" class="form-control" value="${i.getProduct().getName()}">
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>                                          
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Quantity</label>
+                                                <label>Số lượng:</label>
                                                 <input type="text" readonly name="quantityInven" class="form-control" value="${i.getCurrentStock()}">
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>                                                                                                                             
-                                        <button type="submit" class="btn btn-primary mr-2">Import to Inventory</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Thêm vào lịch sử xuất/nhập kho</button>
                                     </form>
 
                                 </div>                            
@@ -88,7 +85,6 @@
                 <!-- Page end  -->
             </div>
         </div>
-    </div>
     <!-- Wrapper End-->
     <footer class="iq-footer">
         <div class="container-fluid">
@@ -102,7 +98,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                         </div>
                     </div>
                 </div>

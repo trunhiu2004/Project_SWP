@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <div class="iq-sidebar  sidebar-default ">
         <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-            <a href="home.jsp" class="header-logo">
+            <a href="HomeAdmin" class="header-logo">
                 <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
             </a>
             <div class="iq-menu-bt-sidebar ml-0">
@@ -21,11 +21,11 @@
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="">
-                        <a href="home.jsp" class="svg-icon">                        
+                        <a href="HomeAdmin" class="svg-icon">                        
                             <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
                             </svg>
-                            <span class="ml-4">Dashboards</span>
+                            <span class="ml-4">Bảng điều khiển</span>
                         </a>
                     </li>
                     <li class=" ">
@@ -33,7 +33,7 @@
                             <svg class="svg-icon" id="p-dash2" width="20" height="20"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
-                            <span class="ml-4">Products</span>
+                            <span class="ml-4">Quản lý sản phẩm</span>
                             <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                             </svg>
@@ -41,27 +41,27 @@
                         <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             <li class="">
                                 <a href="listProduct">
-                                    <i class="las la-minus"></i><span>List Product</span>
+                                    <i class="las la-minus"></i><span>Danh sách sản phẩm</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="listCategory">
-                                    <i class="las la-minus"></i><span>List Category</span>
+                                    <i class="las la-minus"></i><span>Danh sách loại sản phẩm</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="listSupplier">
-                                    <i class="las la-minus"></i><span>List Supplier</span>
+                                    <i class="las la-minus"></i><span>Danh sách nhà cung cấp</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="listUnit">
-                                    <i class="las la-minus"></i><span>List Weight Unit</span>
+                                    <i class="las la-minus"></i><span>Danh sách đơn vị</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="listProductDiscount">
-                                    <i class="las la-minus"></i><span>List Product Expired</span>
+                                    <i class="las la-minus"></i><span>Danh sách sản phẩm giảm giá</span>
                                 </a>
                             </li>
                         </ul>
@@ -71,7 +71,7 @@
                             <svg class="svg-icon" id="p-dash2" width="20" height="20"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
-                            <span class="ml-4">Inventory / Store</span>
+                            <span class="ml-4">Kho / Cửa hàng</span>
                             <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                             </svg>
@@ -79,12 +79,12 @@
                         <ul id="inventory" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             <li class="">
                                 <a href="listInventory">
-                                    <i class="las la-minus"></i><span>List Inventory</span>
+                                    <i class="las la-minus"></i><span>Kho</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="listStoreStock">
-                                    <i class="las la-minus"></i><span>List Store Stock</span>
+                                    <i class="las la-minus"></i><span>Cửa hàng</span>
                                 </a>
                             </li>
                         </ul>
@@ -94,7 +94,7 @@
                             <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                             </svg>
-                            <span class="ml-4">Sale</span>
+                            <span class="ml-4">Quản lý bán hàng</span>
                             <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                             </svg>
@@ -102,22 +102,22 @@
                         <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             <li class="">
                                 <a href="list-order">
-                                    <i class="las la-minus"></i><span>Order List</span>
+                                    <i class="las la-minus"></i><span>Danh sách đơn hàng</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="invoice">
-                                    <i class="las la-minus"></i><span>Invoice</span>
+                                    <i class="las la-minus"></i><span>Hóa đơn</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="couponManage">
-                                    <i class="las la-minus"></i><span>Coupon List</span>
+                                    <i class="las la-minus"></i><span>Danh sách phiếu giảm giá</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="promotionManage">
-                                    <i class="las la-minus"></i><span>Promotion List</span>
+                                    <i class="las la-minus"></i><span>Danh sách khuyến mãi</span>
                                 </a>
                             </li>
                         </ul>
@@ -185,32 +185,103 @@
                                 </a>
                             </li>
 
+                            <li class="">
+                                <a href="ListCustomer">
+                                    <i class="las la-minus"></i><span>Customers</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="ListShop">
+                                    <i class="las la-minus"></i><span>Shop</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="ListShift">
+                                    <i class="las la-minus"></i><span>Shift</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    <li class="">
-                        <a href="page-report.html" class="">
+
+                    <li class=" ">
+                        <a href="#pages-error" class="collapsed" data-toggle="collapse" aria-expanded="false">
                             <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="ml-4">Report</span>
+                            <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                            </svg>
+                        </a>
+                        <ul id="pages-error" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                            <li class="">
+                                <a href="ListCustomerReport">
+                                    <i class="las la-minus"></i><span>Report List Customer Top</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="ProductSales">
+                                    <i class="las la-minus"></i><span>Revenue By Product</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="ProductCategorySale">
+                                    <i class="las la-minus"></i><span>Revenue By Product Category</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="BestSellProduct">
+                                    <i class="las la-minus"></i><span>Best Selling Products</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <li class=" ">
+                        <a href="#auth" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash12" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
-                            <span class="ml-4">Reports</span>
+                            <span class="ml-4">Authentication</span>
+                            <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                            </svg>
                         </a>
-                        <ul id="reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <ul id="auth" class="iq-submenu collapse" data-parent="#otherpage">
+                            <li class="">
+                                <a href="auth-sign-in.html">
+                                    <i class="las la-minus"></i><span>Login</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="auth-sign-up.html">
+                                    <i class="las la-minus"></i><span>Register</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="auth-recoverpw.html">
+                                    <i class="las la-minus"></i><span>Recover Password</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="auth-confirm-mail.html">
+                                    <i class="las la-minus"></i><span>Confirm Mail</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="auth-lock-screen.html">
+                                    <i class="las la-minus"></i><span>Lock Screen</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
                 </ul>
             </nav>
-            <div id="sidebar-bottom" class="position-relative sidebar-bottom">
-                <div class="card border-none">
-                    <div class="card-body p-0">
-                        <div class="sidebarbottom-content">
-                            <div class="image"><img src="assets/images/layouts/side-bkg.png" class="img-fluid" alt="side-bkg"></div>
-                            <h6 class="mt-4 px-4 body-title">Get More Feature by Upgrading</h6>
-                            <button type="button" class="btn sidebar-bottom-btn mt-4">Go Premium</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <div class="p-3"></div>
         </div>
     </div> 

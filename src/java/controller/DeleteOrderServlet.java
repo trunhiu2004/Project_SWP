@@ -11,7 +11,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -54,36 +53,27 @@ public class DeleteOrderServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final OrderDAO orderDAO = new OrderDAO();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderIdStr = request.getParameter("orderId");
-        HttpSession session = request.getSession();
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null && !orderIdParam.isEmpty()) {
+            try {
+                int orderId = Integer.parseInt(orderIdParam);
+                OrderDAO orderDAO = new OrderDAO();
+                boolean deleted = orderDAO.deleteOrder(orderId);
 
-        try {
-            if (orderIdStr == null || orderIdStr.trim().isEmpty()) {
-                session.setAttribute("errorMessage", "Invalid order ID");
-                response.sendRedirect("list-order");
-                return;
+                if (deleted) {
+                    response.sendRedirect("list-order?message=Order deleted successfully");
+                } else {
+                    response.sendRedirect("list-order?error=Failed to delete order");
+                }
+            } catch (NumberFormatException e) {
+                response.sendRedirect("list-order?error=Invalid order ID");
             }
-
-            int orderId = Integer.parseInt(orderIdStr);
-
-            if (orderDAO.deleteOrder(orderId)) {
-                session.setAttribute("successMessage", "Order deleted successfully");
-            } else {
-                session.setAttribute("errorMessage", "Failed to delete order");
-            }
-
-        } catch (NumberFormatException e) {
-            session.setAttribute("errorMessage", "Invalid order ID format");
-        } catch (Exception e) {
-            session.setAttribute("errorMessage", "Error occurred while deleting order: " + e.getMessage());
+        } else {
+            response.sendRedirect("list-order?error=No order ID provided");
         }
-
-        response.sendRedirect("list-order");
     }
 
     /**
