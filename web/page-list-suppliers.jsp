@@ -63,7 +63,7 @@
                                         <h4 class="mb-3">Danh sách nhà cung cấp</h4>
                                         <p class="mb-0">Danh sách nhà cung cấp là tập hợp thông tin về các đơn vị hoặc cá nhân cung cấp hàng hóa, <br>dịch vụ cho doanh nghiệp.</p>
                                     </div>
-                                    <a href="page-add-supplier.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm nhà cung cấp</a>
+                                    <a href="addSupplier" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm nhà cung cấp</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">

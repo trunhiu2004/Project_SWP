@@ -56,7 +56,7 @@
                                     <a href="listUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách đơn vị</a>
                                 </div>
                                 <div class="card-body">
-                                    <form action="addUnit" data-toggle="validator">
+                                    <form action="addUnit" method="post" data-toggle="validator">
                                         <div class="row">                                                                          
                                             <div class="col-md-12">                      
                                                 <div class="form-group">

@@ -56,7 +56,7 @@
                                     <a href="listCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách loại sản phẩm</a>
                                 </div>
                                 <div class="card-body">
-                                    <form action="addCategory" data-toggle="validator">
+                                    <form action="addCategory" method="post" data-toggle="validator">
                                         <div class="row">                                                                          
                                             <div class="col-md-12">                      
                                                 <div class="form-group">

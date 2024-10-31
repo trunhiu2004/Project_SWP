@@ -63,7 +63,7 @@
                                         <h4 class="mb-3">Danh sách loại sản phẩm</h4>
                                         <p class="mb-0">Danh sách loại sản phẩm là tập hợp các nhóm hoặc danh mục sản phẩm <br>được phân loại theo tính chất, chức năng, hoặc mục đích sử dụng.</p>
                                     </div>
-                                    <a href="page-add-category.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm loại sản phẩm</a>
+                                    <a href="addCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm loại sản phẩm</a>
 
                                 </div>
                             </div>

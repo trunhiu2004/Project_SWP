@@ -63,7 +63,7 @@
                                         <h4 class="mb-3">Danh sách đơn vị</h4>
                                         <p class="mb-0">Danh sách đơn vị sản phẩm là tập hợp các đơn vị đo lường được sử dụng <br>để xác định số lượng hoặc khối lượng của sản phẩm trong quá trình bán hàng, quản lý kho, hoặc sản xuất.</p>
                                     </div>
-                                    <a href="page-add-unit.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm đơn vị</a>
+                                    <a href="addUnit" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm đơn vị</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
