@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -51,50 +51,25 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Add category</h4>
+                                        <h4 class="card-title">Thêm loại sản phẩm mới</h4>
                                     </div>
+                                    <a href="listCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về danh sách loại sản phẩm</a>
                                 </div>
                                 <div class="card-body">
-                                    <form action="https://templates.iqonic.design/posdash/html/backend/page-list-category.html" data-toggle="validator">
-                                        <div class="row">                                
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control image-file" name="pic" accept="image/*">
-                                                </div>
-                                            </div>
+                                    <form action="addCategory" method="post" data-toggle="validator">
+                                        <div class="row">                                                                          
                                             <div class="col-md-12">                      
                                                 <div class="form-group">
-                                                    <label>Product Name *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Product Name" required>
+                                                    <label>Tên loại sản phẩm: *</label>
+                                                    <input type="text" name="nameCategory" class="form-control" placeholder="Nhập loại sản phẩm" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div>                                 
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Category *</label>
-                                                    <select name="type" class="selectpicker form-control" data-style="py-0">
-                                                        <option>Beauty</option>
-                                                        <option>Grocery</option>
-                                                        <option>Food</option>
-                                                        <option>Furniture</option>
-                                                        <option>Shoes</option>
-                                                        <option>Frames</option>
-                                                        <option>Jewellery</option>
-                                                    </select>
-                                                </div>
-                                            </div>  
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Code *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Code" required>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>                                 
+                                            </div>                                                                  
                                         </div>                            
-                                        <button type="submit" class="btn btn-primary mr-2">Add category</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Thêm loại sản phẩm</button>
+                                        <button type="reset" class="btn btn-danger">Làm mới</button>
                                     </form>
+                                    <h3 style="color: red">${error}</h3>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +91,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

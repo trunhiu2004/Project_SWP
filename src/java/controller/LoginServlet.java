@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
     throws ServletException, IOException {
         String email = request.getParameter("emailLogin");
         String password = request.getParameter("passwordLogin");
-
+        
         AccountDAO dao = new AccountDAO();
         Accounts a = dao.login(email, password);
         if (a == null) {
@@ -81,9 +81,11 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("account", a);
-            
-            response.sendRedirect("home.jsp");
-
+            if (a.getRole_id()==1) {
+                response.sendRedirect("HomeAdmin");
+            } else {
+                response.sendRedirect("PoSHome");
+            }     
         }
     }
 

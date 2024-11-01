@@ -1,0 +1,90 @@
+.receipt {
+    width: 80mm;
+    padding: 5mm;
+    margin: 20px auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receipt-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.customer-info {
+    margin-bottom: 10px;
+}
+
+.receipt-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.receipt-items th,
+.receipt-items td {
+    border-bottom: 1px dotted #000;
+    padding: 3px;
+    text-align: left;
+}
+
+.receipt-items th {
+    font-weight: bold;
+}
+
+.receipt-summary {
+    margin-top: 20px;
+    border-top: 1px solid #000;
+    padding-top: 10px;
+}
+
+.receipt-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.receipt-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-style: italic;
+}
+
+@media print {
+    @page {
+        size: 80mm 297mm; /* Kích thước giấy in */
+        margin: 0;
+    }
+    
+    body * {
+        visibility: hidden;
+    }
+    
+    .receipt, .receipt * {
+        visibility: visible;
+    }
+    
+    .receipt {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%); /* Căn giữa hóa đơn */
+        width: 80mm;
+        margin: 0;
+        padding: 10mm;
+        box-shadow: none;
+    }
+    
+    /* Ẩn các nút không cần thiết khi in */
+    .modal-footer {
+        display: none;
+    }
+}
