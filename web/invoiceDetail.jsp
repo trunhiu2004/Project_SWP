@@ -3,7 +3,8 @@
     Created on : Oct 13, 2024, 2:31:39 AM
     Author     : ankha
 --%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="model.Invoice" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.OrderDetail" %>
@@ -117,8 +118,9 @@
                                                             <th class="text-center" scope="row"><%= index++ %></th>
                                                             <td><%= detail.getProductName() %></td>
                                                             <td class="text-center"><%= detail.getQuantity() %></td>
-                                                            <td class="text-center">$<%= detail.getUnitPrice() %></td>
-                                                            <td class="text-center">$<%= detail.getTotalPrice() %></td>
+                                                            
+                                                            <td class="text-center"><fmt:formatNumber value="<%= detail.getUnitPrice() %>" pattern="#,##0" />₫</td>
+                                                            <td class="text-center"><fmt:formatNumber value="<%= detail.getTotalPrice() %>" pattern="#,##0" />₫</td>
                                                         </tr>
                                                         <%       }
                                                                 } else { %>

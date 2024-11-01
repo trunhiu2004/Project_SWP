@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <!-- All servlet definitions -->
+    <!-- Authentication & User Management -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
@@ -32,6 +42,7 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <!-- Product Management -->
     <servlet>
         <servlet-name>ListUnitServlet</servlet-name>
         <servlet-class>controller.ListUnitServlet</servlet-class>
@@ -96,6 +107,7 @@
         <servlet-name>UpdateProductServlet</servlet-name>
         <servlet-class>controller.UpdateProductServlet</servlet-class>
     </servlet>
+    <!-- Price & Discount Management -->
     <servlet>
         <servlet-name>UpdatePriceServlet</servlet-name>
         <servlet-class>controller.UpdatePriceServlet</servlet-class>
@@ -112,6 +124,7 @@
         <servlet-name>ListProductDiscountServlet</servlet-name>
         <servlet-class>controller.ListProductDiscountServlet</servlet-class>
     </servlet>
+    <!-- Inventory Management -->
     <servlet>
         <servlet-name>ProductExpiredServlet</servlet-name>
         <servlet-class>controller.ProductExpiredServlet</servlet-class>
@@ -140,10 +153,12 @@
         <servlet-name>ImportProductServlet</servlet-name>
         <servlet-class>controller.ImportProductServlet</servlet-class>
     </servlet>
+    <!-- POS & Sales -->
     <servlet>
         <servlet-name>PoSHomeServlet</servlet-name>
         <servlet-class>controller.PoSHomeServlet</servlet-class>
     </servlet>
+    <!-- Staff Management -->
     <servlet>
         <servlet-name>StaffManageServlet</servlet-name>
         <servlet-class>controller.StaffManageServlet</servlet-class>
@@ -156,6 +171,7 @@
         <servlet-name>StaffDeleteServlet</servlet-name>
         <servlet-class>controller.StaffDeleteServlet</servlet-class>
     </servlet>
+    <!-- Coupon Management -->
     <servlet>
         <servlet-name>CouponManageServlet</servlet-name>
         <servlet-class>controller.CouponManageServlet</servlet-class>
@@ -172,6 +188,7 @@
         <servlet-name>CouponAddServlet</servlet-name>
         <servlet-class>controller.CouponAddServlet</servlet-class>
     </servlet>
+    <!-- Promotion Management -->
     <servlet>
         <servlet-name>PromotionManageServlet</servlet-name>
         <servlet-class>controller.PromotionManageServlet</servlet-class>
@@ -187,6 +204,226 @@
     <servlet>
         <servlet-name>PromotionUpdateServlet</servlet-name>
         <servlet-class>controller.PromotionUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewProductServlet</servlet-name>
+        <servlet-class>controller.AddNewProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportNewToStoreServlet</servlet-name>
+        <servlet-class>controller.ExportNewToStoreServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportOldBatchServlet</servlet-name>
+        <servlet-class>controller.ExportOldBatchServlet</servlet-class>
+    </servlet>
+    <!-- Invoice Management -->
+    <servlet>
+        <servlet-name>InvoiceListServlet</servlet-name>
+        <servlet-class>controller.InvoiceListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InvoiceDetailServlet</servlet-name>
+        <servlet-class>controller.InvoiceDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadInvoiceServlet</servlet-name>
+        <servlet-class>controller.DownloadInvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteInvoiceServlet</servlet-name>
+        <servlet-class>controller.DeleteInvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateInvoiceServlet</servlet-name>
+        <servlet-class>controller.UpdateInvoiceServlet</servlet-class>
+    </servlet>
+    <!-- Sales Management -->
+    <servlet>
+        <servlet-name>SaleListServlet</servlet-name>
+        <servlet-class>controller.SaleListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSaleServlet</servlet-name>
+        <servlet-class>controller.ViewSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <servlet-class>controller.EditSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSaleServlet</servlet-name>
+        <servlet-class>controller.DeleteSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSaleDetailsServlet</servlet-name>
+        <servlet-class>controller.ViewSaleDetailsServlet</servlet-class>
+    </servlet>
+    <!-- Order Management -->
+    <servlet>
+        <servlet-name>ListOrdersServlet</servlet-name>
+        <servlet-class>controller.ListOrdersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <servlet-class>controller.EditOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <servlet-class>controller.DeleteOrderServlet</servlet-class>
+    </servlet>
+    <!-- Servlet Mappings -->
+    <!-- Authentication & User Management Mappings -->
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>controller.CartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>controller.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCartController</servlet-name>
+        <servlet-class>controller.UpdateCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveFromCartController</servlet-name>
+        <servlet-class>controller.RemoveFromCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <servlet-class>controller.SearchProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadCustomersServlet</servlet-name>
+        <servlet-class>controller.LoadCustomersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetCustomerServlet</servlet-name>
+        <servlet-class>controller.SetCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <servlet-class>controller.ClearCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomerServlet</servlet-name>
+        <servlet-class>controller.EditCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <servlet-class>controller.AddCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadCustomerTypesServlet</servlet-name>
+        <servlet-class>controller.LoadCustomerTypesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcessCashPaymentServlet</servlet-name>
+        <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <servlet-class>controller.CreatePaymentLinkServlet</servlet-class>
+    </servlet>
+        <servlet-name>AddShopServlet</servlet-name>
+        <servlet-class>controller.AddShopServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BestSellProduct</servlet-name>
+        <servlet-class>controller.BestSellProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteShop</servlet-name>
+        <servlet-class>controller.DeleteShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteShift</servlet-name>
+        <servlet-class>controller.DeleteShift</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShift</servlet-name>
+        <servlet-class>controller.EditShift</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShop</servlet-name>
+        <servlet-class>controller.EditShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeAdmin</servlet-name>
+        <servlet-class>controller.HomeAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomerReport</servlet-name>
+        <servlet-class>controller.ListCustomerReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrderMax</servlet-name>
+        <servlet-class>controller.ListOrderMax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListSales</servlet-name>
+        <servlet-class>controller.ListSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListShift</servlet-name>
+        <servlet-class>controller.ListShift</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListShop</servlet-name>
+        <servlet-class>controller.ListShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductCategorySale</servlet-name>
+        <servlet-class>controller.ProductCategorySale</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductSales</servlet-name>
+        <servlet-class>controller.ProductSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShop</servlet-name>
+        <servlet-class>controller.SearchShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShiftDetailServlet</servlet-name>
+        <servlet-class>controller.ShiftDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controller.ListCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCustomer</servlet-name>
+        <servlet-class>controller.SearchCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomer</servlet-name>
+        <servlet-class>controller.EditCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <servlet-class>controller.DeleteInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <servlet-class>controller.DeleteStoreStockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <servlet-class>controller.InitOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <servlet-class>controller.CheckPaymentStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <servlet-class>controller.PaymentReturnServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -220,6 +457,7 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    <!-- Product Management Mappings -->
     <servlet-mapping>
         <servlet-name>ListUnitServlet</servlet-name>
         <url-pattern>/listUnit</url-pattern>
@@ -284,6 +522,7 @@
         <servlet-name>UpdateProductServlet</servlet-name>
         <url-pattern>/updateProduct</url-pattern>
     </servlet-mapping>
+    <!-- Price & Discount Management Mappings -->
     <servlet-mapping>
         <servlet-name>UpdatePriceServlet</servlet-name>
         <url-pattern>/updatePrice</url-pattern>
@@ -300,6 +539,7 @@
         <servlet-name>ListProductDiscountServlet</servlet-name>
         <url-pattern>/listProductDiscount</url-pattern>
     </servlet-mapping>
+    <!-- Inventory Management Mappings -->
     <servlet-mapping>
         <servlet-name>ProductExpiredServlet</servlet-name>
         <url-pattern>/productExpired</url-pattern>
@@ -328,10 +568,12 @@
         <servlet-name>ImportProductServlet</servlet-name>
         <url-pattern>/importProduct</url-pattern>
     </servlet-mapping>
+    <!-- POS & Sales Mappings -->
     <servlet-mapping>
         <servlet-name>PoSHomeServlet</servlet-name>
         <url-pattern>/PoSHome</url-pattern>
     </servlet-mapping>
+    <!-- Staff Management Mappings -->
     <servlet-mapping>
         <servlet-name>StaffManageServlet</servlet-name>
         <url-pattern>/staffManage</url-pattern>
@@ -344,6 +586,7 @@
         <servlet-name>StaffDeleteServlet</servlet-name>
         <url-pattern>/staffDelete</url-pattern>
     </servlet-mapping>
+    <!-- Coupon Management Mappings -->
     <servlet-mapping>
         <servlet-name>CouponManageServlet</servlet-name>
         <url-pattern>/couponManage</url-pattern>
@@ -360,6 +603,7 @@
         <servlet-name>CouponAddServlet</servlet-name>
         <url-pattern>/couponAdd</url-pattern>
     </servlet-mapping>
+    <!-- Promotion Management Mappings -->
     <servlet-mapping>
         <servlet-name>PromotionManageServlet</servlet-name>
         <url-pattern>/promotionManage</url-pattern>
@@ -376,4 +620,226 @@
         <servlet-name>PromotionUpdateServlet</servlet-name>
         <url-pattern>/promotionUpdate</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewProductServlet</servlet-name>
+        <url-pattern>/addNewProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportNewToStoreServlet</servlet-name>
+        <url-pattern>/exportNewToStore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportOldBatchServlet</servlet-name>
+        <url-pattern>/exportOldBatch</url-pattern>
+    </servlet-mapping>
+    <!-- Invoice Management Mappings -->
+    <servlet-mapping>
+        <servlet-name>InvoiceListServlet</servlet-name>
+        <url-pattern>/invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InvoiceDetailServlet</servlet-name>
+        <url-pattern>/invoice-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadInvoiceServlet</servlet-name>
+        <url-pattern>/download-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteInvoiceServlet</servlet-name>
+        <url-pattern>/delete-invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInvoiceServlet</servlet-name>
+        <url-pattern>/update-invoice</url-pattern>
+    </servlet-mapping>
+    <!-- Sales Management Mappings -->
+    <servlet-mapping>
+        <servlet-name>SaleListServlet</servlet-name>
+        <url-pattern>/sale-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSaleServlet</servlet-name>
+        <url-pattern>/view-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <url-pattern>/edit-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSaleServlet</servlet-name>
+        <url-pattern>/delete-sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSaleDetailsServlet</servlet-name>
+        <url-pattern>/view-sale-details</url-pattern>
+    </servlet-mapping>
+    <!-- Order Management Mappings -->
+    <servlet-mapping>
+        <servlet-name>ListOrdersServlet</servlet-name>
+        <url-pattern>/list-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <url-pattern>/view-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <url-pattern>/edit-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderServlet</servlet-name>
+        <url-pattern>/delete-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/add-to-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartController</servlet-name>
+        <url-pattern>/update-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveFromCartController</servlet-name>
+        <url-pattern>/remove-from-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <url-pattern>/search-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCustomersServlet</servlet-name>
+        <url-pattern>/load-customers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetCustomerServlet</servlet-name>
+        <url-pattern>/set-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearCartServlet</servlet-name>
+        <url-pattern>/clear-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomerServlet</servlet-name>
+        <url-pattern>/edit-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomerServlet</servlet-name>
+        <url-pattern>/add-customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCustomerTypesServlet</servlet-name>
+        <url-pattern>/load-customer-types</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessCashPaymentServlet</servlet-name>
+        <url-pattern>/process-cash-payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <url-pattern>/create-payment-link</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddShopServlet</servlet-name>
+        <url-pattern>/AddShopServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BestSellProduct</servlet-name>
+        <url-pattern>/BestSellProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteShop</servlet-name>
+        <url-pattern>/DeleteShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <url-pattern>/init-order</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>DeleteShift</servlet-name>
+        <url-pattern>/DeleteShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShift</servlet-name>
+        <url-pattern>/EditShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShop</servlet-name>
+        <url-pattern>/EditShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeAdmin</servlet-name>
+        <url-pattern>/HomeAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomerReport</servlet-name>
+        <url-pattern>/ListCustomerReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrderMax</servlet-name>
+        <url-pattern>/ListOrderMax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSales</servlet-name>
+        <url-pattern>/ListSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListShift</servlet-name>
+        <url-pattern>/ListShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListShop</servlet-name>
+        <url-pattern>/ListShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <url-pattern>/check-payment-status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <url-pattern>/payment-return</url-pattern>
+    </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>ProductCategorySale</servlet-name>
+        <url-pattern>/ProductCategorySale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductSales</servlet-name>
+        <url-pattern>/ProductSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShop</servlet-name>
+        <url-pattern>/SearchShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShiftDetailServlet</servlet-name>
+        <url-pattern>/ShiftDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/ListCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCustomer</servlet-name>
+        <url-pattern>/SearchCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomer</servlet-name>
+        <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteInventoryServlet</servlet-name>
+        <url-pattern>/deleteInventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStoreStockServlet</servlet-name>
+        <url-pattern>/deleteStoreStock</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>
