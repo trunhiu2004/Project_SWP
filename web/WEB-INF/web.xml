@@ -327,6 +327,10 @@
         <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <servlet-class>controller.CreatePaymentLinkServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddShopServlet</servlet-name>
         <servlet-class>controller.AddShopServlet</servlet-class>
     </servlet>
@@ -409,6 +413,22 @@
     <servlet>
         <servlet-name>DeleteStoreStockServlet</servlet-name>
         <servlet-class>controller.DeleteStoreStockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <servlet-class>controller.InitOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <servlet-class>controller.CheckPaymentStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <servlet-class>controller.PaymentReturnServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>controller.DeleteCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -725,6 +745,10 @@
         <url-pattern>/process-cash-payment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CreatePaymentLinkServlet</servlet-name>
+        <url-pattern>/create-payment-link</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddShopServlet</servlet-name>
         <url-pattern>/AddShopServlet</url-pattern>
     </servlet-mapping>
@@ -735,6 +759,10 @@
     <servlet-mapping>
         <servlet-name>DeleteShop</servlet-name>
         <url-pattern>/DeleteShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InitOrderServlet</servlet-name>
+        <url-pattern>/init-order</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteShift</servlet-name>
@@ -773,6 +801,14 @@
         <url-pattern>/ListShop</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CheckPaymentStatusServlet</servlet-name>
+        <url-pattern>/check-payment-status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentReturnServlet</servlet-name>
+        <url-pattern>/payment-return</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProductCategorySale</servlet-name>
         <url-pattern>/ProductCategorySale</url-pattern>
     </servlet-mapping>
@@ -807,6 +843,10 @@
     <servlet-mapping>
         <servlet-name>DeleteStoreStockServlet</servlet-name>
         <url-pattern>/deleteStoreStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

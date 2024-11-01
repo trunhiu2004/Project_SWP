@@ -43,23 +43,33 @@ public class CustomerDAO1 extends DBContext{
     
     
     public Customer getCustomerId(int customerId) {
-    Customer customer = null;
-    String sql = "SELECT c.customer_id, c.customer_name, c.customer_phone, c.point, c.customer_type_id, t.type_name " +
-                 "FROM Customers c " +
-                 "JOIN CustomerTypes t ON c.customer_type_id = t.customer_type_id " +
-                 "WHERE c.customer_id = ?";
-    try {
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, customerId);
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            
+        Customer customer = null;
+        String sql = "SELECT c.customer_id, c.customer_name, c.customer_phone, c.point, c.customer_type_id, t.type_name "
+                + "FROM Customers c "
+                + "JOIN CustomerTypes t ON c.customer_type_id = t.customer_type_id "
+                + "WHERE c.customer_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, customerId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                customer = new Customer(
+                        rs.getInt("customer_id"),
+                        rs.getString("customer_name"),
+                        rs.getString("customer_phone"),
+                        rs.getInt("point"),
+                        rs.getInt("customer_type_id"),
+                        rs.getString("type_name")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching customer: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Error fetching customer: " + e.getMessage());
+        return customer;
     }
-    return customer;
-}
+
+
     
 
     

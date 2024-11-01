@@ -1,0 +1,92 @@
+-- Lấy tất cả dữ liệu từ bảng Roles
+SELECT * FROM Roles;
+
+-- Lấy tất cả dữ liệu từ bảng AccountStatus
+SELECT * FROM AccountStatus;
+
+-- Lấy tất cả dữ liệu từ bảng Accounts
+SELECT * FROM Accounts;
+
+-- Lấy tất cả dữ liệu từ bảng Employees
+SELECT * FROM Employees;
+
+-- Lấy tất cả dữ liệu từ bảng CustomerTypes
+SELECT * FROM CustomerTypes;
+
+-- Lấy tất cả dữ liệu từ bảng Customers
+SELECT * FROM Customers;
+
+-- Lấy tất cả dữ liệu từ bảng Coupons
+SELECT * FROM Coupons;
+
+-- Lấy tất cả dữ liệu từ bảng CustomerCoupon
+SELECT * FROM CustomerCoupon;
+
+-- Lấy tất cả dữ liệu từ bảng Product_Categories
+SELECT * FROM Product_Categories;
+
+-- Lấy tất cả dữ liệu từ bảng Weight_unit
+SELECT * FROM Weight_unit;
+
+-- Lấy tất cả dữ liệu từ bảng Suppliers
+SELECT * FROM Suppliers;
+
+-- Lấy tất cả dữ liệu từ bảng Products
+SELECT * FROM Products;
+
+-- Lấy tất cả dữ liệu từ bảng DiscountProduct
+SELECT * FROM DiscountProduct;
+
+-- Lấy tất cả dữ liệu từ bảng Inventory
+SELECT * FROM Inventory;
+
+-- Lấy tất cả dữ liệu từ bảng StoreStock
+SELECT * FROM StoreStock;
+
+-- Lấy tất cả dữ liệu từ bảng Orders
+SELECT * FROM Orders;
+
+-- Lấy tất cả dữ liệu từ bảng OrdersDetails
+SELECT * FROM OrdersDetails;
+
+-- Lấy tất cả dữ liệu từ bảng ShiftManagers
+SELECT * FROM ShiftManagers;
+
+-- Lấy tất cả dữ liệu từ bảng PaymentMethod
+SELECT * FROM PaymentMethod;
+
+-- Lấy tất cả dữ liệu từ bảng Promotion
+SELECT * FROM Promotion;
+
+-- Lấy tất cả dữ liệu từ bảng Invoices
+SELECT * FROM Invoices;
+
+-- Lấy tất cả dữ liệu từ bảng EmailSettings
+SELECT * FROM EmailSettings;
+
+-- Lấy tất cả dữ liệu từ bảng EmailTemplates
+SELECT * FROM EmailTemplates;
+
+-- Lấy tất cả dữ liệu từ bảng Mailog
+SELECT * FROM Mailog;
+
+-- Lấy tất cả dữ liệu từ bảng HistoryPrice
+SELECT * FROM HistoryPrice;
+
+-- Lấy tất cả dữ liệu từ bảng InventoryDetails
+SELECT * FROM InventoryDetails;
+
+-- Lấy tất cả dữ liệu từ bảng ReportInventoryDetails
+SELECT * FROM ReportInventoryDetails;
+
+-- Lấy tất cả dữ liệu từ bảng ReportInventory
+SELECT * FROM ReportInventory;
+
+-- Lấy tất cả dữ liệu từ bảng ReportRevenueDetails
+SELECT * FROM ReportRevenueDetails;
+
+-- Lấy tất cả dữ liệu từ bảng ReportRevenue
+SELECT * FROM ReportRevenue;
+
+-- Lấy tất cả dữ liệu từ bảng ShopDetails
+SELECT * FROM ShopDetails;

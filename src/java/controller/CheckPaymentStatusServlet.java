@@ -5,21 +5,21 @@
 
 package controller;
 
-import dal.AccountDAO;
+import com.google.gson.JsonObject;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Accounts;
+import model.Order;
 
 /**
  *
- * @author frien
+ * @author ankha
  */
-public class LoginServlet extends HttpServlet {
+public class CheckPaymentStatusServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +36,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet CheckPaymentStatusServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CheckPaymentStatusServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,10 +54,26 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
-    } 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        response.setContentType("application/json");
+        String orderId = request.getParameter("orderId");
+        
+        try {
+            // Kiểm tra trạng thái đơn hàng trong database
+            OrderDAO orderDAO = new OrderDAO();
+            Order order = orderDAO.getOrderById(Integer.parseInt(orderId));
+            
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("status", order.getOrderStatus());
+            response.getWriter().write(jsonResponse.toString());
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Error checking payment status");
+            response.getWriter().write(error.toString());
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -69,24 +85,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("emailLogin");
-        String password = request.getParameter("passwordLogin");
-        
-        AccountDAO dao = new AccountDAO();
-        Accounts a = dao.login(email, password);
-        if (a == null) {
-            request.setAttribute("mess", "Sai tên đăng nhập hoặc mật khẩu!");
-            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
-            
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", a);
-            if (a.getRole_id()==1) {
-                response.sendRedirect("HomeAdmin");
-            } else {
-                response.sendRedirect("PoSHome");
-            }     
-        }
+        processRequest(request, response);
     }
 
     /** 
