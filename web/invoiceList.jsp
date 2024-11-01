@@ -64,7 +64,7 @@
                                         <form method="get" action="invoice" class="row">
                                             <div class="col-md-2">
                                                 <input type="text" class="form-control" name="search" 
-                                                       value="${searchKeyword}" placeholder="Search...">
+                                                       value="${searchKeyword}" placeholder="Search Customer...">
                                         </div>
                                         <div class="col-md-2">
                                             <select class="form-control" name="status">
