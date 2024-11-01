@@ -85,7 +85,7 @@
                                                         <tr>
                                                             <td><%= invoice.getInvoiceDate() %></td>
                                                             <td>$<%= invoice.getTotalAmount() %></td>
-                                                            <td><span class="badge <%= invoice.getStatus().equals("Paid") ? "badge-success" : "badge-danger" %>"><%= invoice.getStatus() %></span></td>
+                                                            <td><span class="badge <%= invoice.getStatus().equals("COMPLETED") ? "badge-success" : "badge-danger" %>"><%= invoice.getStatus() %></span></td>
                                                             <td><%= invoice.getPaymentMethodName() %></td>
                                                         </tr>
                                                     </tbody>

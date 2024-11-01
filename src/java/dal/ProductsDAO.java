@@ -494,7 +494,7 @@ public class ProductsDAO extends DBContext {
                     Customers c ON o.customer_id = c.customer_id
                 WHERE
                     YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
-                    AND o.order_status = 'Paid'
+                    AND o.order_status = 'COMPLETED'
                 GROUP BY 
                     YEAR(o.order_date),   -- Nhóm theo năm
                     MONTH(o.order_date),  -- Nhóm theo tháng
@@ -576,7 +576,7 @@ public class ProductsDAO extends DBContext {
                     Customers c ON o.customer_id = c.customer_id
                 WHERE
                     YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
-                    AND o.order_status = 'Paid'
+                    AND o.order_status = 'COMPLETED'
                 GROUP BY 
                     YEAR(o.order_date),
                     MONTH(o.order_date),

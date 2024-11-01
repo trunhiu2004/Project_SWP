@@ -426,6 +426,10 @@
         <servlet-name>PaymentReturnServlet</servlet-name>
         <servlet-class>controller.PaymentReturnServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>controller.DeleteCustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -759,7 +763,7 @@
     <servlet-mapping>
         <servlet-name>InitOrderServlet</servlet-name>
         <url-pattern>/init-order</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteShift</servlet-name>
         <url-pattern>/DeleteShift</url-pattern>
@@ -803,7 +807,7 @@
     <servlet-mapping>
         <servlet-name>PaymentReturnServlet</servlet-name>
         <url-pattern>/payment-return</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductCategorySale</servlet-name>
         <url-pattern>/ProductCategorySale</url-pattern>
@@ -839,6 +843,10 @@
     <servlet-mapping>
         <servlet-name>DeleteStoreStockServlet</servlet-name>
         <url-pattern>/deleteStoreStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
