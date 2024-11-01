@@ -58,9 +58,8 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Shift List</h4>
-                                    <p class="mb-0">A customer dashboard lets you easily gather and visualize customer data from optimizing <br>
-                                        the customer experience, ensuring customer retention. </p>
+                                    <h4 class="mb-3">Danh sách ca làm</h4>
+                                    <p class="mb-0">Đây là danh sách ca làm và số tiền trong ca làm nhé </p>
                                 </div>
 
                             </div>
@@ -70,15 +69,15 @@
                                 <table class="data-table table mb-0 tbl-server-info">
                                     <thead class="bg-white text-uppercase">
                                         <tr class="ligth ligth-data">
-                                            <th>Shift ID</th>
-                                            <th>Start</th>
-                                            <th>End</th>
-                                            <th>Cast Start</th>
-                                            <th>Cast End</th>
-                                            <th>Total Revenue</th>
-                                            <th>Total Hours</th>
-                                            <th>EmployeeID</th>
-                                            <th>Action</th>
+                                            <th>Mã ca làm</th>
+                                            <th>Thời gian bắt đầu</th>
+                                            <th>Thời gian kết ca</th>
+                                            <th>Tiền mở ca</th>
+                                            <th>Tiền kết ca</th>
+                                            <th>Tổng doanh thu</th>
+                                            <th>Tổng giờ làm</th>
+                                            <th>Mã nhân viên</th>
+                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody class="ligth-body">
@@ -94,13 +93,13 @@
                                                 <td>${shift.employeeId}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Detail"
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết"
                                                            href="ShiftDetailServlet?id=${shift.shiftManageId}">
                                                             <i class="ri-eye-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" title="Edit" href="EditShift?id=${shift.shiftManageId}">
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" title="Sửa đổi" href="EditShift?id=${shift.shiftManageId}">
                                                             <i class="ri-edit-2-line"></i>
                                                         </a>
-                                                        <a class="badge bg-danger" data-toggle="tooltip" title="Delete" href="DeleteShift?id=${shift.shiftManageId}" onclick="return confirm('Are you sure you want to delete this shift?');">
+                                                        <a class="badge bg-danger" data-toggle="tooltip" title="Xóa" href="DeleteShift?id=${shift.shiftManageId}" onclick="return confirm('Bạn có chắc muốn xóa không?');">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </a>
 

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -51,11 +52,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">List Order Max</h4>
-                                        <p class="mb-0">Sales enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Danh sách những đơn hàng lớn nhất</h4>
+                                        <p class="mb-0">Đây là danh sách các đơn hàng lớn nhất nhé. </p>
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Quay về trang chủ</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -63,15 +63,15 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Date</th>
-                                                <th>Customer Name</th>
-                                                <th>Total</th>
-                                                <th>Product Name</th>
-                                                <th>Product Image</th>
-                                                <th>Status</th>
-                                                <th>Quantity</th>
-                                                <th>Unit Price</th>     
-                                                <th>Total Price</th>
+                                                <th>Ngày</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>tổng tiền</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Ảnh sản phẩm</th>
+                                                <th>Trạng thái đơn hàng</th>
+                                                <th>Số lượng</th>
+                                                <th>giá sản phẩm</th>     
+                                                <th>Tổng tiền</th>
                                                 
                                             </tr>
                                         </thead>
@@ -147,7 +147,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

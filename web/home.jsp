@@ -51,8 +51,8 @@
                             <div class="col-lg-4">
                                 <div class="card card-transparent card-block card-stretch card-height border-none">
                                     <div class="card-body p-0 mt-lg-2 mt-0">
-                                        <h3 class="mb-3">Hi Graham, Good Morning</h3>
-                                        <p class="mb-0 mr-4">Your dashboard gives you views of key performance or business process.</p>
+                                        <h3 class="mb-3">Xin Chào Các Bạn</h3>
+                                        <p class="mb-0 mr-4">Đây là bảng điều khiển nhé.</p>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
 
 
                                                         <div>
-                                                            <p class="mb-2">Total Sales</p>
+                                                            <p class="mb-2">Số đơn hàng bán được</p>
                                                             <h4>${total}</h4>
 
                                                     </div>
@@ -98,7 +98,7 @@
                                                 </div>
                                                 <div>
                                                     <c:forEach var="sum" items="${requestScope.sum}">
-                                                    <p class="mb-2">Product Sold</p>
+                                                    <p class="mb-2">Tổng doanh thu</p>
                                                                 ${sum.totalSales}
                                                         
                                                     </c:forEach>
@@ -120,7 +120,7 @@
                             <div class="card card-block card-stretch card-height">
                                 <div class="card-header d-flex align-items-center justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Top Products</h4>
+                                        <h4 class="card-title">Các sản phẩm bán chạy nhất</h4>
                                     </div>
                                     <div class="card-header-toolbar d-flex align-items-center">
                                         <form action="HomeAdmin" method="get">
@@ -165,7 +165,7 @@
                             <div class="card card-transparent card-block card-stretch mb-4">
                                 <div class="card-header d-flex align-items-center justify-content-between p-0">
                                     <div class="header-title">
-                                        <h4 class="card-title mb-0">Best Category</h4>
+                                        <h4 class="card-title mb-0">Loại hàng bán chạy nhất</h4>
                                     </div>
 
                                 </div>
@@ -193,7 +193,7 @@
                             <div class="card card-block card-stretch card-height">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Order Summary</h4>
+                                        <h4 class="card-title">Tổng đơn đặt hàng</h4>
                                     </div>                        
                                     <div class="card-header-toolbar d-flex align-items-center">
                                         <div class="dropdown">
@@ -215,7 +215,7 @@
                                             </div>
                                             <div class="progress-value ml-3 pr-5 border-right">
                                                 <h5>${avg} $</h5>
-                                                <p class="mb-0">Average Orders</p>
+                                                <p class="mb-0">Trung bình tiền của 1 đơn hàng</p>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center ml-5 progress-order-right">
@@ -232,7 +232,7 @@
                                                 <div class="progress-value ml-3">
 
                                                     <h5>${max} $</h5>
-                                                    <p class="mb-0">Top Orders</p>
+                                                    <p class="mb-0">Tiền của đơn hàng cao nhất</p>
                                                 </div>
                                             </a>
                                         </div>

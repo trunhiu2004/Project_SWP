@@ -59,14 +59,14 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Customer List</h4>
+                                        <h4 class="mb-3">Danh sách khách hàng</h4>
                                         
                                         <div class="iq-search-bar device-search">
                                             
                                             
                                 <form action="SearchCustomer" method="post" class="searchbox">
                                     <a type = "submit" class="search-link"><i class="ri-search-line"></i></a>
-                                    <input name="txt" type="text" class="text search-input" placeholder="Search here...">
+                                    <input name="txt" type="text" class="text search-input" placeholder="Tìm kiếm ở đây...">
                                 </form>
                             </div>
                                         
@@ -74,8 +74,7 @@
                                     
                                     
                                     
-                                    <a href="addCustomer.jsp" class="btn btn-primary add-list"><i
-                                            class="las la-plus mr-3"></i>Add Customer</a>
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -84,12 +83,12 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
 
-                                                <th>Name</th>
-                                                <th>Phone </th>
-                                                <th>Point</th>
-                                                <th>Rank of Customer</th>
-                                                <th>Customer type</th>
-                                                <th>Action</th>
+                                                <th>Tên</th>
+                                                <th>Số điện thoại </th>
+                                                <th>Điểm</th>
+                                                <th>Xếp hạng khách hàng</th>
+                                                <th>Loại khách hàng</th>
+                                                <th>Chức năng</th>
 
                                             </tr>
                                         </thead>
@@ -106,11 +105,11 @@
                                                         <div class="d-flex align-items-center list-action">
                                                             
                                                             <a class="badge bg-success mr-2" data-toggle="tooltip"
-                                                                data-placement="top" title="" data-original-title="Edit"
+                                                                data-placement="top" title="" data-original-title="Sửa đổi"
                                                                 href="EditCustomer?id=${customer.customerId}"><i class="ri-pencil-line mr-0"></i></a>
                                                             <a class="badge bg-warning mr-2" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Delete" href="DeleteCustomerServlet?id=${customer.customerId}"><i
+                                                                data-original-title="Xóa" href="DeleteCustomerServlet?id=${customer.customerId}"><i
                                                                     class="ri-delete-bin-line mr-0"></i></a>
                                                         </div>
                                                     </td>

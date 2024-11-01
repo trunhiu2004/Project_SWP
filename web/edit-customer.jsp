@@ -58,7 +58,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Edit Shop</h4>
+                                        <h4 class="card-title">Sửa đổi nhân viên</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -67,25 +67,25 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Name *</label>
+                                                    <label>Tên *</label>
                                                     <input type="text" class="form-control" name="customerName" value="${customer.customerName}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Phone *</label>
+                                                    <label>Số điện thoại *</label>
                                                     <input type="text" class="form-control" name="customerPhone" value="${customer.customerPhone}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Point *</label>
+                                                    <label>Điểm tích lũy *</label>
                                                     <input type="text" class="form-control" name="point" value="${customer.point}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Customer Type *</label>
+                                                    <label>Xếp hạng *</label>
                                                     <select class="form-control" name="customerTypeId">
                                                         <c:forEach var="type" items="${customerTypes}">
                                                             <option value="${type.customerTypeId}" ${type.customerTypeId == customer.customerTypeId ? 'selected="selected"' : ''}>${type.typeName}</option>
@@ -94,7 +94,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Save</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Lưu</button>
                                     </form>
 
 

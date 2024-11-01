@@ -57,7 +57,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Edit Shop</h4>
+                            <h4 class="card-title">Sửa đổi cửa hàng</h4>
                         </div>
                     </div>
                     <div class="card-body">
@@ -66,13 +66,13 @@
                             <div class="row">                                  
                                 <div class="col-md-6">                      
                                     <div class="form-group">
-                                        <label>Name *</label>
+                                        <label>Tên cửa hàng *</label>
                                         <input type="text" class="form-control" name="shop_name" value="${shop.shopName}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Address *</label>
+                                        <label>Địa chỉ cửa hàng *</label>
                                         <input type="text" class="form-control" name="shop_address" value="${shop.shopAddress}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -80,7 +80,7 @@
                                         
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Phone *</label>
+                                        <label>Số điện thoại cửa hàng *</label>
                                         <input type="text" class="form-control" name="shop_phone" value="${shop.shopPhone}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -97,7 +97,7 @@
                                         
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Opening Hours *</label>
+                                        <label>Giờ mở cửa *</label>
                                         <input type="text" class="form-control" name="shop_opening_hours" value="${shop.shopOpeningHours}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -106,7 +106,7 @@
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image *</label>
+                                        <label>Hình ảnh *</label>
                                         <input type="text" class="form-control" name="shop_opening_hours" value="${shop.shopLogo}" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -115,7 +115,7 @@
 
                                 
                             </div>                            
-                            <button type="submit" class="btn btn-primary mr-2" >Save</button>
+                            <button type="submit" class="btn btn-primary mr-2" >Lưu</button>
                             
                         </form>
                     </div>
