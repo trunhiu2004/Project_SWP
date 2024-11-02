@@ -18,26 +18,28 @@ import java.sql.Timestamp;
  *
  * @author pqtru
  */
-public class ShiftDAO extends DBContext{
-    
-    
-     public List<Shift> getAll() {
+public class ShiftDAO extends DBContext {
+
+    public List<Shift> getAll() {
         List<Shift> list = new ArrayList<>();
-        String sql = "SELECT * FROM ShiftManagers";
+        String sql = "SELECT ShiftManagers.*, Employees.employee_name\n"
+                + "FROM ShiftManagers\n"
+                + "JOIN Employees ON ShiftManagers.employee_id = Employees.employee_id";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Shift shift = new Shift(
-                    rs.getInt("shift_manager_id"),                     
-                    rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null,  // Chuyển từ Timestamp sang LocalDateTime
-                    rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null,      // Chuyển từ Timestamp sang LocalDateTime
-                    rs.getBigDecimal("cash_start"),                         
-                    rs.getBigDecimal("cash_end"),                           
-                    rs.getBigDecimal("total_revenue"),                      
-                    rs.getBigDecimal("total_hours"),                        
-                    rs.getString("notes"),                                  
-                    rs.getInt("employee_id")                                
+                        rs.getInt("shift_manager_id"),
+                        rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null, // Chuyển từ Timestamp sang LocalDateTime
+                        rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null, // Chuyển từ Timestamp sang LocalDateTime
+                        rs.getBigDecimal("cash_start"),
+                        rs.getBigDecimal("cash_end"),
+                        rs.getBigDecimal("total_revenue"),
+                        rs.getBigDecimal("total_hours"),
+                        rs.getString("notes"),
+                        rs.getInt("employee_id"),
+                        rs.getString("employee_name")
                 );
                 list.add(shift);
             }
@@ -46,26 +48,28 @@ public class ShiftDAO extends DBContext{
         }
         return list;
     }
-     
-     
+
     public Shift getShiftById(int shiftManagerId) {
         Shift shift = null;
-        String sql = "SELECT * FROM ShiftManagers WHERE shift_manager_id = ?";
+        String sql = "SELECT ShiftManagers.*, Employees.employee_name\n"
+                + "FROM ShiftManagers\n"
+                + "JOIN Employees ON ShiftManagers.employee_id = Employees.employee_id WHERE shift_manager_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, shiftManagerId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 shift = new Shift(
-                    rs.getInt("shift_manager_id"),
-                    rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null,
-                    rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null,
-                    rs.getBigDecimal("cash_start"),
-                    rs.getBigDecimal("cash_end"),
-                    rs.getBigDecimal("total_revenue"),
-                    rs.getBigDecimal("total_hours"),
-                    rs.getString("notes"),
-                    rs.getInt("employee_id")
+                        rs.getInt("shift_manager_id"),
+                        rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null,
+                        rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null,
+                        rs.getBigDecimal("cash_start"),
+                        rs.getBigDecimal("cash_end"),
+                        rs.getBigDecimal("total_revenue"),
+                        rs.getBigDecimal("total_hours"),
+                        rs.getString("notes"),
+                        rs.getInt("employee_id"),
+                        rs.getString("employee_name")
                 );
             }
         } catch (SQLException e) {
@@ -73,8 +77,7 @@ public class ShiftDAO extends DBContext{
         }
         return shift;
     }
-     
-    
+
     public void updateShift(Shift shift) {
         String sql = "UPDATE ShiftManagers SET cash_start = ?, cash_end = ?, total_revenue = ? WHERE shift_manager_id = ?";
         try {
@@ -90,22 +93,18 @@ public class ShiftDAO extends DBContext{
         }
     }
 
-
-    
-
-
-
-    public void deleteShift(String id){
+    public void deleteShift(String id) {
         String sql = "delete from ShiftManagers where shift_manager_id = ?";
-        try{
+        try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);
             st.executeUpdate();
-        }catch(SQLException e){
-            
+        } catch (SQLException e) {
+
         }
     }
-     
-
+    
+    
+    
 
 }

@@ -76,7 +76,7 @@
                                             <th>Tiền kết ca</th>
                                             <th>Tổng doanh thu</th>
                                             <th>Tổng giờ làm</th>
-                                            <th>Mã nhân viên</th>
+                                            <th>Tên nhân viên</th>
                                             <th>Chức năng</th>
                                         </tr>
                                     </thead>
@@ -90,7 +90,7 @@
                                                 <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
                                                 <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
                                                 <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
-                                                <td>${shift.employeeId}</td>
+                                                <td>${shift.employeeName}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết"

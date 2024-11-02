@@ -25,11 +25,13 @@ public class ShiftDetail {
     private int employeeId; 
     private String productName;
     private String productImage;
+    private String employeeName;
+    
 
     public ShiftDetail() {
     }
 
-    public ShiftDetail(int shiftManagerId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal totalHours, int orderId, int quantity, BigDecimal orderTotalAmount, BigDecimal unitPrice, BigDecimal totalPrice, int employeeId, String productName, String productImage) {
+    public ShiftDetail(int shiftManagerId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal totalHours, int orderId, int quantity, BigDecimal orderTotalAmount, BigDecimal unitPrice, BigDecimal totalPrice, int employeeId, String productName, String productImage, String employeeName) {
         this.shiftManagerId = shiftManagerId;
         this.shiftStartTime = shiftStartTime;
         this.shiftEndTime = shiftEndTime;
@@ -42,6 +44,7 @@ public class ShiftDetail {
         this.employeeId = employeeId;
         this.productName = productName;
         this.productImage = productImage;
+        this.employeeName = employeeName;
     }
 
     public int getShiftManagerId() {
@@ -138,6 +141,14 @@ public class ShiftDetail {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
     
     

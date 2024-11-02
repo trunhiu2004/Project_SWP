@@ -20,6 +20,7 @@ public class Shift {
     private List<Integer> orderIds;  
     private List<Integer> quantities;  
     private List<String> productNames; 
+    private String employeeName;
 
     public Shift() {
         this.orderIds = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Shift {
         this.productNames = new ArrayList<>();
     }
 
-    public Shift(int shiftManageId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal cashStart, BigDecimal cashEnd, BigDecimal totalRevenue, BigDecimal totalHours, String note, int employeeId) {
+    public Shift(int shiftManageId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal cashStart, BigDecimal cashEnd, BigDecimal totalRevenue, BigDecimal totalHours, String note, int employeeId, String employeeName) {
         this.shiftManageId = shiftManageId;
         this.shiftStartTime = shiftStartTime;
         this.shiftEndTime = shiftEndTime;
@@ -40,6 +41,7 @@ public class Shift {
         this.orderIds = new ArrayList<>();
         this.quantities = new ArrayList<>();
         this.productNames = new ArrayList<>();
+        this.employeeName = employeeName;
     }
 
     
@@ -148,4 +150,14 @@ public class Shift {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return shiftEndTime != null ? shiftEndTime.format(formatter) : "";
     }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+    
+    
 }

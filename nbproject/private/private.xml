@@ -130,10 +130,6 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/chart-custom.js</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
-        <group>
-            <file>file:/E:/SWP391/final/Project_SWP/src/java/dal/SalesReportDAO.java</file>
-            <file>file:/E:/SWP391/final/Project_SWP/src/java/controller/ProductCategorySale.java</file>
-            <file>file:/E:/SWP391/final/Project_SWP/web/page-report-productCategory.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
