@@ -131,33 +131,7 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/src/java/dal/ProductCategoriesDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/CustomerDAO1.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/verify/SendEmail.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ChangePasswordServlet.java</file>
-            <file>file:/D:/Project_SWP/web/editOrder.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/DeleteCustomerServlet.java</file>
-            <file>file:/D:/Project_SWP/web/assets/js/POS/pos-home.js</file>
-            <file>file:/D:/Project_SWP/src/java/controller/AddCustomerServlet.java</file>
-            <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/HomeAdmin.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/RegisterServlet.java</file>
-            <file>file:/D:/Project_SWP/web/changePassword.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/DeleteInvoiceServlet.java</file>
-            <file>file:/D:/Project_SWP/web/assets/css/backend-plugin.min.css</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ForgetPassword.java</file>
-            <file>file:/D:/Project_SWP/web/coupon-list.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/PaymentReturnServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/verify/RandomCode.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/ProductsDAO.java</file>
-            <file>file:/D:/Project_SWP/web/invoiceDetail.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/dal/SalesReportDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/InvoiceListServlet.java</file>
-            <file>file:/D:/Project_SWP/web/invoiceList.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/add-newproduct-inventory.jsp</file>
         </group>
     </open-files>
 </project-private>
