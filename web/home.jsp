@@ -214,7 +214,7 @@
 
                                             </div>
                                             <div class="progress-value ml-3 pr-5 border-right">
-                                                <h5>${avg} $</h5>
+                                                <h5>${avg} VNĐ</h5>
                                                 <p class="mb-0">Trung bình tiền của 1 đơn hàng</p>
                                             </div>
                                         </div>
@@ -231,7 +231,7 @@
                                             <a href="ListOrderMax">
                                                 <div class="progress-value ml-3">
 
-                                                    <h5>${max} $</h5>
+                                                    <h5>${max} VNĐ</h5>
                                                     <p class="mb-0">Tiền của đơn hàng cao nhất</p>
                                                 </div>
                                             </a>

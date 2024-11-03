@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
         <html lang="en">
 
         <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-customers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
@@ -87,7 +88,7 @@
                                                 <th>Số điện thoại </th>
                                                 <th>Điểm</th>
                                                 <th>Xếp hạng khách hàng</th>
-                                                <th>Loại khách hàng</th>
+                                                
                                                 <th>Chức năng</th>
 
                                             </tr>
@@ -100,7 +101,7 @@
                                                     <td>${customer.customerPhone}</td>
                                                     <td>${customer.point}</td>
                                                     <td>${customer.typeName}</td>
-                                                    <td>${customer.customerTypeId}</td>
+                                                    
                                                     <td>
                                                         <div class="d-flex align-items-center list-action">
                                                             
@@ -123,24 +124,7 @@
                         </div>
                         <!-- Page end  -->
                         <div class="row justify-content-between mt-3">
-                                        <div id="user-list-page-info" class="col-md-6">
-                                            <span>Showing 1 to 5 of 5 entries</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-end mb-0">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                    </li>
-                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">Next</a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+                                        
                                     </div>
                     </div>
                     <!-- Modal Edit -->

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -89,7 +90,7 @@
                                                 <td>${top.customerId}</td>
                                                 <td>${top.customerName}</td>
                                                 <td>${top.customerPhone}</td>
-                                                <td>${top.totalAmount}$</td>
+                                                <td>${top.totalAmount}VNĐ</td>
 
                                                 <td>${top.totalOrders}</td>
 
@@ -153,7 +154,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

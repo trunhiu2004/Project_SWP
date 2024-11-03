@@ -69,8 +69,9 @@ public class ShiftDetailDAO extends DBContext {
             while (rs.next()) {
                 ShiftDetail detail = new ShiftDetail();
                 detail.setShiftManagerId(rs.getInt("shift_manager_id"));
-                detail.setShiftStartTime(rs.getTimestamp("shift_start_time").toLocalDateTime());
-                detail.setShiftEndTime(rs.getTimestamp("shift_end_time").toLocalDateTime());
+                detail.setShiftStartTime(rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null);
+                detail.setShiftEndTime(rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null);
+
                 detail.setTotalHours(rs.getBigDecimal("total_hours"));
                 detail.setOrderId(rs.getInt("order_id"));
                 detail.setQuantity(rs.getInt("quantity"));
