@@ -166,7 +166,7 @@
                                                 </a>
 
 
-                                                <button onclick="confirmDelete(${invoice.invoiceId})" class="btn btn-danger btn-sm">
+                                                <button onclick="confirmDelete(<%= invoice.getInvoiceId()%>)" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i> Xoá
                                                 </button>
                                             </td>
@@ -249,10 +249,15 @@
                 return queryString ? `${baseUrl}?${queryString}` : baseUrl;
                     }
                     function confirmDelete(invoiceId) {
-                        if (confirm('Are you sure you want to delete this invoice? This action cannot be undone.')) {
+                        if (invoiceId === undefined || invoiceId === null) {
+                            alert('ID hóa đơn không hợp lệ. Không thể xóa.');
+                            return;
+                        }
+                        if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này không? Hành động này không thể hoàn tác.')) {
                             window.location.href = 'delete-invoice?invoiceId=' + invoiceId;
                         }
                     }
+
         </script>
     </body>
 </html>

@@ -123,52 +123,6 @@
                         </ul>
                     </li>
                     <li class=" ">
-                        <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                            <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                            <line x1="1" y1="10" x2="23" y2="10"></line>
-                            </svg>
-                            <span class="ml-4">Purchases</span>
-                            <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                            </svg>
-                        </a>
-                        <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                            <li class="">
-                                <a href="page-list-purchase.html">
-                                    <i class="las la-minus"></i><span>List Purchases</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="page-add-purchase.html">
-                                    <i class="las la-minus"></i><span>Add purchase</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" ">
-                        <a href="#return" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                            <svg class="svg-icon" id="p-dash6" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line>
-                            </svg>
-                            <span class="ml-4">Returns</span>
-                            <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                            </svg>
-                        </a>
-                        <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                            <li class="">
-                                <a href="page-list-returns.html">
-                                    <i class="las la-minus"></i><span>List Returns</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="page-add-return.html">
-                                    <i class="las la-minus"></i><span>Add Return</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" ">
                         <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
                             <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
@@ -233,47 +187,6 @@
                             <li class="">
                                 <a href="BestSellProduct">
                                     <i class="las la-minus"></i><span>Sản phẩm bán chạy nhất</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-
-                    <li class=" ">
-                        <a href="#auth" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                            <svg class="svg-icon" id="p-dash12" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
-                            <span class="ml-4">Authentication</span>
-                            <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                            </svg>
-                        </a>
-                        <ul id="auth" class="iq-submenu collapse" data-parent="#otherpage">
-                            <li class="">
-                                <a href="auth-sign-in.html">
-                                    <i class="las la-minus"></i><span>Login</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="auth-sign-up.html">
-                                    <i class="las la-minus"></i><span>Register</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="auth-recoverpw.html">
-                                    <i class="las la-minus"></i><span>Recover Password</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="auth-confirm-mail.html">
-                                    <i class="las la-minus"></i><span>Confirm Mail</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="auth-lock-screen.html">
-                                    <i class="las la-minus"></i><span>Lock Screen</span>
                                 </a>
                             </li>
                         </ul>

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Edit Order</title>
+        <title>POS Admin | Edit Order</title>
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>
         </head>
@@ -21,10 +21,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Edit Order - Order ID: ${order.orderId}</h4>
-                                    <p class="mb-0">Update the order status for the selected order.</p>
+                                        <h4 class="mb-3">Chỉnh sửa đơn hàng - ID đơn hàng: ${order.orderId}</h4>
+                                    <p class="mb-0">Cập nhật trạng thái đơn hàng cho đơn hàng.</p>
                                 </div>
-                                <a href="list-order" class="btn btn-primary add-list"><i class="las la-arrow-left mr-3"></i>Back to Orders</a>
+                                <a href="list-order" class="btn btn-primary add-list"><i class="las la-arrow-left mr-3"></i>Quay lại</a>
                             </div>
                         </div>
 
@@ -32,34 +32,34 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Order Information</h5>
+                                    <h5 class="card-title">Thông tin đặt hàng</h5>
                                     <form action="edit-order" method="post">
                                         <input type="hidden" name="orderId" value="${order.orderId}"/>
                                         <div class="form-group">
-                                            <label for="customerName">Customer Name:</label>
+                                            <label for="customerName">Tên khách hàng:</label>
                                             <input type="text" class="form-control" id="customerName" value="${order.customerName}" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="orderDate">Order Date:</label>
+                                            <label for="orderDate">Ngày đặt hàng:</label>
                                             <input type="text" class="form-control" id="orderDate" value="${order.orderDate}" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="orderStatus">Status:</label>
+                                            <label for="orderStatus">Trạng thái:</label>
                                             <select class="form-control" id="orderStatus" name="orderStatus">
-                                                <option value="Pending" ${order.orderStatus == 'Pending' ? 'selected' : ''}>Pending</option>
-                                                <option value="Completed" ${order.orderStatus == 'Completed' ? 'selected' : ''}>Completed</option>
-                                                <option value="Cancelled" ${order.orderStatus == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                                                <option value="Pending" ${order.orderStatus == 'Pending' ? 'selected' : ''}>Chờ thanh toán</option>
+                                                <option value="Completed" ${order.orderStatus == 'Completed' ? 'selected' : ''}>Hoàn thành</option>
+                                                <option value="Cancelled" ${order.orderStatus == 'Cancelled' ? 'selected' : ''}>Đã huỷ</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="employeeName">Handled By:</label>
+                                            <label for="employeeName">Được xử lý bởi:</label>
                                             <input type="text" class="form-control" id="employeeName" value="${order.employeeName}" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="couponCode">Coupon Code:</label>
+                                            <label for="couponCode">Mã giảm giá:</label>
                                             <input type="text" class="form-control" id="couponCode" value="${order.couponCode != null ? order.couponCode : 'N/A'}" readonly>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Update Status</button>
+                                        <button type="submit" class="btn btn-primary">Cập nhật trạng thái</button>
                                     </form>
                                 </div>
                             </div>

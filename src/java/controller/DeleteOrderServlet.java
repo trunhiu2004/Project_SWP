@@ -72,9 +72,9 @@ public class DeleteOrderServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderIdStr);
 
             if (orderDAO.deleteOrder(orderId)) {
-                session.setAttribute("successMessage", "Order deleted successfully");
+                session.setAttribute("successMessage", "Đã xóa đơn hàng thành công");
             } else {
-                session.setAttribute("errorMessage", "Failed to delete order");
+                session.setAttribute("errorMessage", "Không xóa được đơn hàng");
             }
 
         } catch (NumberFormatException e) {

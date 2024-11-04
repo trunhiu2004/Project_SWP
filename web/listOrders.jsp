@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include> 
@@ -153,9 +153,8 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Order List</h4>
-                                    <p class="mb-0">Order List enables you to effectively control sales KPIs and monitor them in one central<br>
-                                        place while helping teams to reach sales goals. </p>
+                                    <h4 class="mb-3">Danh sách đơn hàng</h4>
+                                    <p class="mb-0">Kiểm soát đơn hàng của shop</p>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +167,7 @@
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" 
                                                    name="customerName" value="${customerName}" 
-                                                   placeholder="Search customer...">
+                                                   placeholder="Tìm khách hàng...">
                                         </div>
                                         <div class="col-md-2">
                                             <input type="date" class="form-control" 
@@ -176,21 +175,21 @@
                                         </div>
                                         <div class="col-md-2">
                                             <select class="form-control" name="status">
-                                                <option value="" ${empty status ? 'selected' : ''}>All Status</option>
-                                                <option value="PENDING" ${status == 'PENDING' ? 'selected' : ''}>Pending</option>
-                                                <option value="COMPLETED" ${status == 'COMPLETED' ? 'selected' : ''}>Completed</option>
-                                                <option value="CANCELLED" ${status == 'CANCELLED' ? 'selected' : ''}>Cancelled</option>
+                                                <option value="" ${empty status ? 'selected' : ''}>Tất cả trạng thái</option>
+                                                <option value="PENDING" ${status == 'PENDING' ? 'selected' : ''}>Chờ thanh toán</option>
+                                                <option value="COMPLETED" ${status == 'COMPLETED' ? 'selected' : ''}>Hoàn thành</option>
+                                                <option value="CANCELLED" ${status == 'CANCELLED' ? 'selected' : ''}>Đã huỷ</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" 
                                                    name="employeeName" value="${employeeName}" 
-                                                   placeholder="Search employee...">
+                                                   placeholder="Tìm kiếm nhân viên...">
                                         </div>
                                         <div class="col-md-2">
                                             <div class="d-flex gap-2">
                                                 <button type="submit" class="btn btn-primary flex-grow-1">
-                                                    <i class="ri-search-line me-1"></i> Filter
+                                                    <i class="ri-search-line me-1"></i> Tìm
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" onclick="clearFilters()">
                                                     <i class="ri-refresh-line"></i>
@@ -208,14 +207,14 @@
                                 <table class="data-table table mb-0 tbl-server-info">
                                     <thead class="bg-white text-uppercase">
                                         <tr class="ligth ligth-data">
-                                            <th>Order ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Order Date</th>
-                                            <th>Total Amount</th>
-                                            <th>Status</th>
-                                            <th>Employee Name</th>
-                                            <th>Coupon Code</th>
-                                            <th>Action</th>
+                                            <th>ID Hoá đơn</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Ngày đặt hàng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Tên nhân viên</th>
+                                            <th>Mã giảm giá</th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody class="ligth-body">
@@ -233,21 +232,21 @@
                                                         <button onclick="window.location.href = 'view-order?orderId=${order.orderId}'" 
                                                                 class="btn btn-soft-info btn-icon btn-sm" 
                                                                 data-bs-toggle="tooltip" 
-                                                                title="View">
+                                                                title="Xem">
                                                             <i class="ri-eye-line"></i>
                                                         </button>
 
                                                         <button onclick="window.location.href = 'edit-order?orderId=${order.orderId}'" 
                                                                 class="btn btn-soft-success btn-icon btn-sm"
                                                                 data-bs-toggle="tooltip" 
-                                                                title="Edit">
+                                                                title="Sửa">
                                                             <i class="ri-pencil-line"></i>
                                                         </button>
 
                                                         <button onclick="confirmDelete(${order.orderId})" 
                                                                 class="btn btn-soft-danger btn-icon btn-sm"
                                                                 data-bs-toggle="tooltip" 
-                                                                title="Delete">
+                                                                title="Xoá">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </button>
                                                     </div>
@@ -270,7 +269,7 @@
                                                     <c:param name="employeeName" value="${employeeName}"/>
                                                 </c:url>
                                                 <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                                    <a class="page-link" href="${prevUrl}">Previous</a>
+                                                    <a class="page-link" href="${prevUrl}">Trang trước</a>
                                                 </li>
 
                                                 <c:forEach begin="1" end="${totalPages}" var="i">
@@ -296,7 +295,7 @@
                                                     <c:param name="employeeName" value="${employeeName}"/>
                                                 </c:url>
                                                 <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                                    <a class="page-link" href="${nextUrl}">Next</a>
+                                                    <a class="page-link" href="${nextUrl}">Trang sau</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -323,7 +322,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>?</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>?</span> <a href="#" class="">POS Admin</a>.
                             </div>
                         </div>
                     </div>
@@ -359,7 +358,7 @@
                                         document.querySelector('form').submit();
                                     }
                                     function confirmDelete(orderId) {
-                                        if (confirm('Are you sure you want to delete this order?')) {
+                                        if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
                                             window.location.href = 'delete-order?orderId=' + orderId;
                                         }
                                     }
