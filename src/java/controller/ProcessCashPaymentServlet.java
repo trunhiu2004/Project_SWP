@@ -6,6 +6,7 @@ package controller;
 
 import dal.CustomerDAO;
 import dal.OrderDAO;
+import dal.ShopDAO;
 import dal.StoreStockDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import model.Customers;
 import model.Employees;
 import model.Order;
 import model.OrderDetail;
+import model.Shop;
 
 /**
  *
@@ -85,7 +87,12 @@ public class ProcessCashPaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
+        //Get Shop Detail
+        ShopDAO shopDAO = new ShopDAO();
+        Shop shop = shopDAO.getShopId(1); // Set ID Shop mặc định là 1
+        request.setAttribute("shop", shop);
+        //
         try {
             // Parse và validate các tham số
             int customerId = Integer.parseInt(request.getParameter("customerId"));

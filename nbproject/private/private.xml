@@ -2,9 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/add-newproduct-inventory.jsp</file>
-        </group>
         <group name="Java_BackEnd">
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/login/mail.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/small/flag-01.png</file>
@@ -116,6 +113,11 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/chart-custom.js</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponDeleteServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
+        </group>
+        <group>
+            <file>file:/D:/Project_SWP/src/java/controller/PoSHomeServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
         </group>
     </open-files>
 </project-private>

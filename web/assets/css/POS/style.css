@@ -908,6 +908,7 @@ body {
     padding: 12px;
     align-items: center;
     border-bottom: 1px solid #e4e6ef;
+    font-family: 'Poppins', sans-serif;
 }
 
 .cart-header .cart-row {
@@ -1089,13 +1090,11 @@ body {
 }
 
 .col-price, .col-total {
-    font-family: 'Roboto Mono', monospace;
     color: #0f172a;
 }
 
 .col-weight {
     color: #64748b;
-    font-size: 0.9em;
 }
 
 .quantity-control {
@@ -1555,4 +1554,7 @@ body {
 
 .modal.show .modal-dialog {
     transform: none;
+}
+.shop-logo.print-only {
+    display: none !important;
 }

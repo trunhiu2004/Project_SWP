@@ -3,7 +3,6 @@ web/WEB-INF/config.properties
 
 # Ignore build directories
 nbproject/private/
-nbproject/private/private.properties
 nbproject/Makefile-*.mk
 nbproject/Package-*.bash
 build/

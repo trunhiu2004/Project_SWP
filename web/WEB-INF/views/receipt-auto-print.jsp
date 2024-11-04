@@ -75,9 +75,25 @@
         <div id="receiptContent">
             <div class="receipt">
                 <div class="receipt-header">
-                    <h2>HÓA ĐƠN BÁN HÀNG</h2>
-                    <p>Ngày: <fmt:formatDate value="${order.orderDate}" pattern="dd/MM/yyyy HH:mm:ss"/></p>
-                    <p>Số hóa đơn: #${order.orderId}</p>
+                    <div class="shop-info">
+                        <div class="shop-brand">
+                            <c:if test="${not empty shop.shopLogo}">
+                                <img src="assets/images/shop/${shop.shopLogo}" alt="Shop Logo" class="shop-logo print-only">
+                            </c:if>
+                            <h2 class="shop-name">${shop.shopName}</h2>
+                        </div>
+                        <div class="shop-details">
+                            <p><i class="fas fa-map-marker-alt"></i> ${shop.shopAddress}</p>
+                            <p><i class="fas fa-phone"></i> ${shop.shopPhone}</p>
+                            <p><i class="fas fa-envelope"></i> ${shop.shopEmail}</p>
+                        </div>
+                    </div>
+
+                    <div class="receipt-title">
+                        <h3>HÓA ĐƠN BÁN HÀNG</h3>
+                        <p>Ngày: <fmt:formatDate value="${order.orderDate}" pattern="dd/MM/yyyy HH:mm:ss"/></p>
+                        <p>Số hóa đơn: ${order.orderId}</p>
+                    </div>
                 </div>
 
                 <div class="customer-info">

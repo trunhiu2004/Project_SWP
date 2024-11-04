@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.OrderDAO;
 import dal.StoreStockDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,7 +59,8 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.scheduleCleanup();
         //clear PENDING Order
 //        OrderDAO orderDAO = new OrderDAO();
 //        orderDAO.scheduleCleanup();
