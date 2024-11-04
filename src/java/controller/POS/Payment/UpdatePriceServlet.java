@@ -2,25 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.POS.Payment;
 
-import dal.DBContext;
+import dal.ProductsDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import model.HistoryPrice;
+import model.Products;
 
 /**
  *
- * @author ankha
+ * @author hungt
  */
-public class DeleteInvoiceServlet extends HttpServlet {
+public class UpdatePriceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class DeleteInvoiceServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteInvoiceServlet</title>");
+            out.println("<title>Servlet UpdatePriceServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteInvoiceServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdatePriceServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,43 +57,21 @@ public class DeleteInvoiceServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String invoiceIdStr = request.getParameter("invoiceId");
-
+        HttpSession session = request.getSession();
+        String id_raw = request.getParameter("product_id");
+        int id;
+        ProductsDAO pd = new ProductsDAO();
         try {
-            if (invoiceIdStr == null || invoiceIdStr.trim().isEmpty()) {
-                request.getSession().setAttribute("errorMessage", "Invalid invoice ID");
-                response.sendRedirect("invoice");
-                return;
-            }
-
-            int invoiceId = Integer.parseInt(invoiceIdStr);
-
-            try (Connection connection = new DBContext().connection) {
-                String deleteQuery = "DELETE FROM Invoices WHERE invoice_id = ?";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
-                    preparedStatement.setInt(1, invoiceId);
-                    int rowsAffected = preparedStatement.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        request.getSession().setAttribute("successMessage", "Invoice deleted successfully");
-                    } else {
-                        request.getSession().setAttribute("errorMessage", "Invoice not found or could not be deleted");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                request.getSession().setAttribute("errorMessage", "Error occurred while deleting invoice");
-            }
+            id = Integer.parseInt(id_raw);
+            Products p = pd.getProductById(id);
+            session.setAttribute("product", p);
+            request.getRequestDispatcher("update-history.jsp").forward(request, response);
         } catch (NumberFormatException e) {
-            request.getSession().setAttribute("errorMessage", "Invalid invoice ID format");
+            System.out.println(e);
         }
-
-        response.sendRedirect("invoice");
     }
 
     /**
@@ -107,7 +85,27 @@ public class DeleteInvoiceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ProductsDAO pd = new ProductsDAO();
+        String id_raw = request.getParameter("idPro");
+        String newPrice_raw = request.getParameter("pricePro");
+        int id = Integer.parseInt(id_raw);
+        float newPrice = Float.parseFloat(newPrice_raw);
+        Products p1 = pd.getProductById(id);
+        float price = p1.getPrice();
+        String status;
+        if (newPrice > price) {
+            status = "Tăng giá";
+        } else if (newPrice < price) {
+            status = "Giảm giá";
+        } else {
+            status = "Giữ nguyên"; // Giá không thay đổi
+        }
+        LocalDateTime updatedAt = LocalDateTime.now();
+
+        HistoryPrice hNew = new HistoryPrice(p1,newPrice,price,updatedAt,status);
+        pd.insertHisPrice(hNew);
+        pd.updateProductPrice(id, newPrice);
+        response.sendRedirect("listPrice?product_id="+id);
     }
 
     /**

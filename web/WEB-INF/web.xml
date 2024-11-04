@@ -4,7 +4,15 @@
     <!-- Authentication & User Management -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>filter.CharacterEncodingFilter</filter-class>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -110,7 +118,7 @@
     <!-- Price & Discount Management -->
     <servlet>
         <servlet-name>UpdatePriceServlet</servlet-name>
-        <servlet-class>controller.UpdatePriceServlet</servlet-class>
+        <servlet-class>controller.POS.Payment.UpdatePriceServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListPriceServlet</servlet-name>
@@ -156,7 +164,7 @@
     <!-- POS & Sales -->
     <servlet>
         <servlet-name>PoSHomeServlet</servlet-name>
-        <servlet-class>controller.PoSHomeServlet</servlet-class>
+        <servlet-class>controller.POS.PoSHomeServlet</servlet-class>
     </servlet>
     <!-- Staff Management -->
     <servlet>
@@ -220,23 +228,23 @@
     <!-- Invoice Management -->
     <servlet>
         <servlet-name>InvoiceListServlet</servlet-name>
-        <servlet-class>controller.InvoiceListServlet</servlet-class>
+        <servlet-class>controller.Admin.InvoiceMng.InvoiceListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InvoiceDetailServlet</servlet-name>
-        <servlet-class>controller.InvoiceDetailServlet</servlet-class>
+        <servlet-class>controller.Admin.InvoiceMng.InvoiceDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DownloadInvoiceServlet</servlet-name>
-        <servlet-class>controller.DownloadInvoiceServlet</servlet-class>
+        <servlet-class>controller.Admin.InvoiceMng.DownloadInvoiceServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteInvoiceServlet</servlet-name>
-        <servlet-class>controller.DeleteInvoiceServlet</servlet-class>
+        <servlet-class>controller.Admin.InvoiceMng.DeleteInvoiceServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateInvoiceServlet</servlet-name>
-        <servlet-class>controller.UpdateInvoiceServlet</servlet-class>
+        <servlet-class>controller.Admin.InvoiceMng.UpdateInvoiceServlet</servlet-class>
     </servlet>
     <!-- Sales Management -->
     <servlet>
@@ -262,19 +270,19 @@
     <!-- Order Management -->
     <servlet>
         <servlet-name>ListOrdersServlet</servlet-name>
-        <servlet-class>controller.ListOrdersServlet</servlet-class>
+        <servlet-class>controller.Admin.OrderMng.ListOrdersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewOrderDetailServlet</servlet-name>
-        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+        <servlet-class>controller.Admin.OrderMng.ViewOrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditOrderServlet</servlet-name>
-        <servlet-class>controller.EditOrderServlet</servlet-class>
+        <servlet-class>controller.Admin.OrderMng.EditOrderServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteOrderServlet</servlet-name>
-        <servlet-class>controller.DeleteOrderServlet</servlet-class>
+        <servlet-class>controller.Admin.OrderMng.DeleteOrderServlet</servlet-class>
     </servlet>
     <!-- Servlet Mappings -->
     <!-- Authentication & User Management Mappings -->
@@ -288,11 +296,11 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateCartController</servlet-name>
-        <servlet-class>controller.UpdateCartController</servlet-class>
+        <servlet-class>controller.POS.Cart.UpdateCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveFromCartController</servlet-name>
-        <servlet-class>controller.RemoveFromCartController</servlet-class>
+        <servlet-class>controller.POS.Cart.RemoveFromCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchProductServlet</servlet-name>
@@ -308,7 +316,7 @@
     </servlet>
     <servlet>
         <servlet-name>ClearCartServlet</servlet-name>
-        <servlet-class>controller.ClearCartServlet</servlet-class>
+        <servlet-class>controller.POS.Cart.ClearCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditCustomerServlet</servlet-name>
@@ -324,11 +332,11 @@
     </servlet>
     <servlet>
         <servlet-name>ProcessCashPaymentServlet</servlet-name>
-        <servlet-class>controller.ProcessCashPaymentServlet</servlet-class>
+        <servlet-class>controller.POS.Payment.ProcessCashPaymentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreatePaymentLinkServlet</servlet-name>
-        <servlet-class>controller.CreatePaymentLinkServlet</servlet-class>
+        <servlet-class>controller.POS.Payment.CreatePaymentLinkServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddShopServlet</servlet-name>
@@ -420,11 +428,11 @@
     </servlet>
     <servlet>
         <servlet-name>CheckPaymentStatusServlet</servlet-name>
-        <servlet-class>controller.CheckPaymentStatusServlet</servlet-class>
+        <servlet-class>controller.POS.Payment.CheckPaymentStatusServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PaymentReturnServlet</servlet-name>
-        <servlet-class>controller.PaymentReturnServlet</servlet-class>
+        <servlet-class>controller.POS.Payment.PaymentReturnServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCustomerServlet</servlet-name>
@@ -449,6 +457,14 @@
     <servlet>
         <servlet-name>FindProInStoreServlet</servlet-name>
         <servlet-class>controller.FindProInStoreServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailSettingsController</servlet-name>
+        <servlet-class>controller.Admin.Setting.EmailSettingsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailTemplateServlet</servlet-name>
+        <servlet-class>controller.Admin.Setting.EmailTemplateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -887,6 +903,14 @@
     <servlet-mapping>
         <servlet-name>FindProInStoreServlet</servlet-name>
         <url-pattern>/findProInStore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailSettingsController</servlet-name>
+        <url-pattern>/emailSettings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailTemplateServlet</servlet-name>
+        <url-pattern>/emailTemplates</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.EmailTemplateDAO;
 import model.Accounts;
 import model.Employees;
 import java.io.IOException;
@@ -16,8 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
+import model.EmailTemplate;
 import verify.RandomCode;
 import verify.SendEmail;
+import java.sql.SQLException;
 
 /**
  *
@@ -77,31 +80,48 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //get info from form
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String email = request.getParameter("emailRegister");
         if (!checkDuplicate(email)) {
-            //create random token
             String token = UUID.randomUUID().toString();
-
-            //url link to change pass
-            String link = "http://localhost:9999/SWP_Project/changePassword?email="+email+"&token=" + token;
+            String link = "http://localhost:9999/SWP_Project/changePassword?email=" + email + "&token=" + token;
 
             request.getSession().setAttribute("emailRegister", email);
 
-//        //activate 6-digit code
-//        RandomCode rc=new RandomCode();
-//        String verifyCode=rc.activateCode();
-            //verify user email
-            SendEmail se = new SendEmail();
-            se.send(email, link);
-            request.getSession().setAttribute("token", token);
-            request.getSession().setAttribute("status", "register");
-            request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+            try {
+                // Lấy template từ cơ sở dữ liệu
+                EmailTemplateDAO templateDAO = new EmailTemplateDAO();
+                EmailTemplate template = templateDAO.getTemplateByName("Register Confirmation Template");
+
+                if (template != null) {
+                    // Thay thế các biến trong template
+                    String content = template.getContent()
+                            .replace("{{email}}", email)
+                            .replace("{{link}}", link);
+
+                    // Gửi email
+                    SendEmail se = new SendEmail();
+                    se.send(email, template.getSubject(), content);
+
+                    request.getSession().setAttribute("token", token);
+                    request.getSession().setAttribute("status", "register");
+                    request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                } else {
+                    // Xử lý khi không tìm thấy template
+                    request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email.");
+                    request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                request.setAttribute("error", "Lỗi hệ thống: Không thể gửi email xác nhận.");
+                request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("error", "Email đã tồn tại!");
             request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
         }
-
     }
 
     /**

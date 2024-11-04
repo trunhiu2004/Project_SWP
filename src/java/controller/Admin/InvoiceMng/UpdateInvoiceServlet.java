@@ -1,4 +1,4 @@
-package controller;
+package controller.Admin.InvoiceMng;
 
 import dal.DBContext;
 import jakarta.servlet.ServletException;

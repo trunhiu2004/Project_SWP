@@ -2,25 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.Admin.OrderMng;
 
-import dal.ProductsDAO;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import model.HistoryPrice;
-import model.Products;
+import java.util.List;
+import model.Order;
 
 /**
  *
- * @author hungt
+ * @author ankha
  */
-public class UpdatePriceServlet extends HttpServlet {
+public class ListOrdersServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class UpdatePriceServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdatePriceServlet</title>");
+            out.println("<title>Servlet ListOrdersServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdatePriceServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListOrdersServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,21 +55,55 @@ public class UpdatePriceServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private final OrderDAO orderDAO = new OrderDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String id_raw = request.getParameter("product_id");
-        int id;
-        ProductsDAO pd = new ProductsDAO();
+
+        // Get filter parameters
+        String customerName = request.getParameter("customerName");
+        String orderDate = request.getParameter("orderDate");
+        String status = request.getParameter("status");
+        String employeeName = request.getParameter("employeeName");
+
+        // Pagination parameters
+        int page = 1;
+        int pageSize = 10;
+
         try {
-            id = Integer.parseInt(id_raw);
-            Products p = pd.getProductById(id);
-            session.setAttribute("product", p);
-            request.getRequestDispatcher("update-history.jsp").forward(request, response);
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            if (request.getParameter("pageSize") != null) {
+                pageSize = Integer.parseInt(request.getParameter("pageSize"));
+            }
         } catch (NumberFormatException e) {
-            System.out.println(e);
+            // Use default values if parameters are invalid
         }
+
+        // Get filtered orders with pagination
+        List<Order> orders = orderDAO.getOrdersWithFilter(customerName, orderDate,
+                status, employeeName, page, pageSize);
+
+        // Get total records for pagination
+        int totalOrders = orderDAO.getTotalOrders(customerName, orderDate, status, employeeName);
+        int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+        // Set attributes for JSP
+        request.setAttribute("orders", orders);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("pageSize", pageSize);
+
+        // Set filter parameters as attributes to maintain state
+        request.setAttribute("customerName", customerName);
+        request.setAttribute("orderDate", orderDate);
+        request.setAttribute("status", status);
+        request.setAttribute("employeeName", employeeName);
+
+        // Forward to JSP
+        request.getRequestDispatcher("listOrders.jsp").forward(request, response);
     }
 
     /**
@@ -85,27 +117,7 @@ public class UpdatePriceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductsDAO pd = new ProductsDAO();
-        String id_raw = request.getParameter("idPro");
-        String newPrice_raw = request.getParameter("pricePro");
-        int id = Integer.parseInt(id_raw);
-        float newPrice = Float.parseFloat(newPrice_raw);
-        Products p1 = pd.getProductById(id);
-        float price = p1.getPrice();
-        String status;
-        if (newPrice > price) {
-            status = "Tăng giá";
-        } else if (newPrice < price) {
-            status = "Giảm giá";
-        } else {
-            status = "Giữ nguyên"; // Giá không thay đổi
-        }
-        LocalDateTime updatedAt = LocalDateTime.now();
-
-        HistoryPrice hNew = new HistoryPrice(p1,newPrice,price,updatedAt,status);
-        pd.insertHisPrice(hNew);
-        pd.updateProductPrice(id, newPrice);
-        response.sendRedirect("listPrice?product_id="+id);
+        processRequest(request, response);
     }
 
     /**

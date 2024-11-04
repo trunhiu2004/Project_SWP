@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.Admin.OrderMng;
 
 import dal.OrderDAO;
 import java.io.IOException;
@@ -12,13 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Coupon;
+import model.Customer;
+import model.Employees;
 import model.Order;
+import model.OrderDetail;
 
 /**
  *
  * @author ankha
  */
-public class ListOrdersServlet extends HttpServlet {
+public class EditOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +41,10 @@ public class ListOrdersServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListOrdersServlet</title>");
+            out.println("<title>Servlet EditOrderServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListOrdersServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditOrderServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,69 +59,48 @@ public class ListOrdersServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final OrderDAO orderDAO = new OrderDAO();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null) {
+            try {
+                int orderId = Integer.parseInt(orderIdParam);
+                OrderDAO orderDAO = new OrderDAO();
+                Order order = orderDAO.getOrderById(orderId);
 
-        // Get filter parameters
-        String customerName = request.getParameter("customerName");
-        String orderDate = request.getParameter("orderDate");
-        String status = request.getParameter("status");
-        String employeeName = request.getParameter("employeeName");
-
-        // Pagination parameters
-        int page = 1;
-        int pageSize = 10;
-
-        try {
-            if (request.getParameter("page") != null) {
-                page = Integer.parseInt(request.getParameter("page"));
+                request.setAttribute("order", order);
+                request.getRequestDispatcher("editOrder.jsp").forward(request, response);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("list-order");
             }
-            if (request.getParameter("pageSize") != null) {
-                pageSize = Integer.parseInt(request.getParameter("pageSize"));
-            }
-        } catch (NumberFormatException e) {
-            // Use default values if parameters are invalid
+        } else {
+            response.sendRedirect("list-order");
         }
-
-        // Get filtered orders with pagination
-        List<Order> orders = orderDAO.getOrdersWithFilter(customerName, orderDate,
-                status, employeeName, page, pageSize);
-
-        // Get total records for pagination
-        int totalOrders = orderDAO.getTotalOrders(customerName, orderDate, status, employeeName);
-        int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
-
-        // Set attributes for JSP
-        request.setAttribute("orders", orders);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
-        request.setAttribute("pageSize", pageSize);
-
-        // Set filter parameters as attributes to maintain state
-        request.setAttribute("customerName", customerName);
-        request.setAttribute("orderDate", orderDate);
-        request.setAttribute("status", status);
-        request.setAttribute("employeeName", employeeName);
-
-        // Forward to JSP
-        request.getRequestDispatcher("listOrders.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int orderId = Integer.parseInt(request.getParameter("orderId"));
+        String orderStatus = request.getParameter("orderStatus");
+
+        OrderDAO orderDAO = new OrderDAO();
+        Order order = orderDAO.getOrderById(orderId);
+        if (order != null) {
+            order.setOrderStatus(orderStatus);
+            boolean updated = orderDAO.updateOrderStatus(order);
+
+            if (updated) {
+                response.sendRedirect("view-order?orderId=" + orderId);
+            } else {
+                request.setAttribute("error", "Failed to update order status.");
+                doGet(request, response);
+            }
+        } else {
+            response.sendRedirect("list-order");
+        }
     }
 
     /**

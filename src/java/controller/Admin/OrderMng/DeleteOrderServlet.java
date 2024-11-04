@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.Admin.OrderMng;
 
 import dal.OrderDAO;
 import java.io.IOException;
@@ -11,15 +11,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Order;
-import model.OrderDetail;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author ankha
  */
-public class ViewOrderDetailServlet extends HttpServlet {
+public class DeleteOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +36,10 @@ public class ViewOrderDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewOrderDetailServlet</title>");
+            out.println("<title>Servlet DeleteOrderServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewOrderDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteOrderServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,27 +54,36 @@ public class ViewOrderDetailServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private final OrderDAO orderDAO = new OrderDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderIdParam = request.getParameter("orderId");
-        if (orderIdParam != null) {
-            try {
-                int orderId = Integer.parseInt(orderIdParam);
-                OrderDAO orderDAO = new OrderDAO();
-                Order order = orderDAO.getOrderById(orderId);
-                List<OrderDetail> orderDetails = orderDAO.getOrderDetailsByOrderId(orderId);
+        String orderIdStr = request.getParameter("orderId");
+        HttpSession session = request.getSession();
 
-                request.setAttribute("order", order);
-                request.setAttribute("orderDetails", orderDetails);
-                request.getRequestDispatcher("viewOrderDetail.jsp").forward(request, response);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+        try {
+            if (orderIdStr == null || orderIdStr.trim().isEmpty()) {
+                session.setAttribute("errorMessage", "Invalid order ID");
                 response.sendRedirect("list-order");
+                return;
             }
-        } else {
-            response.sendRedirect("list-order");
+
+            int orderId = Integer.parseInt(orderIdStr);
+
+            if (orderDAO.deleteOrder(orderId)) {
+                session.setAttribute("successMessage", "Đã xóa đơn hàng thành công");
+            } else {
+                session.setAttribute("errorMessage", "Không xóa được đơn hàng");
+            }
+
+        } catch (NumberFormatException e) {
+            session.setAttribute("errorMessage", "Invalid order ID format");
+        } catch (Exception e) {
+            session.setAttribute("errorMessage", "Error occurred while deleting order: " + e.getMessage());
         }
+
+        response.sendRedirect("list-order");
     }
 
     /**

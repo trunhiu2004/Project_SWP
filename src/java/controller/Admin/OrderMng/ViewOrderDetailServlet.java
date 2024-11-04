@@ -2,32 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.Admin.OrderMng;
 
+import dal.OrderDAO;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.RequestDispatcher;
-import dal.DBContext;
-import dal.InvoiceDAO;
-import java.io.PrintWriter;
-import model.Invoice;
+import java.util.List;
+import model.Order;
 import model.OrderDetail;
 
 /**
  *
  * @author ankha
  */
-public class InvoiceDetailServlet extends HttpServlet {
+public class ViewOrderDetailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +38,10 @@ public class InvoiceDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InvoiceDetailServlet</title>");
+            out.println("<title>Servlet ViewOrderDetailServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InvoiceDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewOrderDetailServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,16 +57,26 @@ public class InvoiceDetailServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int invoiceId = Integer.parseInt(request.getParameter("invoiceId"));
-        InvoiceDAO invoiceDAO = new InvoiceDAO();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam != null) {
+            try {
+                int orderId = Integer.parseInt(orderIdParam);
+                OrderDAO orderDAO = new OrderDAO();
+                Order order = orderDAO.getOrderById(orderId);
+                List<OrderDetail> orderDetails = orderDAO.getOrderDetailsByOrderId(orderId);
 
-        Invoice invoice = invoiceDAO.getInvoiceById(invoiceId);
-        List<OrderDetail> orderDetails = invoiceDAO.getOrderDetailsByOrderId(invoice.getOrderId());
-
-        request.setAttribute("invoice", invoice);
-        request.setAttribute("orderDetails", orderDetails);
-        request.getRequestDispatcher("invoiceDetail.jsp").forward(request, response);
+                request.setAttribute("order", order);
+                request.setAttribute("orderDetails", orderDetails);
+                request.getRequestDispatcher("viewOrderDetail.jsp").forward(request, response);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("list-order");
+            }
+        } else {
+            response.sendRedirect("list-order");
+        }
     }
 
     /**
