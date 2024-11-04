@@ -133,36 +133,81 @@ public class PromotionDAO extends DBContext {
         List<String> statuses = new ArrayList<>();
         statuses.add("Active");
         statuses.add("Inactive");
-        statuses.add("Upcoming");
         return statuses;
     }
+    
+    public List<Promotion> getFilteredPromotion(String promotionName,
+            String description,
+            String discountAmount,
+            String startDate,
+            String endDate,
+            String status) {
+        List<Promotion> promotion = new ArrayList<>();
 
-    public List<Promotion> searchByName(String txtSearch) {
-        List<Promotion> list = new ArrayList<>();
-        String sql = "select * from Promotion\n"
-                + "where promotion_name like ?";
+        // Xây dựng câu lệnh SQL động
+        StringBuilder query = new StringBuilder("SELECT * FROM Promotion WHERE 1=1");
+        if (promotionName != null && !promotionName.isEmpty()) {
+            query.append(" AND promotion_name LIKE ?");
+        }
+        if (description != null && !description.isEmpty()) {
+            query.append(" AND description LIKE ?");
+        }
+        
+        if (startDate != null && !startDate.isEmpty()) {
+            query.append(" AND start_date = ?");
+        }
+        if (endDate != null && !endDate.isEmpty()) {
+            query.append(" AND end_date = ?");
+        }
+        if (discountAmount != null && !discountAmount.isEmpty()) {
+            query.append(" AND discount_value = ?");
+        }
+        if ("All Status".equalsIgnoreCase(status)) {
+            query.append(" AND (status = 'Active' OR status = 'Inactive')");
+        } else if (status != null && !status.isEmpty()) {
+            query.append(" AND status = ?");
+        }
+
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "%" + txtSearch + "%");
+            PreparedStatement stmt = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            if (promotionName != null && !promotionName.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + promotionName + "%");
+            }
+            if (description != null && !description.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + description + "%");
+            }
+            
+            if (startDate != null && !startDate.isEmpty()) {
+                stmt.setDate(paramIndex++, Date.valueOf(startDate));
+            }
+            if (endDate != null && !endDate.isEmpty()) {
+                stmt.setDate(paramIndex++, Date.valueOf(endDate));
+            }
+            if (discountAmount != null && !discountAmount.isEmpty()) {
+                stmt.setDouble(paramIndex++, Double.parseDouble(discountAmount));
+            }
+            if (status != null && !"All Status".equalsIgnoreCase(status) && !status.isEmpty()) {
+                stmt.setString(paramIndex++, status);
+            }
 
-            ResultSet rs = st.executeQuery();
-
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-
-                Promotion c = new Promotion(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDate(4),
-                        rs.getDate(5),
-                        rs.getDouble(6),
-                        rs.getString(7));
-                list.add(c);
+                Promotion pro = new Promotion();
+                pro.setPromotion_id(rs.getInt("promotion_id"));
+                pro.setPromotion_name(rs.getString("promotion_name"));
+                pro.setDescription(rs.getString("description"));
+                pro.setStart_date(rs.getDate("start_date"));
+                pro.setEnd_date(rs.getDate("end_date"));
+                pro.setDiscount_value(rs.getDouble("discount_value"));
+                pro.setStatus(rs.getString("status"));
+                promotion.add(pro);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
 
-        return list;
-
+        return promotion;
     }
+    
 }

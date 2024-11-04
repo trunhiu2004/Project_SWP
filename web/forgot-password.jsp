@@ -45,8 +45,9 @@
 
                                                         
                                                     </div>
+                                                    <div style="color: red">${error}</div>
                                                     <button type="submit" class="btn btn-primary">Xác nhận</button>
- 
+                                                     
                                                 </form>
                                             </div>
                                         </div>

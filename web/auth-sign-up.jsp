@@ -6,53 +6,48 @@
 
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include> </head>
-    <body class=" ">
-        <!-- loader Start -->
-        <a href="auth-sign-up.jsp"></a>
-        <div id="loading">
-            <div id="loading-center">
+        <body class=" ">
+            <!-- loader Start -->
+            <a href="auth-sign-up.jsp"></a>
+            <div id="loading">
+                <div id="loading-center">
+                </div>
             </div>
-        </div>
-        <!- - loader END -->
 
-        <div class="wrapper">
-            <section class="login-content">
-                <div class="container">
-                    <div class="row align-items-center justify-content-center height-self-center">
-                        <div class="col-lg-8">
-                            <div class="card auth-card">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center auth-content">
-                                        <div class="col-lg-7 align-self-center">
-                                            <div class="p-3">
-                                                <h2 class="mb-2">Đăng ký</h2>
-                                                <form action="register" method="post">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="email" placeholder=" " name="emailRegister">
-                                                                <label>Nhập Email</label>
+            <div class="wrapper">
+                <section class="login-content">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center height-self-center">
+                            <div class="col-lg-8">
+                                <div class="card auth-card">
+                                    <div class="card-body p-0">
+                                        <div class="d-flex align-items-center auth-content">
+                                            <div class="col-lg-7 align-self-center">
+                                                <div class="p-3">
+                                                    <h2 class="mb-2">Đăng ký</h2>
+                                                    <form action="register" method="post">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="floating-label form-group">
+                                                                    <input class="floating-input form-control" type="email" placeholder="Nhập email..." name="emailRegister">
+                                                                </div>
                                                             </div>
-                                                        </div>
-
-                                                        
-                                                        
-                                                        <div class="col-lg-12">
-                                                            <div class="floating-label form-group" style="color: red">
+                                                            <div class="col-lg-12">
+                                                                <div class="floating-label form-group" style="color: red">
                                                                 ${error}
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng ký</button>
-                                                    
+                                                    <p class="mt-3">
+                                                        Đã có tài khoản? <a href="login" class="text-primary">Đăng nhập/a>
+                                                    </p>
                                                 </form>
                                             </div>
                                         </div>
