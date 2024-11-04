@@ -80,7 +80,7 @@ public class ForgetPassword extends HttpServlet {
             String token = UUID.randomUUID().toString();
 
             //url link to change pass
-            String link = "http://localhost:9999/SWP_Project/resetPassword?tokenReset=" + token;
+            String link = "http://localhost:9999/SWP_Project/resetPassword?email="+email+"&tokenReset=" + token;
 
             request.getSession().setAttribute("emailReset", email);
 

@@ -57,15 +57,11 @@ public class ResetPasswordServlet extends HttpServlet {
     throws ServletException, IOException {
         // get token from url
         String token = request.getParameter("tokenReset");
-
+        String email = request.getParameter("email");
+        request.getSession().setAttribute("emailRe", email);
         // get token from session
         String savedToken = (String) request.getSession().getAttribute("tokenReset");
-        if (token != null && token.equals(savedToken)) {
             request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-        } else {
-            request.setAttribute("message", "Token Invaled!");
-            request.getRequestDispatcher("login").forward(request, response);
-        }
     } 
 
     /** 
@@ -79,7 +75,7 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
        String rawPassword = request.getParameter("passwordReset");
-        String email = (String) request.getSession().getAttribute("emailReset");
+        String email = (String) request.getSession().getAttribute("emailRe");
         String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
         AccountDAO accountDAO = new AccountDAO();
         accountDAO.changePassword(email, password);

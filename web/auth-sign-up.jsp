@@ -45,9 +45,7 @@
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng ký</button>
-                                                    <p class="mt-3">
-                                                        Đã có tài khoản? <a href="login" class="text-primary">Đăng nhập/a>
-                                                    </p>
+ 
                                                 </form>
                                             </div>
                                         </div>

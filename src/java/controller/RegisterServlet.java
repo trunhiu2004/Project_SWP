@@ -84,7 +84,7 @@ public class RegisterServlet extends HttpServlet {
             String token = UUID.randomUUID().toString();
 
             //url link to change pass
-            String link = "http://localhost:9999/SWP_Project/changePassword?token=" + token;
+            String link = "http://localhost:9999/SWP_Project/changePassword?email="+email+"&token=" + token;
 
             request.getSession().setAttribute("emailRegister", email);
 
