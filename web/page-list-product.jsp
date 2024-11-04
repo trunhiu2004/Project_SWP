@@ -72,6 +72,11 @@
                                             <input type="text" class="form-control" name="namePro" placeholder="Tìm kiếm sản phẩm theo tên" style="max-width: 300px;" />
                                             <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
                                             <a href="listProduct" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Xem toàn bộ sản phẩm</a>
+                                        <c:if test="${not empty message}">
+                                                <div class="alert alert-danger">
+                                                    ${message}
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </form>
                                     <table class="table mb-0 tbl-server-info">
@@ -120,7 +125,7 @@
                                                            href="#" onclick="doDelete(${p.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
-
+                                                
                                             </tr>
                                         </c:forEach>                                  
                                     </tbody>
