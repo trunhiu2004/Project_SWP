@@ -3,11 +3,9 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:26 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
 
         <script type="text/javascript">
                                     function doDelete(id) {
@@ -31,29 +29,7 @@
 
             <jsp:include page="components/sidebar.jsp"></jsp:include>     
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
-                <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="popup text-left">
-                                    <h4 class="mb-3">New Order</h4>
-                                    <div class="content create-workform bg-body">
-                                        <div class="pb-3">
-                                            <label class="mb-2">Email</label>
-                                            <input type="text" class="form-control" placeholder="Enter Name or Email">
-                                        </div>
-                                        <div class="col-lg-12 mt-4">
-                                            <div class="d-flex flex-wrap align-items-ceter justify-content-center">
-                                                <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
-                                                <div class="btn btn-outline-primary" data-dismiss="modal">Create</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>      
+                     
                 <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
@@ -68,7 +44,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth">
                                                 <th>Name</th>
@@ -123,40 +99,7 @@
                     </div>
                     <!-- Page end  -->
                 </div>
-                <!-- Modal Edit -->
-                <div class="modal fade" id="edit-note" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="popup text-left">
-                                    <div class="media align-items-top justify-content-between">                            
-                                        <h3 class="mb-3">Product</h3>
-                                        <div class="btn-cancel p-0" data-dismiss="modal"><i class="las la-times"></i></div>
-                                    </div>
-                                    <div class="content edit-notes">
-                                        <div class="card card-transparent card-block card-stretch event-note mb-0">
-                                            <div class="card-body px-0 bukmark">
-                                                <div class="d-flex align-items-center justify-content-between pb-2 mb-3 border-bottom">                                                    
-                                                    <div class="quill-tool">
-                                                    </div>
-                                                </div>
-                                                <div id="quill-toolbar1">
-                                                    <p>Virtual Digital Marketing Course every week on Monday, Wednesday and Saturday.Virtual Digital Marketing Course every week on Monday</p>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer border-0">
-                                                <div class="d-flex flex-wrap align-items-ceter justify-content-end">
-                                                    <div class="btn btn-primary mr-3" data-dismiss="modal">Cancel</div>
-                                                    <div class="btn btn-outline-primary" data-dismiss="modal">Save</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <!-- Wrapper End-->

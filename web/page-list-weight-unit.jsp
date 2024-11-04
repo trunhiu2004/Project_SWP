@@ -68,7 +68,14 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <form action="findUnit" method="get" data-toggle="validator">
+                                        <div class="mb-3 d-flex justify-content-end">                             
+                                            <input type="text" class="form-control" name="nameUnit" placeholder="Tìm kiếm loại sản phẩm theo tên" style="max-width: 300px;" />
+                                            <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
+                                            <a href="listUnit" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Xem toàn bộ đơn vị sản phẩm</a>
+                                        </div>
+                                    </form>
+                                    <table class="table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Mã</th>
@@ -77,6 +84,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
+                                            <c:if test="${empty wu}">
+                                                <tr>
+                                                    <td colspan="10" style="text-align: center;">Không tìm thấy đơn vị sản phẩm.</td>
+                                                </tr>
+                                            </c:if>
                                         <c:forEach items="${wu}" var="u">
                                             <tr>                                                
                                                 <td>${u.getId()}</td>

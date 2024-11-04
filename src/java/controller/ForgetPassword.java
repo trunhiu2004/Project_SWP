@@ -4,13 +4,16 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.UUID;
+import model.Accounts;
 import verify.SendEmail;
 
 /**
@@ -72,24 +75,28 @@ public class ForgetPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("emailReset");
+        if (checkDuplicate(email)) {
+            //get info from form
+            String token = UUID.randomUUID().toString();
 
-        //get info from form
-        String token = UUID.randomUUID().toString();
+            //url link to change pass
+            String link = "http://localhost:9999/SWP_Project/resetPassword?email="+email+"&tokenReset=" + token;
 
-        //url link to change pass
-        String link = "http://localhost:9999/SWP_Project/resetPassword?tokenReset=" + token;
-
-        request.getSession().setAttribute("emailReset", email);
+            request.getSession().setAttribute("emailReset", email);
 
 //        //activate 6-digit code
 //        RandomCode rc=new RandomCode();
 //        String verifyCode=rc.activateCode();
-        //verify user email
-        SendEmail se = new SendEmail();
-        se.send(email, link);
-        request.getSession().setAttribute("tokenReset", token);
-        request.getSession().setAttribute("status", "resetPass");
-        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+            //verify user email
+            SendEmail se = new SendEmail();
+            se.send(email, link);
+            request.getSession().setAttribute("tokenReset", token);
+            request.getSession().setAttribute("status", "resetPass");
+            request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Email không tồn tại trong hệ thống!");
+            request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+        }
 
     }
 
@@ -103,4 +110,14 @@ public class ForgetPassword extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private boolean checkDuplicate(String email) {
+        AccountDAO accDAO = new AccountDAO();
+        List<Accounts> listAcc = accDAO.getAllAccount();
+        for (Accounts accounts : listAcc) {
+            if (accounts.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

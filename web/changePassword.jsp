@@ -4,7 +4,6 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,8 +34,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" placeholder=" " name="passwordRegister">
-                                                                <label>Mật khẩu mới</label>
+                                                                <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordRegister">
                                                             </div>
                                                         </div>
 

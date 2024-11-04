@@ -60,15 +60,12 @@ public class ChangePasswordServlet extends HttpServlet {
             throws ServletException, IOException {
         // get token from url
         String token = request.getParameter("token");
-
+        String email = request.getParameter("email");
+        request.getSession().setAttribute("emailRegis", email);
         // get token from session
         String savedToken = (String) request.getSession().getAttribute("token");
-        if (token != null && token.equals(savedToken)) {
-            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-        } else {
-            request.setAttribute("message", "Token Invaled!");
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+       
     }
 
     /**
@@ -83,7 +80,7 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String rawPassword = request.getParameter("passwordRegister");
-        String email = (String) request.getSession().getAttribute("emailRegister");
+        String email = (String) request.getSession().getAttribute("emailRegis");
         String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
         AccountDAO accountDAO = new AccountDAO();
         accountDAO.createAccount(email, password, 2);

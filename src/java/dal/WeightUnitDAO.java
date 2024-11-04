@@ -34,7 +34,25 @@ public class WeightUnitDAO extends DBContext {
         }
         return list;
     }
-
+    
+    public List<WeightUnit> findUnitByName(String unit_name) {
+        String sql = "select * from Weight_unit where unit_name like ?";
+        List<WeightUnit> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+unit_name+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                WeightUnit pc = new WeightUnit(rs.getInt("weight_unit_id"),
+                        rs.getString("unit_name"));
+                list.add(pc);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public WeightUnit getUnitById(int weight_unit_id) {
         String sql = "select * from Weight_unit where weight_unit_id = ?";
         try {

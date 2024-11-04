@@ -11,7 +11,7 @@
 
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Bạn có muốn xóa loại sản phẩm có mã là " + id +" không ?")) {
+                if (confirm("Bạn có muốn xóa loại sản phẩm có mã là " + id + " không ?")) {
                     window.location = "deleteCategory?category_id=" + id;
                 }
             }
@@ -64,12 +64,18 @@
                                         <p class="mb-0">Danh sách loại sản phẩm là tập hợp các nhóm hoặc danh mục sản phẩm <br>được phân loại theo tính chất, chức năng, hoặc mục đích sử dụng.</p>
                                     </div>
                                     <a href="addCategory" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm loại sản phẩm</a>
-
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <form action="findCategory" method="get" data-toggle="validator">
+                                        <div class="mb-3 d-flex justify-content-end">                             
+                                            <input type="text" class="form-control" name="nameCate" placeholder="Tìm kiếm loại sản phẩm theo tên" style="max-width: 300px;" />
+                                            <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
+                                            <a href="listCategory" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Xem toàn bộ loại sản phẩm</a>
+                                        </div>
+                                    </form>
+                                    <table class="table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Mã</th>
@@ -78,6 +84,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
+                                            <c:if test="${empty cate}">
+                                                <tr>
+                                                    <td colspan="10" style="text-align: center;">Không tìm thấy loại sản phẩm.</td>
+                                                </tr>
+                                            </c:if>
                                         <c:forEach items="${cate}" var="pc">
                                             <tr>
                                                 <td>${pc.getId()}</td>

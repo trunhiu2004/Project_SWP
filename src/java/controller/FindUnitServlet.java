@@ -5,20 +5,22 @@
 
 package controller;
 
-import dal.AccountDAO;
+import dal.WeightUnitDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.mindrot.jbcrypt.BCrypt;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.WeightUnit;
 
 /**
  *
- * @author frien
+ * @author PC
  */
-public class ResetPasswordServlet extends HttpServlet {
+public class FindUnitServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +37,10 @@ public class ResetPasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ResetPasswordServlet</title>");  
+            out.println("<title>Servlet FindUnitServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet FindUnitServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,13 +57,12 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // get token from url
-        String token = request.getParameter("tokenReset");
-        String email = request.getParameter("email");
-        request.getSession().setAttribute("emailRe", email);
-        // get token from session
-        String savedToken = (String) request.getSession().getAttribute("tokenReset");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        WeightUnitDAO ud = new WeightUnitDAO();
+        String name = request.getParameter("nameUnit");
+        List<WeightUnit> list = ud.findUnitByName(name.trim());
+        session.setAttribute("wu", list);
+        request.getRequestDispatcher("page-list-weight-unit.jsp").forward(request, response);
     } 
 
     /** 
@@ -74,13 +75,7 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String rawPassword = request.getParameter("passwordReset");
-        String email = (String) request.getSession().getAttribute("emailRe");
-        String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
-        AccountDAO accountDAO = new AccountDAO();
-        accountDAO.changePassword(email, password);
-        request.getSession().removeAttribute("tokenReset");
-        response.sendRedirect("login");
+        processRequest(request, response);
     }
 
     /** 

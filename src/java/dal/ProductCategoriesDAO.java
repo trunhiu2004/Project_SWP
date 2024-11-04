@@ -35,7 +35,25 @@ public class ProductCategoriesDAO extends DBContext {
         }
         return list;
     }
-
+    
+    public List<ProductCategories> findCategoryByName(String category_name) {
+        String sql = "select * from Product_Categories where category_name like ?";
+        List<ProductCategories> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+category_name+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ProductCategories pc = new ProductCategories(rs.getInt("category_id"),
+                        rs.getString("category_name"));
+                list.add(pc);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public ProductCategories getCategoryById(int category_id) {
         String sql = "select * from Product_Categories where category_id = ?";
         try {

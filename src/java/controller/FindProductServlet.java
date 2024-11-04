@@ -5,20 +5,22 @@
 
 package controller;
 
-import dal.AccountDAO;
+import dal.ProductsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.mindrot.jbcrypt.BCrypt;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Products;
 
 /**
  *
- * @author frien
+ * @author PC
  */
-public class ResetPasswordServlet extends HttpServlet {
+public class FindProductServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +37,10 @@ public class ResetPasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ResetPasswordServlet</title>");  
+            out.println("<title>Servlet FindProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet FindProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,13 +57,13 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // get token from url
-        String token = request.getParameter("tokenReset");
-        String email = request.getParameter("email");
-        request.getSession().setAttribute("emailRe", email);
-        // get token from session
-        String savedToken = (String) request.getSession().getAttribute("tokenReset");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        ProductsDAO p = new ProductsDAO();
+        String name = request.getParameter("namePro");
+        List<Products> list = p.searchProductByName(name.trim());
+        session.setAttribute("pro", list);
+        request.getRequestDispatcher("page-list-product.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -74,13 +76,7 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String rawPassword = request.getParameter("passwordReset");
-        String email = (String) request.getSession().getAttribute("emailRe");
-        String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
-        AccountDAO accountDAO = new AccountDAO();
-        accountDAO.changePassword(email, password);
-        request.getSession().removeAttribute("tokenReset");
-        response.sendRedirect("login");
+        processRequest(request, response);
     }
 
     /** 

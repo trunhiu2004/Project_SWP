@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Date;
@@ -127,7 +128,6 @@ public class CouponDAO extends DBContext {
         List<String> statuses = new ArrayList<>();
         statuses.add("Active");
         statuses.add("Inactive");
-        statuses.add("Upcoming");
         return statuses;
     }
 
@@ -157,5 +157,77 @@ public class CouponDAO extends DBContext {
 
         return list;
 
+    }
+
+    public List<Coupons> getFilteredCoupons(String couponCode,
+            String discountAmount,
+            String startDate,
+            String endDate,
+            String status) {
+        List<Coupons> coupons = new ArrayList<>();
+
+        // Xây dựng câu lệnh SQL động
+        StringBuilder query = new StringBuilder("SELECT * FROM Coupons WHERE 1=1");
+        if (couponCode != null && !couponCode.isEmpty()) {
+            query.append(" AND coupon_code LIKE ?");
+        }
+        if (discountAmount != null && !discountAmount.isEmpty()) {
+            query.append(" AND discount_amount = ?");
+        }
+        if (startDate != null && !startDate.isEmpty()) {
+            query.append(" AND coupon_start_date = ?");
+        }
+        if (endDate != null && !endDate.isEmpty()) {
+            query.append(" AND coupon_end_date = ?");
+        }
+        if ("All Status".equalsIgnoreCase(status)) {
+            query.append(" AND (coupon_status = 'Active' OR coupon_status = 'Inactive')");
+        } else if (status != null && !status.isEmpty()) {
+            query.append(" AND coupon_status = ?");
+        }
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            if (couponCode != null && !couponCode.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + couponCode + "%");
+            }
+            if (discountAmount != null && !discountAmount.isEmpty()) {
+                stmt.setDouble(paramIndex++, Double.parseDouble(discountAmount));
+            }
+            if (startDate != null && !startDate.isEmpty()) {
+                stmt.setDate(paramIndex++, Date.valueOf(startDate));
+            }
+            if (endDate != null && !endDate.isEmpty()) {
+                stmt.setDate(paramIndex++, Date.valueOf(endDate));
+            }
+            if (status != null && !"All Status".equalsIgnoreCase(status) && !status.isEmpty()) {
+                stmt.setString(paramIndex++, status);
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Coupons coupon = new Coupons();
+                coupon.setCoupon_id(rs.getInt("coupon_id"));
+                coupon.setCoupon_code(rs.getString("coupon_code"));
+                coupon.setDiscount_amount(rs.getDouble("discount_amount"));
+                coupon.setCoupon_start_date(rs.getDate("coupon_start_date"));
+                coupon.setCoupon_end_date(rs.getDate("coupon_end_date"));
+                coupon.setCoupon_status(rs.getString("coupon_status"));
+                coupons.add(coupon);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return coupons;
+    }
+
+    public static void main(String[] args) {
+        CouponDAO c = new CouponDAO();
+        List<Coupons> lst = c.getFilteredCoupons("C", "10", null, null, null);
+        for (Coupons arg : lst) {
+            System.out.println(arg);
+        }
     }
 }
