@@ -91,7 +91,10 @@
 
                     <div class="receipt-title">
                         <h3>HÓA ĐƠN BÁN HÀNG</h3>
-                        <p>Ngày: <fmt:formatDate value="${order.orderDate}" pattern="dd/MM/yyyy HH:mm:ss"/></p>
+                        <p>Ngày: 
+                            <jsp:useBean id="now" class="java.util.Date" />
+                            <fmt:formatDate value="${now}" pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </p>
                         <p>Số hóa đơn: ${order.orderId}</p>
                     </div>
                 </div>

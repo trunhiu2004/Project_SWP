@@ -3,10 +3,10 @@
     Created on : Oct 29, 2024, 9:04:19 PM
     Author     : ankha
 --%>
+<%@page import="model.Order"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <div class="receipt">
     <div class="receipt-header">
         <div class="shop-info">
@@ -22,11 +22,13 @@
                 <p><i class="fas fa-envelope"></i> ${shop.shopEmail}</p>
             </div>
         </div>
-        
+
         <div class="receipt-title">
             <h3>HÓA ĐƠN BÁN HÀNG</h3>
-            <p>Ngày: <fmt:formatDate value="${order.orderDate}" pattern="dd/MM/yyyy HH:mm:ss"/></p>
-            <p>Số hóa đơn: ${order.orderId}</p>
+            <p>Ngày: 
+                <jsp:useBean id="now" class="java.util.Date" />
+                <fmt:formatDate value="${now}" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </p>
         </div>
     </div>
 
