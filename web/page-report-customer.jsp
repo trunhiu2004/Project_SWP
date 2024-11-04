@@ -56,6 +56,17 @@
                                             place while helping teams to reach sales goals. </p>
                                     </div>
                                     <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+
+                                    
+
+
+                                    <div class="iq-search-bar device-search">
+                                        <form method="GET" action="ListCustomerReport" class="searchbox">
+                                            <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                            <input name="search" type="text" class="text search-input" placeholder="Search by name or phone">
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -66,10 +77,10 @@
                                                 <th>Customer ID</th>
                                                 <th>Customer Name</th>
                                                 <th>Customer Phone</th>
-                                                    
+
                                                 <th>Total Amount</th>
                                                 <th>Total Orders</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -79,10 +90,10 @@
                                                 <td>${top.customerName}</td>
                                                 <td>${top.customerPhone}</td>
                                                 <td>${top.totalAmount}$</td>
-                                                
+
                                                 <td>${top.totalOrders}</td>
-                                                
-                                                
+
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>

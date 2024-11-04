@@ -52,6 +52,87 @@ public class ReportCustomerDAO extends DBContext {
         return list;
     }
     
+    public List<ReportCustomer> searchCustomers(String searchTerm) {
+    List<ReportCustomer> list = new ArrayList<>();
+    String sql = "SELECT \n"
+            + "    o.customer_id, \n"
+            + "    c.customer_name,\n"
+            + "    c.customer_phone,\n"
+            + "    SUM(DISTINCT o.order_total_amount) AS total_amount, \n"
+            + "    COUNT(DISTINCT od.order_id) AS total_orders \n"
+            + "FROM \n"
+            + "    Orders AS o \n"
+            + "JOIN \n"
+            + "    OrdersDetails AS od ON o.order_id = od.order_id\n"
+            + "JOIN \n"
+            + "    Customers AS c ON o.customer_id = c.customer_id\n"
+            + "WHERE \n"
+            + "    c.customer_name LIKE ? OR \n"
+            + "    c.customer_phone LIKE ? \n" // Tìm kiếm theo tên khách hàng hoặc số điện thoại
+            + "GROUP BY \n"
+            + "    o.customer_id, c.customer_name, c.customer_phone \n"
+            + "ORDER BY \n"
+            + "    total_amount DESC;";
+
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        String searchPattern = "%" + searchTerm + "%"; // Thêm ký tự % để tìm kiếm như một chuỗi con
+        statement.setString(1, searchPattern);
+        statement.setString(2, searchPattern);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            ReportCustomer report = new ReportCustomer(rs.getInt("customer_id"),
+                    rs.getString("customer_name"),
+                    rs.getString("customer_phone"),
+                    rs.getDouble("total_amount"),
+                    rs.getInt("total_orders"));
+            list.add(report);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Thêm ghi lỗi để dễ dàng theo dõi vấn đề
+    }
+    return list;
+}
+    
+    public List<ReportCustomer> getCustomerReportById() {
+        List<ReportCustomer> list = new ArrayList<>();
+        String sql = "SELECT \n"
+                + "    o.customer_id, \n"
+                + "    c.customer_name,\n"
+                + "	c.customer_phone,\n"
+                + "    SUM(Distinct o.order_total_amount) AS total_amount, \n"
+                + "    COUNT(DISTINCT od.order_id) AS total_orders \n"
+                + "FROM \n"
+                + "    Orders AS o \n"
+                + "JOIN \n"
+                + "    OrdersDetails AS od ON o.order_id = od.order_id\n"
+                + "JOIN \n"
+                + "    Customers AS c ON o.customer_id = c.customer_id where o.customer_id = ? \n"
+                + "GROUP BY \n"
+                + "    o.customer_id, c.customer_name, c.customer_phone \n"
+                + "ORDER BY \n"
+                + "    total_amount DESC; ";
+        
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                ReportCustomer report = new ReportCustomer(rs.getInt("customer_id"), 
+                        rs.getString("customer_name"), 
+                        rs.getString("customer_phone"), 
+                        rs.getDouble("total_amount"),
+                        rs.getInt("total_orders"));
+                list.add(report);
+            }
+        }catch(SQLException e){
+            
+        }
+        return list;
+    }
+    
+    
+    
+    
     public List<ReportCustomer> getTop3() {
         List<ReportCustomer> list = new ArrayList<>();
         String sql = "SELECT top 3\n"

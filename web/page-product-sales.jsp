@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -45,17 +46,29 @@
                             </div>
                         </div>
                     </div>
-                </div>      <div class="content-page">
+                </div>      
+                <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Revenue By Product</h4>
-                                        <p class="mb-0">Sales enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Doanh thu sản phẩm</h4>
+                                        <p class="mb-0">Đây là doanh thu các sản phẩm nhé </p>
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+
+                                     
+                                    
+                                    
+                                    <div class="iq-search-bar device-search">
+                                        <form method="POST" action="ProductSales" class="searchbox">                            
+                                            <input name="search" type="text" class="text search-input" placeholder="Tìm kiếm sản phẩm">
+                                            <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        </form>
+                                    </div>
+                                    
+
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -63,14 +76,14 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                
-                                                <th>Product Name</th>
-                                                <th>Product Image</th>
-                                                    
-                                                <th>Product Total Money</th>
-                                                <th>Product Total Quantity Sold</th>
-                                                <th>Product Total Order</th>
-                                                
+
+                                                <th>Tên sản phẩm</th>
+                                                <th>Hình ảnh sản phẩm</th>
+
+                                                <th>Tiền sản phẩm bán</th>
+                                                <th>Số lượng sản phẩm bán</th>
+                                                <th>Số lượng đơn hàng mua sản phẩm</th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -81,9 +94,9 @@
                                                 <td>${sale.productSales}$</td>
                                                 <td>${sale.totalQuantitySold}</td>
                                                 <td>${sale.totalOrders}</td>
-                                                
-                                                
-                                                
+
+
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -143,7 +156,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

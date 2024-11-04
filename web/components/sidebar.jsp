@@ -173,7 +173,7 @@
                             <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                             </svg>
-                            <span class="ml-4">People</span>
+                            <span class="ml-4">Các bên liên quan</span>
                             <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                             </svg>
@@ -181,23 +181,23 @@
                         <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             <li class="">
                                 <a href="staffManage">
-                                    <i class="las la-minus"></i><span>Staff List</span>
+                                    <i class="las la-minus"></i><span>Danh sách nhân viên</span>
                                 </a>
                             </li>
 
                             <li class="">
                                 <a href="ListCustomer">
-                                    <i class="las la-minus"></i><span>Customers</span>
+                                    <i class="las la-minus"></i><span>Khách hàng</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="ListShop">
-                                    <i class="las la-minus"></i><span>Shop</span>
+                                    <i class="las la-minus"></i><span>Cửa hàng</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="ListShift">
-                                    <i class="las la-minus"></i><span>Shift</span>
+                                    <i class="las la-minus"></i><span>Ca làm</span>
                                 </a>
                             </li>
                         </ul>
@@ -208,7 +208,7 @@
                             <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                             </svg>
-                            <span class="ml-4">Report</span>
+                            <span class="ml-4">Báo cáo</span>
                             <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                             </svg>
@@ -216,23 +216,23 @@
                         <ul id="pages-error" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             <li class="">
                                 <a href="ListCustomerReport">
-                                    <i class="las la-minus"></i><span>Report List Customer Top</span>
+                                    <i class="las la-minus"></i><span>Báo cáo danh sách top khách hàng mua</span>
                                 </a>
                             </li>
 
                             <li class="">
                                 <a href="ProductSales">
-                                    <i class="las la-minus"></i><span>Revenue By Product</span>
+                                    <i class="las la-minus"></i><span>Doanh thu theo sản phẩm</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="ProductCategorySale">
-                                    <i class="las la-minus"></i><span>Revenue By Product Category</span>
+                                    <i class="las la-minus"></i><span>Doanh thu theo loại hàng</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="BestSellProduct">
-                                    <i class="las la-minus"></i><span>Best Selling Products</span>
+                                    <i class="las la-minus"></i><span>Sản phẩm bán chạy nhất</span>
                                 </a>
                             </li>
                         </ul>

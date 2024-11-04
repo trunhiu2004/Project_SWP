@@ -57,7 +57,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">Edit Shift</h4>
+                                        <h4 class="card-title">Sửa đổi ca làm</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -66,24 +66,24 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Cash Start *</label>
+                                                    <label>Số tiền mở ca *</label>
                                                     <input type="number" class="form-control" name="cash_start" value="${shift.cashStart}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Cash End *</label>
+                                                    <label>Số tiền kết ca *</label>
                                                     <input type="number" class="form-control" name="cash_end" value="${shift.cashEnd}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Total Revenue *</label>
+                                                    <label>Tổng doanh thu ca làm *</label>
                                                     <input type="number" class="form-control" name="total_revenue" value="${shift.totalRevenue}" required>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Save</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Lưu</button>
                                     </form>
                                 </div>
                             </div>
