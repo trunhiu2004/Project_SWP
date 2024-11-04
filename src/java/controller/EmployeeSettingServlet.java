@@ -74,7 +74,7 @@ public class EmployeeSettingServlet extends HttpServlet {
         String name = request.getParameter("fullName");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        String email = (String) request.getSession().getAttribute("emailRegister");
+        String email = (String) request.getSession().getAttribute("emailRegis");
         
         AccountDAO dbAccount = new AccountDAO();
         int accountId = dbAccount.getAccountId(email);
