@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.Invoice" %>
 <%@ page import="java.util.List" %>
@@ -64,11 +66,11 @@
                                         <form method="get" action="invoice" class="row">
                                             <div class="col-md-2">
                                                 <input type="text" class="form-control" name="search" 
-                                                       value="${searchKeyword}" placeholder="Search Customer...">
+                                                       value="${searchKeyword}" placeholder="Tìm khách hàng...">
                                         </div>
                                         <div class="col-md-2">
                                             <select class="form-control" name="status">
-                                                <option value="All Status">All Status</option>
+                                                <option value="All Status">Tất cả trạng thái</option>
                                                 <c:forEach items="${statuses}" var="stat">
                                                     <option value="${stat}" ${stat eq selectedStatus ? 'selected' : ''}>
                                                         ${stat}
@@ -86,7 +88,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <select class="form-control" name="paymentMethod">
-                                                <option value="All Payment Method">All Payment Method</option>
+                                                <option value="All Payment Method">Tất cả PTTT</option>
                                                 <c:forEach items="${paymentMethods}" var="method">
                                                     <option value="${method}" ${method eq selectedPaymentMethod ? 'selected' : ''}>
                                                         ${method}
@@ -111,41 +113,61 @@
                                 <table class="data-table table mb-0 tbl-server-info">
                                     <thead class="bg-white text-uppercase">
                                         <tr class="ligth ligth-data">
-                                            <th>Invoice ID</th>
-                                            <th>Invoice Date</th>
-                                            <th>Total Amount</th>
-                                            <th>Status</th>
-                                            <th>Employee Name</th>
-                                            <th>Customer Name</th>
-                                            <th>Payment Method</th>
-                                            <th>Actions</th>
+                                            <th>ID Hoá đơn</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Tên nhân viên</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>PT Thanh toán</th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody class="ligth-body">
                                         <%
                                             List<Invoice> invoices = (List<Invoice>) request.getAttribute("invoices");
                                             if (invoices == null || invoices.isEmpty()) {
-                                                out.println("<tr><td colspan='7'>No invoices found.</td></tr>");
+                                                out.println("<tr><td colspan='7'>Không có hoá đơn nào.</td></tr>");
                                             } else {
                                                 for (Invoice invoice : invoices) {
                                         %>
                                         <tr>
-                                            <td><%= invoice.getInvoiceId() %></td>
-                                            <td><%= invoice.getInvoiceDate() %></td>
-                                            <td><fmt:formatNumber value="<%= invoice.getTotalAmount() %>" pattern="#,##0" />₫</td>
-                                            <td><%= invoice.getStatus() %></td>
-                                            <td><%= invoice.getEmployeeName() %></td>
-                                            <td><%= invoice.getCustomerName() %></td>
-                                            <td><%= invoice.getPaymentMethodName() %></td>
+                                            <td><%= invoice.getInvoiceId()%></td>
                                             <td>
-                                                <a class="badge badge-info" href="invoice-detail?invoiceId=<%= invoice.getInvoiceId() %>" 
+                                                <%
+                                                    String rawDate = invoice.getInvoiceDate();
+                                                    try {
+                                                        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                                        Date date = inputFormat.parse(rawDate);
+
+                                                        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                                                        String formattedDate = outputFormat.format(date);
+                                                %>
+                                                <%= formattedDate%>
+                                                <%
+                                                } catch (Exception e) {
+                                                %>
+                                                <%= rawDate%> <!-- Display raw date if parsing fails -->
+                                                <%
+                                                    }
+                                                %>
+                                            </td>
+
+
+                                            <td><fmt:formatNumber value="<%= invoice.getTotalAmount()%>" pattern="#,##0" />₫</td>
+                                            <td><%= invoice.getStatus()%></td>
+                                            <td><%= invoice.getEmployeeName()%></td>
+                                            <td><%= invoice.getCustomerName()%></td>
+                                            <td><%= invoice.getPaymentMethodName()%></td>
+                                            <td>
+                                                <a class="badge badge-info" href="invoice-detail?invoiceId=<%= invoice.getInvoiceId()%>" 
                                                    style="text-decoration: none;">
-                                                    <i class="fas fa-eye"></i> View
+                                                    <i class="fas fa-eye"></i> Xem
                                                 </a>
 
 
                                                 <button onclick="confirmDelete(${invoice.invoiceId})" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i> Delete
+                                                    <i class="fas fa-trash"></i> Xoá
                                                 </button>
                                             </td>
                                         </tr>
@@ -162,7 +184,7 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
                                         <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                            <a class="page-link" href="invoice?page=${currentPage - 1}${queryString}">Previous</a>
+                                            <a class="page-link" href="invoice?page=${currentPage - 1}${queryString}">Trang trước</a>
                                         </li>
 
                                         <c:forEach begin="1" end="${totalPages}" var="i">
@@ -172,7 +194,7 @@
                                         </c:forEach>
 
                                         <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                            <a class="page-link" href="invoice?page=${currentPage + 1}${queryString}">Next</a>
+                                            <a class="page-link" href="invoice?page=${currentPage + 1}${queryString}">Trang sau</a>
                                         </li>
                                     </ul>
                                 </nav>
