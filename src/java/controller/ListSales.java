@@ -26,7 +26,19 @@ public class ListSales extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String searchTerm = request.getParameter("searchTerm");  
+        SalesListDAO dao = new SalesListDAO();
         
+        List<SalesList> sales;
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            sales = dao.searchSales(searchTerm);  
+        } else {
+            sales = dao.getAllSales();  
+        }
+        
+        request.setAttribute("sales", sales);
+        request.setAttribute("searchTerm", searchTerm); 
+        request.getRequestDispatcher("page-list-sale.jsp").forward(request, response);
     }
 
     @Override

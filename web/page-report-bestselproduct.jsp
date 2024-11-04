@@ -90,7 +90,7 @@
                                                 <td><img src="assets/images/product/${sale.productImage}" width="80px" height="80px" /></td>
                                                 <td>${sale.categoryName}</td>
                                                 <td>${sale.totalQuantitySold}</td>
-                                                <td>${sale.productSales}VNĐ</td>
+                                                <td>${sale.productSales} VNĐ</td>
                                                 <td>${sale.totalOrders}</td>
 
 

@@ -52,11 +52,10 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Report List Top Customer</h4>
-                                        <p class="mb-0">Sales enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Báo cáo các top khách hàng mua</h4>
+                                        <p class="mb-0">Nơi dây hiển thị top những khách hàng mua nhiều nhất </p>
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở lại trang chủ</a>
 
                                     
 
@@ -64,7 +63,7 @@
                                     <div class="iq-search-bar device-search">
                                         <form method="GET" action="ListCustomerReport" class="searchbox">
                                             <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                            <input name="search" type="text" class="text search-input" placeholder="Search by name or phone">
+                                            <input name="search" type="text" class="text search-input" placeholder="tìm kiếm khách hàng">
                                         </form>
                                     </div>
 
@@ -75,12 +74,12 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Customer ID</th>
-                                                <th>Customer Name</th>
-                                                <th>Customer Phone</th>
+                                                <th>Mã khách hàng</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>SỐ điện thoại khách hàng</th>
 
-                                                <th>Total Amount</th>
-                                                <th>Total Orders</th>
+                                                <th>Tổng tiền khách hàng đã mua</th>
+                                                <th>Tổng số đơn hàng của khác hàng</th>
 
                                             </tr>
                                         </thead>
@@ -90,7 +89,7 @@
                                                 <td>${top.customerId}</td>
                                                 <td>${top.customerName}</td>
                                                 <td>${top.customerPhone}</td>
-                                                <td>${top.totalAmount}VNĐ</td>
+                                                <td>${top.totalAmount} VNĐ</td>
 
                                                 <td>${top.totalOrders}</td>
 

@@ -53,41 +53,52 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
                                         <h4 class="mb-3">Danh sách các đơn hàng đã bán</h4>
-                                        
+
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+
+
+
+                                    <div class="iq-search-bar device-search">
+                                        <form method="POST" action="ListSales" class="searchbox">
+                                            <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                            <input name="searchTerm" type="text" class="text search-input" placeholder="Tìm kiếm khách hàng hoặc sản phẩm" value="${searchTerm}">
+                                    </form>
                                 </div>
+
+
                             </div>
-                            <div class="col-lg-12">
-                                <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
-                                        <thead class="bg-white text-uppercase">
-                                            <tr class="ligth ligth-data">
-                                                <th>Ngày</th>
-                                                <th>Tên khách hàng</th>
-                                                <th>tổng tiền</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Ảnh sản phẩm</th>
-                                                <th>Trạng thái đơn hàng</th>
-                                                <th>Số lượng</th>
-                                                <th>giá sản phẩm</th>     
-                                                <th>Tổng tiền</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ligth-body">
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="table-responsive rounded mb-3">
+                                <table class="data-table table mb-0 tbl-server-info">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth ligth-data">
+                                            <th>Ngày</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>tổng tiền</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Ảnh sản phẩm</th>
+                                            <th>Trạng thái đơn hàng</th>
+                                            <th>Số lượng</th>
+                                            <th>giá sản phẩm</th>     
+                                            <th>Tổng tiền</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ligth-body">
                                         <c:forEach var="sale" items="${requestScope.sales}">
                                             <tr>
                                                 <td>${sale.formattedOrderDate}</td>
                                                 <td>${sale.customerName}</td>
-                                                <td>${sale.orderTotalAmount}</td>
+                                                <td>${sale.orderTotalAmount} VNĐ</td>
                                                 <td>${sale.productName}</td>
                                                 <td><img src="assets/images/product/${sale.productImage}" width="80px" height="80px" /></td>
                                                 <td><div class="badge badge-success">${sale.orderStatus}</div></td>
                                                 <td>${sale.quantity}</td>
-                                                <td>${sale.unitPrice}</td>
-                                                <td>${sale.totalPrice}</td>
-                                                
+                                                <td>${sale.unitPrice} VNĐ</td>
+                                                <td>${sale.totalPrice} VNĐ</td>
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>

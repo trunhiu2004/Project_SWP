@@ -86,9 +86,9 @@
                                                 <td>${shift.shiftManageId}</td>
                                                 <td>${shift.formattedShiftStartTime}</td>
                                                 <td>${shift.formattedShiftEndTime}</td>
-                                                <td><fmt:formatNumber value="${shift.cashStart}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
-                                                <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
-                                                <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value="${shift.cashStart}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
                                                 <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
                                                 <td>${shift.employeeName}</td>
                                                 <td>
@@ -151,49 +151,11 @@
                     </div>
                 </div>
                 
-                
-                <div class="row justify-content-between mt-3">
-                                        <div id="user-list-page-info" class="col-md-6">
-                                            <span>Showing 1 to 5 of 5 entries</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-end mb-0">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                    </li>
-                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">Next</a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
+             
             </div>
         </div>
         <!-- Wrapper End-->
-        <footer class="iq-footer">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        
         <!-- Backend Bundle JavaScript -->
         <script src="assets/js/backend-bundle.min.js"></script>
 
