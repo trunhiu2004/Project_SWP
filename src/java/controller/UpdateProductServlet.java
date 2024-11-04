@@ -168,8 +168,10 @@ public class UpdateProductServlet extends HttpServlet {
         float price = Float.parseFloat(price_raw);
         LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
         LocalDate expirationDate = LocalDate.parse(expirationDateStr);
+        
         Products p1 = pd.getProductById(id);
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : p1.getImage();
+        
         int batch = Integer.parseInt(batch_raw);
         Products pNew = new Products(id, name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate,batch);
         
