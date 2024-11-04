@@ -189,7 +189,7 @@
                                         <div class="col-md-2">
                                             <div class="d-flex gap-2">
                                                 <button type="submit" class="btn btn-primary flex-grow-1">
-                                                    <i class="ri-search-line me-1"></i> Tìm
+                                                    <i class="ri-search-line me-1"></i> Lọc
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" onclick="clearFilters()">
                                                     <i class="ri-refresh-line"></i>

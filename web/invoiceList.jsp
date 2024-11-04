@@ -97,8 +97,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-2">
-                                            <button type="submit" class="btn btn-primary">Filter</button>
-                                            <button type="button" class="btn btn-secondary" onclick="clearFilters()">Clear</button>
+                                            <button type="submit" class="btn btn-primary">Lọc</button>
+                                            <button type="button" class="btn btn-secondary" onclick="clearFilters()">Đặt lại</button>
                                         </div>
                                     </form>
                                 </div>
