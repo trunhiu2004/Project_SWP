@@ -23,7 +23,7 @@ public class SalesReportDAO extends DBContext {
         List<SalesReport> reports = new ArrayList<>();
         String sql = "SELECT YEAR(o.order_date) AS order_year, SUM(o.order_total_amount) AS total_sales, COUNT(DISTINCT o.order_id) AS total_orders "
                    + "FROM Orders o "
-                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'Paid' "
+                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'COMPLETED' "
                    + "GROUP BY YEAR(o.order_date)";
 
         try {
@@ -50,7 +50,7 @@ public class SalesReportDAO extends DBContext {
                    + "FROM Orders o "
                    + "LEFT JOIN OrdersDetails od ON o.order_id = od.order_id "
                    + "LEFT JOIN Products p ON od.product_id = p.product_id "
-                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'Paid' "
+                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'COMPLETED' "
                    + "GROUP BY p.product_name, p.product_image "
                    + "ORDER BY product_sales DESC";
 
@@ -81,7 +81,7 @@ public class SalesReportDAO extends DBContext {
                    + "LEFT JOIN OrdersDetails od ON o.order_id = od.order_id "
                    + "LEFT JOIN Products p ON od.product_id = p.product_id "
                    + "LEFT JOIN Product_Categories pc ON p.category_id = pc.category_id "
-                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'Paid' "
+                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'COMPLETED' "
                    + "GROUP BY pc.category_name "
                    + "ORDER BY category_sales DESC";
 
@@ -112,7 +112,7 @@ public class SalesReportDAO extends DBContext {
                    + "LEFT JOIN OrdersDetails od ON o.order_id = od.order_id "
                    + "LEFT JOIN Products p ON od.product_id = p.product_id "
                    + "LEFT JOIN Product_Categories pc ON p.category_id = pc.category_id "
-                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'Paid' "
+                   + "WHERE YEAR(o.order_date) = 2024 AND o.order_status = 'COMPLETED' "
                    + "GROUP BY p.product_name, p.product_image, pc.category_name "
                    + "ORDER BY total_quantity_sold DESC";
 

@@ -8,15 +8,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-        
+
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Bạn có muốn xóa sản phẩm có mã là " + id +" không ?")) {
+                if (confirm("Bạn có muốn xóa sản phẩm có mã là " + id + " không ?")) {
                     window.location = "deleteProduct?product_id=" + id;
                 }
             }
         </script>
-        
+
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
@@ -67,10 +67,22 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <form action="findProduct" method="get" data-toggle="validator">
+                                        <div class="mb-3 d-flex justify-content-end">                             
+                                            <input type="text" class="form-control" name="namePro" placeholder="Tìm kiếm sản phẩm theo tên" style="max-width: 300px;" />
+                                            <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
+                                            <a href="listProduct" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Xem toàn bộ sản phẩm</a>
+                                        <c:if test="${not empty message}">
+                                                <div class="alert alert-danger">
+                                                    ${message}
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </form>
+                                    <table class="table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Barcode</th>
+                                                <th>Mã vạch</th>
                                                 <th>Sản phẩm</th>
                                                 <th>Tên sản phẩm</th>
                                                 <th>Loại sản phẩm</th>
@@ -84,35 +96,38 @@
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
+                                            <c:if test="${empty pro}">
+                                                <tr>
+                                                    <td colspan="10" style="text-align: center;">Không tìm thấy sản phẩm.</td>
+                                                </tr>
+                                            </c:if>
                                         <c:forEach items="${pro}" var="p">
-                                            
-
-                                        <tr>
-                                            <td>${p.getBarcode()}</td>
-                                            <td><img src="assets/images/product/${p.getImage()}" width="80px" height="80px"/></td>
-                                            <td>${p.getName()}</td>
-                                            <td>${p.productCategories.getName()}</td>
-                                            <td>${p.getPrice()}</td>
-                                            <td>${p.suppliers.getName()}</td>
-                                            <td>${p.weightUnit.getName()}</td>
-                                            <td>${p.getManufactureDate()}</td>
-                                            <td>${p.getExpirationDate()}</td>
-                                            <td>${p.getBatch()}</td>
-                                            <td>
-                                                <div class="d-flex align-items-center list-action">
-                                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lịch sử giá"
-                                                       href="listPrice?product_id=${p.getId()}"><i class="ri-eye-line mr-0"></i></a>
-                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa giá"
-                                                       href="updatePrice?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa thông tin"
-                                                       href="updateProduct?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa sản phẩm"
-                                                       href="#" onclick="doDelete(${p.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
-                                                </div>
-                                            </td>
-                                            
-                                        </tr>
-                                    </c:forEach>                                  
+                                            <tr>
+                                                <td>${p.getBarcode()}</td>
+                                                <td><img src="assets/images/product/${p.getImage()}" width="80px" height="80px"/></td>
+                                                <td>${p.getName()}</td>
+                                                <td>${p.productCategories.getName()}</td>
+                                                <td>${p.getPrice()}</td>
+                                                <td>${p.suppliers.getName()}</td>
+                                                <td>${p.weightUnit.getName()}</td>
+                                                <td>${p.getManufactureDate()}</td>
+                                                <td>${p.getExpirationDate()}</td>
+                                                <td>${p.getBatch()}</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center list-action">
+                                                        <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lịch sử giá"
+                                                           href="listPrice?product_id=${p.getId()}"><i class="ri-eye-line mr-0"></i></a>
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa giá"
+                                                           href="updatePrice?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chỉnh sửa thông tin"
+                                                           href="updateProduct?product_id=${p.getId()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa sản phẩm"
+                                                           href="#" onclick="doDelete(${p.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                        </c:forEach>                                  
                                     </tbody>
                                 </table>
                             </div>

@@ -126,7 +126,36 @@ public class InventoryDAO extends DBContext {
         }
         return list;
     }
+    
+    public List<Inventory> getInventoryByProductName(String product_name) {
+        ProductsDAO pd = new ProductsDAO();
+        String sql = "SELECT * FROM [dbo].[Inventory] i JOIN [dbo].[Products] p ON i.product_id = p.product_id WHERE p.product_name LIKE ? ";
+        List<Inventory> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+ product_name +"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
 
+                Inventory in = new Inventory();
+                in.setId(rs.getInt("inventory_id"));
+                Products p = pd.getProductById(rs.getInt("product_id"));
+                in.setProduct(p);
+                in.setCurrentStock(rs.getInt("current_stock"));
+                in.setInventoryStatus(rs.getString("inventory_status"));
+                in.setLastRestockDate(rs.getTimestamp("last_restock_date").toLocalDateTime());
+                in.setAlert(rs.getString("alert"));
+
+                list.add(in);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
+    
+    
     public List<Inventory> getAllInventory() {
         List<Inventory> list = new ArrayList<>();
         ProductsDAO pd = new ProductsDAO();

@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-        
+
         <script type="text/javascript">
             function doDelete(id) {
                 if (confirm("Bạn có muốn xóa sản phẩm này không ?")) {
@@ -16,7 +16,7 @@
                 }
             }
         </script>
-        
+
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
         <body class="  ">
@@ -68,7 +68,14 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="table-responsive rounded mb-3">
-                                    <table class="data-tables table mb-0 tbl-server-info">
+                                    <form action="findProInInven" method="get" data-toggle="validator">
+                                        <div class="mb-3 d-flex justify-content-end">                             
+                                            <input type="text" class="form-control" name="namePro" placeholder="Tìm kiếm sản phẩm theo tên" style="max-width: 300px;" />
+                                            <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
+                                            <a href="listInventory" class="btn btn-primary add-list"><i class="ri-eye-line"></i>Xem toàn bộ kho</a>
+                                        </div>
+                                    </form>
+                                    <table class="table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>Lô</th>
@@ -82,6 +89,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
+                                        <c:if test="${empty inven}">
+                                            <tr>
+                                                <td colspan="10" style="text-align: center;">Không tìm thấy sản phẩm.</td>
+                                            </tr>
+                                        </c:if>
                                         <c:forEach items="${inven}" var="i">
                                             <tr>    
                                                 <td>${i.getProduct().getBatch()}</td>
@@ -96,7 +108,7 @@
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Nhập kho"
                                                            href="importProduct?inventory_id=${i.getId()}"><i class="ri-add-fill mr-0"></i></a>
                                                         <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa sản phẩm trong kho"
-                                                       href="#" onclick="doDelete(${i.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                           href="#" onclick="doDelete(${i.getId()})"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -426,6 +426,30 @@
         <servlet-name>PaymentReturnServlet</servlet-name>
         <servlet-class>controller.PaymentReturnServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>controller.DeleteCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindProductServlet</servlet-name>
+        <servlet-class>controller.FindProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindCategoryServlet</servlet-name>
+        <servlet-class>controller.FindCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindUnitServlet</servlet-name>
+        <servlet-class>controller.FindUnitServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindProInInvenServlet</servlet-name>
+        <servlet-class>controller.FindProInInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindProInStoreServlet</servlet-name>
+        <servlet-class>controller.FindProInStoreServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -759,7 +783,7 @@
     <servlet-mapping>
         <servlet-name>InitOrderServlet</servlet-name>
         <url-pattern>/init-order</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteShift</servlet-name>
         <url-pattern>/DeleteShift</url-pattern>
@@ -803,7 +827,7 @@
     <servlet-mapping>
         <servlet-name>PaymentReturnServlet</servlet-name>
         <url-pattern>/payment-return</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductCategorySale</servlet-name>
         <url-pattern>/ProductCategorySale</url-pattern>
@@ -839,6 +863,30 @@
     <servlet-mapping>
         <servlet-name>DeleteStoreStockServlet</servlet-name>
         <url-pattern>/deleteStoreStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindProductServlet</servlet-name>
+        <url-pattern>/findProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindCategoryServlet</servlet-name>
+        <url-pattern>/findCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindUnitServlet</servlet-name>
+        <url-pattern>/findUnit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindProInInvenServlet</servlet-name>
+        <url-pattern>/findProInInven</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindProInStoreServlet</servlet-name>
+        <url-pattern>/findProInStore</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.AccountDAO;
+import dal.WeightUnitDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,13 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Accounts;
+import java.util.List;
+import model.WeightUnit;
 
 /**
  *
- * @author frien
+ * @author PC
  */
-public class LoginServlet extends HttpServlet {
+public class FindUnitServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +37,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet FindUnitServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet FindUnitServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +57,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        WeightUnitDAO ud = new WeightUnitDAO();
+        String name = request.getParameter("nameUnit");
+        List<WeightUnit> list = ud.findUnitByName(name.trim());
+        session.setAttribute("wu", list);
+        request.getRequestDispatcher("page-list-weight-unit.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,24 +75,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("emailLogin");
-        String password = request.getParameter("passwordLogin");
-        
-        AccountDAO dao = new AccountDAO();
-        Accounts a = dao.login(email, password);
-        if (a == null) {
-            request.setAttribute("mess", "Sai tên đăng nhập hoặc mật khẩu!");
-            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
-            
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", a);
-            if (a.getRole_id()==1) {
-                response.sendRedirect("HomeAdmin");
-            } else {
-                response.sendRedirect("PoSHome");
-            }     
-        }
+        processRequest(request, response);
     }
 
     /** 

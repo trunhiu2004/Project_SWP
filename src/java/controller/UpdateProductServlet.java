@@ -135,58 +135,62 @@ public class UpdateProductServlet extends HttpServlet {
 
         String fileName = null;
         for (Part part : request.getParts()) {
-            fileName = extractFileName(part);
-            if (fileName != null && !fileName.isEmpty()) {
-                part.write(savePath + File.separator + fileName);
-                request.setAttribute("message", savePath + File.separator + fileName);
-            }
+            if (part.getName().equals("imgPro")) {
+                fileName = extractFileName(part);
+                if (fileName != null && !fileName.isEmpty()) {
+                    part.write(savePath + File.separator + fileName);
+                    request.setAttribute("message", savePath + File.separator + fileName);
+                }
+            }}
+
+            System.out.println("Uploaded file name: " + fileName);
+
+            ProductsDAO pd = new ProductsDAO();
+            SuppliersDAO sd = new SuppliersDAO();
+            WeightUnitDAO wud = new WeightUnitDAO();
+            ProductCategoriesDAO pcd = new ProductCategoriesDAO();
+
+            String id_raw = request.getParameter("idPro");
+            String cate_raw = request.getParameter("catePro");
+            String name = request.getParameter("namePro");
+            String barcode = request.getParameter("barcode");
+            String price_raw = request.getParameter("pricePro");
+            String unit_raw = request.getParameter("unitPro");
+            String supplier_raw = request.getParameter("supPro");
+            String manufactureDateStr = request.getParameter("manufactureDate");
+            String expirationDateStr = request.getParameter("expirationDate");
+            String batch_raw = request.getParameter("batch");
+            int id = Integer.parseInt(id_raw);
+            Products p1 = pd.getProductById(id);
+            String img = (fileName != null && !fileName.isEmpty()) ? fileName : p1.getImage();
+
+            int cate = Integer.parseInt(cate_raw);
+            ProductCategories ci = pcd.getCategoryById(cate);
+            int unit = Integer.parseInt(unit_raw);
+            WeightUnit ui = wud.getUnitById(unit);
+            int sup = Integer.parseInt(supplier_raw);
+            Suppliers si = sd.getSupById(sup);
+            float price = Float.parseFloat(price_raw);
+            LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
+            LocalDate expirationDate = LocalDate.parse(expirationDateStr);
+
+            int batch = Integer.parseInt(batch_raw);
+            Products pNew = new Products(id, name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate, batch);
+
+            pd.updateProduct(pNew);
+            response.sendRedirect("listProduct");
         }
 
-        ProductsDAO pd = new ProductsDAO();
-        SuppliersDAO sd = new SuppliersDAO();
-        WeightUnitDAO wud = new WeightUnitDAO();
-        ProductCategoriesDAO pcd = new ProductCategoriesDAO();
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
         
-        String id_raw = request.getParameter("idPro");
-        String cate_raw = request.getParameter("catePro");
-        String name = request.getParameter("namePro");
-        String barcode = request.getParameter("barcode");
-        String price_raw = request.getParameter("pricePro");
-        String unit_raw = request.getParameter("unitPro");
-        String supplier_raw = request.getParameter("supPro");
-        String manufactureDateStr = request.getParameter("manufactureDate");
-        String expirationDateStr = request.getParameter("expirationDate");
-        String batch_raw = request.getParameter("batch");
-        
-        int id = Integer.parseInt(id_raw);
-        int cate = Integer.parseInt(cate_raw);
-        ProductCategories ci = pcd.getCategoryById(cate);
-        int unit = Integer.parseInt(unit_raw);
-        WeightUnit ui = wud.getUnitById(unit);
-        int sup = Integer.parseInt(supplier_raw);
-        Suppliers si = sd.getSupById(sup);
-        float price = Float.parseFloat(price_raw);
-        LocalDate manufactureDate = LocalDate.parse(manufactureDateStr);
-        LocalDate expirationDate = LocalDate.parse(expirationDateStr);
-        
-        Products p1 = pd.getProductById(id);
-        String img = (fileName != null && !fileName.isEmpty()) ? fileName : p1.getImage();
-        
-        int batch = Integer.parseInt(batch_raw);
-        Products pNew = new Products(id, name, price, img, barcode, ci, si, ui, manufactureDate, expirationDate,batch);
-        
-        pd.updateProduct(pNew);
-        response.sendRedirect("listProduct");
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

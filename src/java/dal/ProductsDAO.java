@@ -469,10 +469,10 @@ public class ProductsDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Products> getTopProductByMonth() {
-    List<Products> top = new ArrayList<>();
-    String sql = """
+        List<Products> top = new ArrayList<>();
+        String sql = """
         WITH salesByMonth AS (
                 SELECT 
                     MONTH(o.order_date) AS order_month,  -- Lấy tháng từ order_date
@@ -494,7 +494,7 @@ public class ProductsDAO extends DBContext {
                     Customers c ON o.customer_id = c.customer_id
                 WHERE
                     YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
-                    AND o.order_status = 'Paid'
+                    AND o.order_status = 'COMPLETED'
                 GROUP BY 
                     YEAR(o.order_date),   -- Nhóm theo năm
                     MONTH(o.order_date),  -- Nhóm theo tháng
@@ -519,41 +519,69 @@ public class ProductsDAO extends DBContext {
              
     """;
 
-    try {
-        PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet rs = statement.executeQuery();
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
 
-        while (rs.next()) {
-            String image = rs.getString("product_image");
-            String name = rs.getString("product_name");
-            String category = rs.getString("category_name");
-            int totalSold = rs.getInt("total_sold");
+            while (rs.next()) {
+                String image = rs.getString("product_image");
+                String name = rs.getString("product_name");
+                String category = rs.getString("category_name");
+                int totalSold = rs.getInt("total_sold");
 
-            // Tạo đối tượng Products cho mỗi bản ghi
-            Products product = new Products();
-            product.setName(name);
-            product.setImage(image);
-            
-            ProductCategories productCategory = new ProductCategories();
-            productCategory.setName(category);
-            product.setProductCategories(productCategory);
+                // Tạo đối tượng Products cho mỗi bản ghi
+                Products product = new Products();
+                product.setName(name);
+                product.setImage(image);
 
-            // Bạn có thể sử dụng trường `totalSold` để lưu vào một trường phù hợp trong lớp Products
-            top.add(product);
+                ProductCategories productCategory = new ProductCategories();
+                productCategory.setName(category);
+                product.setProductCategories(productCategory);
+
+                // Bạn có thể sử dụng trường `totalSold` để lưu vào một trường phù hợp trong lớp Products
+                top.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+
+        return top;
     }
-
-    return top;
-}
     
-
-    
+    public List<Products> searchProductByName(String product_name) {
+        String sql = "select * from Products where product_name like ?";
+        List<Products> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+product_name+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Products p = new Products();
+                p.setId(rs.getInt("product_id"));
+                p.setBarcode(rs.getString("barcode"));
+                p.setName(rs.getString("product_name"));
+                p.setPrice(rs.getFloat("product_price"));
+                p.setImage(rs.getString("product_image"));
+                ProductCategories pc = getCategoryById(rs.getInt("category_id"));
+                p.setProductCategories(pc);
+                WeightUnit wu = getWUById(rs.getInt("weight_unit_id"));
+                p.setWeightUnit(wu);
+                Suppliers sup = getSupById(rs.getInt("supplier_id"));
+                p.setSuppliers(sup);
+                p.setManufactureDate(rs.getDate("manufacture_date").toLocalDate());
+                p.setExpirationDate(rs.getDate("expiration_date").toLocalDate());
+                p.setBatch(rs.getInt("batch"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
     
     public List<Products> getTopProductDetail() {
-    List<Products> top = new ArrayList<>();
-    String sql = """
+        List<Products> top = new ArrayList<>();
+        String sql = """
         WITH salesByMonth AS (
                 SELECT 
                     MONTH(o.order_date) AS order_month,
@@ -576,7 +604,7 @@ public class ProductsDAO extends DBContext {
                     Customers c ON o.customer_id = c.customer_id
                 WHERE
                     YEAR(o.order_date) = 2024  -- Chỉ lấy dữ liệu cho năm 2024
-                    AND o.order_status = 'Paid'
+                    AND o.order_status = 'COMPLETED'
                 GROUP BY 
                     YEAR(o.order_date),
                     MONTH(o.order_date),
@@ -624,37 +652,34 @@ public class ProductsDAO extends DBContext {
              
     """;
 
-    try {
-        PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet rs = statement.executeQuery();
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
 
-        while (rs.next()) {
-            String image = rs.getString("product_image");
-            String name = rs.getString("product_name");
-            String category = rs.getString("category_name");
-            int totalSold = rs.getInt("total_quantity");
-            String totalSale  = rs.getString("total_sales_amount");
+            while (rs.next()) {
+                String image = rs.getString("product_image");
+                String name = rs.getString("product_name");
+                String category = rs.getString("category_name");
+                int totalSold = rs.getInt("total_quantity");
+                String totalSale = rs.getString("total_sales_amount");
 
+                Products topProduct = new Products();
+                topProduct.setName(name);
+                topProduct.setImage(image);
+                topProduct.setPrice(Float.parseFloat(totalSale));
+                ProductCategories productCategory = new ProductCategories();
+                productCategory.setName(category);
+                topProduct.setProductCategories(productCategory);
 
-            Products topProduct = new Products();
-            topProduct.setName(name);
-            topProduct.setImage(image);
-            topProduct.setPrice(Float.parseFloat(totalSale)); 
-            ProductCategories productCategory = new ProductCategories();
-            productCategory.setName(category);
-            topProduct.setProductCategories(productCategory);
+                top.add(topProduct);
 
-            top.add(topProduct);
-            
-
-            
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
 
-    return top;
-}
+        return top;
+    }
 
     public static void main(String[] args) {
         ProductsDAO p = new ProductsDAO();

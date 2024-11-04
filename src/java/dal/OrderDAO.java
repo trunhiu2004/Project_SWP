@@ -566,7 +566,7 @@ public class OrderDAO extends DBContext {
 
     public int getTotalPriceOrder() {
         int totalPriceOrder = 0;
-        String sql = "	select Sum(order_total_amount) as Total_Price_Order from Orders where order_status = 'Paid'";
+        String sql = "	select Sum(order_total_amount) as Total_Price_Order from Orders where order_status = 'COMPLETED'";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -581,7 +581,7 @@ public class OrderDAO extends DBContext {
 
     public double getTotalOrderSale() {
         double totalOrderSale = 0;
-        String sql = "	SELECT COUNT(order_id) AS total_order_sales FROM Orders where order_status = 'Paid'";
+        String sql = "	SELECT COUNT(order_id) AS total_order_sales FROM Orders where order_status = 'COMPLETED'";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
@@ -598,7 +598,7 @@ public class OrderDAO extends DBContext {
 
     public double getTotalOrderAvg() {
         double totalAvg = 0;
-        String sql = "SELECT Avg(Orders.order_total_amount) AS total_avg FROM Orders  where order_status = 'Paid'";
+        String sql = "SELECT Avg(Orders.order_total_amount) AS total_avg FROM Orders  where order_status = 'COMPLETED'";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
@@ -615,7 +615,7 @@ public class OrderDAO extends DBContext {
 
     public double getTotalMax() {
         double totalMax = 0;
-        String sql = "SELECT MAX(Orders.order_total_amount) AS max_price FROM Orders  where order_status = 'Paid'";
+        String sql = "SELECT MAX(Orders.order_total_amount) AS max_price FROM Orders  where order_status = 'COMPLETED'";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
 
