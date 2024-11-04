@@ -102,6 +102,40 @@ public class SalesListDAO extends DBContext {
     }
     
     
+    public List<SalesList> searchSales(String searchTerm) {
+    List<SalesList> saleList = new ArrayList<>();
+    String sql = "SELECT o.order_id, c.customer_name, o.order_date, o.order_total_amount, p.product_name, p.product_image, o.order_status, od.quantity, od.unit_price, od.total_price " +
+                 "FROM Orders AS o " +
+                 "JOIN OrdersDetails AS od ON o.order_id = od.order_id " +
+                 "JOIN Products AS p ON od.product_id = p.product_id " +
+                 "JOIN Customers AS c ON o.customer_id = c.customer_id " +
+                 "WHERE c.customer_name LIKE ? OR p.product_name LIKE ?";
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, "%" + searchTerm + "%");
+        statement.setString(2, "%" + searchTerm + "%");
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            SalesList list = new SalesList(
+                    rs.getInt("order_id"),
+                    rs.getString("customer_name"),
+                    rs.getTimestamp("order_date") != null ? rs.getTimestamp("order_date").toLocalDateTime() : null,
+                    rs.getDouble("order_total_amount"),
+                    rs.getString("product_name"),
+                    rs.getString("product_image"),
+                    rs.getString("order_status"),
+                    rs.getInt("quantity"),
+                    rs.getDouble("unit_price"),
+                    rs.getDouble("total_price"));
+            saleList.add(list);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return saleList;
+}
+
+    
     
     public static void main(String[] args) {
         SalesListDAO acc = new SalesListDAO();

@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             // Điều hướng dựa trên vai trò của người dùng
-            if (account.getRole_id() == 2) {
+            if (account.getRole_id() == 1) {
                 response.sendRedirect("HomeAdmin");
             } else {
                 response.sendRedirect("PoSHome");
