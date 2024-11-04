@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
         <html lang="en">
 
         <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-customers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
@@ -59,14 +60,14 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Customer List</h4>
+                                        <h4 class="mb-3">Danh sách khách hàng</h4>
                                         
                                         <div class="iq-search-bar device-search">
                                             
                                             
                                 <form action="SearchCustomer" method="post" class="searchbox">
                                     <a type = "submit" class="search-link"><i class="ri-search-line"></i></a>
-                                    <input name="txt" type="text" class="text search-input" placeholder="Search here...">
+                                    <input name="txt" type="text" class="text search-input" placeholder="Tìm kiếm ở đây...">
                                 </form>
                             </div>
                                         
@@ -74,8 +75,7 @@
                                     
                                     
                                     
-                                    <a href="addCustomer.jsp" class="btn btn-primary add-list"><i
-                                            class="las la-plus mr-3"></i>Add Customer</a>
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -84,12 +84,12 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
 
-                                                <th>Name</th>
-                                                <th>Phone </th>
-                                                <th>Point</th>
-                                                <th>Rank of Customer</th>
-                                                <th>Customer type</th>
-                                                <th>Action</th>
+                                                <th>Tên</th>
+                                                <th>Số điện thoại </th>
+                                                <th>Điểm</th>
+                                                <th>Xếp hạng khách hàng</th>
+                                                
+                                                <th>Chức năng</th>
 
                                             </tr>
                                         </thead>
@@ -101,16 +101,16 @@
                                                     <td>${customer.customerPhone}</td>
                                                     <td>${customer.point}</td>
                                                     <td>${customer.typeName}</td>
-                                                    <td>${customer.customerTypeId}</td>
+                                                    
                                                     <td>
                                                         <div class="d-flex align-items-center list-action">
                                                             
                                                             <a class="badge bg-success mr-2" data-toggle="tooltip"
-                                                                data-placement="top" title="" data-original-title="Edit"
+                                                                data-placement="top" title="" data-original-title="Sửa đổi"
                                                                 href="EditCustomer?id=${customer.customerId}"><i class="ri-pencil-line mr-0"></i></a>
                                                             <a class="badge bg-warning mr-2" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Delete" href="DeleteCustomerServlet?id=${customer.customerId}"><i
+                                                                data-original-title="Xóa" href="DeleteCustomerServlet?id=${customer.customerId}"><i
                                                                     class="ri-delete-bin-line mr-0"></i></a>
                                                         </div>
                                                     </td>
@@ -124,24 +124,7 @@
                         </div>
                         <!-- Page end  -->
                         <div class="row justify-content-between mt-3">
-                                        <div id="user-list-page-info" class="col-md-6">
-                                            <span>Showing 1 to 5 of 5 entries</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-end mb-0">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                    </li>
-                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">Next</a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+                                        
                                     </div>
                     </div>
                     <!-- Modal Edit -->

@@ -5,12 +5,16 @@
 
 package controller;
 
+import dal.EmployeeAttendanceDAO;
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Accounts;
 
 /**
  *
@@ -53,9 +57,27 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getSession().removeAttribute("account");
+        HttpSession session = request.getSession();
+        // Lấy account từ session
+        Accounts account = (Accounts) session.getAttribute("account");
+        
+        if (account != null) {
+            // Lấy employee_id từ account_id
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            Integer employeeId = employeeDAO.getEmployeeIdByAccountId(account.getAccount_id());
+
+            if (employeeId != null) {
+                // Ghi thời gian đăng xuất vào EmployeeAttendance
+                EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
+                attendanceDAO.recordLogoutTime(employeeId);
+            }
+        }
+        
+        // Xóa account khỏi session và điều hướng về trang đăng nhập
+        session.removeAttribute("account");
         response.sendRedirect("login");
     } 
+ 
 
     /** 
      * Handles the HTTP <code>POST</code> method.

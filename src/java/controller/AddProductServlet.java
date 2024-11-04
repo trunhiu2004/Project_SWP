@@ -123,7 +123,7 @@ public class AddProductServlet extends HttpServlet {
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
         }
-
+        
         String fileName = null;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -146,6 +146,7 @@ public class AddProductServlet extends HttpServlet {
         String price_raw = request.getParameter("pricePro");
         String unit_raw = request.getParameter("unitPro");
         String supplier_raw = request.getParameter("supPro");
+        
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : null;
 
         ProductsDAO pd = new ProductsDAO();

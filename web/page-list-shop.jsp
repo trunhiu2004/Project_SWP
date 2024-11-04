@@ -1,6 +1,6 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
+<!doctype html><%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-users.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
@@ -57,7 +57,7 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Shop</h4>
+                                    <h4 class="mb-3">Cửa hàng</h4>
 
                                     <div class="iq-search-bar device-search">
                                         <form action="SearchShop" method="post" class="searchbox">
@@ -67,7 +67,7 @@
                                     </div>
 
                                 </div>
-                                <a href="addShop.jsp" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Shop</a>
+                                
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -77,13 +77,13 @@
                                         <tr class="ligth ligth-data">
 
 
-                                            <th>Name</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
+                                            <th>Tên cửa hàng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Địa chỉ cửa hàng</th>
                                             <th>Email</th>
-                                            <th>Opening</th>   
-                                            <th>Image</th>
-                                            <th>Action</th>
+                                            <th>Giờ mở cửa</th>   
+                                            <th>Ảnh cửa hàng</th>
+                                            <th>Chức năng</th>
 
                                         </tr>
                                     </thead>
@@ -99,8 +99,8 @@
 
                                                 <td><img src="assets/images/logoshop/${shop.shopLogo}" width="80px" height="80px"/></td>
                                                 <th>
-                                                    <a href="DeleteShop?id=${shop.shopId}" class="btn btn-warning">Delete</a>
-                                                    <a href="EditShop?id=${shop.shopId}" class="btn btn-primary">Edit</a>
+                                                    <a href="DeleteShop?id=${shop.shopId}" class="btn btn-warning">Xóa</a>
+                                                    <a href="EditShop?id=${shop.shopId}" class="btn btn-primary">Sửa</a>
 
 
                                                 </th>
@@ -138,7 +138,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

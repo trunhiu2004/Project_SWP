@@ -127,7 +127,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Hình ảnh: </label>
+                                                    <label>Hình ảnh</label>
                                                     <input type="file" class="form-control image-file" name="imgPro" accept="image/*">
                                                 </div>
                                             </div>

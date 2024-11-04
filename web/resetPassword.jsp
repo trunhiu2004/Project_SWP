@@ -2,6 +2,7 @@
 
 
 <!doctype html>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
@@ -41,17 +42,14 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" placeholder=" " name="passwordReset">
-                                                                <label>New password</label>
+                                                                <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordReset">
                                                             </div>
                                                         </div>
 
 
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Confirm</button>
-                                                    <p class="mt-3">
-                                                        Already have an Account <a href="login" class="text-primary">Sign In</a>
-                                                    </p>
+                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+
                                                 </form>
                                             </div>
                                         </div>

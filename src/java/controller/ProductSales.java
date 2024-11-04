@@ -72,7 +72,22 @@ public class ProductSales extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String searchTerm = request.getParameter("search");
+        SalesReportDAO dao = new SalesReportDAO();
+        
+        List<model.ProductSales> productSale;
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+           
+            productSale = dao.searchProductSales(searchTerm);
+        } else {
+            
+            productSale = dao.getProductSales();
+        }
+
+      
+        request.setAttribute("sale", productSale);
+        request.getRequestDispatcher("page-product-sales.jsp").forward(request, response);
     }
 
     /** 

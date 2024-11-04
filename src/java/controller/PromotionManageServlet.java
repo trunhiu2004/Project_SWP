@@ -58,7 +58,8 @@ public class PromotionManageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         PromotionDAO promotionDAO  = new PromotionDAO();
-        
+        List<String> statuses = promotionDAO.getStatuses();
+        request.getSession().setAttribute("statuses", statuses);
         request.setAttribute("listPromotion", promotionDAO.getAllPromotion());
         request.getRequestDispatcher("promotion-list.jsp").forward(request, response);
     } 
@@ -73,10 +74,25 @@ public class PromotionManageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String search = request.getParameter("search");
         PromotionDAO promotionDAO = new PromotionDAO();
-        List<Promotion> listCoupon = promotionDAO.searchByName(search);
-        request.setAttribute("listPromotion", listCoupon);
+        String promotionCode = request.getParameter("promotionCode");
+        String description = request.getParameter("description");
+        String promotionStatus = request.getParameter("promotionStatus");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String discountAmount = request.getParameter("discountAmount");
+        
+        
+        List<Promotion> filteredPromotion = promotionDAO.getFilteredPromotion(promotionCode, description, discountAmount, startDate, endDate, promotionStatus);
+
+        request.setAttribute("listPromotion", filteredPromotion);
+        request.setAttribute("promotionCode", promotionCode);
+        request.setAttribute("description",description);
+        request.setAttribute("promotionStatus", promotionStatus);
+        request.setAttribute("startDate", startDate);
+        request.setAttribute("endDate", endDate);
+        request.setAttribute("discountAmount", discountAmount);
+        
         request.getRequestDispatcher("promotion-list.jsp").forward(request, response);
     }
 

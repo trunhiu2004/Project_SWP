@@ -99,6 +99,43 @@ public class StoreStockDAO extends DBContext {
         return list;
     }
 
+    public List<StoreStock> findStoreByProName(String product_name) {
+        List<StoreStock> list = new ArrayList<>();
+        String sql = "SELECT \n"
+                + "      s.[store_stock_id],\n"
+                + "      s.[inventory_id],\n"
+                + "      s.[quantity_in_stock],\n"
+                + "      s.[last_stock_check_date],\n"
+                + "      s.[discount_product_id],\n"
+                + "      s.[alert]\n"
+                + "FROM [SWP_PROJECT].[dbo].[Inventory] i\n"
+                + "JOIN [SWP_PROJECT].[dbo].[Products] p ON i.product_id = p.product_id\n"
+                + "JOIN [SWP_PROJECT].[dbo].[StoreStock] s ON s.inventory_id = i.inventory_id\n"
+                + "WHERE p.product_name LIKE ? ";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+ product_name +"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                StoreStock stock = new StoreStock();
+                stock.setStoreStockId(rs.getInt("store_stock_id"));
+                Inventory inventory = getInventoryById(rs.getInt("inventory_id"));
+                stock.setInventory(inventory);
+                stock.setStock(rs.getInt("quantity_in_stock"));
+                stock.setLastStockCheckDate(rs.getDate("last_stock_check_date").toLocalDate());
+                DiscountProduct dp = getDiscountProductById(rs.getInt("discount_product_id"));
+                stock.setDiscount(dp);
+                stock.setAlert(rs.getString("alert"));
+                list.add(stock);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
+
     public StoreStock getStoreStockById(int store_stock_id) {
         String sql = "SELECT * FROM [dbo].[StoreStock] WHERE store_stock_id = ?";
 
@@ -201,8 +238,8 @@ public class StoreStockDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
-        public void deleteStock(int id) {
+
+    public void deleteStock(int id) {
         String sql = "delete from StoreStock where store_stock_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -213,7 +250,6 @@ public class StoreStockDAO extends DBContext {
         }
     }
 
-    
     public static void main(String[] args) {
         StoreStockDAO c = new StoreStockDAO();
         List<StoreStock> list = c.getAllStoreStock();
@@ -221,8 +257,6 @@ public class StoreStockDAO extends DBContext {
             System.out.println(storeStock);
         }
     }
-
-    
 
     public StoreStock findByBarcode(String barcode) {
         String sql = "SELECT ss.*, i.*, p.*, dp.* FROM StoreStock ss "

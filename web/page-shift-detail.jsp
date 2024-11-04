@@ -60,9 +60,8 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Shift Detail</h4>
-                                        <p class="mb-0">A customer dashboard lets you easily gather and visualize customer data from optimizing <br>
-                                            the customer experience, ensuring customer retention. </p>
+                                        <h4 class="mb-3">Chi tiết ca làm</h4>
+                                        <p class="mb-0">Nơi đây lưu trữ chi tiết ca làm </p>
                                     </div>
 
                                 </div>
@@ -72,17 +71,22 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                <th>Shift ID</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                                <th>Total Hours</th>
-                                                <th>Order ID</th>                                                                                       
-                                                <th>Order Total Amount</th>
-                                                <th>Unit Price</th>
-                                                <th>Total Price</th>
-                                                <th>Employee ID</th>
-                                                <th>Product Name</th>
-                                                <th>Product Image</th>
+                                                <th>Mã ca làm</th>
+                                                <th>Thời gian bắt đầu</th>
+                                                <th>Thời gian kết ca</th>
+                                                <th>Tổng giờ làm</th>
+                                                <th>Mã đơn hàng</th>                                                                                       
+                                                <th>Tổng tiền đơn hàng</th>
+                                                <th>Giá sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Tổng tiền sản phẩm</th>
+                                                <th>Tên nhân viên</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Ảnh sản phẩm</th>
+
+
+
+                                                
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -95,10 +99,11 @@
                                                 <td><fmt:formatNumber value="${shiftdetail.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/>H</td>
 
                                                 <td>${shiftdetail.orderId}</td>
-                                                <td><fmt:formatNumber value="${shiftdetail.orderTotalAmount}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
-                                                <td><fmt:formatNumber value="${shiftdetail.unitPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
-                                                <td><fmt:formatNumber value="${shiftdetail.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/>$</td>
-                                                <td>${shiftdetail.employeeId}</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.orderTotalAmount}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.unitPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                <td><fmt:formatNumber value="${shiftdetail.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                <td>${shiftdetail.quantity}</td>
+                                                <td>${shiftdetail.employeeName}</td>
                                                 <td>${shiftdetail.productName}</td>
                                                 <td><img src="assets/images/product/${shiftdetail.productImage}" width="80px" height="80px"/></td>
                                             </tr>

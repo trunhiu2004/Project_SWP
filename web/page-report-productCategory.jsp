@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -51,11 +52,21 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Revenue By Product Category</h4>
-                                        <p class="mb-0">Sales enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Doanh thu theo danh mục sản phẩm</h4>
+                                        
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+                                    
+                                    <div class="iq-search-bar device-search">
+                                        <form method="Post" action="ProductCategorySale" class="searchbox">
+                                            <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                            <input name="search" type="text" class="text search-input" placeholder="Tìm kiếm danh mục sản phẩm">
+                                        </form>
+                                    </div>
+                                    
+                           
+                                    
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -64,11 +75,11 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 
-                                                <th>Category Name</th>
-                                                <th>Category Sold Money</th>
+                                                <th>Tên danh mục</th>
+                                                <th>Số tiền đã bán theo danh mục</th>
                                                     
-                                                <th>Category Total Quantity</th>
-                                                <th>Category Total Order</th>
+                                                <th>Tổng số lượng hàng bán theo danh mục</th>
+                                                <th>Tổng đơn hàng danh mục đã bán</th>
                                                 
                                                 
                                             </tr>
@@ -143,7 +154,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>

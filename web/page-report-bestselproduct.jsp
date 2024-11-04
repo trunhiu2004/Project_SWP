@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
     <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-sale.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
@@ -51,11 +52,18 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Revenue By Best Selling Product</h4>
-                                        <p class="mb-0">Sales enables you to effectively control sales KPIs and monitor them in one central<br>
-                                            place while helping teams to reach sales goals. </p>
+                                        <h4 class="mb-3">Doanh thu theo sản phẩm bán chạy nhất</h4>
+                                        
                                     </div>
-                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Back to home</a>
+                                    <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+
+                                    <div class="iq-search-bar device-search">
+                                        <form method="Post" action="BestSellProduct" class="searchbox">
+                                            <a type="submit" class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                            <input name="search" type="text" class="text search-input" placeholder="Tìm kiếm sản phẩm">
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -63,16 +71,16 @@
                                     <table class="data-table table mb-0 tbl-server-info">
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
-                                                
-                                                <th>Product Name</th>
-                                                <th>Product Image</th>
-                                                    
-                                                <th>Category Name</th>
-                                                <th>Total Quantity Sold</th>
-                                                <th>Money Sold</th>
-                                                <th>Total Order</th>
-                                                
-                                                
+
+                                                <th>Tên sản phẩm</th>
+                                                <th>Hình ảnh sản phẩm</th>
+
+                                                <th>Tên loại hàng</th>
+                                                <th>Tổng số lượng đã bán</th>
+                                                <th>Số tiền bán được theo sản phẩm</th>
+                                                <th>Tổng số đơn hàng đã bán</th>
+
+
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -82,11 +90,11 @@
                                                 <td><img src="assets/images/product/${sale.productImage}" width="80px" height="80px" /></td>
                                                 <td>${sale.categoryName}</td>
                                                 <td>${sale.totalQuantitySold}</td>
-                                                <td>${sale.productSales}$</td>
+                                                <td>${sale.productSales} VNĐ</td>
                                                 <td>${sale.totalOrders}</td>
-          
-                                                
-                                                
+
+
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -146,7 +154,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>�</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
                             </div>
                         </div>
                     </div>
