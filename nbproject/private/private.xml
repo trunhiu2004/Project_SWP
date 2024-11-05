@@ -115,9 +115,21 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/src/java/controller/PoSHomeServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/Project_SWP/web/emailTemplateForm.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/Admin/Setting/EmailSettingsController.java</file>
+            <file>file:/D:/Project_SWP/src/java/verify/SendEmail.java</file>
+            <file>file:/D:/Project_SWP/web/emailSettings.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/ForgetPassword.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/EmailSettingsDAO.java</file>
+            <file>file:/D:/Project_SWP/src/java/model/EmailTemplate.java</file>
+            <file>file:/D:/Project_SWP/web/components/sidebar.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/dal/EmailTemplateDAO.java</file>
+            <file>file:/D:/Project_SWP/web/emailTemplates.jsp</file>
+            <file>file:/D:/Project_SWP/src/java/controller/ResetPasswordServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/controller/RegisterServlet.java</file>
             <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Project_SWP/src/java/controller/Admin/Setting/EmailTemplateServlet.java</file>
         </group>
     </open-files>
 </project-private>

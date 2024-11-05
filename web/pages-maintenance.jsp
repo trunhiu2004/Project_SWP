@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="en">
   
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/pages-maintenance.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:44 GMT -->
+
 <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -88,5 +88,5 @@
     <script src="assets/js/app.js"></script>
   </body>
 
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/pages-maintenance.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:45 GMT -->
+
 </html>
