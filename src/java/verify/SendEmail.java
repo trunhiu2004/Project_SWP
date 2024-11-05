@@ -16,7 +16,7 @@ import model.EmailSettings;
  */
 public class SendEmail {
 
-    public void send(String toEmail, String subject, String body) {
+    public boolean send(String toEmail, String subject, String body) {
         EmailSettingsDAO dao = new EmailSettingsDAO();
         EmailSettings settings = dao.getEmailSettings();
 
@@ -53,7 +53,7 @@ public class SendEmail {
             message.setText(body, "UTF-8", "html");
 
             Transport.send(message);
-
+            return true;
         } catch (MessagingException e) {
             throw new RuntimeException("Failed to send email: " + e.getMessage(), e);
         }

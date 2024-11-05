@@ -6,6 +6,7 @@ package controller;
 
 import dal.AccountDAO;
 import dal.EmailTemplateDAO;
+import dal.MailogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -95,20 +96,28 @@ public class ForgetPassword extends HttpServlet {
                 // Lấy template từ cơ sở dữ liệu
                 EmailTemplateDAO templateDAO = new EmailTemplateDAO();
                 EmailTemplate template = templateDAO.getTemplateByName("Password Reset Template");
-
+                MailogDAO mailogDAO = new MailogDAO();
                 if (template != null) {
                     // Thay thế các biến trong template
                     String content = template.getContent()
                             .replace("{{email}}", email)
-                            .replace("{{link}}", link);
+                            .replace("{{reset_link}}", link);
 
                     // Gửi email
                     SendEmail se = new SendEmail();
-                    se.send(email, template.getSubject(), content);
+                    try {
+                        se.send(email, template.getSubject(), content);
+                        // Ghi log thành công
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
 
-                    request.getSession().setAttribute("tokenReset", token);
-                    request.getSession().setAttribute("status", "resetPass");
-                    request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                        request.getSession().setAttribute("tokenReset", token);
+                        request.getSession().setAttribute("status", "resetPass");
+                        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                    } catch (RuntimeException e) {
+                        // Ghi log thất bại
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
+                        throw e;
+                    }
                 } else {
                     // Xử lý khi không tìm thấy template
                     request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email đặt lại mật khẩu.");
