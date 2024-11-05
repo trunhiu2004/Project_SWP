@@ -80,12 +80,10 @@
                     <!-- Select Area -->
                     <div class="select_area">
                         <div style="flex: 1;">
-                            <select class="select2" id="select_employee">
-                                <option value="">Select Employee</option>
-                                <option value="1">Employee 1</option>
-                                <option value="2">Employee 2</option>
-                            </select>
+                            <select class="select2" id="select_employee" disabled>
+                                <option value="">Loading...</select>
                         </div>
+
 
                         <div style="flex: 1;">
                             <select id="customerSelect" class="form-control select2">
@@ -511,12 +509,12 @@
                 });
             }
 
-// Gọi hàm khi document ready
+            // Gọi hàm khi document ready
             $(document).ready(function () {
                 initializeCustomerSelect();
             });
 
-// Format customer in dropdown
+            // Format customer in dropdown
             function formatCustomer(customer) {
                 if (!customer.id)
                     return customer.text;
@@ -526,7 +524,7 @@
                         '</div>');
             }
 
-// Initialize other Select2 elements
+            // Initialize other Select2 elements
             function initializeOtherSelects() {
                 $('.select2:not(#customerSelect)').select2({
                     theme: "classic",
@@ -536,7 +534,7 @@
                 });
             }
 
-// Initialize all features
+            // Initialize all features
             function initializeFeatures() {
                 initializeStockBadges();
                 initializeTimeUpdate();
@@ -546,7 +544,48 @@
                 initializeCancelButton();
                 initializeCustomerModal();
                 initializePaymentFeatures();
+                fetchAndDisplayEmployeeName();
             }
+            function fetchAndDisplayEmployeeName() {
+                fetch('user-profile')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data && data.name) {
+                                const $select = $('#select_employee');
+                                $select.empty();
+                                $select.append(new Option(data.name, '', true, true));
+
+                                // Initialize select2 with specific styling
+                                $select.select2({
+                                    disabled: true,
+                                    theme: "classic",
+                                    minimumResultsForSearch: Infinity,
+                                    width: '100%'
+                                });
+                            } else {
+                                throw new Error('Invalid user data');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading user name:', error);
+                            const $select = $('#select_employee');
+                            $select.empty();
+                            $select.append(new Option('Error loading name', '', true, true));
+
+                            $select.select2({
+                                disabled: true,
+                                theme: "classic",
+                                minimumResultsForSearch: Infinity,
+                                width: '100%'
+                            });
+                        });
+            }
+
             function loadCustomerTypes() {
                 return fetch('load-customer-types')
                         .then(response => response.json())
@@ -1192,7 +1231,7 @@
                 }, 500);
             }
 
-// Format currency utility function
+            // Format currency utility function
             function formatCurrency(amount) {
                 return new Intl.NumberFormat('vi-VN', {
                     style: 'currency',

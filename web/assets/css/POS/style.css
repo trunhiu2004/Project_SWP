@@ -1748,62 +1748,22 @@ body {
         transform: rotate(360deg);
     }
 }
-.profile-info-item {
-    padding: 15px;
-    border-bottom: 1px solid #e2e8f0;
-    transition: background-color 0.2s ease;
+.select2.select2-container--disabled {
+    background-color: #f8f9fa;
+    opacity: 1;
 }
 
-.profile-info-item:last-child {
-    border-bottom: none;
+.select2.select2-container--disabled .select2-selection {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
 }
 
-.profile-info-item:hover {
-    background-color: #f8fafc;
+.select2-container--classic .select2-selection--single {
+    height: 38px;
+    line-height: 36px;
 }
 
-.profile-info-item p {
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.profile-info-item strong {
-    min-width: 120px;
-    color: #4a5568;
-    font-weight: 600;
-}
-
-.error-message {
-    color: #e53e3e;
-    text-align: center;
-    padding: 15px;
-}
-
-#profileModal .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-}
-
-#profileModal .close {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #4a5568;
-}
-
-#profileModal .close:hover {
-    color: #2d3748;
-}
-
-#profileModal h2 {
-    margin-bottom: 20px;
-    color: #2d3748;
-    font-weight: 600;
+.select2-container--classic .select2-selection--single .select2-selection__rendered {
+    line-height: 36px;
+    color: #212529;
 }
