@@ -45,17 +45,35 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
-                                        <thead class="bg-white text-uppercase">
-                                            <tr class="ligth ligth-data">
-                                                <th>ID</th>
-                                                <th>Tên mẫu</th>
-                                                <th>Chủ đề</th>
-                                                <th>Hành động</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ligth-body">
+                                <div class="row mb-4">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form method="get" action="emailTemplates" class="row">
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" name="search" 
+                                                               value="${searchKeyword}" placeholder="Tìm theo tên mẫu hoặc chủ đề...">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                                    <button type="button" class="btn btn-secondary" onclick="clearFilters()">Đặt lại</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive rounded mb-3">
+                                <table class="data-table table mb-0 tbl-server-info">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth ligth-data">
+                                            <th>ID</th>
+                                            <th>Tên mẫu</th>
+                                            <th>Chủ đề</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ligth-body">
                                         <c:forEach var="template" items="${templates}">
                                             <tr>
                                                 <td>${template.templateId}</td>
@@ -74,6 +92,25 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                            <a class="page-link" href="emailTemplates?page=${currentPage - 1}${not empty searchKeyword ? '&search=' : ''}${searchKeyword}">Trang trước</a>
+                                        </li>
+
+                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                                <a class="page-link" href="emailTemplates?page=${i}${not empty searchKeyword ? '&search=' : ''}${searchKeyword}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+
+                                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                            <a class="page-link" href="emailTemplates?page=${currentPage + 1}${not empty searchKeyword ? '&search=' : ''}${searchKeyword}">Trang sau</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -110,5 +147,11 @@
         <script async src="assets/js/chart-custom.js"></script>
         <!-- app JavaScript -->
         <script src="assets/js/app.js"></script>
+        <script>
+                                    function clearFilters() {
+                                        document.querySelector('input[name="search"]').value = '';
+                                        document.querySelector('form').submit();
+                                    }
+        </script>
     </body>
 </html>

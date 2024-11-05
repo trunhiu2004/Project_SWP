@@ -120,8 +120,37 @@ public class EmailTemplateServlet extends HttpServlet {
 
     private void listTemplates(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        List<EmailTemplate> templates = templateDAO.getAllTemplates();
+        // Get filter parameters
+        String searchKeyword = request.getParameter("search");
+
+        // Pagination
+        int page = 1;
+        int pageSize = 10;
+        try {
+            String pageParam = request.getParameter("page");
+            if (pageParam != null && !pageParam.trim().isEmpty()) {
+                page = Integer.parseInt(pageParam);
+            }
+        } catch (NumberFormatException e) {
+            // Keep default value
+        }
+
+        // Get filtered templates
+        List<EmailTemplate> templates = templateDAO.getTemplatesWithFilter(
+                searchKeyword, page, pageSize
+        );
+
+        // Get total records for pagination
+        int totalRecords = templateDAO.getTotalTemplates(searchKeyword);
+
+        // Set attributes
         request.setAttribute("templates", templates);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("pageSize", pageSize);
+        request.setAttribute("totalRecords", totalRecords);
+        request.setAttribute("totalPages", (int) Math.ceil((double) totalRecords / pageSize));
+        request.setAttribute("searchKeyword", searchKeyword);
+
         request.getRequestDispatcher("/emailTemplates.jsp").forward(request, response);
     }
 
