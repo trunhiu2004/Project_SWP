@@ -39,8 +39,14 @@ public class AuthorizationFilter implements Filter {
             "listSupplier",
             "/listUnit",
             "/listProductDiscount",
-            "/listInventory",
-            "/listStoreStock",
+            "/listLogInventory",
+            "/importProduct",
+            "/addNewProduct",
+            "/deleteInventory",
+            "/listLogInventory",
+            "/exportOldBatch",
+            "/exportNewToStore",
+            "/deleteStoreStock",
             "/list-order",
             "/invoice",
             "/couponManage",
@@ -136,13 +142,15 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
 
         String loginURI = httpRequest.getContextPath() + "/login";
+        String forgetPasswordURI = httpRequest.getContextPath() + "/forgetPassword";
         String requestURI = httpRequest.getRequestURI();
 
         boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
         boolean isLoginRequest = requestURI.equals(loginURI);
+        boolean isForgetPasswordRequest = requestURI.equals(forgetPasswordURI);
         boolean isPublicResource = requestURI.contains("/css/") || requestURI.contains("/js/") || requestURI.contains("/images/") || requestURI.contains("/assets/");
 
-        if (isPublicResource || isLoginRequest) {
+        if (isPublicResource || isLoginRequest || isForgetPasswordRequest) {
             // Cho phép truy cập vào tài nguyên công khai và trang đăng nhập
             chain.doFilter(request, response);
         } else if (isLoggedIn) {

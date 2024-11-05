@@ -86,7 +86,14 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("emailRegister");
         if (!checkDuplicate(email)) {
             String token = UUID.randomUUID().toString();
-            String link = "http://localhost:9999/SWP_Project/changePassword?email=" + email + "&token=" + token;
+            // Lấy base URL động
+            String baseURL = request.getScheme() + "://"
+                    + request.getServerName() + ":"
+                    + request.getServerPort()
+                    + request.getContextPath();
+
+            // Tạo link reset password với base URL động
+            String link = baseURL + "/changePassword?email=" + email + "&tokenReset=" + token;
 
             request.getSession().setAttribute("emailRegister", email);
 

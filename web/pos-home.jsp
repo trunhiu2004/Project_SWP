@@ -37,6 +37,7 @@
                                     <span class="iconify" data-icon="solar:user-check-broken" data-width="22"></span>
                                 </a>
                                 <ul class="sub__menu" id="profileDropdown">
+                                    <li><a href="listInventory">Truy cập kho</a></li>
                                     <li><a href="#" id="viewProfileBtn">Xem thông tin</a></li>
                                     <li><a href="javascript:void(0)" onclick="openChangePasswordModal()">Đổi mật khẩu</a></li>
                                     <li><a href="logout">Đăng xuất</a></li>

@@ -80,7 +80,14 @@ public class ForgetPassword extends HttpServlet {
         String email = request.getParameter("emailReset");
         if (checkDuplicate(email)) {
             String token = UUID.randomUUID().toString();
-            String link = "http://localhost:9999/SWP_Project/resetPassword?email=" + email + "&tokenReset=" + token;
+            // Lấy base URL động
+            String baseURL = request.getScheme() + "://"
+                    + request.getServerName() + ":"
+                    + request.getServerPort()
+                    + request.getContextPath();
+
+            // Tạo link reset password với base URL động
+            String link = baseURL + "/resetPassword?email=" + email + "&tokenReset=" + token;
 
             request.getSession().setAttribute("emailReset", email);
 
