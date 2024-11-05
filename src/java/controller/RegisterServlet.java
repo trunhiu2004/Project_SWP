@@ -6,6 +6,7 @@ package controller;
 
 import dal.AccountDAO;
 import dal.EmailTemplateDAO;
+import dal.MailogDAO;
 import model.Accounts;
 import model.Employees;
 import java.io.IOException;
@@ -101,7 +102,7 @@ public class RegisterServlet extends HttpServlet {
                 // Lấy template từ cơ sở dữ liệu
                 EmailTemplateDAO templateDAO = new EmailTemplateDAO();
                 EmailTemplate template = templateDAO.getTemplateByName("Register Confirmation Template");
-
+                MailogDAO mailogDAO = new MailogDAO();
                 if (template != null) {
                     // Thay thế các biến trong template
                     String content = template.getContent()
@@ -110,11 +111,19 @@ public class RegisterServlet extends HttpServlet {
 
                     // Gửi email
                     SendEmail se = new SendEmail();
-                    se.send(email, template.getSubject(), content);
+                    try {
+                        se.send(email, template.getSubject(), content);
+                        // Ghi log thành công
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
 
-                    request.getSession().setAttribute("token", token);
-                    request.getSession().setAttribute("status", "register");
-                    request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                        request.getSession().setAttribute("token", token);
+                        request.getSession().setAttribute("status", "register");
+                        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                    } catch (RuntimeException e) {
+                        // Ghi log thất bại
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
+                        throw e;
+                    }
                 } else {
                     // Xử lý khi không tìm thấy template
                     request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email.");

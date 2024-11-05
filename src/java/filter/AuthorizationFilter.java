@@ -62,7 +62,8 @@ public class AuthorizationFilter implements Filter {
             "/emailSettings",
             "/emailTemplates",
             "/register",
-            "/profile"
+            "/profile",
+            "/mailLogs"
     // Thêm các URL khác mà bạn muốn cấm nhân viên truy cập
     );
     // The filter configuration object we are associated with.  If
@@ -143,14 +144,18 @@ public class AuthorizationFilter implements Filter {
 
         String loginURI = httpRequest.getContextPath() + "/login";
         String forgetPasswordURI = httpRequest.getContextPath() + "/forgetPassword";
+        String resetPasswordURI = httpRequest.getContextPath() + "/resetPassword";
+        String changePasswordURI = httpRequest.getContextPath() + "/changePassword";
         String requestURI = httpRequest.getRequestURI();
 
         boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
         boolean isLoginRequest = requestURI.equals(loginURI);
         boolean isForgetPasswordRequest = requestURI.equals(forgetPasswordURI);
+        boolean isResetPasswordRequest = requestURI.equals(resetPasswordURI);
+        boolean isChangePasswordRequest = requestURI.equals(changePasswordURI);
         boolean isPublicResource = requestURI.contains("/css/") || requestURI.contains("/js/") || requestURI.contains("/images/") || requestURI.contains("/assets/");
 
-        if (isPublicResource || isLoginRequest || isForgetPasswordRequest) {
+        if (isPublicResource || isLoginRequest || isForgetPasswordRequest || isResetPasswordRequest || isChangePasswordRequest) {
             // Cho phép truy cập vào tài nguyên công khai và trang đăng nhập
             chain.doFilter(request, response);
         } else if (isLoggedIn) {

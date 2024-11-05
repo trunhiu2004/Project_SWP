@@ -214,6 +214,11 @@
                                     <i class="las la-minus"></i><span>Cài đặt Mẫu Email</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="mailLogs">
+                                    <i class="las la-minus"></i><span>Nhật ký Email</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
