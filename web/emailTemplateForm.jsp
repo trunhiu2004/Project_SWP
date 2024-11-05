@@ -40,7 +40,7 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
-                                            <h4 class="card-title">${template != null ? 'Edit' : 'Add'} Email Template</h4>
+                                            <h4 class="card-title">${template != null ? 'Sửa' : 'Thêm'} Mẫu Email</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -52,26 +52,26 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Template Name *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Template Name" required name="templateName" value="${template.templateName}">
+                                                    <label>Tên mẫu *</label>
+                                                    <input type="text" class="form-control" placeholder="Nhập Tên Mẫu" required name="templateName" value="${template.templateName}">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Subject *</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Subject" required name="subject" value="${template.subject}">
+                                                    <label>Chủ đề *</label>
+                                                    <input type="text" class="form-control" placeholder="Nhập chủ đề" required name="subject" value="${template.subject}">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Content *</label>
-                                                    <textarea class="form-control" rows="5" placeholder="Enter Content" required name="content">${template.content}</textarea>
+                                                    <label>Nội dung *</label>
+                                                    <textarea class="form-control" rows="5" placeholder="Nhập Nội dung" required name="content">${template.content}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Variables</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Variables (comma-separated)" name="variables" value="${template.variables}">
+                                                    <input type="text" class="form-control" placeholder="Enter Variables (phân cách bằng dấu phẩy)" name="variables" value="${template.variables}">
                                                 </div>
                                             </div>
                                         </div>
