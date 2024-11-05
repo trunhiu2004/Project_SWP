@@ -59,6 +59,24 @@
                                     <span id="current_time"></span>
                                 </a>
                             </li>
+                            <li><% if (request.getParameter("error") != null && request.getParameter("error").equals("unauthorized")) { %>
+                                <div class="alert alert-danger" role="alert">
+                                    Bạn không có quyền truy cập trang này.
+                                </div>
+                                <style>
+                                    .alert {
+                                        padding: 5px;
+                                        border: 1px solid transparent;
+                                        border-radius: 1px;
+                                    }
+                                    .alert-danger {
+                                        color: #721c24;
+                                        background-color: #f8d7da;
+                                        border-color: #f5c6cb;
+                                    }
+                                </style>
+
+                                <% }%></li>
                         </ul>
                     </div>
                 </div>

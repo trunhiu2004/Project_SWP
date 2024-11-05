@@ -18,21 +18,50 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 import model.Accounts;
 
 /**
  *
  * @author ankha
  */
-@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/HomeAdmin", "/PoSHome"})
+@WebFilter(filterName = "AuthorizationFilter", urlPatterns = {"/*"})
 public class AuthorizationFilter implements Filter {
 
     private static final boolean debug = true;
+    private FilterConfig filterConfig = null;
 
+    private static final List<String> STAFF_BLACKLIST = Arrays.asList(
+            "/HomeAdmin",
+            "/listProduct",
+            "/listCategory",
+            "listSupplier",
+            "/listUnit",
+            "/listProductDiscount",
+            "/listInventory",
+            "/listStoreStock",
+            "/list-order",
+            "/invoice",
+            "/couponManage",
+            "/promotionManage",
+            "/staffManage",
+            "/ListCustomer",
+            "/ListShop",
+            "/ListShift",
+            "/ListCustomerReport",
+            "/ProductSales",
+            "/ProductCategorySale",
+            "/BestSellProduct",
+            "/emailSettings",
+            "/emailTemplates",
+            "/register",
+            "/profile"
+    // Thêm các URL khác mà bạn muốn cấm nhân viên truy cập
+    );
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
-    private FilterConfig filterConfig = null;
 
     public AuthorizationFilter() {
     }
@@ -106,25 +135,40 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
-        boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
         String loginURI = httpRequest.getContextPath() + "/login";
+        String requestURI = httpRequest.getRequestURI();
 
-        if (isLoggedIn) {
+        boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
+        boolean isLoginRequest = requestURI.equals(loginURI);
+        boolean isPublicResource = requestURI.contains("/css/") || requestURI.contains("/js/") || requestURI.contains("/images/") || requestURI.contains("/assets/");
+
+        if (isPublicResource || isLoginRequest) {
+            // Cho phép truy cập vào tài nguyên công khai và trang đăng nhập
+            chain.doFilter(request, response);
+        } else if (isLoggedIn) {
             Accounts account = (Accounts) session.getAttribute("account");
-            String requestURI = httpRequest.getRequestURI();
 
             if (account.getRole_id() == 1) {
-                // Admin can access both HomeAdmin and PoSHome
+                // Admin có thể truy cập tất cả
                 chain.doFilter(request, response);
-            } else if (account.getRole_id() == 2 && requestURI.contains("PoSHome")) {
-                // Staff can only access PoSHome
-                chain.doFilter(request, response);
+            } else if (account.getRole_id() == 2) {
+                // Kiểm tra xem URL hiện tại có trong danh sách đen không
+                boolean isBlacklisted = STAFF_BLACKLIST.stream()
+                        .anyMatch(blacklistedUrl -> requestURI.contains(blacklistedUrl));
+
+                if (isBlacklisted) {
+                    // Nếu URL nằm trong danh sách đen, chuyển hướng đến trang lỗi
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/PoSHome?error=unauthorized");
+                } else {
+                    // Nếu không nằm trong danh sách đen, cho phép truy cập
+                    chain.doFilter(request, response);
+                }
             } else {
-                // Unauthorized access
+                // Vai trò không xác định, chuyển hướng đến trang đăng nhập
                 httpResponse.sendRedirect(loginURI + "?error=unauthorized");
             }
         } else {
-            // User is not logged in, redirect to login page
+            // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
             httpResponse.sendRedirect(loginURI);
         }
     }
