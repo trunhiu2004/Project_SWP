@@ -21,17 +21,23 @@
                     </a>
                 </div>
                 <div class="iq-search-bar device-search">
-                      <form action="#" class="searchbox">
-                          
-                            
-                      </form>
-                  </div>
+                    <form action="#" class="searchbox">
+
+
+                    </form>
+                </div>
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-label="Toggle navigation">
                         <i class="ri-menu-3-line"></i>
                     </button>
+                    <li class="nav-item nav-icon">
+                        <a href="PoSHome" class="btn btn-primary p-2" title="Truy cập POS">
+                            <i class="ri-shopping-cart-2-line font-size-18"></i>
+                        </a>
+                    </li>
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto navbar-list align-items-center">
                             <c:if test="${account.getRole_id()==1}">
