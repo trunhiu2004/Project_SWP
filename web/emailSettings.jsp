@@ -39,7 +39,7 @@
                         <div class="card card-block card-stretch card-height">
                             <div class="card-header d-flex justify-content-between bg-primary">
                                 <div class="iq-header-title">
-                                    <h4 class="card-title mb-0 text-white">Email Settings</h4>
+                                    <h4 class="card-title mb-0 text-white">Cài đặt Email</h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -52,11 +52,11 @@
                                     <input type="hidden" name="action" value="update">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="smtpServer" class="form-label">SMTP Server</label>
+                                            <label for="smtpServer" class="form-label">Máy chủ SMTP</label>
                                             <input type="text" class="form-control" id="smtpServer" name="smtpServer" value="${emailSettings.smtpServer}" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="smtpPort" class="form-label">SMTP Port</label>
+                                            <label for="smtpPort" class="form-label">Cổng SMTP</label>
                                             <input type="number" class="form-control" id="smtpPort" name="smtpPort" value="${emailSettings.smtpPort}" required>
                                         </div>
                                     </div>
@@ -66,13 +66,13 @@
                                             <input type="email" class="form-control" id="fromEmail" name="fromEmail" value="${emailSettings.fromEmail}" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="authPassword" class="form-label">Password</label>
+                                            <label for="authPassword" class="form-label">Mật khẩu</label>
                                             <input type="password" class="form-control" id="authPassword" name="authPassword" value="${emailSettings.authPassword}" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                                            <button type="submit" class="btn btn-primary">Lưu Cài Đặt</button>
                                         </div>
                                     </div>
                                 </form>

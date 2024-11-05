@@ -39,9 +39,9 @@
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                                     <div>
-                                        <h4 class="mb-3">Email Templates</h4>
+                                        <h4 class="mb-3">Mẫu Email</h4>
                                     </div>
-                                    <a href="emailTemplates?action=new" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Email Template</a>
+                                    <a href="emailTemplates?action=new" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm mẫu Email</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -50,9 +50,9 @@
                                         <thead class="bg-white text-uppercase">
                                             <tr class="ligth ligth-data">
                                                 <th>ID</th>
-                                                <th>Template Name</th>
-                                                <th>Subject</th>
-                                                <th>Actions</th>
+                                                <th>Tên mẫu</th>
+                                                <th>Chủ đề</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ligth-body">
@@ -63,11 +63,11 @@
                                                 <td>${template.subject}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
-                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+                                                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa"
                                                            href="emailTemplates?action=edit&id=${template.templateId}"><i class="ri-pencil-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xoá"
                                                            href="emailTemplates?action=delete&id=${template.templateId}"
-                                                           onclick="return confirm('Are you sure you want to delete this template?');"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                           onclick="return confirm('Bạn có chắc chắn muốn xóa mẫu này không?');"><i class="ri-delete-bin-line mr-0"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
