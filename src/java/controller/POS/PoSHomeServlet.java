@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Accounts;
 import model.StoreStock;
 
 /**
@@ -59,33 +61,40 @@ public class PoSHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO orderDAO = new OrderDAO();
-        orderDAO.scheduleCleanup();
-        //clear PENDING Order
-//        OrderDAO orderDAO = new OrderDAO();
-//        orderDAO.scheduleCleanup();
-        
-        // Xử lý thông báo từ payment return
-        String success = request.getParameter("success");
-        String error = request.getParameter("error");
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("account") != null) {
+            Accounts account = (Accounts) session.getAttribute("account");
+            if (account.getRole_id() == 1 || account.getRole_id() == 2) {
+                //clear PENDING Order
+                OrderDAO orderDAO = new OrderDAO();
+                orderDAO.scheduleCleanup();
 
-        if ("true".equals(success)) {
-            request.setAttribute("message", "Thanh toán thành công!");
-            request.setAttribute("messageType", "success");
-        } else if (error != null) {
-            String errorMessage = "Có lỗi xảy ra!";
-            if ("payment_failed".equals(error)) {
-                errorMessage = "Thanh toán không thành công!";
+                String success = request.getParameter("success");
+                String error = request.getParameter("error");
+
+                if ("true".equals(success)) {
+                    request.setAttribute("message", "Thanh toán thành công!");
+                    request.setAttribute("messageType", "success");
+                } else if (error != null) {
+                    String errorMessage = "Có lỗi xảy ra!";
+                    if ("payment_failed".equals(error)) {
+                        errorMessage = "Thanh toán không thành công!";
+                    }
+                    request.setAttribute("message", errorMessage);
+                    request.setAttribute("messageType", "error");
+                }
+
+                StoreStockDAO ss = new StoreStockDAO();
+                List<StoreStock> list = ss.getAllStoreStock();
+                request.setAttribute("store", list);
+
+                request.getRequestDispatcher("pos-home.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login?error=unauthorized");
             }
-            request.setAttribute("message", errorMessage);
-            request.setAttribute("messageType", "error");
+        } else {
+            response.sendRedirect("login");
         }
-
-        StoreStockDAO ss = new StoreStockDAO();
-        List<StoreStock> list = ss.getAllStoreStock();
-        request.setAttribute("store", list);
-
-        request.getRequestDispatcher("pos-home.jsp").forward(request, response);
     }
 
     /**

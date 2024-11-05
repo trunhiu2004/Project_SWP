@@ -60,7 +60,7 @@
                                             <div class="p-3">
                                                 <h5 class="mb-1">${account.getEmail()}</h5>
                                                 <div class="d-flex align-items-center justify-content-center mt-3">
-                                                    <a href="https://templates.iqonic.design/posdash/html/app/user-profile.html" class="btn border mr-2">Profile</a>
+                                                    <a href="profile?action=view" class="btn border mr-2">Profile</a>
                                                     <a href="logout" class="btn border">Sign Out</a>
                                                 </div>
                                             </div>

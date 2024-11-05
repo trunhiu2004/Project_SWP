@@ -20,6 +20,7 @@
             </div>
             <!-- loader END -->
 
+
             <div class="wrapper">
                 <section class="login-content">
                     <div class="container">
@@ -27,24 +28,29 @@
                             <div class="col-lg-8">
                                 <div class="card auth-card">
                                     <div class="card-body p-0">
-                                        <div class="d-flex align-items-center auth-content">
-                                            <div class="col-lg-7 align-self-center">
-                                                <div class="p-3">
-                                                    <h2 class="mb-2">Đăng nhập</h2>
-                                                    <br>
-                                                    <form action="login" method="post">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="floating-label form-group">
-                                                                    <input class="floating-input form-control" type="email" placeholder="Email..." name="emailLogin">
-                                                                </div>
+                                    <% if (request.getParameter("error") != null && request.getParameter("error").equals("unauthorized")) { %>
+                                    <div class="alert alert-danger" role="alert">
+                                        Bạn không có quyền truy cập trang này.
+                                    </div>
+                                    <% }%>
+                                    <div class="d-flex align-items-center auth-content">
+                                        <div class="col-lg-7 align-self-center">
+                                            <div class="p-3">
+                                                <h2 class="mb-2">Đăng nhập</h2>
+                                                <br>
+                                                <form action="login" method="post">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="floating-label form-group">
+                                                                <input class="floating-input form-control" type="email" placeholder="Email..." name="emailLogin">
                                                             </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="floating-label form-group">
-                                                                    <input class="floating-input form-control" type="password" placeholder="Mật khẩu..." name="passwordLogin">
-                                                                </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="floating-label form-group">
+                                                                <input class="floating-input form-control" type="password" placeholder="Mật khẩu..." name="passwordLogin">
                                                             </div>
-                                                            <div class="col-lg-6" style="color: red">
+                                                        </div>
+                                                        <div class="col-lg-6" style="color: red">
                                                             ${mess}
                                                         </div>
                                                         <div class="col-lg-6">
@@ -52,7 +58,7 @@
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                                                   
+
                                                 </form>
                                             </div>
                                         </div>
@@ -84,5 +90,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    
+
 </html>

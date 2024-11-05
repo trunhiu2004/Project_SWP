@@ -466,6 +466,10 @@
         <servlet-name>EmailTemplateServlet</servlet-name>
         <servlet-class>controller.Admin.Setting.EmailTemplateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>controller.Admin.ProfileMng.ProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -911,6 +915,10 @@
     <servlet-mapping>
         <servlet-name>EmailTemplateServlet</servlet-name>
         <url-pattern>/emailTemplates</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -135,18 +135,38 @@ public class EmployeeDAO extends DBContext {
         return list;
 
     }
-    
-    
-    public Integer getEmployeeIdByAccountId(int accountId){
+
+    public Integer getEmployeeIdByAccountId(int accountId) {
         String sql = "select employee_id from employees where account_id = ?";
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, accountId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("employee_id");
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Employees getEmployeeByAccountId(int accountId) {
+        String sql = "SELECT * FROM Employees WHERE account_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, accountId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Employees(
+                        rs.getInt("employee_id"),
+                        rs.getString("employee_name"),
+                        rs.getString("employee_phone"),
+                        rs.getString("employee_address"),
+                        rs.getInt("account_id")
+                );
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

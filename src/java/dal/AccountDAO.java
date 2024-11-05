@@ -146,6 +146,20 @@ public class AccountDAO extends DBContext {
         }
     }
 
+    public boolean changePassword(int accountId, String newPassword) {
+        String sql = "UPDATE Accounts SET password = ? WHERE account_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+            st.setInt(2, accountId);
+            int rowsAffected = st.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
         for (Accounts arg : ac.getAllAccount()) {
