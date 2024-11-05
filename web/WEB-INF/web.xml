@@ -470,6 +470,10 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>controller.Admin.ProfileMng.ProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>controller.POS.UserProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -919,6 +923,10 @@
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/user-profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -33,10 +33,16 @@
                     <div class="header_part_middle">
                         <ul class="icon__menu">
                             <li class="has__children main_menu">
-                                <a href="javascript:void(0)" class="header_menu_icon" data-tippy-content="Main Menu">
+                                <a href="javascript:void(0)" class="header_menu_icon" data-tippy-content="Profile" id="profileDropdownToggle">
                                     <span class="iconify" data-icon="solar:user-check-broken" data-width="22"></span>
                                 </a>
+                                <ul class="sub__menu" id="profileDropdown">
+                                    <li><a href="#" id="viewProfileBtn">Xem thông tin</a></li>
+                                    <li><a href="javascript:void(0)" onclick="openChangePasswordModal()">Đổi mật khẩu</a></li>
+                                    <li><a href="logout">Đăng xuất</a></li>
+                                </ul>
                             </li>
+
                             <li>
                                 <a href="HomeAdmin" class="header_menu_icon" target="_blank" data-tippy-content="Dashboard">
                                     <span class="iconify" data-icon="solar:chart-2-broken" data-width="22"></span>
@@ -352,23 +358,61 @@
             </div>
         </div>
         <!-- Modal Thanh toán QR -->
-        <div class="modal fade" id="qrPaymentModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thanh toán QR</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
+        <!--        <div class="modal fade" id="qrPaymentModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thanh toán QR</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                 PayOS Payment Form sẽ được nhúng vào đây 
+                                <div id="payos-wrapper"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <!-- PayOS Payment Form sẽ được nhúng vào đây -->
-                        <div id="payos-wrapper"></div>
-                    </div>
+                </div>      -->
+        <!-- Change Password Modal -->
+        <div id="changePasswordModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Đổi mật khẩu</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Mật khẩu hiện tại:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Mật khẩu mới:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="button" class="btn-save" onclick="changePassword()">Lưu</button>
                 </div>
             </div>
-        </div>      
-
+        </div>
+        <!--View Profile Modal-->
+        <div id="profileModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Thông tin người dùng</h2>
+                <div id="profileInfo">
+                    <!-- Thông tin người dùng sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+            </div>
+        </div>
         <script>
             // Initialize functions when document is ready
             $(document).ready(function () {
@@ -1155,6 +1199,175 @@
                     currency: 'VND'
                 }).format(amount);
             }
+            function openChangePasswordModal() {
+                document.getElementById('changePasswordModal').style.display = 'block';
+            }
+
+            function closeChangePasswordModal() {
+                document.getElementById('changePasswordModal').style.display = 'none';
+            }
+
+            function changePassword() {
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (newPassword !== confirmPassword) {
+                    alert('Mật khẩu mới không khớp');
+                    return;
+                }
+
+                fetch('profile?action=changePassword', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: new URLSearchParams({
+                        currentPassword: currentPassword,
+                        newPassword: newPassword,
+                        confirmPassword: confirmPassword
+                    })
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Đổi mật khẩu thành công');
+                                closeChangePasswordModal();
+                            } else {
+                                alert(data.message || 'Đổi mật khẩu thất bại');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi đổi mật khẩu');
+                        });
+            }
+
+            // Đóng modal khi click bên ngoài
+            window.onclick = function (event) {
+                if (event.target === document.getElementById('changePasswordModal')) {
+                    closeChangePasswordModal();
+                }
+            };
+            document.addEventListener('DOMContentLoaded', function () {
+                const profileDropdownToggle = document.getElementById('profileDropdownToggle');
+                const profileDropdown = document.getElementById('profileDropdown');
+                const viewProfileBtn = document.getElementById('viewProfileBtn');
+                const profileModal = document.getElementById('profileModal');
+                const closeBtn = profileModal.querySelector('.close');
+                const profileInfo = document.getElementById('profileInfo');
+
+                console.log('viewProfileBtn:', viewProfileBtn); // Debug
+
+                viewProfileBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('View profile button clicked'); // Debug
+                    fetchUserProfile();
+                });
+
+                closeBtn.addEventListener('click', function () {
+                    profileModal.style.display = 'none';
+                });
+
+                window.addEventListener('click', function (e) {
+                    if (e.target == profileModal) {
+                        profileModal.style.display = 'none';
+                    }
+                });
+
+                function fetchUserProfile() {
+                    console.log('Fetching user profile');
+                    fetch('user-profile')
+                            .then(response => {
+                                console.log('Response:', response);
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log('Data received:', data);
+                                if (data && typeof data === 'object') {
+                                    // Check if the data object has the expected properties
+                                    if (data.name || data.email || data.phone || data.address) {
+                                        displayUserProfile(data);
+                                    } else {
+                                        console.error('Data object is missing expected properties:', data);
+                                        displayUserProfile(null); // This will show an error message in the modal
+                                    }
+                                } else {
+                                    console.error('Invalid data format received:', data);
+                                    displayUserProfile(null); // This will show an error message in the modal
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                displayUserProfile(null); // This will show an error message in the modal
+                            });
+                }
+                function displayUserProfile(user) {
+                    console.log('Displaying user profile, received user object:', user);
+                    const profileInfo = document.getElementById('profileInfo');
+
+                    if (profileInfo && user) {
+                        // Create elements individually
+                        profileInfo.innerHTML = ''; // Clear existing content
+
+                        // Name
+                        const nameP = document.createElement('p');
+                        const nameStrong = document.createElement('strong');
+                        nameStrong.textContent = 'Tên: ';
+                        nameP.appendChild(nameStrong);
+                        nameP.appendChild(document.createTextNode(user.name));
+
+                        // Email
+                        const emailP = document.createElement('p');
+                        const emailStrong = document.createElement('strong');
+                        emailStrong.textContent = 'Email: ';
+                        emailP.appendChild(emailStrong);
+                        emailP.appendChild(document.createTextNode(user.email));
+
+                        // Phone
+                        const phoneP = document.createElement('p');
+                        const phoneStrong = document.createElement('strong');
+                        phoneStrong.textContent = 'Số điện thoại: ';
+                        phoneP.appendChild(phoneStrong);
+                        phoneP.appendChild(document.createTextNode(user.phone));
+
+                        // Address
+                        const addressP = document.createElement('p');
+                        const addressStrong = document.createElement('strong');
+                        addressStrong.textContent = 'Địa chỉ: ';
+                        addressP.appendChild(addressStrong);
+                        addressP.appendChild(document.createTextNode(user.address));
+
+                        // Append all elements
+                        profileInfo.appendChild(nameP);
+                        profileInfo.appendChild(emailP);
+                        profileInfo.appendChild(phoneP);
+                        profileInfo.appendChild(addressP);
+
+                        console.log('Profile info content set');
+                        console.log('profileInfo content:', profileInfo.textContent);
+                        console.log('Actual Data:', user, user.name, user.email, user.phone, user.address);
+                    } else {
+                        console.error('profileInfo element not found or user data is null');
+                        if (profileInfo) {
+                            const errorP = document.createElement('p');
+                            errorP.textContent = 'Không thể tải thông tin người dùng.';
+                            profileInfo.innerHTML = '';
+                            profileInfo.appendChild(errorP);
+                        }
+                    }
+
+                    const profileModal = document.getElementById('profileModal');
+                    if (profileModal) {
+                        profileModal.style.display = 'block';
+                    }
+                }
+
+            });
 
         </script>
         <script>

@@ -512,6 +512,7 @@ body {
     grid-template-columns: 1fr 1fr 40px 40px;
     gap: 10px;
     align-items: center;
+    z-index: 1;
 }
 
 /* Cập nhật style cho search area */
@@ -1261,6 +1262,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
     background-color: rgba(0,0,0,0.4);
 }
 
@@ -1555,6 +1557,253 @@ body {
 .modal.show .modal-dialog {
     transform: none;
 }
+.show {
+    display: block;
+}
+/*Hide shop logo*/
 .shop-logo.print-only {
     display: none !important;
+}
+
+/*Sub menu style*/
+.sub__menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999;
+}
+
+.sub__menu li {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.sub__menu li:hover {
+    background-color: #f1f1f1;
+}
+
+.has__children:hover .sub__menu {
+    display: block;
+}
+/* Modal Footer */
+.modal-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Modal Buttons */
+.modal-footer button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn-cancel {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border: none;
+}
+
+.modal-footer .btn-cancel:hover {
+    background-color: #cbd5e0;
+}
+
+.modal-footer .btn-save {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+}
+
+.modal-footer .btn-save:hover {
+    background-color: #3182ce;
+}
+
+/* Profile Modal Specific Styles */
+#profileModal .modal-content {
+    max-width: 600px;
+    margin: 10% auto;
+}
+
+#profileInfo {
+    padding: 20px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+#profileInfo p {
+    margin: 10px 0;
+    padding: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#profileInfo p:last-child {
+    border-bottom: none;
+}
+
+#profileInfo strong {
+    display: inline-block;
+    width: 120px;
+    color: #4a5568;
+}
+
+/* Change Password Modal Specific Styles */
+#changePasswordModal .form-group {
+    margin-bottom: 20px;
+}
+
+#changePasswordModal input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#changePasswordModal input[type="password"]:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* Responsive Modal Styles */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
+
+    #profileInfo strong {
+        width: 100px;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+}
+
+/* Animation for Modal */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Error State Styles */
+.form-group.error input {
+    border-color: #fc8181;
+}
+
+.form-group.error .error-message {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Success State Styles */
+.form-group.success input {
+    border-color: #48bb78;
+}
+
+/* Loading State */
+.modal-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #4299e1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.profile-info-item {
+    padding: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease;
+}
+
+.profile-info-item:last-child {
+    border-bottom: none;
+}
+
+.profile-info-item:hover {
+    background-color: #f8fafc;
+}
+
+.profile-info-item p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-info-item strong {
+    min-width: 120px;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.error-message {
+    color: #e53e3e;
+    text-align: center;
+    padding: 15px;
+}
+
+#profileModal .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+#profileModal .close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #4a5568;
+}
+
+#profileModal .close:hover {
+    color: #2d3748;
+}
+
+#profileModal h2 {
+    margin-bottom: 20px;
+    color: #2d3748;
+    font-weight: 600;
 }

@@ -35,9 +35,7 @@ public class ProfileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-
         HttpSession session = request.getSession();
         Accounts account = (Accounts) session.getAttribute("account");
 
@@ -71,23 +69,40 @@ public class ProfileServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirmPassword");
 
         AccountDAO accountDAO = new AccountDAO();
+        boolean success = false;
+        String message = "";
 
         if (!BCrypt.checkpw(currentPassword, account.getPassword())) {
-            request.setAttribute("error", "Mật khẩu hiện tại không đúng");
+            message = "Mật khẩu hiện tại không đúng";
         } else if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("error", "Mật khẩu mới không khớp");
+            message = "Mật khẩu mới không khớp";
         } else if (!PasswordValidator.isValid(newPassword)) {
-            request.setAttribute("error", "Mật khẩu không đáp ứng yêu cầu. " + PasswordValidator.getPasswordRequirements());
+            message = "Mật khẩu không đáp ứng yêu cầu. " + PasswordValidator.getPasswordRequirements();
         } else {
-            boolean success = accountDAO.changePassword(account.getAccount_id(), newPassword);
+            success = accountDAO.changePassword(account.getAccount_id(), newPassword);
             if (success) {
-                request.setAttribute("message", "Mật khẩu đã được thay đổi thành công");
+                message = "Mật khẩu đã được thay đổi thành công";
             } else {
-                request.setAttribute("error", "Đã xảy ra lỗi khi thay đổi mật khẩu");
+                message = "Đã xảy ra lỗi khi thay đổi mật khẩu";
             }
         }
 
-        viewProfile(request, response, account);
+        // Kiểm tra nếu là yêu cầu AJAX
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            out.print("{\"success\":" + success + ",\"message\":\"" + message + "\"}");
+            out.flush();
+        } else {
+            // Xử lý cho form submission thông thường
+            if (success) {
+                request.setAttribute("message", message);
+            } else {
+                request.setAttribute("error", message);
+            }
+            viewProfile(request, response, account);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
