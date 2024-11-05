@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="EditShop" method="post" >
+                        <form action="EditShop" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="shop_id" value="${shop.shopId}">
                             <div class="row">                                  
                                 <div class="col-md-6">                      
@@ -107,7 +107,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Hình ảnh *</label>
-                                        <input type="text" class="form-control" name="shop_opening_hours" value="${shop.shopLogo}" required>
+                                        
+                                        <input type="file" class="form-control image-file" name="shop_logo" accept="image/*">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>  

@@ -97,7 +97,7 @@
                                                 <td>${shop.shopEmail}</td>
                                                 <td>${shop.shopOpeningHours}</td>
 
-                                                <td><img src="assets/images/logoshop/${shop.shopLogo}" width="80px" height="80px"/></td>
+                                                <td><img src="assets/images/shop/${shop.shopLogo}" width="80px" height="80px"/></td>
                                                 <th>
                                                     <a href="DeleteShop?id=${shop.shopId}" class="btn btn-warning">Xóa</a>
                                                     <a href="EditShop?id=${shop.shopId}" class="btn btn-primary">Sửa</a>
