@@ -92,6 +92,34 @@
                 font-size: 24px;
                 margin-right: 10px;
             }
+            #reader {
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            #reader video {
+                object-fit: cover;
+            }
+
+            .scanning-instructions {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Style for successful scan animation */
+            @keyframes scanSuccess {
+                0% {
+                    border-color: #28a745;
+                }
+                100% {
+                    border-color: #ddd;
+                }
+            }
+
+            .scan-success {
+                animation: scanSuccess 0.5s ease-out;
+            }
         </style>
     </head>
     <body>
@@ -129,6 +157,12 @@
                         <button class="btn btn-success scan-button" onclick="startScanner()">
                             <i class="fas fa-camera"></i> Quét mã vạch
                         </button>
+                        <div class="scanning-instructions mt-3" style="display: none;" id="scanning-instructions">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i>
+                                Hướng camera vào mã vạch sản phẩm. Giữ camera cách mã vạch khoảng 10-15cm và giữ cho ổn định.
+                            </div>
+                        </div>
                         <div id="reader" class="mt-3" style="display: none;"></div>
                     </div>
 
@@ -173,15 +207,32 @@
 
             function startScanner() {
                 const reader = document.getElementById('reader');
+                const instructions = document.getElementById('scanning-instructions');
                 reader.style.display = 'block';
-
+                instructions.style.display = 'block';
                 if (!html5QrcodeScanner) {
-                    html5QrcodeScanner = new Html5QrcodeScanner(
-                            "reader", {fps: 10, qrbox: 250});
+                    // Configure scanner for barcodes
+                    const config = {
+                        fps: 10,
+                        qrbox: {width: 250, height: 100}, // Make scanning area more rectangular for barcodes
+                        formatsToSupport: [
+                            Html5QrcodeSupportedFormats.EAN_13,
+                            Html5QrcodeSupportedFormats.EAN_8,
+                            Html5QrcodeSupportedFormats.CODE_128,
+                            Html5QrcodeSupportedFormats.CODE_39,
+                            Html5QrcodeSupportedFormats.UPC_A,
+                            Html5QrcodeSupportedFormats.UPC_E
+                        ]
+                    };
+
+                    html5QrcodeScanner = new Html5QrcodeScanner("reader", config);
 
                     html5QrcodeScanner.render((decodedText) => {
-                        // Khi quét được mã vạch, chuyển hướng đến servlet
+                        // When barcode is scanned, redirect to servlet
                         window.location.href = 'checkPrice?barcode=' + decodedText;
+                    }, (error) => {
+                        // Handle scan errors silently
+                        console.warn(`Code scan error = ${error}`);
                     });
                 }
             }
@@ -195,6 +246,11 @@
                             errorMessage.style.display = 'none';
                         }, 500);
                     }, 5000);
+                }
+            });
+            window.addEventListener('beforeunload', function () {
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear();
                 }
             });
         </script>
