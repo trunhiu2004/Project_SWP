@@ -478,6 +478,10 @@
         <servlet-name>MailLogServlet</servlet-name>
         <servlet-class>controller.Admin.Setting.MailLogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckPriceServlet</servlet-name>
+        <servlet-class>controller.CheckPriceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -935,6 +939,10 @@
     <servlet-mapping>
         <servlet-name>MailLogServlet</servlet-name>
         <url-pattern>/mailLogs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckPriceServlet</servlet-name>
+        <url-pattern>/checkPrice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
