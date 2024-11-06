@@ -94,9 +94,7 @@
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết"
                                                            href="ShiftDetailServlet?id=${shift.shiftManageId}">
                                                             <i class="ri-eye-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" title="Sửa đổi" href="EditShift?id=${shift.shiftManageId}">
-                                                            <i class="ri-edit-2-line"></i>
-                                                        </a>
+
                                                         <a class="badge bg-danger" data-toggle="tooltip" title="Xóa" href="DeleteShift?id=${shift.shiftManageId}" onclick="return confirm('Bạn có chắc muốn xóa không?');">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </a>

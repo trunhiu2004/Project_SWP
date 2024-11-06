@@ -106,9 +106,11 @@ public class LoginServlet extends HttpServlet {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             Integer employeeId = employeeDAO.getEmployeeIdByAccountId(account.getAccount_id());
 
-            if (employeeId != null) {
+            if(employeeId != null){
                 Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
+                attendanceDAO.recordLoginTime(employeeId, loginTime);
+                
             }
 
             // Điều hướng dựa trên vai trò của người dùng
