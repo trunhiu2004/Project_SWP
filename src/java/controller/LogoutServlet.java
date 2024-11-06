@@ -69,7 +69,6 @@ public class LogoutServlet extends HttpServlet {
             if (employeeId != null) {
                 // Ghi thời gian đăng xuất vào EmployeeAttendance
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
-                attendanceDAO.recordLogoutTime(employeeId);
             }
         }
         

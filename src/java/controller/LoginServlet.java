@@ -109,8 +109,6 @@ public class LoginServlet extends HttpServlet {
             if (employeeId != null) {
                 Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
-                attendanceDAO.recordLoginTime(employeeId, loginTime);
-
             }
 
             // Điều hướng dựa trên vai trò của người dùng
