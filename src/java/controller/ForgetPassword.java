@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 import model.Accounts;
@@ -64,6 +65,18 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Accounts account = (Accounts) session.getAttribute("account");
+
+        //        Nếu đã đăng nhập rồi (session có tồn tại account) thì chuyển hướng về các trang theo Role, không sẽ bị xung đột
+        if (account != null) {
+            if (account.getRole_id() == 1) {
+                response.sendRedirect("HomeAdmin");
+            } else if (account.getRole_id() == 2) {
+                response.sendRedirect("PoSHome");
+            }
+            return;
+        }
         request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
     }
 

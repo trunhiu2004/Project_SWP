@@ -62,6 +62,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Accounts account = (Accounts) session.getAttribute("account");
+
+//        Nếu đã đăng nhập rồi (session có tồn tại account) thì chuyển hướng về các trang theo Role, không sẽ bị xung đột
+        if (account != null) {
+            if (account.getRole_id() == 1) {
+                response.sendRedirect("HomeAdmin");
+            } else if (account.getRole_id() == 2) {
+                response.sendRedirect("PoSHome");
+            }
+            return;
+        }
+        
+//        Chuyển hướng login nếu chưa đăng nhập
         request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
     }
 
@@ -89,16 +103,14 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", account);
 
-            
             EmployeeDAO employeeDAO = new EmployeeDAO();
             Integer employeeId = employeeDAO.getEmployeeIdByAccountId(account.getAccount_id());
-            
 
-            if(employeeId != null){
+            if (employeeId != null) {
                 Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
                 attendanceDAO.recordLoginTime(employeeId, loginTime);
-                
+
             }
 
             // Điều hướng dựa trên vai trò của người dùng
