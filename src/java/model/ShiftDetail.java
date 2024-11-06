@@ -1,82 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
-/**
- *
- * @author pqtru
- */
 public class ShiftDetail {
+
     private int shiftManagerId;
-    private LocalDateTime shiftStartTime;
-    private LocalDateTime shiftEndTime;
-    private BigDecimal totalHours;
     private int orderId;
-    private int quantity;
-    private BigDecimal orderTotalAmount;
-    private BigDecimal unitPrice; 
-    private BigDecimal totalPrice; 
-    private int employeeId; 
     private String productName;
-    private String productImage;
     private String employeeName;
-    
+    private int quantity;
+    private BigDecimal unitPrice;
+    private BigDecimal totalPrice;
+    private String productImage;
+    private String customerName;
+    private Timestamp orderDate;
+    private Timestamp shiftStartTime;
+    private Timestamp shiftEndTime;
 
-    public ShiftDetail() {
-    }
-
-    public ShiftDetail(int shiftManagerId, LocalDateTime shiftStartTime, LocalDateTime shiftEndTime, BigDecimal totalHours, int orderId, int quantity, BigDecimal orderTotalAmount, BigDecimal unitPrice, BigDecimal totalPrice, int employeeId, String productName, String productImage, String employeeName) {
-        this.shiftManagerId = shiftManagerId;
-        this.shiftStartTime = shiftStartTime;
-        this.shiftEndTime = shiftEndTime;
-        this.totalHours = totalHours;
-        this.orderId = orderId;
-        this.quantity = quantity;
-        this.orderTotalAmount = orderTotalAmount;
-        this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
-        this.employeeId = employeeId;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.employeeName = employeeName;
-    }
-
+    // Getters and Setters
     public int getShiftManagerId() {
         return shiftManagerId;
     }
 
     public void setShiftManagerId(int shiftManagerId) {
         this.shiftManagerId = shiftManagerId;
-    }
-
-    public LocalDateTime getShiftStartTime() {
-        return shiftStartTime;
-    }
-
-    public void setShiftStartTime(LocalDateTime shiftStartTime) {
-        this.shiftStartTime = shiftStartTime;
-    }
-
-    public LocalDateTime getShiftEndTime() {
-        return shiftEndTime;
-    }
-
-    public void setShiftEndTime(LocalDateTime shiftEndTime) {
-        this.shiftEndTime = shiftEndTime;
-    }
-
-    public BigDecimal getTotalHours() {
-        return totalHours;
-    }
-
-    public void setTotalHours(BigDecimal totalHours) {
-        this.totalHours = totalHours;
     }
 
     public int getOrderId() {
@@ -87,20 +36,28 @@ public class ShiftDetail {
         this.orderId = orderId;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public BigDecimal getOrderTotalAmount() {
-        return orderTotalAmount;
-    }
-
-    public void setOrderTotalAmount(BigDecimal orderTotalAmount) {
-        this.orderTotalAmount = orderTotalAmount;
     }
 
     public BigDecimal getUnitPrice() {
@@ -119,22 +76,6 @@ public class ShiftDetail {
         this.totalPrice = totalPrice;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public String getProductImage() {
         return productImage;
     }
@@ -143,23 +84,51 @@ public class ShiftDetail {
         this.productImage = productImage;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
-    
-    
 
-    public String getFormattedShiftStartTime(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return shiftStartTime != null ? shiftStartTime.format(formatter) : "";
-    }   
-    
-    public String getFormattedShiftEndTime(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return shiftEndTime != null ? shiftEndTime.format(formatter) : "";
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Timestamp getShiftStartTime() {
+        return shiftStartTime;
+    }
+
+    public void setShiftStartTime(Timestamp shiftStartTime) {
+        this.shiftStartTime = shiftStartTime;
+    }
+
+    public Timestamp getShiftEndTime() {
+        return shiftEndTime;
+    }
+
+    public void setShiftEndTime(Timestamp shiftEndTime) {
+        this.shiftEndTime = shiftEndTime;
+    }
+
+    // Helper methods for formatted output
+    public String getFormattedShiftStartTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return shiftStartTime != null ? sdf.format(shiftStartTime) : "";
+    }
+
+    public String getFormattedShiftEndTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return shiftEndTime != null ? sdf.format(shiftEndTime) : "";
+    }
+
+    public String getFormattedOrderDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return orderDate != null ? sdf.format(orderDate) : "";
     }
 }

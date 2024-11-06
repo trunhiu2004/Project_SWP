@@ -9,33 +9,36 @@ import model.Shift;
 
 public class ShiftDAO extends DBContext {
 
-    // Lấy tất cả các ca làm
-    public List<Shift> getAll() {
-        List<Shift> list = new ArrayList<>();
-        String sql = "SELECT ShiftManagers.*, Employees.employee_name "
-                   + "FROM ShiftManagers "
-                   + "JOIN Employees ON ShiftManagers.employee_id = Employees.employee_id";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Shift shift = new Shift(
-                        rs.getInt("shift_manager_id"),
-                        rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null,
-                        rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null,
-                        rs.getBigDecimal("total_revenue"), 
-                        rs.getBigDecimal("total_hours"),
-                        rs.getString("notes"),
-                        rs.getInt("employee_id"),
-                        rs.getString("employee_name")
-                );
-                list.add(shift);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error fetching shifts: " + e.getMessage());
+    
+public List<Shift> getAll() {
+    List<Shift> list = new ArrayList<>();
+    String sql = "SELECT SM.shift_manager_id, SM.shift_start_time, SM.shift_end_time, " +
+                 "SM.total_revenue, SM.total_hours, SM.notes, SM.employee_id, E.employee_name " +
+                 "FROM ShiftManagers SM " +
+                 "LEFT JOIN Employees E ON SM.employee_id = E.employee_id";
+
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            Shift shift = new Shift(
+                    rs.getInt("shift_manager_id"),
+                    rs.getTimestamp("shift_start_time") != null ? rs.getTimestamp("shift_start_time").toLocalDateTime() : null,
+                    rs.getTimestamp("shift_end_time") != null ? rs.getTimestamp("shift_end_time").toLocalDateTime() : null,
+                    rs.getBigDecimal("total_revenue"),
+                    rs.getBigDecimal("total_hours"),
+                    rs.getString("notes"),
+                    rs.getInt("employee_id"),
+                    rs.getString("employee_name")
+            );
+            list.add(shift);
         }
-        return list;
+    } catch (SQLException e) {
+        System.out.println("Error fetching shifts: " + e.getMessage());
     }
+    return list;
+}
 
     // Lấy thông tin ca làm của nhân viên theo id
     public Shift getShiftById(int shiftManagerId) {
