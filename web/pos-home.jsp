@@ -874,7 +874,7 @@
                                 closeEditCustomerModal();
                                 // Refresh customer select
                                 $('#customerSelect').val(null).trigger('change');
-                                loadCustomers(); // Thêm hàm này nếu bạn cần refresh danh sách khách hàng
+                                loadCustomers(); // Refresh danh sách khách hàng
                             } else {
                                 alert('Có lỗi xảy ra khi cập nhật thông tin khách hàng');
                             }

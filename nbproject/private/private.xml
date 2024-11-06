@@ -115,24 +115,7 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/src/java/controller/LogoutServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/Accounts.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/Roles.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/AccountDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/EmployeeDAO.java</file>
-            <file>file:/D:/Project_SWP/web/profile.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/dal/AccountStatusDAO.java</file>
-            <file>file:/D:/Project_SWP/web/assets/css/POS/style.css</file>
-            <file>file:/D:/Project_SWP/src/java/dal/RolesDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/AccountStatus.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/HomeAdmin.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/POS/PoSHomeServlet.java</file>
             <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/model/Employees.java</file>
-            <file>file:/D:/Project_SWP/web/home.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/Admin/ProfileMng/ProfileServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/POS/UserProfileServlet.java</file>
         </group>
     </open-files>
 </project-private>

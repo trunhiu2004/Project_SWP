@@ -62,7 +62,7 @@ public class AuthorizationFilter implements Filter {
             "/emailSettings",
             "/emailTemplates",
             "/register",
-            "/profile",
+            "/profile?action=view",
             "/mailLogs"
     // Thêm các URL khác mà bạn muốn cấm nhân viên truy cập
     );
