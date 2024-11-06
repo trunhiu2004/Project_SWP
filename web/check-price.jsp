@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -183,10 +184,10 @@
                                     <p class="price-display mb-3">
                                         <c:choose>
                                             <c:when test="${product.discount != null}">
-                                                Giá bán: ${product.discount.priceSell} VNĐ
+                                                Giá bán: <fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫
                                             </c:when>
                                             <c:otherwise>
-                                                Giá bán: ${product.inventory.product.price} VNĐ
+                                                Giá bán: <fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫
                                             </c:otherwise>
                                         </c:choose>
                                     </p>

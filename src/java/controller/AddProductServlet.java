@@ -116,14 +116,15 @@ public class AddProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        File projectRoot = new File(appPath).getParentFile().getParentFile();
-        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "product";
+//        File projectRoot = new File(appPath).getParentFile().getParentFile();
+//        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "product";
+        String savePath = request.getServletContext().getRealPath("/assets/images/product");
 
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
         }
-        
+
         String fileName = null;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -139,14 +140,13 @@ public class AddProductServlet extends HttpServlet {
         LocalDate expirationDate = LocalDate.parse(expirationDateStr);
         LocalDate currentDate = LocalDate.now();
 
-
         String cate_raw = request.getParameter("catePro");
         String name = request.getParameter("namePro");
         String barcode = request.getParameter("barcode");
         String price_raw = request.getParameter("pricePro");
         String unit_raw = request.getParameter("unitPro");
         String supplier_raw = request.getParameter("supPro");
-        
+
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : null;
 
         ProductsDAO pd = new ProductsDAO();

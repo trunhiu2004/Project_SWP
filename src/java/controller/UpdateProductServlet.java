@@ -30,7 +30,7 @@ import model.WeightUnit;
  *
  * @author hungt
  */
-//@WebServlet("/updatePro")
+@WebServlet("/updatePro")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
@@ -125,9 +125,10 @@ public class UpdateProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        File projectRoot = new File(appPath).getParentFile().getParentFile();
-        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "product";
+//        File projectRoot = new File(appPath).getParentFile().getParentFile();
+//        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "product";
 
+        String savePath = request.getServletContext().getRealPath("/assets/images/product");
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();

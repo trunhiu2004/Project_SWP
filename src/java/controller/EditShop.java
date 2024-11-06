@@ -68,9 +68,9 @@ public class EditShop extends HttpServlet {
         String shopOpening = request.getParameter("shop_opening_hours");
 
         String appPath = request.getServletContext().getRealPath("");
-        File projectRoot = new File(appPath).getParentFile().getParentFile();
-        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "shop";
-
+//        File projectRoot = new File(appPath).getParentFile().getParentFile();
+//        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "shop";
+        String savePath = request.getServletContext().getRealPath("/assets/images/shop");
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
@@ -120,9 +120,3 @@ public class EditShop extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-
-
-
-
