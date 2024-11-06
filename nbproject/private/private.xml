@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Project_SWP/src/java/controller/PoSHomeServlet.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
+        </group>
         <group name="Java_BackEnd">
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/login/mail.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/small/flag-01.png</file>
@@ -10,14 +15,13 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-customers.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/table-data.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-category.jsp</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/InvoiceListServlet.java</file>
-            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-layout.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/nbproject/build-impl.xml~</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-customers.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/PromotionManageServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/PromotionDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponUpdateServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pages-maintenance.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/Admin/Setting/EmailSettingsController.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-sale.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/ResetPasswordServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/small/flag-03.png</file>
@@ -37,19 +41,25 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/logo.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/table-treeview.js</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/Coupon.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/emailTemplateForm.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/product/04.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponManageServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/promotion-list.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmailSettingsDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/ForgetPassword.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/customizer.js</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/LogoutServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/components/topnavbar.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/StaffManageServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmailTemplateDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/user/02.jpg</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-textarea.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/emailTemplates.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pricing.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/VerifyServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-report.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/emailSettings.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/EmailTemplate.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/layouts/side-bkg.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/AccountDAO.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-users.jsp</file>
@@ -59,6 +69,7 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/home.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/staff-list.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pages-error.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/edit-customer.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-users.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/small/flag-02.png</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/loader.gif</file>
@@ -105,17 +116,26 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/LoginServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-add-return.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/model/Employees.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/Admin/Setting/EmailTemplateServlet.java</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/BestSellProduct.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/form-switch.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/add-to-inventory.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/images/user/05.jpg</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-category.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/add-newproduct-inventory.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/invoiceList.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/page-list-product-discount.jsp</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/pages-error-500.jsp</file>
+            <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/verify/SendEmail.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/web/assets/js/chart-custom.js</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/controller/CouponDeleteServlet.java</file>
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
+<<<<<<< HEAD
         <group>
             <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
         </group>
+=======
+>>>>>>> origin/FixBugExpired
     </open-files>
 </project-private>
