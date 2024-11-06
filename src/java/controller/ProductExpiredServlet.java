@@ -87,11 +87,11 @@ public class ProductExpiredServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idPro"));
-        int discount = Integer.parseInt(request.getParameter("discount"));
+        double discount = Double.parseDouble(request.getParameter("discount"));
         StoreStockDAO ss = new StoreStockDAO();
         ProductsDAO pd = new ProductsDAO();
         Products p = pd.getProductById(id);
-        double newPrice = p.getPrice() * (1 - discount * 0.05);
+        double newPrice = p.getPrice() * (1 - discount/100);
         DiscountProduct discountProduct = new DiscountProduct(id, newPrice);
         DiscountProductDAO discountProductDAO = new DiscountProductDAO();
         if (discountProductDAO.isProductExists(id)) {
