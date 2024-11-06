@@ -72,8 +72,7 @@
                                             <th>Mã ca làm</th>
                                             <th>Thời gian bắt đầu</th>
                                             <th>Thời gian kết ca</th>
-                                            <th>Tiền mở ca</th>
-                                            <th>Tiền kết ca</th>
+                                            
                                             <th>Tổng doanh thu</th>
                                             <th>Tổng giờ làm</th>
                                             <th>Tên nhân viên</th>
@@ -86,8 +85,7 @@
                                                 <td>${shift.shiftManageId}</td>
                                                 <td>${shift.formattedShiftStartTime}</td>
                                                 <td>${shift.formattedShiftEndTime}</td>
-                                                <td><fmt:formatNumber value="${shift.cashStart}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
-                                                <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                
                                                 <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
                                                 <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
                                                 <td>${shift.employeeName}</td>

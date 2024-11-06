@@ -51,8 +51,7 @@ public class EditShift extends HttpServlet {
 
         Shift shift = new Shift();
         shift.setShiftManageId(shiftManageId);
-        shift.setCashStart(cashStart);
-        shift.setCashEnd(cashEnd);
+        
         shift.setTotalRevenue(totalRevenue);
 
         shiftDAO.updateShift(shift);

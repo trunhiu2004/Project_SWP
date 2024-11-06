@@ -57,11 +57,12 @@ public class ListShift extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ShiftDAO dao = new ShiftDAO();
-        List<Shift> listShift = dao.getAll();
-        
+        List<Shift> listShift = dao.getAll(); // Đảm bảo totalRevenue được tính toán ở đây
+    
         request.setAttribute("shift", listShift);
         request.getRequestDispatcher("page-list-shift.jsp").forward(request, response);
-    } 
+    }
+    
 
     /** 
      * Handles the HTTP <code>POST</code> method.
