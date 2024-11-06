@@ -2,7 +2,7 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <!-- All servlet definitions -->
     <!-- Authentication & User Management -->
-<!--    <filter>
+    <!--    <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
         <init-param>
@@ -474,6 +474,22 @@
         <servlet-name>UserProfileServlet</servlet-name>
         <servlet-class>controller.POS.UserProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExportReportCustomerToExcel</servlet-name>
+        <servlet-class>ExportToExcel.ExportReportCustomerToExcel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportReportProductSales</servlet-name>
+        <servlet-class>ExportToExcel.ExportReportProductSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportReportCategory</servlet-name>
+        <servlet-class>ExportToExcel.ExportReportCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportBestSellProduct</servlet-name>
+        <servlet-class>ExportToExcel.ExportBestSellProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -927,6 +943,22 @@
     <servlet-mapping>
         <servlet-name>UserProfileServlet</servlet-name>
         <url-pattern>/user-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportReportCustomerToExcel</servlet-name>
+        <url-pattern>/ExportReportCustomerToExcel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportReportProductSales</servlet-name>
+        <url-pattern>/ExportReportProductSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportReportCategory</servlet-name>
+        <url-pattern>/ExportReportCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportBestSellProduct</servlet-name>
+        <url-pattern>/ExportBestSellProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

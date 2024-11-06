@@ -56,6 +56,8 @@
                                         
                                     </div>
                                     <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+                                    <a href="ExportReportCategory" class="btn btn-success add-list"><i
+                                                class="las la-plus mr-3"></i>Xuất file ra Excel</a>
                                     
                                     <div class="iq-search-bar device-search">
                                         <form method="Post" action="ProductCategorySale" class="searchbox">

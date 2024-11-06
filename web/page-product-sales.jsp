@@ -57,6 +57,8 @@
                                         <p class="mb-0">Đây là doanh thu các sản phẩm nhé </p>
                                     </div>
                                     <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+                                    <a href="ExportReportProductSales" class="btn btn-success add-list"><i
+                                                class="las la-plus mr-3"></i>Xuất file ra Excel</a>
 
                                      
                                     
