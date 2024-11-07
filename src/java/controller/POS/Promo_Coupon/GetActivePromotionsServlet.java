@@ -2,25 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.POS;
+package controller.POS.Promo_Coupon;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import dal.PromotionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Cart;
+import java.util.List;
+import model.Promotion;
 
 /**
  *
  * @author ankha
  */
-@WebServlet(name = "RemoveCouponServlet", urlPatterns = {"/remove-coupon"})
-public class RemoveCouponServlet extends HttpServlet {
+public class GetActivePromotionsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class RemoveCouponServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RemoveCouponServlet</title>");
+            out.println("<title>Servlet GetActivePromotionsServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RemoveCouponServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GetActivePromotionsServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +59,18 @@ public class RemoveCouponServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PromotionDAO promotionDAO = new PromotionDAO();
+        List<Promotion> activePromotions = promotionDAO.getActivePromotions();
+
+        Gson gson = new Gson();
+        String jsonPromotions = gson.toJson(activePromotions);
+
+        PrintWriter out = response.getWriter();
+        out.print(jsonPromotions);
+        out.flush();
     }
 
     /**
@@ -71,40 +81,10 @@ public class RemoveCouponServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private Gson gson = new Gson();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        try {
-            // Xóa coupon khỏi session
-            request.getSession().removeAttribute("appliedCoupon");
-
-            // Lấy tổng tiền gốc
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            double originalTotal = cart.getTotalMoney();
-
-            JsonObject jsonResponse = new JsonObject();
-            jsonResponse.addProperty("success", true);
-            jsonResponse.addProperty("originalTotal", originalTotal);
-            jsonResponse.addProperty("message", "Đã xóa mã giảm giá");
-
-            PrintWriter out = response.getWriter();
-            out.print(gson.toJson(jsonResponse));
-            out.flush();
-
-        } catch (Exception e) {
-            JsonObject errorResponse = new JsonObject();
-            errorResponse.addProperty("success", false);
-            errorResponse.addProperty("message", "Có lỗi xảy ra: " + e.getMessage());
-
-            PrintWriter out = response.getWriter();
-            out.print(gson.toJson(errorResponse));
-            out.flush();
-        }
+        processRequest(request, response);
     }
 
     /**

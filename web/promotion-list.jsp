@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -31,7 +30,7 @@
                                     <div>
                                         <h4 class="mb-3">Danh sách khuyễn mãi</h4>
                                     </div>
-                                    <a href="couponAdd" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Promotion</a>
+                                    <a href="promotionAdd" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Promotion</a>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -173,7 +172,7 @@
 
         <script type="text/javascript">
                                     function doDelete(id) {
-                                        if (confirm("Are you sure delete coupon which has id =" + id)) {
+                                        if (confirm("Are you sure delete promotion which has id =" + id)) {
                                             window.location = "promotionDelete?id=" + id;
                                         }
                                     }

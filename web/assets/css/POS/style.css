@@ -995,7 +995,7 @@ body {
 
 .cart-summary {
     display: grid;
-/*    gap: 5px;*/
+    /*    gap: 5px;*/
 }
 
 .summary-row {
@@ -1816,4 +1816,44 @@ body {
 
 .summary-row.with-discount {
     color: #22c55e;
+}
+#promotionList {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.promotion-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.promotion-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.promotion-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.promotion-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.promotion-item button:hover {
+    background-color: #45a049;
 }

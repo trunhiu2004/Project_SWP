@@ -2,24 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.POS.Promo_Coupon;
 
-import dal.CouponDAO;
-import dal.PromotionDAO;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.util.List;
+import model.Cart;
 
 /**
  *
- * @author frien
+ * @author ankha
  */
-public class PromotionAddServlet extends HttpServlet {
+@WebServlet(name = "RemoveCouponServlet", urlPatterns = {"/remove-coupon"})
+public class RemoveCouponServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +39,10 @@ public class PromotionAddServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PromotionAddServlet</title>");
+            out.println("<title>Servlet RemoveCouponServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PromotionAddServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RemoveCouponServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,10 +60,7 @@ public class PromotionAddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CouponDAO couponDAO = new CouponDAO();
-        List<String> statuses = couponDAO.getStatuses();
-        request.setAttribute("statuses", statuses);
-        request.getRequestDispatcher("promotion-add.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -73,19 +71,40 @@ public class PromotionAddServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private Gson gson = new Gson();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String code = request.getParameter("code");
-        String description = request.getParameter("description");
-        Double discount = Double.valueOf(request.getParameter("discountPercentage"));
-        Date startDate = Date.valueOf(request.getParameter("startDate"));
-        Date endDate = Date.valueOf(request.getParameter("endDate"));
-        String status = request.getParameter("status");
-        PromotionDAO promotionDAO = new PromotionDAO();
-        promotionDAO.createPromotion(code, description, startDate, endDate, discount, status);
-        response.sendRedirect("promotionManage");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            // Xóa coupon khỏi session
+            request.getSession().removeAttribute("appliedCoupon");
+
+            // Lấy tổng tiền gốc
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            double originalTotal = cart.getTotalMoney();
+
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("success", true);
+            jsonResponse.addProperty("originalTotal", originalTotal);
+            jsonResponse.addProperty("message", "Đã xóa mã giảm giá");
+
+            PrintWriter out = response.getWriter();
+            out.print(gson.toJson(jsonResponse));
+            out.flush();
+
+        } catch (Exception e) {
+            JsonObject errorResponse = new JsonObject();
+            errorResponse.addProperty("success", false);
+            errorResponse.addProperty("message", "Có lỗi xảy ra: " + e.getMessage());
+
+            PrintWriter out = response.getWriter();
+            out.print(gson.toJson(errorResponse));
+            out.flush();
+        }
     }
 
     /**

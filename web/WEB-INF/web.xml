@@ -2,7 +2,7 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <!-- All servlet definitions -->
     <!-- Authentication & User Management -->
-    <!--    <filter>
+    <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
         <init-param>
@@ -17,7 +17,7 @@
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
@@ -498,6 +498,14 @@
         <servlet-name>ExportBestSellProduct</servlet-name>
         <servlet-class>ExportToExcel.ExportBestSellProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetActivePromotionsServlet</servlet-name>
+        <servlet-class>controller.POS.Promo_Coupon.GetActivePromotionsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyPromotionServlet</servlet-name>
+        <servlet-class>controller.POS.Promo_Coupon.ApplyPromotionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -975,6 +983,14 @@
     <servlet-mapping>
         <servlet-name>ExportBestSellProduct</servlet-name>
         <url-pattern>/ExportBestSellProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetActivePromotionsServlet</servlet-name>
+        <url-pattern>/get-active-promotions</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyPromotionServlet</servlet-name>
+        <url-pattern>/apply-promotion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -59,7 +59,7 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <form action="promotionAdd" method="post" data-toggle="validator">
+                                           <form action="promotionAdd" method="post" data-toggle="validator" accept-charset="UTF-8">
                                             <input type="hidden" name="couponId"/>
                                             <div class="row"> 
                                                 <div class="col-md-6">                      

@@ -88,7 +88,7 @@
                         <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
                         <li><a href="javascript:void(0)" class="bg__blue">Brand</a></li>
                         <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>
-                        <li><a href="javascript:void(0)" class="bg__blue">Promo</a></li>
+                        <li><a href="javascript:void(0)" class="bg__blue" onclick="openPromotionModal()">Promo</a></li>
                     </ul>
                 </div>
             </div>
@@ -448,6 +448,23 @@
                 <h2>Thông tin người dùng</h2>
                 <div id="profileInfo">
                     <!-- Thông tin người dùng sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+            </div>
+        </div>
+        <!-- Promotion Modal -->
+        <div id="promotionModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Chương trình khuyến mãi</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="promotionList">
+                        <!-- Danh sách promotion sẽ được thêm vào đây bằng JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="closePromotionModal" class="btn-cancel">Hủy</button>
                 </div>
             </div>
         </div>
@@ -1455,6 +1472,98 @@
                 } else {
                     finalTotalAmount = 0;
                 }
+            }
+            var promotionModal = document.getElementById('promotionModal');
+            var closeBtn = promotionModal.querySelector('.close');
+            var cancelBtn = document.getElementById('closePromotionModal');
+            //Open Promotion Modal
+            function openPromotionModal() {
+                fetchPromotions();
+                document.getElementById('promotionModal').style.display = 'block';
+            }
+
+            //Close Promotion Modal
+            function closePromotionModal() {
+                promotionModal.style.display = 'none';
+            }
+
+            // Đóng modal khi click vào nút đóng (X)
+            closeBtn.onclick = closePromotionModal;
+
+            // Đóng modal khi click vào nút Hủy
+            cancelBtn.onclick = closePromotionModal;
+
+            // Đóng modal khi click ra ngoài modal
+            window.onclick = function (event) {
+                if (event.target == promotionModal) {
+                    closePromotionModal();
+                }
+            }
+            function fetchPromotions() {
+                fetch('get-active-promotions')
+                        .then(response => response.json())
+                        .then(promotions => {
+                            const promotionList = document.getElementById('promotionList');
+                            promotionList.innerHTML = ''; // Xóa nội dung cũ
+
+                            promotions.forEach(promotion => {
+                                const promotionItem = document.createElement('div');
+                                promotionItem.className = 'promotion-item';
+
+                                const title = document.createElement('h3');
+                                title.textContent = promotion.promotion_name;
+                                promotionItem.appendChild(title);
+
+                                const description = document.createElement('p');
+                                description.textContent = promotion.description;
+                                promotionItem.appendChild(description);
+
+                                const discount = document.createElement('p');
+                                discount.textContent = 'Giảm giá: ' + promotion.discount_value + '%';
+                                promotionItem.appendChild(discount);
+
+                                const dateRange = document.createElement('p');
+                                dateRange.textContent = 'Từ ' + new Date(promotion.start_date).toLocaleDateString() + ' đến ' + new Date(promotion.end_date).toLocaleDateString();
+                                promotionItem.appendChild(dateRange);
+
+                                const applyButton = document.createElement('button');
+                                applyButton.textContent = 'Áp dụng';
+                                applyButton.onclick = function () {
+                                    applyPromotion(promotion.promotion_id);
+                                };
+                                promotionItem.appendChild(applyButton);
+
+                                promotionList.appendChild(promotionItem);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.error('Error:', error);
+                        });
+            }
+            function applyPromotion(promotionId) {
+                fetch('apply-promotion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({promotionId: promotionId})
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'flex';
+                                document.getElementById('appliedCouponCode').textContent = 'Khuyến mãi: ' + data.promotionName;
+                                document.getElementById('discountRow').style.display = 'flex';
+                                document.getElementById('discountAmount').textContent = '-' + formatCurrency(data.discountAmount);
+                                finalTotalAmount = data.finalTotal;
+                                document.getElementById('finalTotal').textContent = formatCurrency(data.finalTotal);
+                                document.getElementById('promotionModal').style.display = 'none';
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                closePromotionModal();
             }
         </script>
         <script>

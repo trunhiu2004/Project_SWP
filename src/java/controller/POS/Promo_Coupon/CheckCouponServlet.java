@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.POS;
+package controller.POS.Promo_Coupon;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
