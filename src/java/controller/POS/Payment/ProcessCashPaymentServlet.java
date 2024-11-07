@@ -98,6 +98,7 @@ public class ProcessCashPaymentServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
             Coupons appliedCoupon = (Coupons) session.getAttribute("appliedCoupon");
+            Integer employeeId = (Integer) session.getAttribute("employeeId");
 
             if (cart == null || cart.getItems().isEmpty()) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -116,7 +117,7 @@ public class ProcessCashPaymentServlet extends HttpServlet {
             }
 
             try {
-                orderId = orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon);
+                orderId = orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon, employeeId);
             } catch (SQLException e) {
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -136,7 +137,7 @@ public class ProcessCashPaymentServlet extends HttpServlet {
                 request.setAttribute("changeAmount", receivedAmount - finalTotalAmount);
                 request.setAttribute("appliedCoupon", appliedCoupon);
                 request.setAttribute("subtotal", cart.getTotalMoney()); // Trả lại về giá tiền chưa giảm giá
-                
+
                 session.removeAttribute("cart");
                 session.removeAttribute("appliedCoupon");
 

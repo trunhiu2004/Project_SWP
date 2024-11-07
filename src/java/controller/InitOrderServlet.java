@@ -92,14 +92,22 @@ public class InitOrderServlet extends HttpServlet {
 
         try {
             HttpSession session = request.getSession();
-            // Thay đổi từ customerId thành selected_customer_id
             Integer customerId = (Integer) session.getAttribute("selected_customer_id");
+            Integer employeeId = (Integer) session.getAttribute("employeeId");
 
             System.out.println("Selected Customer ID from session: " + customerId); // Debug log
+            System.out.println("Employee ID from session: " + employeeId); // Debug log
 
             if (customerId == null) {
                 jsonResponse.addProperty("success", false);
                 jsonResponse.addProperty("error", "Vui lòng chọn khách hàng trước khi tạo đơn hàng");
+                out.print(jsonResponse.toString());
+                return;
+            }
+
+            if (employeeId == null) {
+                jsonResponse.addProperty("success", false);
+                jsonResponse.addProperty("error", "Không tìm thấy thông tin nhân viên. Vui lòng đăng nhập lại.");
                 out.print(jsonResponse.toString());
                 return;
             }
@@ -117,16 +125,20 @@ public class InitOrderServlet extends HttpServlet {
             }
 
             // Tạo order mới
-            int orderId = orderDAO.createPendingOrder(customerId);
+            int orderId = orderDAO.createPendingOrder(customerId, employeeId);
             session.setAttribute("currentOrderId", orderId);
 
             jsonResponse.addProperty("success", true);
             jsonResponse.addProperty("orderId", orderId);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            jsonResponse.addProperty("success", false);
+            jsonResponse.addProperty("error", "Lỗi cơ sở dữ liệu: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             jsonResponse.addProperty("success", false);
-            jsonResponse.addProperty("error", e.getMessage());
+            jsonResponse.addProperty("error", "Lỗi không xác định: " + e.getMessage());
         }
 
         out.print(jsonResponse.toString());

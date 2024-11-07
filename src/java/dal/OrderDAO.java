@@ -282,24 +282,24 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public int createOrder(int customerId, double totalAmount, List<CartItem> items, Coupons appliedCoupon) throws SQLException {
+    public int createOrder(int customerId, double totalAmount, List<CartItem> items, Coupons appliedCoupon, Integer employeeId) throws SQLException {
         try {
             connection.setAutoCommit(false);
 
             String orderSql = "INSERT INTO Orders (customer_id, order_date, order_total_amount, order_status, employee_id, customer_coupon_id) "
-                    + "VALUES (?, GETDATE(), ?, 'COMPLETED', 2, ?)";
+                    + "VALUES (?, GETDATE(), ?, 'COMPLETED', ?, ?)";
 
             int orderId;
             try (PreparedStatement ps = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, customerId);
                 ps.setDouble(2, totalAmount);
+                ps.setObject(3, employeeId);
 
                 if (appliedCoupon != null) {
-                    // Tạo CustomerCoupon mới và lấy ID
                     int customerCouponId = createCustomerCoupon(customerId, appliedCoupon.getCoupon_id());
-                    ps.setInt(3, customerCouponId);
+                    ps.setInt(4, customerCouponId);
                 } else {
-                    ps.setNull(3, java.sql.Types.INTEGER);
+                    ps.setNull(4, java.sql.Types.INTEGER);
                 }
 
                 ps.executeUpdate();
@@ -312,7 +312,7 @@ public class OrderDAO extends DBContext {
             }
 
             processOrderDetails(orderId, items);
-            createInvoice(orderId, customerId, totalAmount);
+            createInvoice(orderId, customerId, totalAmount, employeeId);
 
             connection.commit();
             return orderId;
@@ -378,25 +378,27 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public void createInvoice(int orderId, int customerId, double totalAmount) throws SQLException {
+    public void createInvoice(int orderId, int customerId, double totalAmount, int employeeId) throws SQLException {
         String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
                 + "payment_method_id, employee_id, customer_id, shift_manager_id) "
-                + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, 2, ?, 2)";
+                + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, ?, ?, 2)";
 
         try (PreparedStatement ps = connection.prepareStatement(invoiceSql)) {
             ps.setInt(1, orderId);
             ps.setDouble(2, totalAmount);
-            ps.setInt(3, customerId);
+            ps.setInt(3, employeeId);
+            ps.setInt(4, customerId);
             ps.executeUpdate();
         }
     }
 
-    public int createPendingOrder(int customerId) throws SQLException {
+    public int createPendingOrder(int customerId, int employeeId) throws SQLException {
         String sql = "INSERT INTO Orders (customer_id, order_date, order_status, employee_id) "
-                + "VALUES (?, GETDATE(), 'PENDING', 2)"; // Giả sử employee_id = 2 là default
+                + "VALUES (?, GETDATE(), 'PENDING', ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, customerId);
+            ps.setInt(2, employeeId);
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {

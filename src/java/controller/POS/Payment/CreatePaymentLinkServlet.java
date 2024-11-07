@@ -163,6 +163,7 @@ public class CreatePaymentLinkServlet extends HttpServlet {
 
         } catch (Exception e) {
             LOGGER.severe("Error creating payment: " + e.getMessage());
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             JsonObject error = new JsonObject();
             error.addProperty("error", "Server error: " + e.getMessage());

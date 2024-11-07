@@ -129,10 +129,15 @@
                 </table>
 
                 <div class="receipt-summary">
-                    <p>Tổng tiền: <fmt:formatNumber value="${order.orderTotalAmount}" pattern="#,##0" />₫</p>
-                    <c:if test="${not empty order.couponCode}">
-                        <p>Mã giảm giá: ${order.couponCode}</p>
+                    <p>Tổng tiền hàng: <fmt:formatNumber value="${subtotal}" pattern="#,##0" />₫</p>
+                    <c:if test="${not empty appliedCoupon}">
+                        <p>Mã giảm giá: ${appliedCoupon.coupon_code}</p>
+                        <c:set var="discountAmount" value="${subtotal * appliedCoupon.discount_amount / 100}" />
+                        <p>Giảm giá: <fmt:formatNumber value="${discountAmount}" pattern="#,##0" />₫</p>
                     </c:if>
+                    <p>Tổng thanh toán: <fmt:formatNumber value="${order.orderTotalAmount}" pattern="#,##0" />₫</p>
+                    <p>Tiền khách đưa: <fmt:formatNumber value="${receivedAmount}" pattern="#,##0" />₫</p>
+                    <p>Tiền thừa: <fmt:formatNumber value="${changeAmount}" pattern="#,##0" />₫</p>
                 </div>
 
                 <div class="receipt-footer">

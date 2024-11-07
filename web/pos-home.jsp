@@ -1474,11 +1474,10 @@
                         alert('Vui lòng chọn khách hàng trước khi thanh toán');
                         return;
                     }
-
-                    // Lấy tổng tiền - đảm bảo là số
-                    const totalAmountText = document.querySelector('.cart-summary .summary-row span:last-child').textContent;
-                    const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''));
-                    if (isNaN(totalAmount) || totalAmount <= 0) {
+                    // Lấy tổng tiền sau khi giảm giá - đảm bảo là số
+                    const finalTotalElement = document.getElementById('finalTotal');
+                    const finalTotalAmount = parseInt(finalTotalElement.textContent.replace(/[^\d]/g, ''));
+                    if (isNaN(finalTotalAmount) || finalTotalAmount <= 0) {
                         alert('Số tiền thanh toán không hợp lệ');
                         return;
                     }
@@ -1497,7 +1496,7 @@
                     });
                     // Log request data để debug
                     const requestData = {
-                        amount: totalAmount,
+                        amount: finalTotalAmount, // Sử dụng finalTotalAmount thay vì totalAmount
                         orderId: currentOrderId,
                         description: `Thanh toán đơn hàng #${currentOrderId}`,
                         items: items

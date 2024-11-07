@@ -66,8 +66,8 @@ public class PoSHomeServlet extends HttpServlet {
             Accounts account = (Accounts) session.getAttribute("account");
             if (account.getRole_id() == 1 || account.getRole_id() == 2) {
                 //clear PENDING Order
-                OrderDAO orderDAO = new OrderDAO();
-                orderDAO.scheduleCleanup();
+//                OrderDAO orderDAO = new OrderDAO();
+//                orderDAO.scheduleCleanup();
 
                 String success = request.getParameter("success");
                 String error = request.getParameter("error");

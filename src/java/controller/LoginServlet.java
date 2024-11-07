@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             }
             return;
         }
-        
+
 //        Chuyển hướng login nếu chưa đăng nhập
         request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
     }
@@ -106,11 +106,12 @@ public class LoginServlet extends HttpServlet {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             Integer employeeId = employeeDAO.getEmployeeIdByAccountId(account.getAccount_id());
 
-            if(employeeId != null){
+            if (employeeId != null) {
+                session.setAttribute("employeeId", employeeId); // Lưu employeeId vào session
                 Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
                 attendanceDAO.recordLoginTime(employeeId, loginTime);
-                
+
             }
 
             // Điều hướng dựa trên vai trò của người dùng
