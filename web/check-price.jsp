@@ -187,7 +187,7 @@
                                                 Giá bán: <fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫
                                             </c:when>
                                             <c:otherwise>
-                                                Giá bán: <fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫
+                                                Giá bán: <fmt:formatNumber value="${product.inventory.product.price}" pattern="#,##0" />₫
                                             </c:otherwise>
                                         </c:choose>
                                     </p>
