@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import model.Coupons;
 import model.Order;
 import model.Customers;
+import model.PaymentMethod;
 
 /**
  *
@@ -113,12 +114,14 @@ public class PaymentReturnServlet extends HttpServlet {
                     order.setOrderTotalAmount((int) finalTotalAmount);
                     order.setEmployeeId(employeeId);
                     // Thêm các thông tin khác nếu cần
-                    orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon, employeeId);
+                    orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon, employeeId, PaymentMethod.QR_CODE);
                 } else {
                     // Cập nhật đơn hàng hiện có
                     order.setOrderStatus("COMPLETED");
                     order.setOrderTotalAmount((int) finalTotalAmount);
                     orderDAO.updateOrder(order);
+                    // Cập nhật hoặc tạo invoice với payment method là QR
+                    orderDAO.createInvoice(order.getOrderId(), order.getCustomerId(), finalTotalAmount, employeeId, PaymentMethod.QR_CODE);
                 }
 
                 CustomerDAO customerDAO = new CustomerDAO();

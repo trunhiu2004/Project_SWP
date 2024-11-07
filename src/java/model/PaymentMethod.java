@@ -9,9 +9,13 @@ package model;
  * @author ankha
  */
 public class PaymentMethod {
+
     private int paymentMethodId;
     private String paymentMethodName;
     private int status;
+
+    public static final int CASH = 1;
+    public static final int QR_CODE = 2;
 
     public PaymentMethod() {
     }
@@ -45,6 +49,5 @@ public class PaymentMethod {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
 }

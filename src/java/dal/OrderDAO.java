@@ -282,7 +282,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public int createOrder(int customerId, double totalAmount, List<CartItem> items, Coupons appliedCoupon, Integer employeeId) throws SQLException {
+    public int createOrder(int customerId, double totalAmount, List<CartItem> items, Coupons appliedCoupon, Integer employeeId, int paymentMethodId) throws SQLException {
         try {
             connection.setAutoCommit(false);
 
@@ -312,7 +312,7 @@ public class OrderDAO extends DBContext {
             }
 
             processOrderDetails(orderId, items);
-            createInvoice(orderId, customerId, totalAmount, employeeId);
+            createInvoice(orderId, customerId, totalAmount, employeeId, paymentMethodId);
 
             connection.commit();
             return orderId;
@@ -378,16 +378,17 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public void createInvoice(int orderId, int customerId, double totalAmount, int employeeId) throws SQLException {
+    public void createInvoice(int orderId, int customerId, double totalAmount, int employeeId, int paymentMethodId) throws SQLException {
         String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
                 + "payment_method_id, employee_id, customer_id, shift_manager_id) "
-                + "VALUES (?, GETDATE(), ?, 'COMPLETED', 1, ?, ?, 2)";
+                + "VALUES (?, GETDATE(), ?, 'COMPLETED', ?, ?, ?, 2)";
 
         try (PreparedStatement ps = connection.prepareStatement(invoiceSql)) {
             ps.setInt(1, orderId);
             ps.setDouble(2, totalAmount);
-            ps.setInt(3, employeeId);
-            ps.setInt(4, customerId);
+            ps.setInt(3, paymentMethodId);
+            ps.setInt(4, employeeId);
+            ps.setInt(5, customerId);
             ps.executeUpdate();
         }
     }

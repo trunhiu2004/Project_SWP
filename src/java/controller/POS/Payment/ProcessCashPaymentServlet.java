@@ -28,6 +28,7 @@ import model.Customers;
 import model.Employees;
 import model.Order;
 import model.OrderDetail;
+import model.PaymentMethod;
 import model.Shop;
 
 /**
@@ -117,7 +118,7 @@ public class ProcessCashPaymentServlet extends HttpServlet {
             }
 
             try {
-                orderId = orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon, employeeId);
+                orderId = orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon, employeeId, PaymentMethod.CASH);
             } catch (SQLException e) {
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
