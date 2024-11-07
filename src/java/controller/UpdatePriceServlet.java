@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.CustomerDAO;
+import dal.ProductsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +12,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Customers;
+import java.time.LocalDateTime;
+import model.HistoryPrice;
+import model.Products;
 
 /**
  *
- * @author ankha
+ * @author hungt
  */
-public class SetCustomerServlet extends HttpServlet {
+public class UpdatePriceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,10 @@ public class SetCustomerServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SetCustomerServlet</title>");
+            out.println("<title>Servlet UpdatePriceServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SetCustomerServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdatePriceServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,45 +60,17 @@ public class SetCustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-
+        HttpSession session = request.getSession();
+        String id_raw = request.getParameter("product_id");
+        int id;
+        ProductsDAO pd = new ProductsDAO();
         try {
-            String customerId = request.getParameter("id");
-
-            if (customerId != null && !customerId.trim().isEmpty()) {
-                // Lưu customer_id vào session
-                HttpSession session = request.getSession();
-                session.setAttribute("selected_customer_id", Integer.parseInt(customerId));
-
-                // Lấy thông tin customer để trả về
-                CustomerDAO customerDAO = new CustomerDAO();
-                Customers customer = customerDAO.getCustomerById(Integer.parseInt(customerId));
-
-                if (customer != null) {
-                    // Trả về thông tin customer dạng JSON
-                    StringBuilder json = new StringBuilder();
-                    json.append("{");
-                    json.append("\"success\":true,");
-                    json.append("\"customerId\":").append(customer.getCustomerId()).append(",");
-                    json.append("\"customerName\":\"").append(customer.getCustomerName()).append("\",");
-                    json.append("\"customerPhone\":\"").append(customer.getCustomerPhone()).append("\",");
-                    json.append("\"customerType\":\"").append(customer.getCustomerType().getTypeName()).append("\"");
-                    json.append("}");
-                    out.print(json.toString());
-                } else {
-                    out.print("{\"success\":false,\"message\":\"Customer not found\"}");
-                }
-            } else {
-                // Nếu id rỗng hoặc null, xóa customer khỏi session (walk-in customer)
-                HttpSession session = request.getSession();
-                session.removeAttribute("selected_customer_id");
-                out.print("{\"success\":true,\"message\":\"Set to walk-in customer\"}");
-            }
-
-        } catch (Exception e) {
-            out.print("{\"success\":false,\"message\":\"" + e.getMessage() + "\"}");
+            id = Integer.parseInt(id_raw);
+            Products p = pd.getProductById(id);
+            session.setAttribute("product", p);
+            request.getRequestDispatcher("update-history.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
     }
 
@@ -111,7 +85,27 @@ public class SetCustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ProductsDAO pd = new ProductsDAO();
+        String id_raw = request.getParameter("idPro");
+        String newPrice_raw = request.getParameter("pricePro");
+        int id = Integer.parseInt(id_raw);
+        float newPrice = Float.parseFloat(newPrice_raw);
+        Products p1 = pd.getProductById(id);
+        float price = p1.getPrice();
+        String status;
+        if (newPrice > price) {
+            status = "Tăng giá";
+        } else if (newPrice < price) {
+            status = "Giảm giá";
+        } else {
+            status = "Giữ nguyên"; // Giá không thay đổi
+        }
+        LocalDateTime updatedAt = LocalDateTime.now();
+
+        HistoryPrice hNew = new HistoryPrice(p1,newPrice,price,updatedAt,status);
+        pd.insertHisPrice(hNew);
+        pd.updateProductPrice(id, newPrice);
+        response.sendRedirect("listPrice?product_id="+id);
     }
 
     /**

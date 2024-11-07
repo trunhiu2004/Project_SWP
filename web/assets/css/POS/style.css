@@ -506,7 +506,7 @@ body {
 
 /* Cập nhật layout cho Cart Area */
 .select_area {
-    padding: 15px;
+    padding: 5px;
     border-bottom: 1px solid var(--border-color);
     display: grid;
     grid-template-columns: 1fr 1fr 40px 40px;
@@ -976,13 +976,13 @@ body {
     box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 5px;
     border-top: 1px solid #edf2f7;
 }
 
 .cart-total-section {
     background: #f8fafc;
-    padding: 20px;
+    /*padding: 20px;*/
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
     transition: all 0.3s ease;
@@ -995,14 +995,14 @@ body {
 
 .cart-summary {
     display: grid;
-    gap: 15px;
+/*    gap: 5px;*/
 }
 
 .summary-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 2px solid #e2e8f0;
 }
 
@@ -1018,7 +1018,7 @@ body {
 }
 
 .summary-row span:last-child {
-    font-size: 24px;
+    font-size: 20px;
     color: #1e293b;
     font-weight: 600;
 }
@@ -1058,7 +1058,7 @@ body {
 
 .cart-header {
     background: #f8fafc;
-    padding: 15px;
+    padding: 1px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     border-bottom: 2px solid #e2e8f0;
@@ -1766,4 +1766,54 @@ body {
 .select2-container--classic .select2-selection--single .select2-selection__rendered {
     line-height: 36px;
     color: #212529;
+}
+.coupon-input-group {
+    display: flex;
+    gap: 10px;
+    /*margin-bottom: 15px;*/
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.coupon-input-group input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.coupon-input-group button {
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.coupon-input-group button:hover {
+    background: #2563eb;
+}
+
+.applied-coupon {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    padding: 4px 6px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.applied-coupon .remove-coupon {
+    color: #ef4444;
+    cursor: pointer;
+}
+
+.summary-row.with-discount {
+    color: #22c55e;
 }

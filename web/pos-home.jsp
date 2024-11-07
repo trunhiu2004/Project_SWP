@@ -181,9 +181,30 @@
                     <div id="bottom_absolute">
                         <div class="cart-total-section">
                             <div class="cart-summary">
+                                <!-- Phần nhập Coupon -->
+                                <div class="coupon-input-group">
+                                    <input type="text" id="couponCode" placeholder="Nhập mã giảm giá">
+                                    <button onclick="applyCoupon()">Áp dụng</button>
+                                </div>
+
+                                <!-- Hiển thị coupon đã áp dụng (ẩn mặc định) -->
+                                <div id="appliedCoupon" class="applied-coupon" style="display: none;">
+                                    <span id="appliedCouponCode"></span>
+                                    <span class="remove-coupon" onclick="removeCoupon()">×</span>
+                                </div>
+
+                                <!-- Các dòng tổng tiền -->
                                 <div class="summary-row">
-                                    <span>Total:</span>
-                                    <span><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
+                                    <span>Tạm tính:</span>
+                                    <span id="subtotal"><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
+                                </div>
+                                <div class="summary-row with-discount" id="discountRow" style="display: none;">
+                                    <span>Giảm giá:</span>
+                                    <span id="discountAmount">-0đ</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tổng cộng:</span>
+                                    <span id="finalTotal"><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
                                 </div>
                             </div>
                         </div>
@@ -431,23 +452,20 @@
             </div>
         </div>
         <script>
+            let finalTotalAmount = 0;
             // Initialize functions when document is ready
             $(document).ready(function () {
                 console.log('Document ready');
                 console.log('jQuery version:', $.fn.jquery);
                 console.log('Select2 loaded:', typeof $.fn.select2 !== 'undefined');
-
                 console.log('Customer select element exists:', $('#customerSelect').length > 0);
                 console.log('Customer select HTML:', $('#customerSelect')[0]?.outerHTML);
-
                 console.log('Edit button exists:', document.querySelector('.customer_action_btn i.material-icons') !== null);
-
                 initializeOtherSelects();
                 initializeFeatures();
             });
             function initializeCustomerSelect() {
                 console.log('Initializing customer select...');
-
                 $('#customerSelect').select2({
                     placeholder: 'Chọn khách hàng',
                     allowClear: true,
@@ -532,12 +550,10 @@
             $(document).ready(function () {
                 initializeCustomerSelect();
             });
-
             // Format customer in dropdown
             function formatCustomer(customer) {
                 if (!customer.id)
                     return customer.text;
-
                 return $('<div class="customer-option">' +
                         '<div class="customer-name">' + customer.text + '</div>' +
                         '</div>');
@@ -578,7 +594,6 @@
                                 const $select = $('#select_employee');
                                 $select.empty();
                                 $select.append(new Option(data.name, '', true, true));
-
                                 // Initialize select2 with specific styling
                                 $select.select2({
                                     disabled: true,
@@ -595,7 +610,6 @@
                             const $select = $('#select_employee');
                             $select.empty();
                             $select.append(new Option('Error loading name', '', true, true));
-
                             $select.select2({
                                 disabled: true,
                                 theme: "classic",
@@ -612,7 +626,6 @@
                             // Lấy references đến cả hai select elements
                             const editSelect = document.getElementById('customerType');
                             const addSelect = document.getElementById('newCustomerType');
-
                             if (editSelect) {
                                 editSelect.innerHTML = '';
                                 types.forEach(type => {
@@ -637,7 +650,7 @@
                             console.error('Error loading customer types:', error);
                         });
             }
-// Cart Management Functions
+            // Cart Management Functions
             function addToCart(storeStockId) {
                 window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
             }
@@ -646,7 +659,6 @@
                 let data = new URLSearchParams();
                 data.append('storeStockId', storeStockId);
                 data.append('action', action);
-
                 if (value !== null) {
                     data.append('quantity', value);
                 }
@@ -699,11 +711,10 @@
                 }
             }
 
-// Barcode and Search Functions
+            // Barcode and Search Functions
             function searchProductByBarcode(barcode) {
                 if (!barcode)
                     return;
-
                 fetch('search-product?barcode=' + encodeURIComponent(barcode))
                         .then(response => response.json())
                         .then(data => {
@@ -724,7 +735,7 @@
                         });
             }
 
-// Utility Functions
+            // Utility Functions
             function initializeTimeUpdate() {
                 function updateTime() {
                     const now = new Date();
@@ -825,9 +836,7 @@
                 console.log('Opening modal...');
                 const modal = document.getElementById('editCustomerModal');
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-
                 console.log('Selected customer:', selectedCustomer);
-
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng trước');
                     return;
@@ -862,7 +871,6 @@
 
             function saveCustomerChanges() {
                 const formData = new FormData(document.getElementById('editCustomerForm'));
-
                 fetch('edit-customer', {
                     method: 'POST',
                     body: new URLSearchParams(formData)
@@ -912,7 +920,6 @@
                     const editCloseButton = editModal.querySelector('.close');
                     const editCancelButton = editModal.querySelector('.btn-cancel');
                     const editSaveButton = editModal.querySelector('.btn-save');
-
                     if (editCloseButton)
                         editCloseButton.addEventListener('click', closeEditCustomerModal);
                     if (editCancelButton)
@@ -927,7 +934,6 @@
                     const addCloseButton = addModal.querySelector('.close');
                     const addCancelButton = addModal.querySelector('.btn-cancel');
                     const addSaveButton = addModal.querySelector('.btn-save');
-
                     if (addCloseButton)
                         addCloseButton.addEventListener('click', closeAddCustomerModal);
                     if (addCancelButton)
@@ -957,12 +963,10 @@
                     console.log('Save button initialized');
                 }
                 loadCustomerTypes();
-
                 // Close modals when clicking outside
                 window.addEventListener('click', function (event) {
                     const editModal = document.getElementById('editCustomerModal');
                     const addModal = document.getElementById('addCustomerModal');
-
                     if (event.target === editModal) {
                         closeEditCustomerModal();
                     }
@@ -975,7 +979,6 @@
             function openAddCustomerModal() {
                 console.log('Opening add customer modal...');
                 const modal = document.getElementById('addCustomerModal');
-
                 // Load customer types before showing modal
                 loadCustomerTypes().then(() => {
                     modal.style.display = 'block';
@@ -993,11 +996,9 @@
 // Hàm xử lý việc thêm khách hàng mới
             function saveNewCustomer() {
                 const formData = new FormData(document.getElementById('addCustomerForm'));
-
                 // Validate form
                 const customerName = formData.get('customerName').trim();
                 const customerPhone = formData.get('customerPhone').trim();
-
                 if (!customerName || !customerPhone) {
                     alert('Vui lòng điền đầy đủ thông tin');
                     return;
@@ -1017,7 +1018,6 @@
                             if (data.success) {
                                 alert('Thêm khách hàng mới thành công');
                                 closeAddCustomerModal();
-
                                 // Refresh customer select và chọn khách hàng mới
                                 if (data.customerId) {
                                     loadCustomers().then(() => {
@@ -1035,7 +1035,7 @@
                             alert('Có lỗi xảy ra khi thêm khách hàng');
                         });
             }
-// Payment Functions
+            // Payment Functions
             function initializePaymentFeatures() {
                 initializeCashPayment();
                 initializePaymentModals();
@@ -1055,11 +1055,9 @@
                     const closeButtons = cashModal.querySelectorAll('.close, .btn-secondary');
                     const confirmButton = cashModal.querySelector('#confirmPayment');
                     const receivedInput = cashModal.querySelector('#receivedAmount');
-
                     closeButtons.forEach(button => {
                         button.addEventListener('click', closeCashPaymentModal);
                     });
-
                     if (confirmButton) {
                         confirmButton.addEventListener('click', processCashPayment);
                     }
@@ -1074,11 +1072,9 @@
                 if (receiptModal) {
                     const closeButtons = receiptModal.querySelectorAll('.close, .btn-secondary');
                     const printButton = receiptModal.querySelector('.btn-primary');
-
                     closeButtons.forEach(button => {
                         button.addEventListener('click', closeReceiptModal);
                     });
-
                     if (printButton) {
                         printButton.addEventListener('click', printReceipt);
                     }
@@ -1088,30 +1084,17 @@
             function openCashPaymentModal() {
                 console.log('Opening cash payment modal...');
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-
-                // Validate customer selection
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng trước khi thanh toán');
                     return;
                 }
 
-                // Get total amount
-                const totalAmountElement = document.querySelector('.cart-summary .summary-row span:last-child');
-                if (!totalAmountElement) {
-                    alert('Không thể lấy thông tin giỏ hàng');
+                if (!finalTotalAmount || finalTotalAmount <= 0) {
+                    alert('Giỏ hàng trống hoặc tổng tiền không hợp lệ');
                     return;
                 }
 
-                const totalAmount = parseFloat(totalAmountElement.textContent.replace(/[^\d]/g, ''));
-
-                // Validate cart
-                if (!totalAmount || totalAmount <= 0) {
-                    alert('Giỏ hàng trống');
-                    return;
-                }
-
-                // Open modal and set values
-                document.getElementById('totalAmount').value = formatCurrency(totalAmount);
+                document.getElementById('totalAmount').value = formatCurrency(finalTotalAmount);
                 document.getElementById('receivedAmount').value = '';
                 document.getElementById('changeAmount').value = '';
                 document.getElementById('cashPaymentModal').style.display = 'block';
@@ -1136,7 +1119,6 @@
                 const receivedInput = document.getElementById('receivedAmount');
                 const receivedAmount = parseFloat(receivedInput.value) || 0;
                 const changeAmount = receivedAmount - totalAmount;
-
                 // Validate input
                 if (receivedAmount <= 0) {
                     document.getElementById('changeAmount').value = '';
@@ -1151,35 +1133,30 @@
 
             function processCashPayment() {
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-                const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/[^\d]/g, ''));
                 const receivedAmount = parseFloat(document.getElementById('receivedAmount').value);
-
-                // Validate customer selection
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng');
                     return;
                 }
 
-                // Validate cart
-                if (!totalAmount || totalAmount <= 0) {
-                    alert('Giỏ hàng trống');
+                if (!finalTotalAmount || finalTotalAmount <= 0) {
+                    alert('Giỏ hàng trống hoặc tổng tiền không hợp lệ');
                     return;
                 }
 
-                // Validate received amount
                 if (!receivedAmount) {
                     alert('Vui lòng nhập số tiền khách đưa');
                     return;
                 }
-                if (receivedAmount < totalAmount) {
+                if (receivedAmount < finalTotalAmount) {
                     alert('Số tiền khách đưa không đủ');
                     return;
                 }
 
-                const changeAmount = receivedAmount - totalAmount;
-                // Disable nút thanh toán
+                const changeAmount = receivedAmount - finalTotalAmount;
                 document.getElementById('confirmPayment').disabled = true;
-
+                const appliedCouponElement = document.getElementById('appliedCouponCode');
+                const couponCode = appliedCouponElement ? appliedCouponElement.textContent.split(': ')[1] : null;
                 fetch('process-cash-payment', {
                     method: 'POST',
                     headers: {
@@ -1187,9 +1164,10 @@
                     },
                     body: new URLSearchParams({
                         customerId: selectedCustomer.id,
-                        totalAmount: totalAmount,
+                        totalAmount: finalTotalAmount,
                         receivedAmount: receivedAmount,
-                        changeAmount: changeAmount
+                        changeAmount: changeAmount,
+                        couponCode: couponCode
                     })
                 })
                         .then(response => {
@@ -1204,8 +1182,6 @@
                             closeCashPaymentModal();
                             document.getElementById('receiptContent').innerHTML = html;
                             document.getElementById('receiptModal').style.display = 'block';
-
-                            // Tự động in hoá đơn
                             setTimeout(() => {
                                 printReceipt();
                             }, 500);
@@ -1240,7 +1216,6 @@
                 printWindow.document.write(document.getElementById('receiptContent').innerHTML);
                 printWindow.document.write('</body></html>');
                 printWindow.document.close();
-
                 // Đợi CSS load xong
                 setTimeout(() => {
                     printWindow.print();
@@ -1269,7 +1244,6 @@
                 const currentPassword = document.getElementById('currentPassword').value;
                 const newPassword = document.getElementById('newPassword').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
-
                 if (newPassword !== confirmPassword) {
                     alert('Mật khẩu mới không khớp');
                     return;
@@ -1309,13 +1283,13 @@
                 }
             };
             document.addEventListener('DOMContentLoaded', function () {
+                updateFinalTotalAmount();
                 const profileDropdownToggle = document.getElementById('profileDropdownToggle');
                 const profileDropdown = document.getElementById('profileDropdown');
                 const viewProfileBtn = document.getElementById('viewProfileBtn');
                 const profileModal = document.getElementById('profileModal');
                 const closeBtn = profileModal.querySelector('.close');
                 const profileInfo = document.getElementById('profileInfo');
-
                 console.log('viewProfileBtn:', viewProfileBtn); // Debug
 
                 viewProfileBtn.addEventListener('click', function (e) {
@@ -1323,17 +1297,14 @@
                     console.log('View profile button clicked'); // Debug
                     fetchUserProfile();
                 });
-
                 closeBtn.addEventListener('click', function () {
                     profileModal.style.display = 'none';
                 });
-
                 window.addEventListener('click', function (e) {
                     if (e.target == profileModal) {
                         profileModal.style.display = 'none';
                     }
                 });
-
                 function fetchUserProfile() {
                     console.log('Fetching user profile');
                     fetch('user-profile')
@@ -1367,7 +1338,6 @@
                 function displayUserProfile(user) {
                     console.log('Displaying user profile, received user object:', user);
                     const profileInfo = document.getElementById('profileInfo');
-
                     if (profileInfo && user) {
                         // Create elements individually
                         profileInfo.innerHTML = ''; // Clear existing content
@@ -1378,34 +1348,29 @@
                         nameStrong.textContent = 'Tên: ';
                         nameP.appendChild(nameStrong);
                         nameP.appendChild(document.createTextNode(user.name));
-
                         // Email
                         const emailP = document.createElement('p');
                         const emailStrong = document.createElement('strong');
                         emailStrong.textContent = 'Email: ';
                         emailP.appendChild(emailStrong);
                         emailP.appendChild(document.createTextNode(user.email));
-
                         // Phone
                         const phoneP = document.createElement('p');
                         const phoneStrong = document.createElement('strong');
                         phoneStrong.textContent = 'Số điện thoại: ';
                         phoneP.appendChild(phoneStrong);
                         phoneP.appendChild(document.createTextNode(user.phone));
-
                         // Address
                         const addressP = document.createElement('p');
                         const addressStrong = document.createElement('strong');
                         addressStrong.textContent = 'Địa chỉ: ';
                         addressP.appendChild(addressStrong);
                         addressP.appendChild(document.createTextNode(user.address));
-
                         // Append all elements
                         profileInfo.appendChild(nameP);
                         profileInfo.appendChild(emailP);
                         profileInfo.appendChild(phoneP);
                         profileInfo.appendChild(addressP);
-
                         console.log('Profile info content set');
                         console.log('profileInfo content:', profileInfo.textContent);
                         console.log('Actual Data:', user, user.name, user.email, user.phone, user.address);
@@ -1426,7 +1391,71 @@
                 }
 
             });
+            function applyCoupon() {
+                const couponCode = document.getElementById('couponCode').value.trim();
+                if (!couponCode) {
+                    alert('Vui lòng nhập mã giảm giá');
+                    return;
+                }
 
+                const data = {
+                    couponCode: couponCode
+                };
+                fetch('check-coupon', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'flex';
+                                document.getElementById('appliedCouponCode').textContent = 'Mã giảm giá: ' + couponCode;
+                                document.getElementById('couponCode').value = '';
+                                document.getElementById('discountRow').style.display = 'flex';
+                                document.getElementById('discountAmount').textContent = '-' + formatCurrency(data.discountAmount);
+                                finalTotalAmount = data.finalTotal; // Lưu tổng tiền sau khi giảm giá
+                                document.getElementById('finalTotal').textContent = formatCurrency(finalTotalAmount);
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi áp dụng mã giảm giá');
+                        });
+            }
+
+            function removeCoupon() {
+                fetch('remove-coupon', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'none';
+                                document.getElementById('discountRow').style.display = 'none';
+                                document.getElementById('finalTotal').textContent = formatCurrency(data.originalTotal);
+                                document.getElementById('couponCode').value = '';
+                                updateFinalTotalAmount();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi xóa mã giảm giá');
+                        });
+            }
+            function updateFinalTotalAmount() {
+                const totalElement = document.getElementById('finalTotal');
+                if (totalElement) {
+                    finalTotalAmount = parseFloat(totalElement.textContent.replace(/[^\d]/g, ''));
+                } else {
+                    finalTotalAmount = 0;
+                }
+            }
         </script>
         <script>
             // Xử lý nút thanh toán QR
@@ -1449,7 +1478,6 @@
                     // Lấy tổng tiền - đảm bảo là số
                     const totalAmountText = document.querySelector('.cart-summary .summary-row span:last-child').textContent;
                     const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''));
-
                     if (isNaN(totalAmount) || totalAmount <= 0) {
                         alert('Số tiền thanh toán không hợp lệ');
                         return;
@@ -1461,14 +1489,12 @@
                         const priceText = row.querySelector('.col-price').textContent.trim();
                         const price = parseInt(priceText.replace(/[^\d]/g, ''));
                         const quantity = parseInt(row.querySelector('.col-qty input').value);
-
                         return {
                             productName: name,
                             quantity: quantity,
                             price: price
                         };
                     });
-
                     // Log request data để debug
                     const requestData = {
                         amount: totalAmount,
@@ -1477,7 +1503,6 @@
                         items: items
                     };
                     console.log('Request data:', requestData);
-
                     // Gọi API để tạo payment
                     const response = await fetch('create-payment-link', {
                         method: 'POST',
@@ -1487,7 +1512,6 @@
                         },
                         body: JSON.stringify(requestData)
                     });
-
                     if (!response.ok) {
                         const errorText = await response.text();
                         console.error('Error response:', errorText);
@@ -1496,14 +1520,12 @@
 
                     const data = await response.json();
                     console.log('Response data:', data);
-
                     if (!data || !data.checkoutUrl) {
                         throw new Error('Invalid response: missing checkoutUrl');
                     }
 
                     // Mở URL thanh toán trong cửa sổ mới
                     window.open(data.checkoutUrl, '_blank');
-
                     // Theo dõi trạng thái thanh toán
                     const checkPaymentStatus = setInterval(async () => {
                         try {
@@ -1525,12 +1547,10 @@
                             console.error('Error checking payment status:', error);
                         }
                     }, 5000);
-
                     // Dừng kiểm tra sau 5 phút
                     setTimeout(() => {
                         clearInterval(checkPaymentStatus);
                     }, 300000);
-
                 } catch (error) {
                     console.error('Error creating payment:', error);
                     alert('Có lỗi xảy ra khi tạo thanh toán. Vui lòng thử lại sau.');

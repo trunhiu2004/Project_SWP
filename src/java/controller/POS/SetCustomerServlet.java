@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.POS;
 
-import com.google.gson.Gson;
 import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,16 +11,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import jakarta.servlet.http.HttpSession;
 import model.Customers;
 
 /**
  *
  * @author ankha
  */
-public class LoadCustomersServlet extends HttpServlet {
+public class SetCustomerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class LoadCustomersServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadCustomersServlet</title>");
+            out.println("<title>Servlet SetCustomerServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadCustomersServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SetCustomerServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,36 +60,43 @@ public class LoadCustomersServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
         PrintWriter out = response.getWriter();
-        try {
-            CustomerDAO customerDAO = new CustomerDAO();
-            String searchTerm = request.getParameter("search");
 
-            List<Customers> customers;
-            if (searchTerm != null && !searchTerm.trim().isEmpty()) {
-                customers = customerDAO.searchCustomers(searchTerm);
+        try {
+            String customerId = request.getParameter("id");
+
+            if (customerId != null && !customerId.trim().isEmpty()) {
+                // Lưu customer_id vào session
+                HttpSession session = request.getSession();
+                session.setAttribute("selected_customer_id", Integer.parseInt(customerId));
+
+                // Lấy thông tin customer để trả về
+                CustomerDAO customerDAO = new CustomerDAO();
+                Customers customer = customerDAO.getCustomerById(Integer.parseInt(customerId));
+
+                if (customer != null) {
+                    // Trả về thông tin customer dạng JSON
+                    StringBuilder json = new StringBuilder();
+                    json.append("{");
+                    json.append("\"success\":true,");
+                    json.append("\"customerId\":").append(customer.getCustomerId()).append(",");
+                    json.append("\"customerName\":\"").append(customer.getCustomerName()).append("\",");
+                    json.append("\"customerPhone\":\"").append(customer.getCustomerPhone()).append("\",");
+                    json.append("\"customerType\":\"").append(customer.getCustomerType().getTypeName()).append("\"");
+                    json.append("}");
+                    out.print(json.toString());
+                } else {
+                    out.print("{\"success\":false,\"message\":\"Customer not found\"}");
+                }
             } else {
-                customers = customerDAO.getAllCustomers();
+                // Nếu id rỗng hoặc null, xóa customer khỏi session (walk-in customer)
+                HttpSession session = request.getSession();
+                session.removeAttribute("selected_customer_id");
+                out.print("{\"success\":true,\"message\":\"Set to walk-in customer\"}");
             }
 
-            // Chuyển đổi danh sách customers thành JSON
-            Gson gson = new Gson();
-            String json = gson.toJson(customers.stream()
-                    .map(c -> new HashMap<String, Object>() {
-                {
-                    put("id", c.getCustomerId());
-                    put("name", c.getCustomerName());
-                    put("phone", c.getCustomerPhone());
-                    put("type", c.getCustomerType().getTypeName());
-                }
-            })
-                    .collect(Collectors.toList()));
-
-            out.print(json);
         } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"error\":\"" + e.getMessage().replace("\"", "\\\"") + "\"}");
+            out.print("{\"success\":false,\"message\":\"" + e.getMessage() + "\"}");
         }
     }
 

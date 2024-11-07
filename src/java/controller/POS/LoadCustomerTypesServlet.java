@@ -2,25 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.POS.Payment;
+package controller.POS;
 
-import dal.ProductsDAO;
+import com.google.gson.Gson;
+import dal.CustomerTypeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import model.HistoryPrice;
-import model.Products;
+import java.util.List;
+import model.CustomerType;
 
 /**
  *
- * @author hungt
+ * @author ankha
  */
-public class UpdatePriceServlet extends HttpServlet {
+public class LoadCustomerTypesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class UpdatePriceServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdatePriceServlet</title>");
+            out.println("<title>Servlet LoadCustomerTypesServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdatePriceServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadCustomerTypesServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,18 +59,16 @@ public class UpdatePriceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String id_raw = request.getParameter("product_id");
-        int id;
-        ProductsDAO pd = new ProductsDAO();
-        try {
-            id = Integer.parseInt(id_raw);
-            Products p = pd.getProductById(id);
-            session.setAttribute("product", p);
-            request.getRequestDispatcher("update-history.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        CustomerTypeDAO customerTypeDAO = new CustomerTypeDAO();
+        List<CustomerType> types = customerTypeDAO.getAllCustomerTypes();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(types);
+
+        response.getWriter().write(json);
     }
 
     /**
@@ -85,27 +82,7 @@ public class UpdatePriceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductsDAO pd = new ProductsDAO();
-        String id_raw = request.getParameter("idPro");
-        String newPrice_raw = request.getParameter("pricePro");
-        int id = Integer.parseInt(id_raw);
-        float newPrice = Float.parseFloat(newPrice_raw);
-        Products p1 = pd.getProductById(id);
-        float price = p1.getPrice();
-        String status;
-        if (newPrice > price) {
-            status = "Tăng giá";
-        } else if (newPrice < price) {
-            status = "Giảm giá";
-        } else {
-            status = "Giữ nguyên"; // Giá không thay đổi
-        }
-        LocalDateTime updatedAt = LocalDateTime.now();
-
-        HistoryPrice hNew = new HistoryPrice(p1,newPrice,price,updatedAt,status);
-        pd.insertHisPrice(hNew);
-        pd.updateProductPrice(id, newPrice);
-        response.sendRedirect("listPrice?product_id="+id);
+        processRequest(request, response);
     }
 
     /**

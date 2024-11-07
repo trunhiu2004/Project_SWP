@@ -118,7 +118,7 @@
     <!-- Price & Discount Management -->
     <servlet>
         <servlet-name>UpdatePriceServlet</servlet-name>
-        <servlet-class>controller.POS.Payment.UpdatePriceServlet</servlet-class>
+        <servlet-class>controller.UpdatePriceServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListPriceServlet</servlet-name>
@@ -308,11 +308,11 @@
     </servlet>
     <servlet>
         <servlet-name>LoadCustomersServlet</servlet-name>
-        <servlet-class>controller.LoadCustomersServlet</servlet-class>
+        <servlet-class>controller.POS.LoadCustomersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SetCustomerServlet</servlet-name>
-        <servlet-class>controller.SetCustomerServlet</servlet-class>
+        <servlet-class>controller.POS.SetCustomerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClearCartServlet</servlet-name>
@@ -328,7 +328,7 @@
     </servlet>
     <servlet>
         <servlet-name>LoadCustomerTypesServlet</servlet-name>
-        <servlet-class>controller.LoadCustomerTypesServlet</servlet-class>
+        <servlet-class>controller.POS.LoadCustomerTypesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProcessCashPaymentServlet</servlet-name>

@@ -2,24 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.POS;
 
 import com.google.gson.Gson;
-import dal.CustomerTypeDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
-import model.CustomerType;
+import java.util.stream.Collectors;
+import model.Customers;
 
 /**
  *
  * @author ankha
  */
-public class LoadCustomerTypesServlet extends HttpServlet {
+public class LoadCustomersServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +40,10 @@ public class LoadCustomerTypesServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadCustomerTypesServlet</title>");
+            out.println("<title>Servlet LoadCustomersServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadCustomerTypesServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadCustomersServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,13 +64,36 @@ public class LoadCustomerTypesServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        CustomerTypeDAO customerTypeDAO = new CustomerTypeDAO();
-        List<CustomerType> types = customerTypeDAO.getAllCustomerTypes();
+        PrintWriter out = response.getWriter();
+        try {
+            CustomerDAO customerDAO = new CustomerDAO();
+            String searchTerm = request.getParameter("search");
 
-        Gson gson = new Gson();
-        String json = gson.toJson(types);
+            List<Customers> customers;
+            if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+                customers = customerDAO.searchCustomers(searchTerm);
+            } else {
+                customers = customerDAO.getAllCustomers();
+            }
 
-        response.getWriter().write(json);
+            // Chuyển đổi danh sách customers thành JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(customers.stream()
+                    .map(c -> new HashMap<String, Object>() {
+                {
+                    put("id", c.getCustomerId());
+                    put("name", c.getCustomerName());
+                    put("phone", c.getCustomerPhone());
+                    put("type", c.getCustomerType().getTypeName());
+                }
+            })
+                    .collect(Collectors.toList()));
+
+            out.print(json);
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.print("{\"error\":\"" + e.getMessage().replace("\"", "\\\"") + "\"}");
+        }
     }
 
     /**

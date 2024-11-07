@@ -4,6 +4,7 @@
  */
 package controller.POS.Payment;
 
+import dal.CouponDAO;
 import dal.CustomerDAO;
 import dal.OrderDAO;
 import dal.ShopDAO;
@@ -22,6 +23,7 @@ import utils.ReceiptGenerator;
 import java.sql.SQLException;
 import java.util.Date;
 import model.Cart;
+import model.Coupons;
 import model.Customers;
 import model.Employees;
 import model.Order;
@@ -87,27 +89,15 @@ public class ProcessCashPaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //Get Shop Detail
-        ShopDAO shopDAO = new ShopDAO();
-        Shop shop = shopDAO.getShopId(1); // Set ID Shop mặc định là 1
-        request.setAttribute("shop", shop);
-        //
+
         try {
-            // Parse và validate các tham số
             int customerId = Integer.parseInt(request.getParameter("customerId"));
             double totalAmount = Double.parseDouble(request.getParameter("totalAmount"));
             double receivedAmount = Double.parseDouble(request.getParameter("receivedAmount"));
 
-            if (receivedAmount < totalAmount) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("Số tiền khách đưa không đủ");
-                return;
-            }
-
-            // Lấy cart từ session
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
+            Coupons appliedCoupon = (Coupons) session.getAttribute("appliedCoupon");
 
             if (cart == null || cart.getItems().isEmpty()) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -115,14 +105,19 @@ public class ProcessCashPaymentServlet extends HttpServlet {
                 return;
             }
 
-            // Xử lý transaction trong một try-catch riêng
             OrderDAO orderDAO = new OrderDAO();
             int orderId;
 
+            // Tính toán lại tổng tiền sau khi áp dụng mã giảm giá
+            double finalTotalAmount = totalAmount;
+            if (appliedCoupon != null) {
+                double discountAmount = (cart.getTotalMoney() * appliedCoupon.getDiscount_amount()) / 100;
+                finalTotalAmount = cart.getTotalMoney() - discountAmount;
+            }
+
             try {
-                orderId = orderDAO.createOrder(customerId, totalAmount, cart.getItems());
+                orderId = orderDAO.createOrder(customerId, finalTotalAmount, cart.getItems(), appliedCoupon);
             } catch (SQLException e) {
-                // Log lỗi
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Lỗi xử lý đơn hàng: " + e.getMessage());
@@ -130,22 +125,21 @@ public class ProcessCashPaymentServlet extends HttpServlet {
             }
 
             if (orderId > 0) {
-                // Lấy thông tin order và customer
                 Order order = orderDAO.getOrderById(orderId);
                 CustomerDAO customerDAO = new CustomerDAO();
                 Customers customer = customerDAO.getCustomerById(customerId);
 
-                // Set attributes cho receipt
                 request.setAttribute("order", order);
                 request.setAttribute("items", cart.getItems());
                 request.setAttribute("customer", customer);
                 request.setAttribute("receivedAmount", receivedAmount);
-                request.setAttribute("changeAmount", receivedAmount - totalAmount);
-
-                // Xóa cart
+                request.setAttribute("changeAmount", receivedAmount - finalTotalAmount);
+                request.setAttribute("appliedCoupon", appliedCoupon);
+                request.setAttribute("subtotal", cart.getTotalMoney()); // Trả lại về giá tiền chưa giảm giá
+                
                 session.removeAttribute("cart");
+                session.removeAttribute("appliedCoupon");
 
-                // Forward to receipt JSP
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/receipt.jsp");
                 dispatcher.forward(request, response);
             } else {
