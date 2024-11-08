@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Accounts;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -63,9 +64,13 @@ public class ChangePasswordServlet extends HttpServlet {
         String email = request.getParameter("email");
         request.getSession().setAttribute("emailRegis", email);
         // get token from session
-        String savedToken = (String) request.getSession().getAttribute("token");
-        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-       
+//        String savedToken = (String) request.getSession().getAttribute("token");
+        if (checkDuplicate(email)) {
+            response.sendRedirect("login");
+        } else {
+            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -98,4 +103,14 @@ public class ChangePasswordServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private boolean checkDuplicate(String email) {
+        AccountDAO accDAO = new AccountDAO();
+        List<Accounts> listAcc = accDAO.getAllAccount();
+        for (Accounts accounts : listAcc) {
+            if (accounts.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

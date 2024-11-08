@@ -40,7 +40,7 @@
 
 
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
                                                    
                                                 </form>
                                             </div>
