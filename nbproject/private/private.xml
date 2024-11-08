@@ -115,17 +115,10 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/src/java/controller/POS/CheckCouponServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LogoutServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/model/Coupon.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/EditShop.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/POS/RemoveCouponServlet.java</file>
-            <file>file:/D:/Project_SWP/web/pos-home.jsp</file>
-            <file>file:/D:/Project_SWP/web/assets/css/POS/style.css</file>
+            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
             <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/AddProductServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/dal/CouponDAO.java</file>
+            <file>file:/D:/Project_SWP/web/editOrder.jsp</file>
+            <file>file:/D:/Project_SWP/web/listOrders.jsp</file>
         </group>
     </open-files>
 </project-private>

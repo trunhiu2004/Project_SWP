@@ -87,7 +87,7 @@
                                                 <td>${shift.formattedShiftEndTime}</td>
                                                 
                                                 <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
-                                                <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
+                                                <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
                                                 <td>${shift.employeeName}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">

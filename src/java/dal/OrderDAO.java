@@ -379,9 +379,16 @@ public class OrderDAO extends DBContext {
     }
 
     public void createInvoice(int orderId, int customerId, double totalAmount, int employeeId, int paymentMethodId) throws SQLException {
+        ShiftDAO shiftDAO = new ShiftDAO();
+        Integer shiftManagerId = shiftDAO.getCurrentShiftManagerId(employeeId);
+
+        if (shiftManagerId == null) {
+            throw new SQLException("No active shift found for employee " + employeeId);
+        }
+
         String invoiceSql = "INSERT INTO Invoices (order_id, invoice_date, invoice_total_amount, invoice_status, "
                 + "payment_method_id, employee_id, customer_id, shift_manager_id) "
-                + "VALUES (?, GETDATE(), ?, 'COMPLETED', ?, ?, ?, 2)";
+                + "VALUES (?, GETDATE(), ?, 'COMPLETED', ?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(invoiceSql)) {
             ps.setInt(1, orderId);
@@ -389,6 +396,7 @@ public class OrderDAO extends DBContext {
             ps.setInt(3, paymentMethodId);
             ps.setInt(4, employeeId);
             ps.setInt(5, customerId);
+            ps.setInt(6, shiftManagerId);
             ps.executeUpdate();
         }
     }
