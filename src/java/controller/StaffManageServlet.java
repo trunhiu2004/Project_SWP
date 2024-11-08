@@ -79,10 +79,11 @@ public class StaffManageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String search = request.getParameter("search");
+        String search = request.getParameter("staffName");
         EmployeeDAO employeeDAO = new EmployeeDAO();
         List<Employees> e = employeeDAO.searchByName(search);
         request.setAttribute("listEmployee", e);
+        request.setAttribute("staffName", search);
         request.getRequestDispatcher("staff-list.jsp").forward(request, response);
     }
 

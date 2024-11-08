@@ -85,20 +85,21 @@ public class LoginServlet extends HttpServlet {
         if (account == null) {
             request.setAttribute("mess", "Sai tên đăng nhập hoặc mật khẩu!");
             request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
-        } else {
+        } else if (account !=null && account.getStatus_id()==2) {
+             request.setAttribute("mess", "Tài khoản của bạn đã bị vô hiệu hóa!");
+            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);   
+        } else if(account!=null && account.getStatus_id()==1){
             HttpSession session = request.getSession();
             session.setAttribute("account", account);
 
-            
             EmployeeDAO employeeDAO = new EmployeeDAO();
             Integer employeeId = employeeDAO.getEmployeeIdByAccountId(account.getAccount_id());
-            
 
-            if(employeeId != null){
+            if (employeeId != null) {
                 Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                 EmployeeAttendanceDAO attendanceDAO = new EmployeeAttendanceDAO();
                 attendanceDAO.recordLoginTime(employeeId, loginTime);
-                
+
             }
 
             // Điều hướng dựa trên vai trò của người dùng

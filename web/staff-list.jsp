@@ -8,11 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <script type="text/javascript">
-                                    function doDelete(id) {
-                                        if (confirm("Are you sure delete category which has id =" + id)) {
-                                            window.location = "staffDelete?id=" + id;
-                                        }
-                                    }
+            function doDelete(id) {
+                if (confirm("Are you sure delete category which has id =" + id)) {
+                    window.location = "staffDelete?id=" + id;
+                }
+            }
         </script>
 
         <!-- Favicon -->
@@ -29,7 +29,7 @@
 
             <jsp:include page="components/sidebar.jsp"></jsp:include>     
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
-                     
+
                 <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
@@ -38,60 +38,89 @@
                                     <div>
                                         <h4 class="mb-3">Danh sách nhân viên</h4>
                                     </div>
-           
+
 
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
-                                        <thead class="bg-white text-uppercase">
-                                            <tr class="ligth">
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
+                            <div class="row mb-4">
+                                <div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form method="post" action="staffManage" class="row">
+                                                <!-- Coupon Code Filter -->
+                                                <div>
+                                                    <input type="text" class="form-control" name="staffName" 
+                                                           value="${staffName}" placeholder="Tìm nhân viên">
+                                            </div>
 
-                                                <th style="min-width: 100px">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ligth-body">
+                                            
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <a href="staffManage" class="btn btn-secondary">Clear</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="table-responsive rounded mb-3">
+                                <table class="data-table table mb-0 tbl-server-info">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth">
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+
+                                            <th style="min-width: 100px">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ligth-body">
                                         <c:forEach items="${listEmployee}" var="employee">
-                                                    <tr>
-                                                        <td>${employee.getEmployee_name()}</td>
-                                                        <td>${employee.getEmployee_phone()}</td>
-                                                        <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    ${account.getEmail()}
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </td>
-                                                        <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    <c:forEach items="${listAccountStatus}" var="accountStatus">
-                                                                        <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
+                                            <tr>
+                                                <td>${employee.getEmployee_name()}</td>
+                                                <td>${employee.getEmployee_phone()}</td>
+                                                <td>
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            ${account.getEmail()}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            <c:forEach items="${listAccountStatus}" var="accountStatus">
+                                                                <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
+                                                                    <c:choose>
+                                                                        <c:when test="${accountStatus.getStatus_id() == 1}">
                                                                             <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
-                                                                        </c:if>
-                                                                    </c:forEach>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <span class="badge bg-warning text-dark">${accountStatus.getStatus_name()}</span> 
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:if>
                                                             </c:forEach>
-
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex align-items-center list-user-action">
-
-                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                        </c:if>
+                                                    </c:forEach>
 
 
-                                            </c:forEach>                                
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                        </c:forEach>                                
                                     </tbody>
                                 </table>
                             </div>
@@ -99,7 +128,7 @@
                     </div>
                     <!-- Page end  -->
                 </div>
-                
+
             </div>
         </div>
         <!-- Wrapper End-->
