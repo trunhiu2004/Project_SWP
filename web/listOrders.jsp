@@ -176,9 +176,9 @@
                                         <div class="col-md-2">
                                             <select class="form-control" name="status">
                                                 <option value="" ${empty status ? 'selected' : ''}>Tất cả trạng thái</option>
-                                                <option value="PENDING" ${status == 'PENDING' ? 'selected' : ''}>Chờ thanh toán</option>
-                                                <option value="COMPLETED" ${status == 'COMPLETED' ? 'selected' : ''}>Hoàn thành</option>
-                                                <option value="CANCELLED" ${status == 'CANCELLED' ? 'selected' : ''}>Đã huỷ</option>
+                                                <option value="PENDING" ${status == 'PENDING' ? 'selected' : ''}>PENDING</option>
+                                                <option value="COMPLETED" ${status == 'COMPLETED' ? 'selected' : ''}>COMPLETED</option>
+                                                <option value="CANCELLED" ${status == 'CANCELLED' ? 'selected' : ''}>CANCELLED</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">

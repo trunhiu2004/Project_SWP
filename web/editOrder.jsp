@@ -46,9 +46,9 @@
                                         <div class="form-group">
                                             <label for="orderStatus">Trạng thái:</label>
                                             <select class="form-control" id="orderStatus" name="orderStatus">
-                                                <option value="Pending" ${order.orderStatus == 'Pending' ? 'selected' : ''}>Chờ thanh toán</option>
-                                                <option value="Completed" ${order.orderStatus == 'Completed' ? 'selected' : ''}>Hoàn thành</option>
-                                                <option value="Cancelled" ${order.orderStatus == 'Cancelled' ? 'selected' : ''}>Đã huỷ</option>
+                                                <option value="Pending" ${order.orderStatus == 'Pending' ? 'selected' : ''}>PENDING</option>
+                                                <option value="Completed" ${order.orderStatus == 'Completed' ? 'selected' : ''}>COMPLETED</option>
+                                                <option value="Cancelled" ${order.orderStatus == 'Cancelled' ? 'selected' : ''}>CANCELLED</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
