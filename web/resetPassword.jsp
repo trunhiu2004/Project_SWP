@@ -36,8 +36,8 @@
                                     <div class="d-flex align-items-center auth-content">
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
-                                                <h2 class="mb-2">Change password</h2>
-                                                <p>Create your POSDash account.</p>
+                                                <h2 class="mb-2">Đổi mật khẩu</h2>
+                                                <p>Đặt lại mật khẩu của bạn.</p>
                                                 <form action="resetPassword" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-6">
