@@ -8,11 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <script type="text/javascript">
-                                    function doDelete(id) {
-                                        if (confirm("Are you sure delete category which has id =" + id)) {
-                                            window.location = "staffDelete?id=" + id;
-                                        }
-                                    }
+            function doDelete(id) {
+                if (confirm("Are you sure delete category which has id =" + id)) {
+                    window.location = "staffDelete?id=" + id;
+                }
+            }
         </script>
 
         <!-- Favicon -->
@@ -29,7 +29,7 @@
 
             <jsp:include page="components/sidebar.jsp"></jsp:include>     
             <jsp:include page="components/topnavbar.jsp"></jsp:include>
-                     
+
                 <div class="content-page">
                     <div class="container-fluid">
                         <div class="row">
@@ -38,7 +38,7 @@
                                     <div>
                                         <h4 class="mb-3">Danh sách nhân viên</h4>
                                     </div>
-           
+
 
                                 </div>
                             </div>
@@ -57,41 +57,41 @@
                                         </thead>
                                         <tbody class="ligth-body">
                                         <c:forEach items="${listEmployee}" var="employee">
-                                                    <tr>
-                                                        <td>${employee.getEmployee_name()}</td>
-                                                        <td>${employee.getEmployee_phone()}</td>
-                                                        <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    ${account.getEmail()}
+                                            <tr>
+                                                <td>${employee.getEmployee_name()}</td>
+                                                <td>${employee.getEmployee_phone()}</td>
+                                                <td>
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            ${account.getEmail()}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:forEach items="${listAccount}" var="account">
+                                                        <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
+                                                            <c:forEach items="${listAccountStatus}" var="accountStatus">
+                                                                <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
+                                                                    <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
                                                                 </c:if>
                                                             </c:forEach>
-                                                        </td>
-                                                        <td>
-                                                            <c:forEach items="${listAccount}" var="account">
-                                                                <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
-                                                                    <c:forEach items="${listAccountStatus}" var="accountStatus">
-                                                                        <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
-                                                                            <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                </c:if>
-                                                            </c:forEach>
+                                                        </c:if>
+                                                    </c:forEach>
 
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex align-items-center list-user-action">
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
 
-                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
-                                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                                                   data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Update" href="staffUpdate?id=${employee.getEmployee_id()}"><i class="ri-pencil-line mr-0"></i></a>
+                                                        <a class="btn btn-sm bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                                           data-original-title="Delete" href="#" onclick="doDelete(${employee.getEmployee_id()})"><i class="ri-delete-bin-line mr-0"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
 
-                                            </c:forEach>                                
+                                        </c:forEach>                                
                                     </tbody>
                                 </table>
                             </div>
@@ -99,7 +99,7 @@
                     </div>
                     <!-- Page end  -->
                 </div>
-                
+
             </div>
         </div>
         <!-- Wrapper End-->
@@ -138,5 +138,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    
+
 </html>
