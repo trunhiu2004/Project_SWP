@@ -6,6 +6,7 @@ package controller.POS.Payment;
 
 import dal.CustomerDAO;
 import dal.OrderDAO;
+import dal.ShopDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,7 @@ import model.Coupons;
 import model.Order;
 import model.Customers;
 import model.PaymentMethod;
+import model.Shop;
 
 /**
  *
@@ -123,6 +125,10 @@ public class PaymentReturnServlet extends HttpServlet {
                     // Cập nhật hoặc tạo invoice với payment method là QR
                     orderDAO.createInvoice(order.getOrderId(), order.getCustomerId(), finalTotalAmount, employeeId, PaymentMethod.QR_CODE);
                 }
+                //Get Shop Detail
+                ShopDAO shopDAO = new ShopDAO();
+                Shop shop = shopDAO.getShopId(1); // Set ID Shop mặc định là 1
+                request.setAttribute("shop", shop);
 
                 CustomerDAO customerDAO = new CustomerDAO();
                 Customers customer = customerDAO.getCustomerById(customerId);

@@ -85,9 +85,9 @@
                 <!-- Right Header Menu -->
                 <div class="header_part_right">
                     <ul class="btn__menu">
-                        <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
+<!--                        <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
                         <li><a href="javascript:void(0)" class="bg__blue">Brand</a></li>
-                        <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>
+                        <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>-->
                         <li><a href="javascript:void(0)" class="bg__blue" onclick="openPromotionModal()">Promo</a></li>
                     </ul>
                 </div>
