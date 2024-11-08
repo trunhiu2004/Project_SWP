@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
-
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
 public class EmployeeAttendanceDAO extends DBContext {
+
     public void recordLoginTime(int employeeId, Timestamp loginTime) {
         String sql = "INSERT INTO EmployeeAttendance (employee_id, login_time) VALUES (?, ?)";
         try {
@@ -38,5 +35,5 @@ public class EmployeeAttendanceDAO extends DBContext {
     }
 }
 
+    
 }
-

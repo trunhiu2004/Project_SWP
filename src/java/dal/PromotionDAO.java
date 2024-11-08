@@ -135,7 +135,7 @@ public class PromotionDAO extends DBContext {
         statuses.add("Inactive");
         return statuses;
     }
-    
+
     public List<Promotion> getFilteredPromotion(String promotionName,
             String description,
             String discountAmount,
@@ -152,7 +152,7 @@ public class PromotionDAO extends DBContext {
         if (description != null && !description.isEmpty()) {
             query.append(" AND description LIKE ?");
         }
-        
+
         if (startDate != null && !startDate.isEmpty()) {
             query.append(" AND start_date = ?");
         }
@@ -177,7 +177,7 @@ public class PromotionDAO extends DBContext {
             if (description != null && !description.isEmpty()) {
                 stmt.setString(paramIndex++, "%" + description + "%");
             }
-            
+
             if (startDate != null && !startDate.isEmpty()) {
                 stmt.setDate(paramIndex++, Date.valueOf(startDate));
             }
@@ -209,5 +209,26 @@ public class PromotionDAO extends DBContext {
 
         return promotion;
     }
-    
+
+    public List<Promotion> getActivePromotions() {
+        List<Promotion> activePromotions = new ArrayList<>();
+        String sql = "SELECT * FROM Promotion WHERE status = 'Active' AND start_date <= GETDATE() AND end_date >= GETDATE()";
+        try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Promotion promotion = new Promotion(
+                        rs.getInt("promotion_id"),
+                        rs.getString("promotion_name"),
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("end_date"),
+                        rs.getDouble("discount_value"),
+                        rs.getString("status")
+                );
+                activePromotions.add(promotion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activePromotions;
+    }
 }

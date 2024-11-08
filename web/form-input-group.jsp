@@ -3,11 +3,11 @@
 <!doctype html>
 <html lang="en">
   
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/form-input-group.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:43 GMT -->
+
 <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>POS Admin</title>
       
       <!-- Favicon -->
       <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
@@ -232,7 +232,7 @@
                                       </a>
                                       <ul id="user" class="iq-submenu collapse" data-parent="#otherpage">
                                               <li class="">
-                                                  <a href="https://templates.iqonic.design/posdash/html/app/user-profile.html">
+                                                  <a href="profile?action=view">
                                                       <i class="las la-minus"></i><span>User Profile</span>
                                                   </a>
                                               </li>
@@ -826,7 +826,7 @@
                                                   <h5 class="mb-1">JoanDuo@property.com</h5>
                                                   <p class="mb-0">Since 10 march, 2020</p>
                                                   <div class="d-flex align-items-center justify-content-center mt-3">
-                                                      <a href="https://templates.iqonic.design/posdash/html/app/user-profile.html" class="btn border mr-2">Profile</a>
+                                                      <a href="profile?action=view" class="btn border mr-2">Profile</a>
                                                       <a href="auth-sign-in.html" class="btn border">Sign Out</a>
                                                   </div>
                                               </div>
@@ -1414,7 +1414,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Admin</a>.
                         </div>
                     </div>
                 </div>
@@ -1437,5 +1437,5 @@
     <script src="assets/js/app.js"></script>
   </body>
 
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/form-input-group.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:43 GMT -->
+
 </html>

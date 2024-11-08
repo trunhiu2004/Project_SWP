@@ -15,7 +15,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Accounts;
 import model.CategorySummary;
 import model.Invoice;
 import model.ProductCategories;
@@ -67,39 +69,38 @@ public class HomeAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        SalesReportDAO reportDAo = new SalesReportDAO();
-        List<TopSellingProduct> bestSale = reportDAo.getTopSellingProducts();
-        request.setAttribute("top", bestSale);
-        
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("account") != null) {
+            Accounts account = (Accounts) session.getAttribute("account");
+            if (account.getRole_id() == 1) {
+                SalesReportDAO reportDAo = new SalesReportDAO();
+                List<TopSellingProduct> bestSale = reportDAo.getTopSellingProducts();
+                request.setAttribute("top", bestSale);
 
-        
-        List<SalesReport> reports = reportDAo.getAnnualSales();
-        request.setAttribute("sum", reports);
-        
-        
-        
-        OrderDAO ordertotalPrice = new OrderDAO();
-        double totalOrderSale = ordertotalPrice.getTotalOrderSale();
-        request.setAttribute("total", totalOrderSale);
+                List<SalesReport> reports = reportDAo.getAnnualSales();
+                request.setAttribute("sum", reports);
 
-        double totalAvg = ordertotalPrice.getTotalOrderAvg();
-        request.setAttribute("avg", totalAvg);
-        
-        double totalMax = ordertotalPrice.getTotalMax();
-        request.setAttribute("max", totalMax);
-        
-        ProductCategoriesDAO cate = new ProductCategoriesDAO();
-        List<CategorySummary> name = cate.getBestCategory();
-        request.setAttribute("best", name);
-        
-        request.getRequestDispatcher("home.jsp").forward(request, response);
-        
+                OrderDAO ordertotalPrice = new OrderDAO();
+                double totalOrderSale = ordertotalPrice.getTotalOrderSale();
+                request.setAttribute("total", totalOrderSale);
 
-        
+                double totalAvg = ordertotalPrice.getTotalOrderAvg();
+                request.setAttribute("avg", totalAvg);
 
+                double totalMax = ordertotalPrice.getTotalMax();
+                request.setAttribute("max", totalMax);
+
+                ProductCategoriesDAO cate = new ProductCategoriesDAO();
+                List<CategorySummary> name = cate.getBestCategory();
+                request.setAttribute("best", name);
+
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("PoSHome");
+            }
+        } else {
+            response.sendRedirect("login");
+        }
     }
 
     /**
@@ -113,7 +114,7 @@ public class HomeAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**

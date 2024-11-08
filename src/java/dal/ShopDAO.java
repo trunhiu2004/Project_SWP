@@ -63,7 +63,7 @@ public class ShopDAO extends DBContext{
     }
     
     public void updateShop(Shop shop) {
-        String sql = "UPDATE ShopDetails SET shop_name = ?, shop_address = ?, shop_phone = ?,  shop_email = ?, shop_opening_hours = ? WHERE shop_id = ?";
+        String sql = "UPDATE ShopDetails SET shop_name = ?, shop_address = ?, shop_phone = ?,  shop_email = ?, shop_opening_hours = ?, shop_logo = ? WHERE shop_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, shop.getShopName());
@@ -71,7 +71,8 @@ public class ShopDAO extends DBContext{
             statement.setString(3, shop.getShopPhone());
             statement.setString(4, shop.getShopEmail());
             statement.setString(5, shop.getShopOpeningHours());
-            statement.setInt(6, shop.getShopId());
+            statement.setString(6, shop.getShopLogo());
+            statement.setInt(7, shop.getShopId());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error updating employee: " + e.getMessage());

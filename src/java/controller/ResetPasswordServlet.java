@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.AccountDAO;
@@ -12,41 +11,47 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Accounts;
 import org.mindrot.jbcrypt.BCrypt;
+import utils.TokenManager;
 
 /**
  *
  * @author frien
  */
 public class ResetPasswordServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ResetPasswordServlet</title>");  
+            out.println("<title>Servlet ResetPasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ResetPasswordServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -54,18 +59,24 @@ public class ResetPasswordServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        // get token from url
-        String token = request.getParameter("tokenReset");
-        String email = request.getParameter("email");
-        request.getSession().setAttribute("emailRe", email);
-        // get token from session
-        String savedToken = (String) request.getSession().getAttribute("tokenReset");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-    } 
+            throws ServletException, IOException {
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
 
-    /** 
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            request.setAttribute("email", email);
+            request.setAttribute("token", token);
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Link không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+        }
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,18 +84,28 @@ public class ResetPasswordServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       String rawPassword = request.getParameter("passwordReset");
-        String email = (String) request.getSession().getAttribute("emailRe");
-        String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
-        AccountDAO accountDAO = new AccountDAO();
-        accountDAO.changePassword(email, password);
-        request.getSession().removeAttribute("tokenReset");
-        response.sendRedirect("login");
+            throws ServletException, IOException {
+        String rawPassword = request.getParameter("passwordReset");
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
+
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
+            AccountDAO accountDAO = new AccountDAO();
+            accountDAO.changePassword(email, password);
+
+            tokenManager.removeToken(token);
+            response.sendRedirect("login");
+        } else {
+            request.setAttribute("error", "Token không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
@@ -92,4 +113,14 @@ public class ResetPasswordServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private boolean checkDuplicate(String email) {
+        AccountDAO accDAO = new AccountDAO();
+        List<Accounts> listAcc = accDAO.getAllAccount();
+        for (Accounts accounts : listAcc) {
+            if (accounts.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

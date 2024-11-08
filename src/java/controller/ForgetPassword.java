@@ -5,16 +5,23 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.EmailTemplateDAO;
+import dal.MailogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 import model.Accounts;
+import model.EmailTemplate;
 import verify.SendEmail;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import utils.TokenManager;
 
 /**
  *
@@ -60,6 +67,18 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Accounts account = (Accounts) session.getAttribute("account");
+
+        //        Nếu đã đăng nhập rồi (session có tồn tại account) thì chuyển hướng về các trang theo Role, không sẽ bị xung đột
+        if (account != null) {
+            if (account.getRole_id() == 1) {
+                response.sendRedirect("HomeAdmin");
+            } else if (account.getRole_id() == 2) {
+                response.sendRedirect("PoSHome");
+            }
+            return;
+        }
         request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
     }
 
@@ -71,33 +90,55 @@ public class ForgetPassword extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger LOGGER = Logger.getLogger(ForgetPassword.class.getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("emailReset");
         if (checkDuplicate(email)) {
-            //get info from form
             String token = UUID.randomUUID().toString();
+            TokenManager.getInstance().addToken(email, token);
 
-            //url link to change pass
-            String link = "http://localhost:9999/SWP_Project/resetPassword?email="+email+"&tokenReset=" + token;
+            // Lấy base URL động
+            String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-            request.getSession().setAttribute("emailReset", email);
+            // Tạo link reset password với base URL động
+            String link = baseURL + "/resetPassword?token=" + token;
 
-//        //activate 6-digit code
-//        RandomCode rc=new RandomCode();
-//        String verifyCode=rc.activateCode();
-            //verify user email
-            SendEmail se = new SendEmail();
-            se.send(email, link);
-            request.getSession().setAttribute("tokenReset", token);
-            request.getSession().setAttribute("status", "resetPass");
-            request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+            try {
+                EmailTemplateDAO templateDAO = new EmailTemplateDAO();
+                EmailTemplate template = templateDAO.getTemplateByName("Password Reset Template");
+                MailogDAO mailogDAO = new MailogDAO();
+                if (template != null) {
+                    String content = template.getContent()
+                            .replace("{{email}}", email)
+                            .replace("{{reset_link}}", link);
+
+                    SendEmail se = new SendEmail();
+                    try {
+                        se.send(email, template.getSubject(), content);
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
+
+                        request.setAttribute("message", "Một email đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư của bạn.");
+                        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                    } catch (RuntimeException e) {
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
+                        throw e;
+                    }
+                } else {
+                    request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email đặt lại mật khẩu.");
+                    request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Database error: " + e.getMessage());
+                request.setAttribute("error", "Lỗi hệ thống: Không thể gửi email đặt lại mật khẩu.");
+                request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("error", "Email không tồn tại trong hệ thống!");
             request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
         }
-
     }
 
     /**

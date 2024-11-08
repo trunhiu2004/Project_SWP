@@ -7,41 +7,42 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
-    <body class=" ">
-        <!-- loader Start -->
-        <div id="loading">
-            <div id="loading-center">
+        <body class=" ">
+            <!-- loader Start -->
+            <div id="loading">
+                <div id="loading-center">
+                </div>
             </div>
-        </div>
-        <!- - loader END -->
+            <!- - loader END -->
 
-        <div class="wrapper">
-            <section class="login-content">
-                <div class="container">
-                    <div class="row align-items-center justify-content-center height-self-center">
-                        <div class="col-lg-8">
-                            <div class="card auth-card">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center auth-content">
-                                        <div class="col-lg-7 align-self-center">
-                                            <div class="p-3">
-                                                <h2 class="mb-2">Đổi mật khẩu</h2>
-                                                <form action="changePassword" method="post">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordRegister">
+            <div class="wrapper">
+                <section class="login-content">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center height-self-center">
+                            <div class="col-lg-8">
+                                <div class="card auth-card">
+                                    <div class="card-body p-0">
+                                        <div class="d-flex align-items-center auth-content">
+                                            <div class="col-lg-7 align-self-center">
+                                                <div class="p-3">
+                                                    <h2 class="mb-2">Đổi mật khẩu</h2>
+                                                    <form action="changePassword" method="post">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="floating-label form-group">
+                                                                    <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordRegister">
+                                                                </div>
                                                             </div>
+
+
                                                         </div>
+                                                        <input type="hidden" name="token" value="${param.token}">
+                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
 
-
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Confirm</button>
-                                                   
                                                 </form>
                                             </div>
                                         </div>
@@ -73,5 +74,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
+
 </html>

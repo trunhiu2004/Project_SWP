@@ -5,11 +5,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico" />
@@ -36,8 +36,8 @@
                                     <div class="d-flex align-items-center auth-content">
                                         <div class="col-lg-7 align-self-center">
                                             <div class="p-3">
-                                                <h2 class="mb-2">Change password</h2>
-                                                <p>Create your POSDash account.</p>
+                                                <h2 class="mb-2">Đổi mật khẩu</h2>
+                                                <p>Đặt lại mật khẩu của bạn.</p>
                                                 <form action="resetPassword" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -48,6 +48,7 @@
 
 
                                                     </div>
+                                                    <input type="hidden" name="token" value="${param.token}">
                                                     <button type="submit" class="btn btn-primary">Xác nhận</button>
 
                                                 </form>
@@ -81,5 +82,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/auth-sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:42 GMT -->
+
 </html>

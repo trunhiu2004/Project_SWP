@@ -73,8 +73,9 @@ public class LogoutServlet extends HttpServlet {
             }
         }
         
-        // Xóa account khỏi session và điều hướng về trang đăng nhập
+        // Xóa account và employeeId khỏi session và điều hướng về trang đăng nhập
         session.removeAttribute("account");
+        session.removeAttribute("employeeId");
         response.sendRedirect("login");
     } 
  

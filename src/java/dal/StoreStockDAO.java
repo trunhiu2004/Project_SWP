@@ -115,7 +115,7 @@ public class StoreStockDAO extends DBContext {
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "%"+ product_name +"%");
+            st.setString(1, "%" + product_name + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 StoreStock stock = new StoreStock();
@@ -300,5 +300,4 @@ public class StoreStockDAO extends DBContext {
         }
         return null;
     }
-
 }

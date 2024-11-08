@@ -5,6 +5,8 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.EmailTemplateDAO;
+import dal.MailogDAO;
 import model.Accounts;
 import model.Employees;
 import java.io.IOException;
@@ -16,8 +18,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
+import model.EmailTemplate;
 import verify.RandomCode;
 import verify.SendEmail;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import utils.TokenManager;
 
 /**
  *
@@ -74,34 +80,55 @@ public class RegisterServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger LOGGER = Logger.getLogger(RegisterServlet.class.getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //get info from form
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String email = request.getParameter("emailRegister");
         if (!checkDuplicate(email)) {
-            //create random token
             String token = UUID.randomUUID().toString();
+            TokenManager.getInstance().addToken(email, token);
 
-            //url link to change pass
-            String link = "http://localhost:9999/SWP_Project/changePassword?email="+email+"&token=" + token;
+            String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            String link = baseURL + "/changePassword?token=" + token;
 
-            request.getSession().setAttribute("emailRegister", email);
+            try {
+                EmailTemplateDAO templateDAO = new EmailTemplateDAO();
+                EmailTemplate template = templateDAO.getTemplateByName("Register Confirmation Template");
+                MailogDAO mailogDAO = new MailogDAO();
+                if (template != null) {
+                    String content = template.getContent()
+                            .replace("{{email}}", email)
+                            .replace("{{link}}", link);
 
-//        //activate 6-digit code
-//        RandomCode rc=new RandomCode();
-//        String verifyCode=rc.activateCode();
-            //verify user email
-            SendEmail se = new SendEmail();
-            se.send(email, link);
-            request.getSession().setAttribute("token", token);
-            request.getSession().setAttribute("status", "register");
-            request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                    SendEmail se = new SendEmail();
+                    try {
+                        se.send(email, template.getSubject(), content);
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
+
+                        request.setAttribute("message", "Một email xác nhận đã được gửi. Vui lòng kiểm tra hộp thư của bạn.");
+                        request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
+                    } catch (RuntimeException e) {
+                        mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
+                        throw e;
+                    }
+                } else {
+                    request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email.");
+                    request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Database error: " + e.getMessage());
+                request.setAttribute("error", "Lỗi hệ thống: Không thể gửi email xác nhận.");
+                request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("error", "Email đã tồn tại!");
             request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
         }
-
     }
 
     /**

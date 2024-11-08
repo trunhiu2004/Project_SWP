@@ -4,11 +4,11 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-sale.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include> </head>
@@ -57,6 +57,8 @@
                                         <p class="mb-0">Đây là doanh thu các sản phẩm nhé </p>
                                     </div>
                                     <a href="HomeAdmin" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Trở về trang chủ</a>
+                                    <a href="ExportReportProductSales" class="btn btn-success add-list"><i
+                                                class="las la-plus mr-3"></i>Xuất file ra Excel</a>
 
                                      
                                     
@@ -156,7 +158,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Admin</a>.
                             </div>
                         </div>
                     </div>
@@ -179,5 +181,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-sale.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    
 </html>

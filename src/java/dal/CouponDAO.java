@@ -223,6 +223,47 @@ public class CouponDAO extends DBContext {
         return coupons;
     }
 
+    public Coupons getCouponByCode(String code) {
+        String sql = "SELECT * FROM Coupons WHERE coupon_code = ? AND coupon_status = 'Active' "
+                + "AND GETDATE() BETWEEN coupon_start_date AND coupon_end_date";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, code);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Coupons(
+                        rs.getInt("coupon_id"),
+                        rs.getString("coupon_code"),
+                        rs.getDouble("discount_amount"),
+                        rs.getDate("coupon_start_date"),
+                        rs.getDate("coupon_end_date"),
+                        rs.getString("coupon_status")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public boolean isValidCoupon(String code) {
+        Coupons coupon = getCouponByCode(code);
+        return coupon != null;
+    }
+
+    public boolean isCustomerEligibleForCoupon(int customerId, int couponId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM CustomerCoupon WHERE customer_id = ? AND coupon_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, customerId);
+            ps.setInt(2, couponId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) == 0; // Trả về true nếu khách hàng chưa sử dụng mã giảm giá này
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         CouponDAO c = new CouponDAO();
         List<Coupons> lst = c.getFilteredCoupons("C", "10", null, null, null);

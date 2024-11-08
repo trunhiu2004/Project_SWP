@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -7,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
@@ -31,7 +30,7 @@
                                     <div>
                                         <h4 class="mb-3">Danh sách khuyễn mãi</h4>
                                     </div>
-                                    <a href="couponAdd" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Promotion</a>
+                                    <a href="promotionAdd" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Add Promotion</a>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -149,7 +148,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6 text-right">
-                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Admin</a>.
                             </div>
                         </div>
                     </div>
@@ -173,12 +172,12 @@
 
         <script type="text/javascript">
                                     function doDelete(id) {
-                                        if (confirm("Are you sure delete coupon which has id =" + id)) {
+                                        if (confirm("Are you sure delete promotion which has id =" + id)) {
                                             window.location = "promotionDelete?id=" + id;
                                         }
                                     }
         </script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    
 </html>

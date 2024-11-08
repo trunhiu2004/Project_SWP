@@ -5,11 +5,11 @@
 <!doctype html>
 <html lang="en">
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-customers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+        <title>POS Admin</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
@@ -72,8 +72,7 @@
                                             <th>Mã ca làm</th>
                                             <th>Thời gian bắt đầu</th>
                                             <th>Thời gian kết ca</th>
-                                            <th>Tiền mở ca</th>
-                                            <th>Tiền kết ca</th>
+                                            
                                             <th>Tổng doanh thu</th>
                                             <th>Tổng giờ làm</th>
                                             <th>Tên nhân viên</th>
@@ -86,19 +85,16 @@
                                                 <td>${shift.shiftManageId}</td>
                                                 <td>${shift.formattedShiftStartTime}</td>
                                                 <td>${shift.formattedShiftEndTime}</td>
-                                                <td><fmt:formatNumber value="${shift.cashStart}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
-                                                <td><fmt:formatNumber value="${shift.cashEnd}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
+                                                
                                                 <td><fmt:formatNumber value="${shift.totalRevenue}" type="number" minFractionDigits="0" maxFractionDigits="0"/> VNĐ</td>
-                                                <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
+                                                <td><fmt:formatNumber value="${shift.totalHours}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
                                                 <td>${shift.employeeName}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center list-action">
                                                         <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết"
                                                            href="ShiftDetailServlet?id=${shift.shiftManageId}">
                                                             <i class="ri-eye-line mr-0"></i></a>
-                                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" title="Sửa đổi" href="EditShift?id=${shift.shiftManageId}">
-                                                            <i class="ri-edit-2-line"></i>
-                                                        </a>
+
                                                         <a class="badge bg-danger" data-toggle="tooltip" title="Xóa" href="DeleteShift?id=${shift.shiftManageId}" onclick="return confirm('Bạn có chắc muốn xóa không?');">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </a>
@@ -172,5 +168,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-customers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+    
 </html>

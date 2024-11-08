@@ -33,10 +33,17 @@
                     <div class="header_part_middle">
                         <ul class="icon__menu">
                             <li class="has__children main_menu">
-                                <a href="javascript:void(0)" class="header_menu_icon" data-tippy-content="Main Menu">
+                                <a href="javascript:void(0)" class="header_menu_icon" data-tippy-content="Profile" id="profileDropdownToggle">
                                     <span class="iconify" data-icon="solar:user-check-broken" data-width="22"></span>
                                 </a>
+                                <ul class="sub__menu" id="profileDropdown">
+                                    <li><a href="listInventory">Truy cập kho</a></li>
+                                    <li><a href="#" id="viewProfileBtn">Xem thông tin</a></li>
+                                    <li><a href="javascript:void(0)" onclick="openChangePasswordModal()">Đổi mật khẩu</a></li>
+                                    <li><a href="logout">Đăng xuất</a></li>
+                                </ul>
                             </li>
+
                             <li>
                                 <a href="HomeAdmin" class="header_menu_icon" target="_blank" data-tippy-content="Dashboard">
                                     <span class="iconify" data-icon="solar:chart-2-broken" data-width="22"></span>
@@ -53,6 +60,24 @@
                                     <span id="current_time"></span>
                                 </a>
                             </li>
+                            <li><% if (request.getParameter("error") != null && request.getParameter("error").equals("unauthorized")) { %>
+                                <div class="alert alert-danger" role="alert">
+                                    Bạn không có quyền truy cập trang này.
+                                </div>
+                                <style>
+                                    .alert {
+                                        padding: 5px;
+                                        border: 1px solid transparent;
+                                        border-radius: 1px;
+                                    }
+                                    .alert-danger {
+                                        color: #721c24;
+                                        background-color: #f8d7da;
+                                        border-color: #f5c6cb;
+                                    }
+                                </style>
+
+                                <% }%></li>
                         </ul>
                     </div>
                 </div>
@@ -63,7 +88,7 @@
                         <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
                         <li><a href="javascript:void(0)" class="bg__blue">Brand</a></li>
                         <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>
-                        <li><a href="javascript:void(0)" class="bg__blue">Promo</a></li>
+                        <li><a href="javascript:void(0)" class="bg__blue" onclick="openPromotionModal()">Promo</a></li>
                     </ul>
                 </div>
             </div>
@@ -74,12 +99,10 @@
                     <!-- Select Area -->
                     <div class="select_area">
                         <div style="flex: 1;">
-                            <select class="select2" id="select_employee">
-                                <option value="">Select Employee</option>
-                                <option value="1">Employee 1</option>
-                                <option value="2">Employee 2</option>
-                            </select>
+                            <select class="select2" id="select_employee" disabled>
+                                <option value="">Loading...</select>
                         </div>
+
 
                         <div style="flex: 1;">
                             <select id="customerSelect" class="form-control select2">
@@ -158,9 +181,30 @@
                     <div id="bottom_absolute">
                         <div class="cart-total-section">
                             <div class="cart-summary">
+                                <!-- Phần nhập Coupon -->
+                                <div class="coupon-input-group">
+                                    <input type="text" id="couponCode" placeholder="Nhập mã giảm giá">
+                                    <button onclick="applyCoupon()">Áp dụng</button>
+                                </div>
+
+                                <!-- Hiển thị coupon đã áp dụng (ẩn mặc định) -->
+                                <div id="appliedCoupon" class="applied-coupon" style="display: none;">
+                                    <span id="appliedCouponCode"></span>
+                                    <span class="remove-coupon" onclick="removeCoupon()">×</span>
+                                </div>
+
+                                <!-- Các dòng tổng tiền -->
                                 <div class="summary-row">
-                                    <span>Total:</span>
-                                    <span><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
+                                    <span>Tạm tính:</span>
+                                    <span id="subtotal"><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
+                                </div>
+                                <div class="summary-row with-discount" id="discountRow" style="display: none;">
+                                    <span>Giảm giá:</span>
+                                    <span id="discountAmount">-0đ</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tổng cộng:</span>
+                                    <span id="finalTotal"><fmt:formatNumber value="${sessionScope.cart.getTotalMoney()}" pattern="#,##0đ"/></span>
                                 </div>
                             </div>
                         </div>
@@ -352,41 +396,93 @@
             </div>
         </div>
         <!-- Modal Thanh toán QR -->
-        <div class="modal fade" id="qrPaymentModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thanh toán QR</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
+        <!--        <div class="modal fade" id="qrPaymentModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thanh toán QR</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                 PayOS Payment Form sẽ được nhúng vào đây 
+                                <div id="payos-wrapper"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <!-- PayOS Payment Form sẽ được nhúng vào đây -->
-                        <div id="payos-wrapper"></div>
-                    </div>
+                </div>      -->
+        <!-- Change Password Modal -->
+        <div id="changePasswordModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Đổi mật khẩu</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Mật khẩu hiện tại:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Mật khẩu mới:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel">Hủy</button>
+                    <button type="button" class="btn-save" onclick="changePassword()">Lưu</button>
                 </div>
             </div>
-        </div>      
-
+        </div>
+        <!--View Profile Modal-->
+        <div id="profileModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Thông tin người dùng</h2>
+                <div id="profileInfo">
+                    <!-- Thông tin người dùng sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+            </div>
+        </div>
+        <!-- Promotion Modal -->
+        <div id="promotionModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Chương trình khuyến mãi</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="promotionList">
+                        <!-- Danh sách promotion sẽ được thêm vào đây bằng JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="closePromotionModal" class="btn-cancel">Hủy</button>
+                </div>
+            </div>
+        </div>
         <script>
+            let finalTotalAmount = 0;
             // Initialize functions when document is ready
             $(document).ready(function () {
                 console.log('Document ready');
                 console.log('jQuery version:', $.fn.jquery);
                 console.log('Select2 loaded:', typeof $.fn.select2 !== 'undefined');
-
                 console.log('Customer select element exists:', $('#customerSelect').length > 0);
                 console.log('Customer select HTML:', $('#customerSelect')[0]?.outerHTML);
-
                 console.log('Edit button exists:', document.querySelector('.customer_action_btn i.material-icons') !== null);
-
                 initializeOtherSelects();
                 initializeFeatures();
             });
             function initializeCustomerSelect() {
                 console.log('Initializing customer select...');
-
                 $('#customerSelect').select2({
                     placeholder: 'Chọn khách hàng',
                     allowClear: true,
@@ -467,22 +563,20 @@
                 });
             }
 
-// Gọi hàm khi document ready
+            // Gọi hàm khi document ready
             $(document).ready(function () {
                 initializeCustomerSelect();
             });
-
-// Format customer in dropdown
+            // Format customer in dropdown
             function formatCustomer(customer) {
                 if (!customer.id)
                     return customer.text;
-
                 return $('<div class="customer-option">' +
                         '<div class="customer-name">' + customer.text + '</div>' +
                         '</div>');
             }
 
-// Initialize other Select2 elements
+            // Initialize other Select2 elements
             function initializeOtherSelects() {
                 $('.select2:not(#customerSelect)').select2({
                     theme: "classic",
@@ -492,7 +586,7 @@
                 });
             }
 
-// Initialize all features
+            // Initialize all features
             function initializeFeatures() {
                 initializeStockBadges();
                 initializeTimeUpdate();
@@ -502,7 +596,46 @@
                 initializeCancelButton();
                 initializeCustomerModal();
                 initializePaymentFeatures();
+                fetchAndDisplayEmployeeName();
             }
+            function fetchAndDisplayEmployeeName() {
+                fetch('user-profile')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data && data.name) {
+                                const $select = $('#select_employee');
+                                $select.empty();
+                                $select.append(new Option(data.name, '', true, true));
+                                // Initialize select2 with specific styling
+                                $select.select2({
+                                    disabled: true,
+                                    theme: "classic",
+                                    minimumResultsForSearch: Infinity,
+                                    width: '100%'
+                                });
+                            } else {
+                                throw new Error('Invalid user data');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading user name:', error);
+                            const $select = $('#select_employee');
+                            $select.empty();
+                            $select.append(new Option('Error loading name', '', true, true));
+                            $select.select2({
+                                disabled: true,
+                                theme: "classic",
+                                minimumResultsForSearch: Infinity,
+                                width: '100%'
+                            });
+                        });
+            }
+
             function loadCustomerTypes() {
                 return fetch('load-customer-types')
                         .then(response => response.json())
@@ -510,7 +643,6 @@
                             // Lấy references đến cả hai select elements
                             const editSelect = document.getElementById('customerType');
                             const addSelect = document.getElementById('newCustomerType');
-
                             if (editSelect) {
                                 editSelect.innerHTML = '';
                                 types.forEach(type => {
@@ -535,7 +667,7 @@
                             console.error('Error loading customer types:', error);
                         });
             }
-// Cart Management Functions
+            // Cart Management Functions
             function addToCart(storeStockId) {
                 window.location.href = 'add-to-cart?storeStockId=' + storeStockId;
             }
@@ -544,7 +676,6 @@
                 let data = new URLSearchParams();
                 data.append('storeStockId', storeStockId);
                 data.append('action', action);
-
                 if (value !== null) {
                     data.append('quantity', value);
                 }
@@ -597,11 +728,10 @@
                 }
             }
 
-// Barcode and Search Functions
+            // Barcode and Search Functions
             function searchProductByBarcode(barcode) {
                 if (!barcode)
                     return;
-
                 fetch('search-product?barcode=' + encodeURIComponent(barcode))
                         .then(response => response.json())
                         .then(data => {
@@ -622,7 +752,7 @@
                         });
             }
 
-// Utility Functions
+            // Utility Functions
             function initializeTimeUpdate() {
                 function updateTime() {
                     const now = new Date();
@@ -723,9 +853,7 @@
                 console.log('Opening modal...');
                 const modal = document.getElementById('editCustomerModal');
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-
                 console.log('Selected customer:', selectedCustomer);
-
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng trước');
                     return;
@@ -760,7 +888,6 @@
 
             function saveCustomerChanges() {
                 const formData = new FormData(document.getElementById('editCustomerForm'));
-
                 fetch('edit-customer', {
                     method: 'POST',
                     body: new URLSearchParams(formData)
@@ -772,7 +899,7 @@
                                 closeEditCustomerModal();
                                 // Refresh customer select
                                 $('#customerSelect').val(null).trigger('change');
-                                loadCustomers(); // Thêm hàm này nếu bạn cần refresh danh sách khách hàng
+                                loadCustomers(); // Refresh danh sách khách hàng
                             } else {
                                 alert('Có lỗi xảy ra khi cập nhật thông tin khách hàng');
                             }
@@ -810,7 +937,6 @@
                     const editCloseButton = editModal.querySelector('.close');
                     const editCancelButton = editModal.querySelector('.btn-cancel');
                     const editSaveButton = editModal.querySelector('.btn-save');
-
                     if (editCloseButton)
                         editCloseButton.addEventListener('click', closeEditCustomerModal);
                     if (editCancelButton)
@@ -825,7 +951,6 @@
                     const addCloseButton = addModal.querySelector('.close');
                     const addCancelButton = addModal.querySelector('.btn-cancel');
                     const addSaveButton = addModal.querySelector('.btn-save');
-
                     if (addCloseButton)
                         addCloseButton.addEventListener('click', closeAddCustomerModal);
                     if (addCancelButton)
@@ -855,12 +980,10 @@
                     console.log('Save button initialized');
                 }
                 loadCustomerTypes();
-
                 // Close modals when clicking outside
                 window.addEventListener('click', function (event) {
                     const editModal = document.getElementById('editCustomerModal');
                     const addModal = document.getElementById('addCustomerModal');
-
                     if (event.target === editModal) {
                         closeEditCustomerModal();
                     }
@@ -873,7 +996,6 @@
             function openAddCustomerModal() {
                 console.log('Opening add customer modal...');
                 const modal = document.getElementById('addCustomerModal');
-
                 // Load customer types before showing modal
                 loadCustomerTypes().then(() => {
                     modal.style.display = 'block';
@@ -891,11 +1013,9 @@
 // Hàm xử lý việc thêm khách hàng mới
             function saveNewCustomer() {
                 const formData = new FormData(document.getElementById('addCustomerForm'));
-
                 // Validate form
                 const customerName = formData.get('customerName').trim();
                 const customerPhone = formData.get('customerPhone').trim();
-
                 if (!customerName || !customerPhone) {
                     alert('Vui lòng điền đầy đủ thông tin');
                     return;
@@ -915,7 +1035,6 @@
                             if (data.success) {
                                 alert('Thêm khách hàng mới thành công');
                                 closeAddCustomerModal();
-
                                 // Refresh customer select và chọn khách hàng mới
                                 if (data.customerId) {
                                     loadCustomers().then(() => {
@@ -933,7 +1052,7 @@
                             alert('Có lỗi xảy ra khi thêm khách hàng');
                         });
             }
-// Payment Functions
+            // Payment Functions
             function initializePaymentFeatures() {
                 initializeCashPayment();
                 initializePaymentModals();
@@ -953,11 +1072,9 @@
                     const closeButtons = cashModal.querySelectorAll('.close, .btn-secondary');
                     const confirmButton = cashModal.querySelector('#confirmPayment');
                     const receivedInput = cashModal.querySelector('#receivedAmount');
-
                     closeButtons.forEach(button => {
                         button.addEventListener('click', closeCashPaymentModal);
                     });
-
                     if (confirmButton) {
                         confirmButton.addEventListener('click', processCashPayment);
                     }
@@ -972,11 +1089,9 @@
                 if (receiptModal) {
                     const closeButtons = receiptModal.querySelectorAll('.close, .btn-secondary');
                     const printButton = receiptModal.querySelector('.btn-primary');
-
                     closeButtons.forEach(button => {
                         button.addEventListener('click', closeReceiptModal);
                     });
-
                     if (printButton) {
                         printButton.addEventListener('click', printReceipt);
                     }
@@ -986,30 +1101,17 @@
             function openCashPaymentModal() {
                 console.log('Opening cash payment modal...');
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-
-                // Validate customer selection
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng trước khi thanh toán');
                     return;
                 }
 
-                // Get total amount
-                const totalAmountElement = document.querySelector('.cart-summary .summary-row span:last-child');
-                if (!totalAmountElement) {
-                    alert('Không thể lấy thông tin giỏ hàng');
+                if (!finalTotalAmount || finalTotalAmount <= 0) {
+                    alert('Giỏ hàng trống hoặc tổng tiền không hợp lệ');
                     return;
                 }
 
-                const totalAmount = parseFloat(totalAmountElement.textContent.replace(/[^\d]/g, ''));
-
-                // Validate cart
-                if (!totalAmount || totalAmount <= 0) {
-                    alert('Giỏ hàng trống');
-                    return;
-                }
-
-                // Open modal and set values
-                document.getElementById('totalAmount').value = formatCurrency(totalAmount);
+                document.getElementById('totalAmount').value = formatCurrency(finalTotalAmount);
                 document.getElementById('receivedAmount').value = '';
                 document.getElementById('changeAmount').value = '';
                 document.getElementById('cashPaymentModal').style.display = 'block';
@@ -1034,7 +1136,6 @@
                 const receivedInput = document.getElementById('receivedAmount');
                 const receivedAmount = parseFloat(receivedInput.value) || 0;
                 const changeAmount = receivedAmount - totalAmount;
-
                 // Validate input
                 if (receivedAmount <= 0) {
                     document.getElementById('changeAmount').value = '';
@@ -1049,35 +1150,30 @@
 
             function processCashPayment() {
                 const selectedCustomer = $('#customerSelect').select2('data')[0];
-                const totalAmount = parseFloat(document.getElementById('totalAmount').value.replace(/[^\d]/g, ''));
                 const receivedAmount = parseFloat(document.getElementById('receivedAmount').value);
-
-                // Validate customer selection
                 if (!selectedCustomer || !selectedCustomer.id) {
                     alert('Vui lòng chọn khách hàng');
                     return;
                 }
 
-                // Validate cart
-                if (!totalAmount || totalAmount <= 0) {
-                    alert('Giỏ hàng trống');
+                if (!finalTotalAmount || finalTotalAmount <= 0) {
+                    alert('Giỏ hàng trống hoặc tổng tiền không hợp lệ');
                     return;
                 }
 
-                // Validate received amount
                 if (!receivedAmount) {
                     alert('Vui lòng nhập số tiền khách đưa');
                     return;
                 }
-                if (receivedAmount < totalAmount) {
+                if (receivedAmount < finalTotalAmount) {
                     alert('Số tiền khách đưa không đủ');
                     return;
                 }
 
-                const changeAmount = receivedAmount - totalAmount;
-                // Disable nút thanh toán
+                const changeAmount = receivedAmount - finalTotalAmount;
                 document.getElementById('confirmPayment').disabled = true;
-
+                const appliedCouponElement = document.getElementById('appliedCouponCode');
+                const couponCode = appliedCouponElement ? appliedCouponElement.textContent.split(': ')[1] : null;
                 fetch('process-cash-payment', {
                     method: 'POST',
                     headers: {
@@ -1085,9 +1181,10 @@
                     },
                     body: new URLSearchParams({
                         customerId: selectedCustomer.id,
-                        totalAmount: totalAmount,
+                        totalAmount: finalTotalAmount,
                         receivedAmount: receivedAmount,
-                        changeAmount: changeAmount
+                        changeAmount: changeAmount,
+                        couponCode: couponCode
                     })
                 })
                         .then(response => {
@@ -1102,8 +1199,6 @@
                             closeCashPaymentModal();
                             document.getElementById('receiptContent').innerHTML = html;
                             document.getElementById('receiptModal').style.display = 'block';
-
-                            // Tự động in hoá đơn
                             setTimeout(() => {
                                 printReceipt();
                             }, 500);
@@ -1138,7 +1233,6 @@
                 printWindow.document.write(document.getElementById('receiptContent').innerHTML);
                 printWindow.document.write('</body></html>');
                 printWindow.document.close();
-
                 // Đợi CSS load xong
                 setTimeout(() => {
                     printWindow.print();
@@ -1148,14 +1242,329 @@
                 }, 500);
             }
 
-// Format currency utility function
+            // Format currency utility function
             function formatCurrency(amount) {
                 return new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(amount);
             }
+            function openChangePasswordModal() {
+                document.getElementById('changePasswordModal').style.display = 'block';
+            }
 
+            function closeChangePasswordModal() {
+                document.getElementById('changePasswordModal').style.display = 'none';
+            }
+
+            function changePassword() {
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                if (newPassword !== confirmPassword) {
+                    alert('Mật khẩu mới không khớp');
+                    return;
+                }
+
+                fetch('profile?action=changePassword', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: new URLSearchParams({
+                        currentPassword: currentPassword,
+                        newPassword: newPassword,
+                        confirmPassword: confirmPassword
+                    })
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Đổi mật khẩu thành công');
+                                closeChangePasswordModal();
+                            } else {
+                                alert(data.message || 'Đổi mật khẩu thất bại');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi đổi mật khẩu');
+                        });
+            }
+
+            // Đóng modal khi click bên ngoài
+            window.onclick = function (event) {
+                if (event.target === document.getElementById('changePasswordModal')) {
+                    closeChangePasswordModal();
+                }
+            };
+            document.addEventListener('DOMContentLoaded', function () {
+                updateFinalTotalAmount();
+                const profileDropdownToggle = document.getElementById('profileDropdownToggle');
+                const profileDropdown = document.getElementById('profileDropdown');
+                const viewProfileBtn = document.getElementById('viewProfileBtn');
+                const profileModal = document.getElementById('profileModal');
+                const closeBtn = profileModal.querySelector('.close');
+                const profileInfo = document.getElementById('profileInfo');
+                console.log('viewProfileBtn:', viewProfileBtn); // Debug
+
+                viewProfileBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('View profile button clicked'); // Debug
+                    fetchUserProfile();
+                });
+                closeBtn.addEventListener('click', function () {
+                    profileModal.style.display = 'none';
+                });
+                window.addEventListener('click', function (e) {
+                    if (e.target == profileModal) {
+                        profileModal.style.display = 'none';
+                    }
+                });
+                function fetchUserProfile() {
+                    console.log('Fetching user profile');
+                    fetch('user-profile')
+                            .then(response => {
+                                console.log('Response:', response);
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log('Data received:', data);
+                                if (data && typeof data === 'object') {
+                                    // Check if the data object has the expected properties
+                                    if (data.name || data.email || data.phone || data.address) {
+                                        displayUserProfile(data);
+                                    } else {
+                                        console.error('Data object is missing expected properties:', data);
+                                        displayUserProfile(null); // This will show an error message in the modal
+                                    }
+                                } else {
+                                    console.error('Invalid data format received:', data);
+                                    displayUserProfile(null); // This will show an error message in the modal
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                displayUserProfile(null); // This will show an error message in the modal
+                            });
+                }
+                function displayUserProfile(user) {
+                    console.log('Displaying user profile, received user object:', user);
+                    const profileInfo = document.getElementById('profileInfo');
+                    if (profileInfo && user) {
+                        // Create elements individually
+                        profileInfo.innerHTML = ''; // Clear existing content
+
+                        // Name
+                        const nameP = document.createElement('p');
+                        const nameStrong = document.createElement('strong');
+                        nameStrong.textContent = 'Tên: ';
+                        nameP.appendChild(nameStrong);
+                        nameP.appendChild(document.createTextNode(user.name));
+                        // Email
+                        const emailP = document.createElement('p');
+                        const emailStrong = document.createElement('strong');
+                        emailStrong.textContent = 'Email: ';
+                        emailP.appendChild(emailStrong);
+                        emailP.appendChild(document.createTextNode(user.email));
+                        // Phone
+                        const phoneP = document.createElement('p');
+                        const phoneStrong = document.createElement('strong');
+                        phoneStrong.textContent = 'Số điện thoại: ';
+                        phoneP.appendChild(phoneStrong);
+                        phoneP.appendChild(document.createTextNode(user.phone));
+                        // Address
+                        const addressP = document.createElement('p');
+                        const addressStrong = document.createElement('strong');
+                        addressStrong.textContent = 'Địa chỉ: ';
+                        addressP.appendChild(addressStrong);
+                        addressP.appendChild(document.createTextNode(user.address));
+                        // Append all elements
+                        profileInfo.appendChild(nameP);
+                        profileInfo.appendChild(emailP);
+                        profileInfo.appendChild(phoneP);
+                        profileInfo.appendChild(addressP);
+                        console.log('Profile info content set');
+                        console.log('profileInfo content:', profileInfo.textContent);
+                        console.log('Actual Data:', user, user.name, user.email, user.phone, user.address);
+                    } else {
+                        console.error('profileInfo element not found or user data is null');
+                        if (profileInfo) {
+                            const errorP = document.createElement('p');
+                            errorP.textContent = 'Không thể tải thông tin người dùng.';
+                            profileInfo.innerHTML = '';
+                            profileInfo.appendChild(errorP);
+                        }
+                    }
+
+                    const profileModal = document.getElementById('profileModal');
+                    if (profileModal) {
+                        profileModal.style.display = 'block';
+                    }
+                }
+
+            });
+            function applyCoupon() {
+                const couponCode = document.getElementById('couponCode').value.trim();
+                if (!couponCode) {
+                    alert('Vui lòng nhập mã giảm giá');
+                    return;
+                }
+
+                const data = {
+                    couponCode: couponCode
+                };
+                fetch('check-coupon', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'flex';
+                                document.getElementById('appliedCouponCode').textContent = 'Mã giảm giá: ' + couponCode;
+                                document.getElementById('couponCode').value = '';
+                                document.getElementById('discountRow').style.display = 'flex';
+                                document.getElementById('discountAmount').textContent = '-' + formatCurrency(data.discountAmount);
+                                finalTotalAmount = data.finalTotal; // Lưu tổng tiền sau khi giảm giá
+                                document.getElementById('finalTotal').textContent = formatCurrency(finalTotalAmount);
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi áp dụng mã giảm giá');
+                        });
+            }
+
+            function removeCoupon() {
+                fetch('remove-coupon', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'none';
+                                document.getElementById('discountRow').style.display = 'none';
+                                document.getElementById('finalTotal').textContent = formatCurrency(data.originalTotal);
+                                document.getElementById('couponCode').value = '';
+                                updateFinalTotalAmount();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi xóa mã giảm giá');
+                        });
+            }
+            function updateFinalTotalAmount() {
+                const totalElement = document.getElementById('finalTotal');
+                if (totalElement) {
+                    finalTotalAmount = parseFloat(totalElement.textContent.replace(/[^\d]/g, ''));
+                } else {
+                    finalTotalAmount = 0;
+                }
+            }
+            var promotionModal = document.getElementById('promotionModal');
+            var closeBtn = promotionModal.querySelector('.close');
+            var cancelBtn = document.getElementById('closePromotionModal');
+            //Open Promotion Modal
+            function openPromotionModal() {
+                fetchPromotions();
+                document.getElementById('promotionModal').style.display = 'block';
+            }
+
+            //Close Promotion Modal
+            function closePromotionModal() {
+                promotionModal.style.display = 'none';
+            }
+
+            // Đóng modal khi click vào nút đóng (X)
+            closeBtn.onclick = closePromotionModal;
+
+            // Đóng modal khi click vào nút Hủy
+            cancelBtn.onclick = closePromotionModal;
+
+            // Đóng modal khi click ra ngoài modal
+            window.onclick = function (event) {
+                if (event.target == promotionModal) {
+                    closePromotionModal();
+                }
+            }
+            function fetchPromotions() {
+                fetch('get-active-promotions')
+                        .then(response => response.json())
+                        .then(promotions => {
+                            const promotionList = document.getElementById('promotionList');
+                            promotionList.innerHTML = ''; // Xóa nội dung cũ
+
+                            promotions.forEach(promotion => {
+                                const promotionItem = document.createElement('div');
+                                promotionItem.className = 'promotion-item';
+
+                                const title = document.createElement('h3');
+                                title.textContent = promotion.promotion_name;
+                                promotionItem.appendChild(title);
+
+                                const description = document.createElement('p');
+                                description.textContent = promotion.description;
+                                promotionItem.appendChild(description);
+
+                                const discount = document.createElement('p');
+                                discount.textContent = 'Giảm giá: ' + promotion.discount_value + '%';
+                                promotionItem.appendChild(discount);
+
+                                const dateRange = document.createElement('p');
+                                dateRange.textContent = 'Từ ' + new Date(promotion.start_date).toLocaleDateString() + ' đến ' + new Date(promotion.end_date).toLocaleDateString();
+                                promotionItem.appendChild(dateRange);
+
+                                const applyButton = document.createElement('button');
+                                applyButton.textContent = 'Áp dụng';
+                                applyButton.onclick = function () {
+                                    applyPromotion(promotion.promotion_id);
+                                };
+                                promotionItem.appendChild(applyButton);
+
+                                promotionList.appendChild(promotionItem);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.error('Error:', error);
+                        });
+            }
+            function applyPromotion(promotionId) {
+                fetch('apply-promotion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({promotionId: promotionId})
+                })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('appliedCoupon').style.display = 'flex';
+                                document.getElementById('appliedCouponCode').textContent = 'Khuyến mãi: ' + data.promotionName;
+                                document.getElementById('discountRow').style.display = 'flex';
+                                document.getElementById('discountAmount').textContent = '-' + formatCurrency(data.discountAmount);
+                                finalTotalAmount = data.finalTotal;
+                                document.getElementById('finalTotal').textContent = formatCurrency(data.finalTotal);
+                                document.getElementById('promotionModal').style.display = 'none';
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                closePromotionModal();
+            }
         </script>
         <script>
             // Xử lý nút thanh toán QR
@@ -1174,12 +1583,10 @@
                         alert('Vui lòng chọn khách hàng trước khi thanh toán');
                         return;
                     }
-
-                    // Lấy tổng tiền - đảm bảo là số
-                    const totalAmountText = document.querySelector('.cart-summary .summary-row span:last-child').textContent;
-                    const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''));
-
-                    if (isNaN(totalAmount) || totalAmount <= 0) {
+                    // Lấy tổng tiền sau khi giảm giá - đảm bảo là số
+                    const finalTotalElement = document.getElementById('finalTotal');
+                    const finalTotalAmount = parseInt(finalTotalElement.textContent.replace(/[^\d]/g, ''));
+                    if (isNaN(finalTotalAmount) || finalTotalAmount <= 0) {
                         alert('Số tiền thanh toán không hợp lệ');
                         return;
                     }
@@ -1190,23 +1597,20 @@
                         const priceText = row.querySelector('.col-price').textContent.trim();
                         const price = parseInt(priceText.replace(/[^\d]/g, ''));
                         const quantity = parseInt(row.querySelector('.col-qty input').value);
-
                         return {
                             productName: name,
                             quantity: quantity,
                             price: price
                         };
                     });
-
                     // Log request data để debug
                     const requestData = {
-                        amount: totalAmount,
+                        amount: finalTotalAmount, // Sử dụng finalTotalAmount thay vì totalAmount
                         orderId: currentOrderId,
                         description: `Thanh toán đơn hàng #${currentOrderId}`,
                         items: items
                     };
                     console.log('Request data:', requestData);
-
                     // Gọi API để tạo payment
                     const response = await fetch('create-payment-link', {
                         method: 'POST',
@@ -1216,7 +1620,6 @@
                         },
                         body: JSON.stringify(requestData)
                     });
-
                     if (!response.ok) {
                         const errorText = await response.text();
                         console.error('Error response:', errorText);
@@ -1225,14 +1628,12 @@
 
                     const data = await response.json();
                     console.log('Response data:', data);
-
                     if (!data || !data.checkoutUrl) {
                         throw new Error('Invalid response: missing checkoutUrl');
                     }
 
                     // Mở URL thanh toán trong cửa sổ mới
                     window.open(data.checkoutUrl, '_blank');
-
                     // Theo dõi trạng thái thanh toán
                     const checkPaymentStatus = setInterval(async () => {
                         try {
@@ -1254,12 +1655,10 @@
                             console.error('Error checking payment status:', error);
                         }
                     }, 5000);
-
                     // Dừng kiểm tra sau 5 phút
                     setTimeout(() => {
                         clearInterval(checkPaymentStatus);
                     }, 300000);
-
                 } catch (error) {
                     console.error('Error creating payment:', error);
                     alert('Có lỗi xảy ra khi tạo thanh toán. Vui lòng thử lại sau.');

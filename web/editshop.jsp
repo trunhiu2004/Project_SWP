@@ -2,11 +2,11 @@
 <!doctype html>
 <html lang="en">
   
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-return.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+
 <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>POS Admin</title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="EditShop" method="post" >
+                        <form action="EditShop" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="shop_id" value="${shop.shopId}">
                             <div class="row">                                  
                                 <div class="col-md-6">                      
@@ -107,7 +107,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Hình ảnh *</label>
-                                        <input type="text" class="form-control" name="shop_opening_hours" value="${shop.shopLogo}" required>
+                                        
+                                        <input type="file" class="form-control image-file" name="shop_logo" accept="image/*">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>  
@@ -139,7 +140,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">POS Admin</a>.
                         </div>
                     </div>
                 </div>
@@ -162,5 +163,5 @@
     <script src="assets/js/app.js"></script>
   </body>
 
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-add-return.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
+
 </html>

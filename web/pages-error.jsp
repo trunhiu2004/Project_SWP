@@ -4,11 +4,11 @@
 <!doctype html>
 <html lang="en">
   
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/pages-error.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:43 GMT -->
+
 <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>POS Admin</title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
@@ -56,5 +56,5 @@
     <script src="assets/js/app.js"></script>
   </body>
 
-<!-- Mirrored from templates.iqonic.design/posdash/html/backend/pages-error.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:43 GMT -->
+
 </html>
