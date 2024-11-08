@@ -5,7 +5,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html lang="en">
 
-    
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,6 +48,7 @@
 
 
                                                     </div>
+                                                    <input type="hidden" name="token" value="${param.token}">
                                                     <button type="submit" class="btn btn-primary">Xác nhận</button>
 
                                                 </form>
@@ -81,5 +82,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    
+
 </html>

@@ -44,8 +44,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" name="token" value="${param.token}">
                                                     <button type="submit" class="btn btn-primary">Đăng ký</button>
- 
+
                                                 </form>
                                             </div>
                                         </div>
@@ -77,5 +78,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    
+
 </html>

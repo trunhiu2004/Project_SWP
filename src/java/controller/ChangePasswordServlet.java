@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Accounts;
 import org.mindrot.jbcrypt.BCrypt;
+import utils.TokenManager;
 
 /**
  *
@@ -59,18 +60,18 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get token from url
         String token = request.getParameter("token");
-        String email = request.getParameter("email");
-        request.getSession().setAttribute("emailRegis", email);
-        // get token from session
-//        String savedToken = (String) request.getSession().getAttribute("token");
-        if (checkDuplicate(email)) {
-            response.sendRedirect("login");
-        } else {
-            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-        }
+        TokenManager tokenManager = TokenManager.getInstance();
 
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            request.setAttribute("email", email);
+            request.setAttribute("token", token);
+            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Link không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -85,12 +86,21 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String rawPassword = request.getParameter("passwordRegister");
-        String email = (String) request.getSession().getAttribute("emailRegis");
-        String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
-        AccountDAO accountDAO = new AccountDAO();
-        accountDAO.createAccount(email, password, 2);
-        request.getSession().removeAttribute("token");
-        response.sendRedirect("employeeSetting");
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
+
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
+            AccountDAO accountDAO = new AccountDAO();
+            accountDAO.createAccount(email, password, 2);
+
+//            tokenManager.removeToken(token);
+            response.sendRedirect("employeeSetting?token=" + token);
+        } else {
+            request.setAttribute("error", "Token không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+        }
     }
 
     /**

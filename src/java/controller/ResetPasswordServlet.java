@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Accounts;
 import org.mindrot.jbcrypt.BCrypt;
+import utils.TokenManager;
 
 /**
  *
@@ -59,13 +60,18 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get token from url
-//        String token = request.getParameter("tokenReset");
-        String email = request.getParameter("email");
-        request.getSession().setAttribute("emailRe", email);
-        // get token from session
-        String savedToken = (String) request.getSession().getAttribute("tokenReset");
-        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
+
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            request.setAttribute("email", email);
+            request.setAttribute("token", token);
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Link không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -80,12 +86,21 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String rawPassword = request.getParameter("passwordReset");
-        String email = (String) request.getSession().getAttribute("emailRe");
-        String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
-        AccountDAO accountDAO = new AccountDAO();
-        accountDAO.changePassword(email, password);
-        request.getSession().removeAttribute("tokenReset");
-        response.sendRedirect("login");
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
+
+        if (tokenManager.isTokenValid(token)) {
+            String email = tokenManager.getEmailFromToken(token);
+            String password = BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
+            AccountDAO accountDAO = new AccountDAO();
+            accountDAO.changePassword(email, password);
+
+            tokenManager.removeToken(token);
+            response.sendRedirect("login");
+        } else {
+            request.setAttribute("error", "Token không hợp lệ hoặc đã hết hạn.");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        }
     }
 
     /**

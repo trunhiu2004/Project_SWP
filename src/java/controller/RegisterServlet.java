@@ -22,6 +22,8 @@ import model.EmailTemplate;
 import verify.RandomCode;
 import verify.SendEmail;
 import java.sql.SQLException;
+import java.util.logging.Logger;
+import utils.TokenManager;
 
 /**
  *
@@ -78,6 +80,8 @@ public class RegisterServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger LOGGER = Logger.getLogger(RegisterServlet.class.getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -87,50 +91,37 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("emailRegister");
         if (!checkDuplicate(email)) {
             String token = UUID.randomUUID().toString();
-            // Lấy base URL động
-            String baseURL = request.getScheme() + "://"
-                    + request.getServerName() + ":"
-                    + request.getServerPort()
-                    + request.getContextPath();
+            TokenManager.getInstance().addToken(email, token);
 
-            // Tạo link reset password với base URL động
-            String link = baseURL + "/changePassword?email=" + email + "&tokenReset=" + token;
-
-            request.getSession().setAttribute("emailRegister", email);
+            String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            String link = baseURL + "/changePassword?token=" + token;
 
             try {
-                // Lấy template từ cơ sở dữ liệu
                 EmailTemplateDAO templateDAO = new EmailTemplateDAO();
                 EmailTemplate template = templateDAO.getTemplateByName("Register Confirmation Template");
                 MailogDAO mailogDAO = new MailogDAO();
                 if (template != null) {
-                    // Thay thế các biến trong template
                     String content = template.getContent()
                             .replace("{{email}}", email)
                             .replace("{{link}}", link);
 
-                    // Gửi email
                     SendEmail se = new SendEmail();
                     try {
                         se.send(email, template.getSubject(), content);
-                        // Ghi log thành công
                         mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
 
-                        request.getSession().setAttribute("token", token);
-                        request.getSession().setAttribute("status", "register");
+                        request.setAttribute("message", "Một email xác nhận đã được gửi. Vui lòng kiểm tra hộp thư của bạn.");
                         request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
                     } catch (RuntimeException e) {
-                        // Ghi log thất bại
                         mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
                         throw e;
                     }
                 } else {
-                    // Xử lý khi không tìm thấy template
                     request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email.");
                     request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOGGER.severe("Database error: " + e.getMessage());
                 request.setAttribute("error", "Lỗi hệ thống: Không thể gửi email xác nhận.");
                 request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
             }

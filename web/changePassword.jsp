@@ -11,37 +11,38 @@
 
         <!-- Favicon -->
         <jsp:include page="components/favicon.jsp"></jsp:include>  </head>
-    <body class=" ">
-        <!-- loader Start -->
-        <div id="loading">
-            <div id="loading-center">
+        <body class=" ">
+            <!-- loader Start -->
+            <div id="loading">
+                <div id="loading-center">
+                </div>
             </div>
-        </div>
-        <!- - loader END -->
+            <!- - loader END -->
 
-        <div class="wrapper">
-            <section class="login-content">
-                <div class="container">
-                    <div class="row align-items-center justify-content-center height-self-center">
-                        <div class="col-lg-8">
-                            <div class="card auth-card">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center auth-content">
-                                        <div class="col-lg-7 align-self-center">
-                                            <div class="p-3">
-                                                <h2 class="mb-2">Đổi mật khẩu</h2>
-                                                <form action="changePassword" method="post">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordRegister">
+            <div class="wrapper">
+                <section class="login-content">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center height-self-center">
+                            <div class="col-lg-8">
+                                <div class="card auth-card">
+                                    <div class="card-body p-0">
+                                        <div class="d-flex align-items-center auth-content">
+                                            <div class="col-lg-7 align-self-center">
+                                                <div class="p-3">
+                                                    <h2 class="mb-2">Đổi mật khẩu</h2>
+                                                    <form action="changePassword" method="post">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="floating-label form-group">
+                                                                    <input class="floating-input form-control" type="password" placeholder="Mật khẩu mới..." name="passwordRegister">
+                                                                </div>
                                                             </div>
+
+
                                                         </div>
-
-
-                                                    </div>
+                                                        <input type="hidden" name="token" value="${param.token}">
                                                     <button type="submit" class="btn btn-primary">Xác nhận</button>
-                                                   
+
                                                 </form>
                                             </div>
                                         </div>
@@ -73,5 +74,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-    
+
 </html>

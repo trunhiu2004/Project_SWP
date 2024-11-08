@@ -147,6 +147,7 @@ public class AuthorizationFilter implements Filter {
         String resetPasswordURI = httpRequest.getContextPath() + "/resetPassword";
         String changePasswordURI = httpRequest.getContextPath() + "/changePassword";
         String checkPriceURI = httpRequest.getContextPath() + "/checkPrice";
+        String fisrtEmployeeSettingURI = httpRequest.getContextPath() + "/employeeSetting";
         String requestURI = httpRequest.getRequestURI();
 
         boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
@@ -155,9 +156,10 @@ public class AuthorizationFilter implements Filter {
         boolean isResetPasswordRequest = requestURI.equals(resetPasswordURI);
         boolean isChangePasswordRequest = requestURI.equals(changePasswordURI);
         boolean isCheckPriceRequest = requestURI.equals(checkPriceURI);
+        boolean isFirstEmployeeSetting = requestURI.equals(fisrtEmployeeSettingURI);
         boolean isPublicResource = requestURI.contains("/css/") || requestURI.contains("/js/") || requestURI.contains("/images/") || requestURI.contains("/assets/");
 
-        if (isPublicResource || isLoginRequest || isForgetPasswordRequest || isResetPasswordRequest || isChangePasswordRequest || isCheckPriceRequest) {
+        if (isPublicResource || isLoginRequest || isForgetPasswordRequest || isResetPasswordRequest || isChangePasswordRequest || isCheckPriceRequest || isFirstEmployeeSetting) {
             // Cho phép truy cập vào tài nguyên công khai và trang đăng nhập
             chain.doFilter(request, response);
         } else if (isLoggedIn) {

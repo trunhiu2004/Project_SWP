@@ -20,6 +20,8 @@ import model.Accounts;
 import model.EmailTemplate;
 import verify.SendEmail;
 import java.sql.SQLException;
+import java.util.logging.Logger;
+import utils.TokenManager;
 
 /**
  *
@@ -88,56 +90,48 @@ public class ForgetPassword extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger LOGGER = Logger.getLogger(ForgetPassword.class.getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("emailReset");
         if (checkDuplicate(email)) {
             String token = UUID.randomUUID().toString();
+            TokenManager.getInstance().addToken(email, token);
+
             // Lấy base URL động
-            String baseURL = request.getScheme() + "://"
-                    + request.getServerName() + ":"
-                    + request.getServerPort()
-                    + request.getContextPath();
+            String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
             // Tạo link reset password với base URL động
-            String link = baseURL + "/resetPassword?email=" + email + "&tokenReset=" + token;
-
-            request.getSession().setAttribute("emailReset", email);
+            String link = baseURL + "/resetPassword?token=" + token;
 
             try {
-                // Lấy template từ cơ sở dữ liệu
                 EmailTemplateDAO templateDAO = new EmailTemplateDAO();
                 EmailTemplate template = templateDAO.getTemplateByName("Password Reset Template");
                 MailogDAO mailogDAO = new MailogDAO();
                 if (template != null) {
-                    // Thay thế các biến trong template
                     String content = template.getContent()
                             .replace("{{email}}", email)
                             .replace("{{reset_link}}", link);
 
-                    // Gửi email
                     SendEmail se = new SendEmail();
                     try {
                         se.send(email, template.getSubject(), content);
-                        // Ghi log thành công
                         mailogDAO.addMailLog(email, template.getSubject(), content, "SUCCESS", null, template.getTemplateId());
 
-                        request.getSession().setAttribute("tokenReset", token);
-                        request.getSession().setAttribute("status", "resetPass");
+                        request.setAttribute("message", "Một email đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư của bạn.");
                         request.getRequestDispatcher("auth-confirm-mail.jsp").forward(request, response);
                     } catch (RuntimeException e) {
-                        // Ghi log thất bại
                         mailogDAO.addMailLog(email, template.getSubject(), content, "FAILED", e.getMessage(), template.getTemplateId());
                         throw e;
                     }
                 } else {
-                    // Xử lý khi không tìm thấy template
                     request.setAttribute("error", "Lỗi hệ thống: Không tìm thấy mẫu email đặt lại mật khẩu.");
                     request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOGGER.severe("Database error: " + e.getMessage());
                 request.setAttribute("error", "Lỗi hệ thống: Không thể gửi email đặt lại mật khẩu.");
                 request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
             }

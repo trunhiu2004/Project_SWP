@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.TokenManager;
 
 /**
  *
@@ -71,17 +72,25 @@ public class EmployeeSettingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String email = (String) request.getSession().getAttribute("emailRegis");
-        
-        AccountDAO dbAccount = new AccountDAO();
-        int accountId = dbAccount.getAccountId(email);
-        EmployeeDAO dbEmployee = new EmployeeDAO();
-        dbEmployee.createEmployee(name, phone, address, accountId);
-        response.sendRedirect("login");
+        String token = request.getParameter("token");
+        TokenManager tokenManager = TokenManager.getInstance();
+        String email = tokenManager.getEmailFromToken(token);
 
+        if (email != null) {
+            String name = request.getParameter("fullName");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+
+            AccountDAO dbAccount = new AccountDAO();
+            int accountId = dbAccount.getAccountId(email);
+            EmployeeDAO dbEmployee = new EmployeeDAO();
+            dbEmployee.createEmployee(name, phone, address, accountId);
+
+            tokenManager.removeToken(token);
+            response.sendRedirect("login");
+        } else {
+            response.sendRedirect("error.jsp?message=Invalid or expired token");
+        }
     }
 
     /**
