@@ -81,7 +81,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Mã vạch: </label>
-                                                    <input type="text" name="barcode" class="form-control" value="${p.getBarcode()}">
+                                                    <input type="number" name="barcode" class="form-control" value="${p.getBarcode()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                        
