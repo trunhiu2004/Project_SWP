@@ -314,6 +314,8 @@ public class OrderDAO extends DBContext {
             processOrderDetails(orderId, items);
             createInvoice(orderId, customerId, totalAmount, employeeId, paymentMethodId);
 
+            // Cộng điểm cho khách hàng (Hiện tại: 1 điểm cho mỗi đơn hàng)
+            updateCustomerPoints(customerId, 1);
             connection.commit();
             return orderId;
 
@@ -416,6 +418,15 @@ public class OrderDAO extends DBContext {
                 }
                 throw new SQLException("Creating order failed, no ID obtained.");
             }
+        }
+    }
+
+    public void updateCustomerPoints(int customerId, int pointsToAdd) throws SQLException {
+        String sql = "UPDATE Customers SET point = point + ? WHERE customer_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, pointsToAdd);
+            ps.setInt(2, customerId);
+            ps.executeUpdate();
         }
     }
 

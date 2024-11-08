@@ -90,7 +90,10 @@ public class ProcessCashPaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        //Get Shop Detail
+        ShopDAO shopDAO = new ShopDAO();
+        Shop shop = shopDAO.getShopId(1); // Set ID Shop mặc định là 1
+        request.setAttribute("shop", shop);
         try {
             int customerId = Integer.parseInt(request.getParameter("customerId"));
             double totalAmount = Double.parseDouble(request.getParameter("totalAmount"));
