@@ -85,9 +85,9 @@
                 <!-- Right Header Menu -->
                 <div class="header_part_right">
                     <ul class="btn__menu">
-<!--                        <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
-                        <li><a href="javascript:void(0)" class="bg__blue">Brand</a></li>
-                        <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>-->
+                        <!--                        <li><a href="javascript:void(0)" class="bg__blue">All</a></li>
+                                                <li><a href="javascript:void(0)" class="bg__blue">Brand</a></li>
+                                                <li><a href="javascript:void(0)" class="bg__blue">Most Selling</a></li>-->
                         <li><a href="javascript:void(0)" class="bg__blue" onclick="openPromotionModal()">Promo</a></li>
                     </ul>
                 </div>
@@ -231,11 +231,11 @@
                     <div class="right_side_search_add_item">
                         <div class="search_filter_row">
                             <div class="search_input_group">
-                                <input type="text" placeholder="Search by name, code, category">
+                                <input type="text" placeholder="Tìm kiếm qua tên sản phẩm...">
                                 <i class="material-icons">search</i>
                             </div>
                             <div class="search_input_group">
-                                <input type="text" placeholder="Scan barcode">
+                                <input type="text" placeholder="Nhập || Quét barcode">
                                 <i class="material-icons">qr_code_scanner</i>
                             </div>
                         </div>
@@ -910,9 +910,24 @@
                         });
             }
             function loadCustomers() {
-                $('#customerSelect').select2('destroy'); // Hủy select2 hiện tại
-                loadCustomerTypes(); // Load lại customer types
-                initializeCustomerSelect(); // Khởi tạo lại select2
+                return new Promise((resolve, reject) => {
+                    fetch('load-customers')
+                            .then(response => response.json())
+                            .then(data => {
+                                const select = $('#customerSelect');
+                                select.empty();
+                                select.append(new Option('Chọn khách hàng', ''));
+                                data.forEach(customer => {
+                                    select.append(new Option(customer.name + ' - ' + customer.phone, customer.id));
+                                });
+                                select.trigger('change'); // Refresh Select2
+                                resolve(); // Resolve the promise when done
+                            })
+                            .catch(error => {
+                                console.error('Error loading customers:', error);
+                                reject(error); // Reject the promise if there's an error
+                            });
+                });
             }
             function initializeCustomerModal() {
                 // Edit button click
@@ -992,7 +1007,7 @@
                     }
                 });
             }
-// Hàm mở modal thêm khách hàng
+            // Hàm mở modal thêm khách hàng
             function openAddCustomerModal() {
                 console.log('Opening add customer modal...');
                 const modal = document.getElementById('addCustomerModal');
@@ -1004,13 +1019,13 @@
                 });
             }
 
-// Hàm đóng modal thêm khách hàng
+            // Hàm đóng modal thêm khách hàng
             function closeAddCustomerModal() {
                 const modal = document.getElementById('addCustomerModal');
                 modal.style.display = 'none';
             }
 
-// Hàm xử lý việc thêm khách hàng mới
+            // Hàm xử lý việc thêm khách hàng mới
             function saveNewCustomer() {
                 const formData = new FormData(document.getElementById('addCustomerForm'));
                 // Validate form
@@ -1033,23 +1048,23 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                alert('Thêm khách hàng mới thành công');
+                                alert(data.message || 'Thêm khách hàng mới thành công');
                                 closeAddCustomerModal();
                                 // Refresh customer select và chọn khách hàng mới
-                                if (data.customerId) {
-                                    loadCustomers().then(() => {
+                                loadCustomers().then(() => {
+                                    if (data.customerId) {
                                         $('#customerSelect').val(data.customerId).trigger('change');
-                                    });
-                                } else {
-                                    loadCustomers();
-                                }
+                                    }
+                                }).catch(error => {
+                                    console.error('Error refreshing customer list:', error);
+                                });
                             } else {
-                                alert(data.message || 'Có lỗi xảy ra khi thêm khách hàng');
+                                throw new Error(data.message || 'Có lỗi xảy ra khi thêm khách hàng');
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Có lỗi xảy ra khi thêm khách hàng');
+                            alert(error.message || 'Có lỗi xảy ra khi thêm khách hàng');
                         });
             }
             // Payment Functions

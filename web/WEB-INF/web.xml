@@ -324,7 +324,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddCustomerServlet</servlet-name>
-        <servlet-class>controller.AddCustomerServlet</servlet-class>
+        <servlet-class>controller.POS.AddCustomerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoadCustomerTypesServlet</servlet-name>
