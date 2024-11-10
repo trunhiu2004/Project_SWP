@@ -56,6 +56,11 @@
                                                         <div class="col-lg-6">
                                                             <a href="forgetPassword" class="text-primary float-right">Quên mật khẩu</a>
                                                         </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="floating-label form-group" style="color: red">
+                                                                ${error}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
 

@@ -70,7 +70,7 @@ public class ChangePasswordServlet extends HttpServlet {
             request.getRequestDispatcher("changePassword.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Link không hợp lệ hoặc đã hết hạn.");
-            request.getRequestDispatcher("auth-sign-up.jsp").forward(request, response);
+            request.getRequestDispatcher("auth-sign-in.jsp").forward(request, response);
         }
     }
 

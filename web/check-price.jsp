@@ -121,6 +121,16 @@
             .scan-success {
                 animation: scanSuccess 0.5s ease-out;
             }
+            .discounted-price {
+                color: #e74c3c;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            .original-price {
+                color: #7f8c8d;
+                text-decoration: line-through;
+                font-size: 18px;
+            }
         </style>
     </head>
     <body>
@@ -184,7 +194,8 @@
                                     <p class="price-display mb-3">
                                         <c:choose>
                                             <c:when test="${product.discount != null}">
-                                                Giá bán: <fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫
+                                                Giá bán: <span class="discounted-price"><fmt:formatNumber value="${product.discount.priceSell}" pattern="#,##0" />₫</span>
+                                                <span class="original-price"><fmt:formatNumber value="${product.inventory.product.price}" pattern="#,##0" />₫</span>
                                             </c:when>
                                             <c:otherwise>
                                                 Giá bán: <fmt:formatNumber value="${product.inventory.product.price}" pattern="#,##0" />₫
