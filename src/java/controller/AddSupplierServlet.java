@@ -94,14 +94,14 @@ public class AddSupplierServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        File projectRoot = new File(appPath).getParentFile().getParentFile();
-        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "supplier";
-
+//        File projectRoot = new File(appPath).getParentFile().getParentFile();
+//        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "supplier";
+        String savePath = request.getServletContext().getRealPath("/assets/images/supplier");
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
         }
-        
+
         String fileName = null;
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -110,15 +110,15 @@ public class AddSupplierServlet extends HttpServlet {
                 request.setAttribute("message", savePath + File.separator + fileName);
             }
         }
-        
+
         HttpSession session = request.getSession();
         String name = request.getParameter("nameSup");
         String email = request.getParameter("emailSup");
         String phone = request.getParameter("phoneSup");
         String person = request.getParameter("personSup");
         String address = request.getParameter("addressSup");
-        
-        String img = (fileName != null && !fileName.isEmpty()) ?  fileName : null;
+
+        String img = (fileName != null && !fileName.isEmpty()) ? fileName : null;
 
         SuppliersDAO sd = new SuppliersDAO();
         Suppliers s = sd.getSupByName(name);

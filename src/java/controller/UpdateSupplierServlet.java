@@ -105,9 +105,9 @@ public class UpdateSupplierServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        File projectRoot = new File(appPath).getParentFile().getParentFile();
-        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "supplier";
-
+//        File projectRoot = new File(appPath).getParentFile().getParentFile();
+//        String savePath = projectRoot.getAbsolutePath() + File.separator + "web" + File.separator + "assets" + File.separator + "images" + File.separator + "supplier";
+        String savePath = request.getServletContext().getRealPath("/assets/images/supplier");
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
@@ -116,13 +116,14 @@ public class UpdateSupplierServlet extends HttpServlet {
         String fileName = null;
         for (Part part : request.getParts()) {
             if (part.getName().equals("imgSup")) {
-            fileName = extractFileName(part);
-            if (fileName != null && !fileName.isEmpty()) {
-                part.write(savePath + File.separator + fileName);
-                request.setAttribute("message", savePath + File.separator + fileName);
+                fileName = extractFileName(part);
+                if (fileName != null && !fileName.isEmpty()) {
+                    part.write(savePath + File.separator + fileName);
+                    request.setAttribute("message", savePath + File.separator + fileName);
+                }
             }
-        }}
-        
+        }
+
         SuppliersDAO sd = new SuppliersDAO();
         String id_raw = request.getParameter("idSup");
         String name = request.getParameter("nameSup");
@@ -130,9 +131,9 @@ public class UpdateSupplierServlet extends HttpServlet {
         String phone = request.getParameter("phoneSup");
         String person = request.getParameter("personSup");
         String address = request.getParameter("addressSup");
-        
+
         int id = Integer.parseInt(id_raw);
-        Suppliers s1 = sd.getSupById(id);   
+        Suppliers s1 = sd.getSupById(id);
         String img = (fileName != null && !fileName.isEmpty()) ? fileName : s1.getImg();
         Suppliers sNew = new Suppliers(id, name, address, phone, email, person, img);
         sd.updateSupplier(sNew);
