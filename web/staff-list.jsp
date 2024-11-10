@@ -42,20 +42,41 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="table-responsive rounded mb-3">
-                                    <table class="data-table table mb-0 tbl-server-info">
-                                        <thead class="bg-white text-uppercase">
-                                            <tr class="ligth">
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
+                            <div class="row mb-4">
+                                <div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form method="post" action="staffManage" class="row">
+                                                <!-- Coupon Code Filter -->
+                                                <div>
+                                                    <input type="text" class="form-control" name="staffName" 
+                                                           value="${staffName}" placeholder="Tìm nhân viên">
+                                            </div>
 
-                                                <th style="min-width: 100px">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ligth-body">
+
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <a href="staffManage" class="btn btn-secondary">Clear</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="table-responsive rounded mb-3">
+                                <table class="data-table table mb-0 tbl-server-info">
+                                    <thead class="bg-white text-uppercase">
+                                        <tr class="ligth">
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+
+                                            <th style="min-width: 100px">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ligth-body">
                                         <c:forEach items="${listEmployee}" var="employee">
                                             <tr>
                                                 <td>${employee.getEmployee_name()}</td>
@@ -72,11 +93,19 @@
                                                         <c:if test="${account.getAccount_id() == employee.getAccount_id()}">
                                                             <c:forEach items="${listAccountStatus}" var="accountStatus">
                                                                 <c:if test="${accountStatus.getStatus_id() == account.getStatus_id()}">
-                                                                    <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
+                                                                    <c:choose>
+                                                                        <c:when test="${accountStatus.getStatus_id() == 1}">
+                                                                            <span class="badge bg-primary">${accountStatus.getStatus_name()}</span> 
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <span class="badge bg-warning text-dark">${accountStatus.getStatus_name()}</span> 
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:if>
                                                     </c:forEach>
+
 
                                                 </td>
                                                 <td>
@@ -138,5 +167,5 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-
+    <!-- Mirrored from templates.iqonic.design/posdash/html/backend/page-list-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Sep 2024 10:43:35 GMT -->
 </html>
