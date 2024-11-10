@@ -115,12 +115,14 @@ public class UpdateSupplierServlet extends HttpServlet {
 
         String fileName = null;
         for (Part part : request.getParts()) {
+            if (part.getName().equals("imgSup")) {
             fileName = extractFileName(part);
             if (fileName != null && !fileName.isEmpty()) {
                 part.write(savePath + File.separator + fileName);
                 request.setAttribute("message", savePath + File.separator + fileName);
             }
-        }
+        }}
+        
         SuppliersDAO sd = new SuppliersDAO();
         String id_raw = request.getParameter("idSup");
         String name = request.getParameter("nameSup");

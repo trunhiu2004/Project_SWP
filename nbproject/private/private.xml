@@ -115,31 +115,13 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/Project_SWP/src/java/dal/OrderDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ChangePasswordServlet.java</file>
-            <file>file:/D:/Project_SWP/web/editOrder.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/dal/ShiftDAO.java</file>
-            <file>file:/D:/Project_SWP/src/java/utils/TokenManager.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/EmployeeSettingServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/filter/AuthorizationFilter.java</file>
-            <file>file:/D:/Project_SWP/web/employeeSetting.jsp</file>
+<<<<<<< HEAD
             <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/RegisterServlet.java</file>
-            <file>file:/D:/Project_SWP/web/auth-sign-in.jsp</file>
-            <file>file:/D:/Project_SWP/web/changePassword.jsp</file>
-            <file>file:/D:/Project_SWP/web/resetPassword.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LogoutServlet.java</file>
-            <file>file:/D:/Project_SWP/web/forgot-password.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ForgetPassword.java</file>
-            <file>file:/D:/Project_SWP/web/auth-sign-up.jsp</file>
-            <file>file:/D:/Project_SWP/web/page-list-shift.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/POS/Payment/ProcessCashPaymentServlet.java</file>
-            <file>file:/D:/Project_SWP/web/auth-confirm-mail.jsp</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ResetPasswordServlet.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/ListShift.java</file>
-            <file>file:/D:/Project_SWP/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/Project_SWP/web/listOrders.jsp</file>
             <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
+=======
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/export-old-batch-to-store.jsp</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/export-to-store.jsp</file>
+>>>>>>> origin/FixBugUpdateSupplier
         </group>
     </open-files>
 </project-private>

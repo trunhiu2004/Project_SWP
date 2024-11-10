@@ -73,7 +73,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Số lượng</label>
-                                                    <input type="text" name="quantity" class="form-control" placeholder="Nhập số lượng." data-errors="Please Enter Quantity." required>
+                                                    <input type="number" name="quantity" class="form-control" placeholder="Nhập số lượng." data-errors="Please Enter Quantity." required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                                                                                                             

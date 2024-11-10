@@ -75,7 +75,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Số điện thoại *</label>
-                                                    <input type="text" name="phoneSup" class="form-control" placeholder="Nhập số điện thoại nhà cung cấp" required>
+                                                    <input type="number" name="phoneSup" class="form-control" placeholder="Nhập số điện thoại nhà cung cấp" required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 

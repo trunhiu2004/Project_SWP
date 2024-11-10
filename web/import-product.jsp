@@ -98,7 +98,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Mã vạch</label>
-                                                <input type="text" name="barcode" class="form-control" placeholder="Mã vạch mới" data-errors="Please Enter Barcode." required>
+                                                <input type="number" name="barcode" class="form-control" placeholder="Mã vạch mới" data-errors="Please Enter Barcode." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>            

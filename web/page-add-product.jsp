@@ -79,14 +79,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Mã vạch: *</label>
-                                                    <input type="text" name="barcode" class="form-control" placeholder="Nhập mã vạch sản phẩm" data-errors="Please Enter Code." required>
+                                                    <input type="number" name="barcode" class="form-control" placeholder="Nhập mã vạch sản phẩm" data-errors="Please Enter Code." required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                        
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Giá: *</label>
-                                                    <input type="text" name="pricePro" class="form-control" placeholder="Nhập giá sản phẩm" data-errors="Please Enter Price." required>
+                                                    <input type="number" name="pricePro" class="form-control" placeholder="Nhập giá sản phẩm" data-errors="Please Enter Price." required>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>                                           
