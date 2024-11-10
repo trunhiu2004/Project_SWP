@@ -231,11 +231,11 @@
                     <div class="right_side_search_add_item">
                         <div class="search_filter_row">
                             <div class="search_input_group">
-                                <input type="text" placeholder="Tìm kiếm qua tên sản phẩm...">
+                                <input type="text" placeholder="Search by name, code, category">
                                 <i class="material-icons">search</i>
                             </div>
                             <div class="search_input_group">
-                                <input type="text" placeholder="Nhập || Quét barcode">
+                                <input type="text" placeholder="Scan barcode">
                                 <i class="material-icons">qr_code_scanner</i>
                             </div>
                         </div>
