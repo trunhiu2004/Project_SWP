@@ -84,7 +84,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Số điện thoại</label>
-                                                    <input type="text" name="phoneSup" class="form-control" value="${sup.getPhone()}">
+                                                    <input type="number" name="phoneSup" class="form-control" value="${sup.getPhone()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div> 

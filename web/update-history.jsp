@@ -71,7 +71,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Giá mới: </label>
-                                                    <input type="text" name="pricePro" class="form-control" value="${p.getPrice()}">
+                                                    <input type="number" name="pricePro" class="form-control" value="${p.getPrice()}">
                                                     <div class="help-block with-errors"></div>
                                                 </div>                                           
                                             </div>

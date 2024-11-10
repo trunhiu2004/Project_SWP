@@ -115,8 +115,13 @@
             <file>file:/D:/Java_BackEnd/SWP_Project/Project_SWP/src/java/dal/EmployeeDAO.java</file>
         </group>
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Project_SWP/src/java/dal/DBContext.java</file>
             <file>file:/D:/Project_SWP/web/WEB-INF/web.xml</file>
+=======
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/export-old-batch-to-store.jsp</file>
+            <file>file:/C:/Users/PC/Desktop/swp/New/Project_SWP/web/export-to-store.jsp</file>
+>>>>>>> origin/FixBugUpdateSupplier
         </group>
     </open-files>
 </project-private>

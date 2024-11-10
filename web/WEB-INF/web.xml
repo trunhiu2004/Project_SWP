@@ -506,6 +506,10 @@
         <servlet-name>ApplyPromotionServlet</servlet-name>
         <servlet-class>controller.POS.Promo_Coupon.ApplyPromotionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FindSupplierServlet</servlet-name>
+        <servlet-class>controller.FindSupplierServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -991,6 +995,10 @@
     <servlet-mapping>
         <servlet-name>ApplyPromotionServlet</servlet-name>
         <url-pattern>/apply-promotion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindSupplierServlet</servlet-name>
+        <url-pattern>/findSupplier</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -91,6 +91,31 @@ public class SuppliersDAO extends DBContext {
         }
         return null;
     }
+    
+    public List<Suppliers> findSupByName(String supplier_name) {
+        List<Suppliers> list = new ArrayList<>();
+        String sql = "select * from Suppliers where supplier_name like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+supplier_name+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Suppliers s = new Suppliers(
+                        rs.getInt("supplier_id"),
+                        rs.getString("supplier_name"),
+                        rs.getString("supplier_address"),
+                        rs.getString("supplier_phone"),
+                        rs.getString("supplier_email"),
+                        rs.getString("supplier_contact_person"),
+                        rs.getString("image")          
+                );
+                list.add(s);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public void deleteSup(int id) {
         String sql = "delete from Suppliers where supplier_id = ?";
